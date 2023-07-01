@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query";
 import {logOut, setCredentials} from "../features/authSlice";
-import {API_ERRORS} from "../../constants";
+import {apiErrors} from "../../constants";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:5432",
@@ -17,7 +17,7 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions)
 
-  if (result?.error?.originalStatus === API_ERRORS.forbidden.status) {
+  if (result?.error?.originalStatus === apiErrors.forbidden.status) {
     const refreshResult = await baseQuery('/refresh', api, extraOptions)
     console.log(`Refreshed token: ${refreshResult}`)
     if (refreshResult?.data) {
