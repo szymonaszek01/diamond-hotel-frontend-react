@@ -1,11 +1,11 @@
-import './App.css';
+import Router from "./router/router";
 
 const App = () => {
   return (
     <div>
-      App
+      <Router/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
