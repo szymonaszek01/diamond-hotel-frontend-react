@@ -7,6 +7,8 @@ import Footer from "./Footer";
 import Opinion from "./Opinion";
 import Hero from "./Hero";
 import Contact from "./Contact";
+import LoginForm from "./LoginForm";
+import CustomLoadingOverlay from "./CustomLoadingOverlay";
 
 export {
   Navbar,
@@ -17,5 +19,7 @@ export {
   Footer,
   Opinion,
   Hero,
-  Contact
+  Contact,
+  CustomLoadingOverlay,
+  LoginForm
 }
