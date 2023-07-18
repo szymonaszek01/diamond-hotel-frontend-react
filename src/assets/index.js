@@ -9,7 +9,7 @@ import star from "./star.svg";
 import menu from "./menu.svg";
 import close from "./close.svg";
 import email from "./email.png"
-import arrowUp from "./arrow-up.svg";
+import arrowUp from "./arrowUp.svg";
 import facebook from "./facebook.svg";
 import instagram from "./instagram.svg";
 import linkedin from "./linkedin.svg";
@@ -23,6 +23,10 @@ import telephone from "./telephone.png"
 import people01 from "./people01.png";
 import people02 from "./people02.png";
 import people03 from "./people03.png";
+import loginImg from "./login.png"
+import googleLogo from "./googleLogo.png"
+import defaultUser from "./defaultUser.jpg"
+import sessionExpired from "./sessionExpired.png"
 
 export {
   card,
@@ -49,5 +53,9 @@ export {
   telephone,
   people01,
   people02,
-  people03
+  people03,
+  loginImg,
+  googleLogo,
+  defaultUser,
+  sessionExpired
 }
