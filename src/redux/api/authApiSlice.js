@@ -1,18 +1,22 @@
 import {apiSlice} from "./apiSlice";
 import {apiMethods} from "../../constants";
 
-export const authApiSlice = apiSlice.injectEndpoints({
+const authBaseUrl = () => {
+  return "/api/v1/auth"
+}
+
+const authApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
     login: builder.mutation({
       query: loginReqDto => ({
-        url: "/login",
+        url: authBaseUrl() + "/login",
         method: apiMethods.post,
         body: {...loginReqDto}
       })
     }),
     register: builder.mutation({
       query: registerReqDto => ({
-        url: "/register",
+        url: authBaseUrl() + "/register",
         method: apiMethods.post,
         body: {...registerReqDto},
       }),
@@ -21,6 +25,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
-  userLoginMutation,
-  userRegisterMutation
+  useLoginMutation,
+  useRegisterMutation
 } = authApiSlice
