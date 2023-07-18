@@ -1,9 +1,9 @@
-import {Navbar, Hero, Stats, Business, Product, Contact, Opinion, CTA, Footer} from "../../components"
-import styles from "../../style"
+import styles from "../../style";
+import {Footer, LoginForm, Navbar} from "../../components";
 
-const HomePage = () => {
+const SignInPage = () => {
   const navConfig = {
-    page: "Home",
+    page: "Sign in",
     isToggled: true
   }
 
@@ -15,20 +15,13 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className={`bg-primary ${styles.flexStart}`}>
-        <div className={`${styles.boxWidth}`}>
-          <Hero/>
-        </div>
-      </div>
-
       <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
-          <Stats/>
-          <Business/>
-          <Product/>
-          <Contact/>
-          <Opinion/>
-          <CTA/>
+          <LoginForm/>
+          {/* gradient start */}
+          <div className="absolute z-[0] w-[40%] h-[35%] top-0 pink__gradient"/>
+          <div className="absolute z-[1] w-[80%] h-[80%] rounded-full white__gradient bottom-40"/>
+          {/* gradient end */}
           <Footer/>
         </div>
       </div>
@@ -36,4 +29,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default SignInPage
