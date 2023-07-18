@@ -9,8 +9,8 @@ export const apiMethods = {
   get: "GET",
   post: "POST",
   put: "PUT",
-  delete: "DELETE",
-};
+  delete: "DELETE"
+}
 
 export const apiErrors = {
   badRequest: {
@@ -40,29 +40,75 @@ export const apiErrors = {
   internalServerError: {
     status: 500,
     message: "Internal server error"
-  },
+  }
 }
 
 export const navLinks = [
   {
-    id: "home",
-    title: "Home",
+    main: {
+      id: "home",
+      title: "Home",
+      path: "/"
+    },
+    sections: [
+      {
+        id: "features",
+        title: "Features"
+      },
+      {
+        id: "product",
+        title: "Product"
+      },
+      {
+        id: "contact",
+        title: "Contact"
+      },
+      {
+        id: "opinion",
+        title: "Opinion"
+      }
+    ]
   },
   {
-    id: "features",
-    title: "Features",
+    main: {
+      id: "offer",
+      title: "Offer",
+      path: "/offer"
+    },
+    sections: [
+      {
+        id: "rooms",
+        title: "Rooms"
+      },
+      {
+        id: "restaurant",
+        title: "Restaurant"
+      },
+      {
+        id: "pools",
+        title: "Pools"
+      },
+      {
+        id: "spa-and-sport",
+        title: "Spa&Sport"
+      }
+    ]
   },
   {
-    id: "product",
-    title: "Product",
+    main: {
+      id: "sign-in",
+      title: "Sign in",
+      path: "/sign-in"
+    },
+    sections: []
   },
   {
-    id: "contact",
-    title: "Contact",
-  },
-  {
-    id: "opinion",
-    title: "Opinion",
+    main: {
+      id: "sign-up",
+      title: "Sign up",
+      path: "/sign-up"
+    },
+    sections: []
   }
 ];
 
@@ -72,22 +118,22 @@ export const features = [
     icon: star,
     title: "Quick room booking",
     content:
-      "Keep track of your upcoming stays and manage your reservations with ease",
+      "Keep track of your upcoming stays and manage your reservations with ease"
   },
   {
     id: "feature-2",
     icon: shield,
     title: "100% Secured",
     content:
-      "We take proactive steps make sure your information and transactions are secure.",
+      "We take proactive steps make sure your information and transactions are secure."
   },
   {
     id: "feature-3",
     icon: send,
     title: "Unparalleled room service",
     content:
-      "Indulge in our top-notch room service that caters to your every need.",
-  },
+      "Indulge in our top-notch room service that caters to your every need."
+  }
 ];
 
 export const feedback = [
@@ -97,7 +143,7 @@ export const feedback = [
       "I had an amazing experience at this hotel! The staff was incredibly friendly and attentive, " +
       "making me feel welcome from the moment I arrived.",
     name: "Herman Jensen",
-    img: people01,
+    img: people01
   },
   {
     id: "feedback-2",
@@ -105,7 +151,7 @@ export const feedback = [
       "Staying at this hotel exceeded all my expectations. The level of service was exceptional, " +
       "with every staff member going above and beyond to ensure my comfort.",
     name: "Steve Mark",
-    img: people02,
+    img: people02
   },
   {
     id: "feedback-3",
@@ -113,38 +159,38 @@ export const feedback = [
       "I can't say enough good things about this hotel. From the moment I stepped foot in the lobby, " +
       "I was greeted with warmth and professionalism.",
     name: "Kenn Gallagher",
-    img: people03,
-  },
+    img: people03
+  }
 ];
 
 export const stats = [
   {
     id: "stats-1",
     title: "User Active",
-    value: "3800+",
+    value: "3800+"
   },
   {
     id: "stats-2",
     title: "Trusted by Company",
-    value: "230+",
+    value: "230+"
   },
   {
     id: "stats-3",
     title: "Transaction",
-    value: "$230M+",
-  },
+    value: "$230M+"
+  }
 ];
 
 export const socialMedia = [
   {
     id: "social-media-1",
     icon: instagram,
-    link: "https://www.instagram.com/",
+    link: "https://www.instagram.com/"
   },
   {
     id: "social-media-2",
     icon: facebook,
-    link: "https://www.facebook.com/",
+    link: "https://www.facebook.com/"
   },
   {
     id: "social-media-3",
@@ -154,8 +200,8 @@ export const socialMedia = [
   {
     id: "social-media-4",
     icon: linkedin,
-    link: "https://www.linkedin.com/",
-  },
+    link: "https://www.linkedin.com/"
+  }
 ];
 
 export const leafletMap = {
@@ -184,6 +230,6 @@ export const contact = [
   {
     icon: email,
     title: "Email",
-    content: "diamond.hotel@gmail.co"
+    content: "diamond.hotel.contact@gmail.com"
   }
 ]
