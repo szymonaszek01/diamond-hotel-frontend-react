@@ -21,8 +21,9 @@ const OAuth2RedirectHandler = () => {
   const accessToken = getUrlParam("access-token")
   const refreshToken = getUrlParam("refresh-token")
   const user = getUrlParam("email")
+  const confirmed = getUrlParam("confirmed")
   if (accessToken && user) {
-    store.dispatch(setCredentials({user, accessToken, refreshToken}))
+    store.dispatch(setCredentials({user, accessToken, refreshToken, confirmed}))
   }
 
   const getPathName = () => {

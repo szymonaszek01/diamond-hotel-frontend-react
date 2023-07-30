@@ -20,11 +20,25 @@ const authApiSlice = apiSlice.injectEndpoints({
         method: apiMethods.post,
         body: {...registerReqDto},
       }),
+    }),
+    confirmAccount: builder.mutation({
+      query: token => ({
+        url: authBaseUrl() + "/confirm/account/token/" + token,
+        method: apiMethods.get
+      }),
+    }),
+    resendConfirmationToken: builder.mutation({
+      query: userId => ({
+        url: authBaseUrl() + "/resend/confirmation/token/user/" + userId,
+        method: apiMethods.get
+      }),
     })
   })
 })
 
 export const {
   useLoginMutation,
-  useRegisterMutation
+  useRegisterMutation,
+  useConfirmAccountMutation,
+  useResendConfirmationTokenMutation
 } = authApiSlice

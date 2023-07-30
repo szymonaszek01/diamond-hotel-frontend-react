@@ -6,6 +6,7 @@ import SignInPage from "../pages/public/signIn.page";
 import OAuth2RedirectHandler from "../components/OAuth2RedirectHandler";
 import UserDashboardPage from "../pages/private/user-dashboard.page";
 import SessionExpiredPage from "../pages/public/sessionExpired.page";
+import ConfirmAccountPage from "../pages/public/confirmAccount.page";
 
 const Router = () => {
   return (
@@ -16,6 +17,7 @@ const Router = () => {
         <Route path="/sign-in" element={<SignInPage/>}/>
         <Route path="/sign-in/oauth2/callback" element={<OAuth2RedirectHandler/>}/>
         <Route path="/session-expired" element={<SessionExpiredPage/>}/>
+        <Route path="/account/confirmation" element={<ConfirmAccountPage/>}/>
 
         {/* private router */}
         <Route element={<Authenticator/>}>
