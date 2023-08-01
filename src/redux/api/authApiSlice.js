@@ -28,9 +28,22 @@ const authApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     resendConfirmationToken: builder.mutation({
-      query: userId => ({
-        url: authBaseUrl() + "/resend/confirmation/token/user/" + userId,
+      query: token => ({
+        url: authBaseUrl() + "/refresh/confirmation-token/" + token,
         method: apiMethods.get
+      }),
+    }),
+    forgotPassword: builder.mutation({
+      query: email => ({
+        url: authBaseUrl() + "/confirm/changing/password/email/" + email,
+        method: apiMethods.get
+      }),
+    }),
+    changePassword: builder.mutation({
+      query: changePasswordReqDto => ({
+        url: authBaseUrl() + "/change/password",
+        method: apiMethods.post,
+        body: {...changePasswordReqDto},
       }),
     })
   })
@@ -40,5 +53,7 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useConfirmAccountMutation,
-  useResendConfirmationTokenMutation
+  useResendConfirmationTokenMutation,
+  useForgotPasswordMutation,
+  useChangePasswordMutation
 } = authApiSlice

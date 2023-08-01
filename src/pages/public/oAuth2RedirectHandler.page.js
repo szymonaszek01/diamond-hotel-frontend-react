@@ -1,8 +1,8 @@
 import {Navigate, useLocation} from "react-router-dom";
-import {setCredentials} from "../redux/features/authSlice";
-import {store} from "../redux/store";
+import {setCredentials} from "../../redux/features/authSlice";
+import {store} from "../../redux/store";
 
-const OAuth2RedirectHandler = () => {
+const OAuth2RedirectHandlerPage = () => {
   const getUrlParam = (name) => {
     const queryParams = new URLSearchParams(window.location.search)
     const encodedParam = queryParams.get(name)
@@ -35,4 +35,4 @@ const OAuth2RedirectHandler = () => {
   )
 }
 
-export default OAuth2RedirectHandler
+export default OAuth2RedirectHandlerPage

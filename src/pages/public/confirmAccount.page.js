@@ -19,10 +19,9 @@ const ConfirmAccountPage = () => {
   const [confirmAccount, {isLoading}] = useConfirmAccountMutation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
-  const user = getUrlParam("user")
+  
   const confirmationToken = getUrlParam("confirmation-token")
-  if (!user || !confirmationToken) {
+  if (!confirmationToken) {
     navigate('/')
   }
 
@@ -32,7 +31,7 @@ const ConfirmAccountPage = () => {
   }
 
   const resendTokenConfig = {
-    user: user
+    token: confirmationToken
   }
 
   useEffect(() => {

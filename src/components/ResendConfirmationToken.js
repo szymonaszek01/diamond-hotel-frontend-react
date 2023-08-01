@@ -5,7 +5,7 @@ import {sessionExpired} from "../assets";
 import {CustomLoadingOverlay} from "./index";
 import {useNavigate} from "react-router-dom";
 
-const ResendConfirmationToken = ({user}) => {
+const ResendConfirmationToken = ({token}) => {
   const [resendConfirmationToken, {isLoading}] = useResendConfirmationTokenMutation()
   const navigate = useNavigate()
 
@@ -13,11 +13,11 @@ const ResendConfirmationToken = ({user}) => {
     e.preventDefault()
 
     try {
-      await resendConfirmationToken(user).unwrap()
+      await resendConfirmationToken(token).unwrap()
       toast.success('Confirmation link was sent to your email account successfully.')
       setTimeout(() => {
         navigate("/")
-      }, 1000 * 3)
+      }, 1000 * 5)
 
     } catch (error) {
       toast.error('Resending confirmation link Failed.')

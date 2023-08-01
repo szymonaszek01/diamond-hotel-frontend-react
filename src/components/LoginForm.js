@@ -41,9 +41,8 @@ const LoginForm = () => {
 
   const handleRememberMeInput = (e) => setRememberMe(e.target.checked)
 
-  // TODO Handling "forgot password" process
   return isLoading ? (<CustomLoadingOverlay message={"Loading..."}/>) : (
-    <section id="product" className={`${layout.section} ${styles.flexCenter}`}>
+    <section id="login-form" className={`${layout.section} ${styles.flexCenter}`}>
       <ToastContainer className={"toast-style"}/>
       <div className="h-[100vh] sm:h-[100%] sm:w-[100%] max-w-[75%] flex sm:flex-row flex-col rounded-[10px]">
         <div className="flex justify-center sm:justify-start w-[100%]">
@@ -74,9 +73,10 @@ const LoginForm = () => {
               <p className={`${styles.paragraph} text-[15px] sm:text-[12px] lg:text-[15px] text-white`}>Remember
                 me</p>
             </div>
-            <p
+            <a
+              href="/change/password"
               className={`${styles.paragraph} text-[15px] sm:text-[12px] lg:text-[15px] text-gradient w-[100%] flex justify-start sm:justify-end`}>Forgot
-              password?</p>
+              password?</a>
           </div>
           <button className="mt-4 bg-yellow-gradient rounded-[10px] font-poppins p-2" onClick={loginLocal}>Sign in
           </button>
