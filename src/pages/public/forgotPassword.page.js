@@ -1,7 +1,5 @@
-import {Footer, Navbar} from "../../components";
+import {Footer, Navbar, ForgotPasswordStepOne, ForgotPasswordStepTwo} from "../../components";
 import styles from "../../style";
-import ForgotPasswordStepOne from "../../components/ForgotPasswordStepOne";
-import ForgotPasswordStepTwo from "../../components/ForgotPasswordStepTwo";
 import {loginImg} from "../../assets";
 
 const ForgotPasswordPage = () => {

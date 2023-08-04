@@ -1,6 +1,6 @@
 import {feedback} from "../constants";
 import styles from "../style";
-import FeedbackCard from "./FeedbackCard";
+import {FeedbackCard} from "../components";
 
 const Opinion = () => (
   <section id="opinion" className={`${styles.paddingY} ${styles.flexCenter} flex-col relative `}>

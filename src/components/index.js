@@ -9,17 +9,39 @@ import Hero from "./Hero";
 import Contact from "./Contact";
 import LoginForm from "./LoginForm";
 import CustomLoadingOverlay from "./CustomLoadingOverlay";
+import AccountNotConfirmed from "./AccountNotConfirmed";
+import Authenticator from "./Autheticator";
+import Button from "./Button";
+import FeedbackCard from "./FeedbackCard";
+import ForgotPasswordStepTwo from "./ForgotPasswordStepTwo";
+import ForgotPasswordStepOne from "./ForgotPasswordStepOne";
+import GetStarted from "./GetStarted";
+import Layout from "./Layout";
+import RegisterForm from "./RegisterForm";
+import ResendConfirmationToken from "./ResendConfirmationToken";
+import Steps from "./Steps";
 
 export {
-  Navbar,
-  Product,
+  AccountNotConfirmed,
+  Authenticator,
   Business,
-  CTA,
-  Stats,
-  Footer,
-  Opinion,
-  Hero,
+  Button,
   Contact,
+  CTA,
   CustomLoadingOverlay,
-  LoginForm
+  FeedbackCard,
+  Footer,
+  ForgotPasswordStepOne,
+  ForgotPasswordStepTwo,
+  GetStarted,
+  Hero,
+  Layout,
+  LoginForm,
+  Navbar,
+  Opinion,
+  Product,
+  RegisterForm,
+  ResendConfirmationToken,
+  Stats,
+  Steps
 }

@@ -1,13 +1,13 @@
 import {Route, Routes} from "react-router-dom";
-import Layout from "../components/Layout";
+import {Authenticator, Layout} from "../components"
 import HomePage from "../pages/public/home.page";
-import Authenticator from "../components/Autheticator";
 import SignInPage from "../pages/public/signIn.page";
 import OAuth2RedirectHandlerPage from "../pages/public/oAuth2RedirectHandler.page";
-import UserDashboardPage from "../pages/private/user-dashboard.page";
 import SessionExpiredPage from "../pages/public/sessionExpired.page";
 import ConfirmAccountPage from "../pages/public/confirmAccount.page";
 import ForgotPasswordPage from "../pages/public/forgotPassword.page";
+import SignUpPage from "../pages/public/signUp.page";
+import UserDashboardPage from "../pages/private/user-dashboard.page";
 
 const Router = () => {
   return (
@@ -15,6 +15,7 @@ const Router = () => {
       <Route path="/" element={<Layout/>}>
         {/* public router */}
         <Route index element={<HomePage/>}/>
+        <Route path="/sign-up" element={<SignUpPage/>}/>
         <Route path="/sign-in" element={<SignInPage/>}/>
         <Route path="/sign-in/oauth2/callback" element={<OAuth2RedirectHandlerPage/>}/>
         <Route path="/session-expired" element={<SessionExpiredPage/>}/>

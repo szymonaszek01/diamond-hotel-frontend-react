@@ -4,8 +4,8 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useLoginMutation} from "../redux/api/authApiSlice";
 import {useDispatch} from "react-redux";
-import {toAuthResponseMapper, setCredentials} from "../redux/features/authSlice";
-import {CustomLoadingOverlay} from "./index";
+import {toAuthResMapper, setCredentials} from "../redux/features/authSlice";
+import {CustomLoadingOverlay} from "../components";
 import {ToastContainer, toast} from 'react-toastify';
 
 const LoginForm = () => {
@@ -25,7 +25,7 @@ const LoginForm = () => {
 
     try {
       const response = await login({email: email, password: password}).unwrap()
-      dispatch(setCredentials(toAuthResponseMapper(response)))
+      dispatch(setCredentials(toAuthResMapper(response)))
       setEmail('')
       setPassword('')
       navigate('/dashboard')

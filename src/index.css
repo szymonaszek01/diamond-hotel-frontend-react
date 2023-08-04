@@ -1,11 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
 @import 'react-toastify/dist/ReactToastify.css';
+@import 'react-phone-number-input/style.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
+  --PhoneInputCountrySelectArrow-color: #FFFFFF;
+  --PhoneInputCountrySelectArrow-color--focus: #d0bf79;
+  --PhoneInputCountryFlag-borderColor: #FFFFFF;
+  --PhoneInputCountryFlag-borderColor--focus: #FFFFFF;
+  --PhoneInput-color--focus: #FFFFFF;
   --black-gradient: linear-gradient(
     144.39deg,
     #ffffff -278.56%,
@@ -106,7 +112,7 @@
   animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-input {
+input, .phone {
   border: 1px solid white;
   width: 100%;
   background: transparent;
@@ -117,6 +123,19 @@ input {
   align-items: center;
   padding: 0 10px;
   color: white;
+}
+
+.error {
+  border: 1px solid rgb(220 38 38);
+  color: rgb(220 38 38);
+}
+
+.PhoneInput select {
+  color: black;
+}
+
+.PhoneInput input {
+  border: 0;
 }
 
 input[type="checkbox"] {

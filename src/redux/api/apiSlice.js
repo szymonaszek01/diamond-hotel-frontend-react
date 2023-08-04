@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {logOut, setCredentials, toAuthResponseMapper} from "../features/authSlice";
+import {logOut, setCredentials, toAuthResMapper} from "../features/authSlice";
 import {apiErrors, apiMethods} from "../../constants";
 
 const baseUrl = () => {
@@ -33,7 +33,7 @@ const baseQueryWithReAuth = async (args, api, extraOptions) => {
     }, api, extraOptions);
 
     if (response?.data) {
-      api.dispatch(setCredentials(toAuthResponseMapper(response.data)))
+      api.dispatch(setCredentials(toAuthResMapper(response.data)))
       response = await baseQuery(args, api, extraOptions)
     } else {
       api.dispatch(logOut())

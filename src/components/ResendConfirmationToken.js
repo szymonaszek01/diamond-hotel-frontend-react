@@ -2,7 +2,7 @@ import {useResendConfirmationTokenMutation} from "../redux/api/authApiSlice";
 import {toast, ToastContainer} from "react-toastify";
 import styles from "../style";
 import {sessionExpired} from "../assets";
-import {CustomLoadingOverlay} from "./index";
+import {CustomLoadingOverlay} from "../components";
 import {useNavigate} from "react-router-dom";
 
 const ResendConfirmationToken = ({token}) => {

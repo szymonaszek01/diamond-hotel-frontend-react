@@ -1,12 +1,11 @@
 import {useNavigate} from "react-router-dom";
-import {setCredentials, toAuthResponseMapper} from "../../redux/features/authSlice";
+import {setCredentials, toAuthResMapper} from "../../redux/features/authSlice";
 import {toast, ToastContainer} from "react-toastify";
 import {useConfirmAccountMutation} from "../../redux/api/authApiSlice";
 import {useDispatch} from "react-redux";
 import styles from "../../style";
-import {CustomLoadingOverlay, Footer, Navbar} from "../../components";
+import {CustomLoadingOverlay, Footer, Navbar, ResendConfirmationToken} from "../../components";
 import {useEffect} from "react";
-import ResendConfirmationToken from "../../components/ResendConfirmationToken";
 
 const ConfirmAccountPage = () => {
   const getUrlParam = (name) => {
@@ -38,7 +37,7 @@ const ConfirmAccountPage = () => {
     const confirm = async () => {
       try {
         const response = await confirmAccount(confirmationToken).unwrap()
-        dispatch(setCredentials(toAuthResponseMapper(response)))
+        dispatch(setCredentials(toAuthResMapper(response)))
         navigate('/dashboard')
 
       } catch (error) {
