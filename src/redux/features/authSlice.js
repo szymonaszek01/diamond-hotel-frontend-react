@@ -43,18 +43,18 @@ export const toAuthResMapper = (res) => {
 
 export const toRegisterReqMapper = (req) => {
   return {
-    email: req.email,
-    password: req.password,
-    repeated_password: req.repeated,
-    firstname: req.firstname,
-    lastname: req.lastname,
-    age: req.age,
-    country: req.country,
-    passport_number: req.passport,
-    phone_number: req.phone,
-    city: req.city,
-    street: req.street,
-    postal_code: req.postal
+    email: req.email.value,
+    password: req.password.value,
+    repeated_password: req.repeated.value,
+    firstname: req.firstname.value,
+    lastname: req.lastname.value,
+    age: req.age.value,
+    country: req.country.value,
+    passport_number: req.passport.value,
+    phone_number: req.phone.value,
+    city: req.city.value,
+    street: req.street.value,
+    postal_code: req.postal.value
   }
 }
 

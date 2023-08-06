@@ -8,7 +8,7 @@ const Navbar = ({page, isToggled}) => {
   const [toggle, setToggle] = useState(isToggled)
   const renderMobileView = () => {
     return !isToggled ? '' : (
-      <div className="sm:hidden flex flex-1 justify-end items-center">
+      <div className="sm:hidden flex flex-1 justify-end items-center z-[99]">
         <img
           src={toggle ? close : menu}
           alt="menu"
@@ -22,7 +22,7 @@ const Navbar = ({page, isToggled}) => {
           } p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
         >
           <ul className="list-none flex justify-end items-start flex-1 flex-col">
-            {navLinks.find(nav => nav.main.title === page)?.sections.map((section, index) => (
+            {navLinks.find(nav => nav.main.title === page)?.sections.map((section, _) => (
               <li
                 key={section.id}
                 className={`font-poppins font-medium cursor-pointer text-[16px] mb-4 ${

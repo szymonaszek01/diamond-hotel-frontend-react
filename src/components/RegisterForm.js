@@ -10,61 +10,11 @@ import {useNavigate} from "react-router-dom";
 import PhoneInput from "react-phone-number-input";
 import {motion} from "framer-motion"
 
-const FirstStep = ({registerForm, onChange, error}) => {
+const StepForm = ({form, step, standardInput, phoneInput}) => {
   return (
-    <motion.div initial={{scale: 0}} animate={{rotate: 360, scale: 1}} className="w-full">
-      <input type="email" className={`${styles.input} ${error ? styles.error : ''} mt-7`} name="email"
-             value={registerForm.email} placeholder="email" onChange={onChange}/>
-      <input type="password" className={`${styles.input} ${error ? styles.error : ''} mt-7`} name="password"
-             value={registerForm.password} placeholder="new password" onChange={onChange}/>
-      <input type="password" className={`${styles.input} ${error ? styles.error : ''} mt-7`} name="repeated"
-             value={registerForm.repeated} placeholder="repeated password" onChange={onChange}/>
-    </motion.div>
-  )
-}
-
-const SecondStep = ({registerForm, onChange, error}) => {
-  return (
-    <motion.div initial={{scale: 0}} animate={{rotate: 360, scale: 1}} className="w-full">
-      <input type="text" className={`${styles.input} ${error ? styles.error : ''} mt-7`} name="firstname"
-             value={registerForm.firstname} placeholder="firstname" onChange={onChange}/>
-      <input type="text" className={`${styles.input} ${error ? styles.error : ''} mt-7`} name="lastname"
-             value={registerForm.lastname} placeholder="lastname" onChange={onChange}/>
-      <input type="number" className={`${styles.input} ${error ? styles.error : ''} mt-7`} name="age"
-             value={registerForm.age} placeholder="age" onChange={onChange}/>
-    </motion.div>
-  )
-}
-
-const ThirdStep = ({registerForm, onChange, error}) => {
-  const [phone, setPhone] = useState('')
-  if (registerForm.phone && !phone) {
-    setPhone(registerForm.phone)
-  }
-  registerForm.phone = phone
-
-  return (
-    <motion.div initial={{scale: 0}} animate={{rotate: 360, scale: 1}} className="w-full">
-      <input type="text" className={`${styles.input} ${error ? styles.error : ''} mt-7`} name="country"
-             value={registerForm.country} placeholder="country" onChange={onChange}/>
-      <input type="text" className={`${styles.input} ${error ? styles.error : ''} mt-7`} name="passport"
-             value={registerForm.passport} placeholder="passport" onChange={onChange}/>
-      <PhoneInput className={`${styles.input} phone ${error ? styles.error : ''} mt-7`} placeholder="phone number"
-                  value={phone}
-                  name="phone" onChange={setPhone}/>
-    </motion.div>
-  )
-}
-
-const FourthStep = ({registerForm, onChange, error}) => {
-  return (
-    <motion.div initial={{scale: 0}} animate={{rotate: 360, scale: 1}} className="w-full">
-      <input type="text" className={`${styles.input} ${error ? styles.error : ''} mt-7`} name="city"
-             value={registerForm.city} placeholder="city" onChange={onChange}/>
-      <input type="text" className={`${styles.input} ${error ? styles.error : ''} mt-7`} name="street"
-             value={registerForm.street} placeholder="street" onChange={onChange}/>
-      <input type="text" className={`${styles.input} ${error ? styles.error : ''} mt-7`} name="postal"
-             value={registerForm.postal} placeholder="postal" onChange={onChange}/>
+    <motion.div key={`form-${step}`} initial={{scale: 0}} animate={{rotate: 360, scale: 1}} className="w-full">
+      {form.filter(input => input.name !== "phone").map(input => standardInput(input))}
+      {form.filter(input => input.name === "phone").map(input => phoneInput(input))}
     </motion.div>
   )
 }
@@ -73,114 +23,128 @@ const RegisterForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [register, {isLoading}] = useRegisterMutation()
-  let [error, setError] = useState(false)
-  let [count, setCount] = useState(1)
-  let [firstStepData, setFirstStepData] = useState({
-    email: "",
-    password: "",
-    repeated: ""
+  const [step, setStep] = useState(1)
+  const [form, setForm] = useState({
+    email: {value: '', type: 'email', label: 'email', name: 'email'},
+    password: {value: '', type: 'password', label: 'password', name: 'password'},
+    repeated: {value: '', type: 'password', label: 'repeated password', name: 'repeated'},
+    firstname: {value: '', type: 'text', label: 'firstname', name: 'firstname'},
+    lastname: {value: '', type: 'text', label: 'lastname', name: 'lastname'},
+    age: {value: '', type: 'number', label: 'age', name: 'age'},
+    country: {value: '', type: 'text', label: 'country', name: 'country'},
+    passport: {value: '', type: 'text', label: 'passport number', name: 'passport'},
+    phone: {value: '', type: 'text', label: 'phone number', name: 'phone'},
+    city: {value: '', type: 'text', label: 'city', name: 'city'},
+    street: {value: '', type: 'text', label: 'street', name: 'street'},
+    postal: {value: '', type: 'text', label: 'postal code', name: 'postal'}
   })
-  let [secondStepData, setSecondStepData] = useState({
-    firstname: "",
-    lastname: "",
-    age: ""
-  })
-  let [thirdStepData, setThirdStepData] = useState({
-    country: "",
-    passport: "",
-    phone: ""
-  })
-  let [fourthStepData, setFourthStepData] = useState({
-    city: "",
-    street: "",
-    postal: ""
+  const [error, setError] = useState({
+    userExists: false,
+    fields: []
   })
 
-  const isEmpty = (obj) => {
-    return Object.values(obj).filter(value => value.length < 1).length > 0
+  const renderStandardInput = (input) => {
+    return (
+      <input type={input.type} key={`input-${input.name}`}
+             className={`${styles.input} ${error.fields.find(field => field === input.name) ? styles.error : ''} mt-7`}
+             name={input.name} value={input.value} placeholder={input.label} onChange={onChange}/>
+    )
   }
 
-  const previousStep = () => setCount(count - 1)
+  const renderPhoneInput = (input) => {
+    return (
+      <PhoneInput
+        key={`input-${input.name}`}
+        className={`${styles.input} phone ${error.fields.find(field => field === input.name) ? styles.error : ''} mt-7`}
+        placeholder={input.label}
+        value={input.value}
+        name={input.name} onChange={onChange}/>
+    )
+  }
+
+  const renderErrorMessage = (inputs) => {
+    return `Please, fill ${
+      inputs.map(input => {
+        return "'" + input.label + "'"
+      })
+    } ${inputs.length > 1 ? 'fields' : 'field'}`
+  }
+
+  const getInputsByStep = () => {
+    const stop = 3 * step
+    const start = stop - 3
+    return Object.values(form).filter((_, index) => index >= start && index < stop)
+  }
+
+  const previousStep = () => setStep(step - 1)
 
   const nextStep = () => {
-    let result = {valid: true, message: "Please fill all values"}
-    if (count === 1) {
-      result.valid = !isEmpty(firstStepData)
-      if (result.valid) {
-        const pwdValidation = validatePassword(firstStepData.password, firstStepData.repeated)
-        if (pwdValidation) {
-          result.valid = false
-          result.message = pwdValidation
-        }
-      }
-    } else if (count === 2) {
-      result.valid = !isEmpty(secondStepData)
-    } else if (count === 3) {
-      result.valid = !isEmpty(thirdStepData)
-    } else {
-      result.valid = !isEmpty(fourthStepData)
-    }
-
-    if (!result.valid) {
-      setError(true)
-      toast.error(result.message)
+    if (error.userExists) {
       return
     }
 
-    setCount(count + 1)
+    const invalidInputs = getInputsByStep().filter(input => input.value.length < 1)
+    if (invalidInputs.length > 0) {
+      setError({
+        ...error,
+        fields: invalidInputs.map(invalidInput => invalidInput.name)
+      })
+      toast.error(renderErrorMessage(invalidInputs))
+      return
+    }
+
+    if (step === 1) {
+      const result = validatePassword(form.password.value, form.repeated.value)
+      if (result) {
+        setError({
+          ...error,
+          fields: [form.password.name, form.repeated.name]
+        })
+
+        toast.error(result)
+        return
+      }
+    }
+
+    setStep(step + 1)
   }
 
   const registerUser = async (e) => {
     e.preventDefault()
 
     try {
-      const response = await register(toRegisterReqMapper({...firstStepData, ...secondStepData, ...thirdStepData, ...fourthStepData})).unwrap()
+      const response = await register(toRegisterReqMapper(form)).unwrap()
       dispatch(setCredentials(toAuthResMapper(response)))
       navigate('/dashboard')
 
     } catch (error) {
-      setCount(1)
-      setError(true)
-      toast.error('Register Failed. User with this password or email exists.')
+      setStep(1)
+      setError({
+        ...error,
+        userExists: true,
+        fields: [form.email.name, form.password.name, form.repeated.name]
+      })
+      toast.error('Registration Failed. User with this password or email exists.')
     }
   }
 
-  const handleRegisterFormInput = (e) => {
-    setError(false)
-    const property = e.target.name
-    const value = e.target.value
-    if (count === 1) {
-      setFirstStepData({
-        ...firstStepData,
-        [property]: value
-      })
-    } else if (count === 2) {
-      setSecondStepData({
-        ...secondStepData,
-        [property]: value
-      })
-    } else if (count === 3) {
-      setThirdStepData({
-        ...thirdStepData,
-        [property]: value
-      })
-    } else {
-      setFourthStepData({
-        ...fourthStepData,
-        [property]: value
-      })
+  const onChange = (e) => {
+    if (e === undefined) {
+      return
     }
-  }
 
-  const renderInputs = () => {
-    if (count === 1) {
-      return (<FirstStep registerForm={firstStepData} onChange={handleRegisterFormInput} error={error}/>)
-    } else if (count === 2) {
-      return (<SecondStep registerForm={secondStepData} onChange={handleRegisterFormInput} error={error}/>)
-    } else if (count === 3) {
-      return (<ThirdStep registerForm={thirdStepData} onChange={handleRegisterFormInput} error={error}/>)
-    } else {
-      return (<FourthStep registerForm={fourthStepData} onChange={handleRegisterFormInput} error={error}/>)
+    const inputName = (typeof e) === "string" ? "phone" : e.target.name
+    const inputValue = (typeof e) === "string" ? e : e.target.value
+    const result = Object.values(form).find(input => input.name === inputName)
+
+    setError({
+      ...error,
+      userExists: false,
+      fields: error.fields.filter(field => field !== inputName)
+    })
+
+    if (result) {
+      setForm({...form, [inputName]: {...result, value: inputValue}})
     }
   }
 
@@ -191,20 +155,21 @@ const RegisterForm = () => {
         <div className="flex justify-center sm:justify-start w-[100%]">
           <img src={loginImg} alt="billing" className="w-[100%] h-auto"/>
         </div>
-        <div className="flex flex-col justify-center items-center sm:items-start w-[100%] sm:px-10 z-50">
-          <h4 className={`${styles.heading2} z-[99]`}>Sign up</h4>
+        <div className="flex flex-col justify-center items-center sm:items-start w-[100%] sm:px-10 z-50 ">
+          <h2 className={`flex ${styles.heading2} z-[99] justify-center sm:justify-start`}>Sign up</h2>
 
-          <Steps/>
-          {renderInputs()}
+          <Steps steps={4} count={step} error={error.fields.length > 0}/>
+          <StepForm step={step} form={getInputsByStep()} standardInput={renderStandardInput}
+                    phoneInput={renderPhoneInput}/>
 
           <div className="flex flex-row justify-center items-center sm:justify-start gap-5">
-            <button className={`${count > 1 ? '' : 'hidden'} mt-4 ${styles.button}`}
+            <button className={`${step > 1 ? '' : 'hidden'} mt-4 ${styles.button}`}
                     onClick={previousStep}>
               Previous
             </button>
             <button className={`mt-4 ${styles.button}`}
-                    onClick={count === 4 ? registerUser : nextStep}>
-              {count === 4 ? 'Sign up' : 'Next'}
+                    onClick={step === 4 ? registerUser : nextStep}>
+              {step === 4 ? 'Sign up' : 'Next'}
             </button>
           </div>
         </div>

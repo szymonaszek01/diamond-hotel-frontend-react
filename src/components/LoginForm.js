@@ -4,13 +4,16 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useLoginMutation} from "../redux/api/authApiSlice";
 import {useDispatch} from "react-redux";
-import {toAuthResMapper, setCredentials} from "../redux/features/authSlice";
+import {setCredentials, toAuthResMapper} from "../redux/features/authSlice";
 import {CustomLoadingOverlay} from "../components";
-import {ToastContainer, toast} from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 
 const LoginForm = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [form, setForm] = useState({
+    email: '',
+    password: ''
+  })
+  const [error, setError] = useState(false)
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate()
   const [login, {isLoading}] = useLoginMutation()
@@ -24,20 +27,32 @@ const LoginForm = () => {
     e.preventDefault()
 
     try {
-      const response = await login({email: email, password: password}).unwrap()
+      const response = await login({email: form.email, password: form.password}).unwrap()
       dispatch(setCredentials(toAuthResMapper(response)))
-      setEmail('')
-      setPassword('')
+      setForm({
+        ...form,
+        password: '',
+        repeated: ''
+      })
       navigate('/dashboard')
 
     } catch (error) {
+      setError(true)
       toast.error('Login Failed. You have entered an invalid username or password.')
     }
   }
 
-  const handleUserInput = (e) => setEmail(e.target.value)
-
-  const handlePwdInput = (e) => setPassword(e.target.value)
+  const onChange = (e) => {
+    let inputName = e.target.name
+    if (inputName === 'current-password') {
+      inputName = 'password'
+    }
+    setError(false)
+    setForm({
+      ...form,
+      [inputName]: e.target.value
+    })
+  }
 
   const handleRememberMeInput = (e) => setRememberMe(e.target.checked)
 
@@ -60,13 +75,12 @@ const LoginForm = () => {
             <hr className="border-1 w-[100%]"/>
           </div>
           <input placeholder="email" type="email" id="email" name="email" autoComplete={rememberMe ? 'username' : ''}
-                 value={email} className="mt-7 h-11 font-poppins text-[14px] sm:text-[12px] lg:text-[14px]" required
-                 onChange={handleUserInput}/>
+                 value={form.email} className={`${styles.input} ${error ? styles.error : ''} z-[99]`}
+                 onChange={onChange}/>
           <input placeholder="password" type="password" id="current-password" name="current-password"
                  autoComplete={rememberMe ? 'current-password' : ''}
-                 value={password} className="mt-7 h-11 font-poppins text-[14px] sm:text-[12px] lg:text-[14px]"
-                 required
-                 onChange={handlePwdInput}/>
+                 value={form.password} className={`${styles.input} ${error ? styles.error : ''} mt-7 z-[99]`}
+                 onChange={onChange}/>
           <div className="flex flex-col sm:flex-row justify-between items-center w-[100%] mt-2">
             <div className="flex items-center gap-2 w-[100%]">
               <input type="checkbox" onChange={handleRememberMeInput} className="h-4 p-0"/>

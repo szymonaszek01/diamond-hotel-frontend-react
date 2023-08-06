@@ -7,8 +7,10 @@ import styles from "../style";
 import {validatePassword} from "../redux/features/authSlice";
 
 const ForgotPasswordStepTwo = ({token}) => {
-  const [newPwd, setNewPwd] = useState('')
-  const [repeatedPwd, setRepeatedPwd] = useState('')
+  const [form, setForm] = useState({
+    password: '',
+    repeated: ''
+  })
   const [error, setError] = useState(false)
   const navigate = useNavigate()
   const [changePassword, {isLoading}] = useChangePasswordMutation()
@@ -16,17 +18,20 @@ const ForgotPasswordStepTwo = ({token}) => {
   const forgotPasswordStepTwo = async (e) => {
     e.preventDefault()
 
-    const message = validatePassword(newPwd, repeatedPwd)
-    if (message) {
+    const result = validatePassword(form.password, form.repeated)
+    if (result) {
       setError(true)
-      toast.error(message)
-      return;
+      toast.error(result)
+      return
     }
 
     try {
-      await changePassword({token: token, new_password: newPwd}).unwrap()
-      setNewPwd('')
-      setRepeatedPwd('')
+      await changePassword({token: token, new_password: form.password}).unwrap()
+      setForm({
+        ...form,
+        password: '',
+        repeated: ''
+      })
       toast.success('Password was changed successfully')
       setTimeout(() => {
         navigate("/")
@@ -38,14 +43,12 @@ const ForgotPasswordStepTwo = ({token}) => {
     }
   }
 
-  const handleNewPwdInput = (e) => {
+  const onChange = (e) => {
     setError(false)
-    setNewPwd(e.target.value)
-  }
-
-  const handleRepeatedPwdInput = (e) => {
-    setError(false)
-    setRepeatedPwd(e.target.value)
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
   }
 
   return isLoading ? (<CustomLoadingOverlay message={"Loading..."}/>) : (
@@ -56,17 +59,17 @@ const ForgotPasswordStepTwo = ({token}) => {
       <div className="absolute z-[1] w-[80%] h-[80%] rounded-full white__gradient bottom-40"/>
       {/* gradient end */}
 
-      <h4 className={`${styles.heading2} z-[99]`}>Change password</h4>
+      <h2 className={`flex ${styles.heading2} z-[99] justify-center sm:justify-start`}>Change password</h2>
 
-      <input placeholder="new password" type="password"
-             value={newPwd} className={`${styles.input} ${error ? styles.error : ''} z-[99]`}
+      <input placeholder="new password" type="password" name="password"
+             value={form.password} className={`${styles.input} ${error ? styles.error : ''} z-[99]`}
              required
-             onChange={handleNewPwdInput}/>
+             onChange={onChange}/>
 
-      <input placeholder="repeated password" type="password"
-             value={repeatedPwd} className={`${styles.input} ${error ? styles.error : ''} z-[99]`}
+      <input placeholder="repeated password" type="password" name="repeated"
+             value={form.repeated} className={`${styles.input} ${error ? styles.error : ''} z-[99]`}
              required
-             onChange={handleRepeatedPwdInput}/>
+             onChange={onChange}/>
       <div>
 
       </div>
