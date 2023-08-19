@@ -1,14 +1,22 @@
 import styles from "../../style";
 import {Footer, LoginForm, Navbar} from "../../components";
+import {publicNavLinks} from "../../constants";
+import {selectUser} from "../../redux/features/authSlice";
+import {useSelector} from "react-redux";
+import {Navigate, useLocation} from "react-router-dom";
 
 const SignInPage = () => {
   const navConfig = {
     page: "Sign in",
-    isToggled: true
+    isToggled: true,
+    navbarLinks: publicNavLinks
   }
 
-  return (
-    <div className="bg-primary w-full overflow-hidden">
+  const user = useSelector(selectUser)
+  const location = useLocation()
+
+  return user ? (<Navigate to="/dashboard" state={{from: location}} replace/>) : (
+    <div className={styles.page}>
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar {...navConfig}/>
@@ -18,13 +26,11 @@ const SignInPage = () => {
       <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <LoginForm/>
-          {/* gradient start */}
           <div className="absolute z-[0] w-[40%] h-[35%] top-0 pink__gradient"/>
           <div className="absolute z-[1] w-[80%] h-[80%] rounded-full white__gradient bottom-40"/>
-          {/* gradient end */}
-          <Footer/>
         </div>
       </div>
+      <Footer/>
     </div>
   )
 }

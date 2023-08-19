@@ -13,7 +13,7 @@ const SessionExpiredPage = () => {
   }
 
   return (
-    <div className="bg-primary w-full overflow-hidden">
+    <div className={styles.page}>
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar {...navConfig}/>
@@ -37,16 +37,16 @@ const SessionExpiredPage = () => {
                 Please sign in again or go back to the home page.
               </p>
               <div className="flex flex-row gap-4">
-                <button className="mt-4 bg-yellow-gradient rounded-[10px] font-poppins p-2" onClick={() => nextPath("/sign-in")}>Sign in
+                <button className={`mt-4 ${styles.button} z-[99]`} onClick={() => nextPath("/sign-in")}>Sign in
                 </button>
-                <button className="mt-4 bg-yellow-gradient rounded-[10px] font-poppins p-2" onClick={() => nextPath("/")}>Home
+                <button className={`mt-4 ${styles.button} z-[99]`} onClick={() => nextPath("/")}>Home
                 </button>
               </div>
             </div>
           </div>
-          <Footer/>
         </div>
       </div>
+      <Footer/>
     </div>
   )
 }

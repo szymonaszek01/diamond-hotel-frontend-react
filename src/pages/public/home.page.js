@@ -1,14 +1,16 @@
 import {Navbar, Hero, Stats, Business, Product, Contact, Opinion, CTA, Footer} from "../../components"
 import styles from "../../style"
+import {publicNavLinks} from "../../constants";
 
 const HomePage = () => {
   const navConfig = {
     page: "Home",
-    isToggled: true
+    isToggled: true,
+    navbarLinks: publicNavLinks
   }
 
   return (
-    <div className="bg-primary w-full overflow-hidden">
+    <div className={styles.page}>
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar {...navConfig}/>
@@ -29,9 +31,9 @@ const HomePage = () => {
           <Contact/>
           <Opinion/>
           <CTA/>
-          <Footer/>
         </div>
       </div>
+      <Footer/>
     </div>
   )
 }

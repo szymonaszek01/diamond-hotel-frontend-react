@@ -3,8 +3,8 @@ import {googleLogo, loginImg} from "../assets";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useLoginMutation} from "../redux/api/authApiSlice";
-import {useDispatch} from "react-redux";
-import {setCredentials, toAuthResMapper} from "../redux/features/authSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {selectOAuth2Error, setCredentials, setOAuth2Error, toAuthResMapper} from "../redux/features/authSlice";
 import {CustomLoadingOverlay} from "../components";
 import {toast, ToastContainer} from 'react-toastify';
 
@@ -18,6 +18,11 @@ const LoginForm = () => {
   const navigate = useNavigate()
   const [login, {isLoading}] = useLoginMutation()
   const dispatch = useDispatch()
+  const oAuthError = useSelector(selectOAuth2Error)
+  if (oAuthError) {
+    toast.error("Login Failed. Account with this email exists.")
+    dispatch(setOAuth2Error({error: null}))
+  }
 
   const loginOAuth2 = async () => {
     window.location.href = "http://localhost:5432/api/v1/user-profile/login/oauth2/google"

@@ -4,7 +4,7 @@ import {toast, ToastContainer} from "react-toastify";
 import {useConfirmAccountMutation} from "../../redux/api/authApiSlice";
 import {useDispatch} from "react-redux";
 import styles from "../../style";
-import {CustomLoadingOverlay, Footer, Navbar, ResendConfirmationToken} from "../../components";
+import {CustomLoadingOverlay, Footer, Navbar, ResendConfirmAccountEmail} from "../../components";
 import {useEffect} from "react";
 
 const ConfirmAccountPage = () => {
@@ -18,7 +18,7 @@ const ConfirmAccountPage = () => {
   const [confirmAccount, {isLoading}] = useConfirmAccountMutation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  
+
   const confirmationToken = getUrlParam("confirmation-token")
   if (!confirmationToken) {
     navigate('/')
@@ -26,11 +26,8 @@ const ConfirmAccountPage = () => {
 
   const navConfig = {
     page: null,
-    isToggled: false
-  }
-
-  const resendTokenConfig = {
-    token: confirmationToken
+    isToggled: false,
+    navbarLinks: null
   }
 
   useEffect(() => {
@@ -50,7 +47,7 @@ const ConfirmAccountPage = () => {
 
   return isLoading ? (
     <CustomLoadingOverlay message={"Loading..."}/>) : (
-    <div className="bg-primary w-full overflow-hidden">
+    <div className={styles.page}>
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar {...navConfig}/>
@@ -62,11 +59,11 @@ const ConfirmAccountPage = () => {
       <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <div className="flex justify-center items-center mt-4 mb-16">
-            <ResendConfirmationToken {...resendTokenConfig}/>
+            <ResendConfirmAccountEmail token={confirmationToken}/>
           </div>
-          <Footer/>
         </div>
       </div>
+      <Footer/>
     </div>
   )
 }

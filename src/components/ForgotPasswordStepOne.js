@@ -15,7 +15,7 @@ const ForgotPasswordStepOne = () => {
     e.preventDefault()
 
     try {
-      await forgotPassword(email).unwrap()
+      await forgotPassword(email)
       setEmail('')
       toast.success('Link was sent to your email account successfully')
       setTimeout(() => {

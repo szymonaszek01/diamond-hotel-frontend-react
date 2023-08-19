@@ -1,8 +1,19 @@
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import {
-  people01, people02, people03, facebook, instagram, linkedin, twitter, send, shield, star, email, telephone,
-  localization
+  email,
+  facebook,
+  instagram,
+  linkedin,
+  localization,
+  people01,
+  people02,
+  people03,
+  send,
+  shield,
+  star,
+  telephone,
+  twitter
 } from "../assets";
 
 export const apiMethods = {
@@ -43,7 +54,46 @@ export const apiErrors = {
   }
 }
 
-export const navLinks = [
+export const inputsInfo = {
+  user: {
+    image: {type: 'file', label: 'image', name: 'image'},
+    email: {type: 'email', label: 'email', name: 'email'},
+    password: {type: 'password', label: 'password', name: 'password'},
+    repeated: {type: 'password', label: 'repeated password', name: 'repeated'},
+    firstname: {type: 'text', label: 'firstname', name: 'firstname'},
+    lastname: {type: 'text', label: 'lastname', name: 'lastname'},
+    age: {type: 'number', label: 'age', name: 'age'},
+    country: {type: 'text', label: 'country', name: 'country'},
+    passport: {type: 'text', label: 'passport number', name: 'passport'},
+    phone: {type: 'text', label: 'phone number', name: 'phone'},
+    city: {type: 'text', label: 'city', name: 'city'},
+    street: {type: 'text', label: 'street', name: 'street'},
+    postal: {type: 'text', label: 'postal code', name: 'postal'}
+  }
+}
+
+export const itemsInfo = {
+  user: {
+    email: {
+      name: "email",
+      label: "Email"
+    },
+    password: {
+      name: "password",
+      label: "Password"
+    },
+    details: {
+      name: "details",
+      label: "Details"
+    },
+    image: {
+      name: "image",
+      label: "Image"
+    }
+  }
+}
+
+export const publicNavLinks = [
   {
     main: {
       id: "home",
@@ -107,6 +157,57 @@ export const navLinks = [
       id: "sign-up",
       title: "Sign up",
       path: "/sign-up"
+    },
+    sections: []
+  }
+];
+
+export const privateNavLinks = [
+  {
+    main: {
+      id: "dashboard",
+      title: "Home",
+      path: "/dashboard"
+    },
+    sections: []
+  },
+  {
+    main: {
+      id: "messages",
+      title: "Messages",
+      path: "/messages"
+    },
+    sections: []
+  },
+  {
+    main: {
+      id: "services",
+      title: "Services",
+      path: "/services"
+    },
+    sections: []
+  },
+  {
+    main: {
+      id: "reservations",
+      title: "Reservations",
+      path: "/reservations"
+    },
+    sections: []
+  },
+  {
+    main: {
+      id: "settings",
+      title: "Settings",
+      path: "/settings"
+    },
+    sections: []
+  },
+  {
+    main: {
+      id: "log-out",
+      title: "Sign out",
+      path: "/"
     },
     sections: []
   }

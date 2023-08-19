@@ -1,6 +1,7 @@
 import {Navigate, useLocation} from "react-router-dom";
-import {setCredentials} from "../../redux/features/authSlice";
+import {setCredentials, setOAuth2Error} from "../../redux/features/authSlice";
 import {store} from "../../redux/store";
+import {useDispatch} from "react-redux";
 
 const OAuth2RedirectHandlerPage = () => {
   const getUrlParam = (name) => {
@@ -11,8 +12,10 @@ const OAuth2RedirectHandlerPage = () => {
   }
 
   const location = useLocation()
+  const dispatch = useDispatch()
   const error = getUrlParam("error")
   if (error) {
+    dispatch(setOAuth2Error({error: error}))
     return (
       <Navigate to={"/sign-in"} state={{from: location}}/>
     )
@@ -21,9 +24,10 @@ const OAuth2RedirectHandlerPage = () => {
   const accessToken = getUrlParam("access-token")
   const refreshToken = getUrlParam("refresh-token")
   const user = getUrlParam("email")
-  const confirmed = getUrlParam("confirmed")
+  const confirmed = getUrlParam("confirmed") === "true"
+  const id = Number.parseInt(getUrlParam("id"))
   if (accessToken && user) {
-    store.dispatch(setCredentials({user, accessToken, refreshToken, confirmed}))
+    store.dispatch(setCredentials({user, id, accessToken, refreshToken, confirmed}))
   }
 
   const getPathName = () => {

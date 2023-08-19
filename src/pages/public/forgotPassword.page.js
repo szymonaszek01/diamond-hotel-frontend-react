@@ -14,14 +14,10 @@ const ForgotPasswordPage = () => {
     page: null,
     isToggled: false
   }
-
   const confirmationToken = getUrlParam("confirmation-token")
-  const forgotPasswordConfig = {
-    token: confirmationToken
-  }
 
   return (
-    <div className="bg-primary w-full overflow-hidden">
+    <div className={styles.page}>
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar {...navConfig}/>
@@ -35,13 +31,13 @@ const ForgotPasswordPage = () => {
                 <img src={loginImg} alt="billing" className="w-[100%] h-auto"/>
               </div>
               <div className="flex flex-col justify-center items-center sm:items-start w-[100%] sm:px-10 z-50">
-                {!confirmationToken ? <ForgotPasswordStepOne/> : <ForgotPasswordStepTwo {...forgotPasswordConfig}/>}
+                {!confirmationToken ? <ForgotPasswordStepOne/> : <ForgotPasswordStepTwo token={confirmationToken}/>}
               </div>
             </div>
           </div>
-          <Footer/>
         </div>
       </div>
+      <Footer/>
     </div>
   )
 }

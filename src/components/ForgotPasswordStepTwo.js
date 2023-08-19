@@ -1,4 +1,4 @@
-import {useChangePasswordMutation} from "../redux/api/authApiSlice";
+import {useForgotPasswordNewMutation} from "../redux/api/authApiSlice";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {toast, ToastContainer} from "react-toastify";
@@ -13,7 +13,7 @@ const ForgotPasswordStepTwo = ({token}) => {
   })
   const [error, setError] = useState(false)
   const navigate = useNavigate()
-  const [changePassword, {isLoading}] = useChangePasswordMutation()
+  const [forgotPasswordNew, {isLoading}] = useForgotPasswordNewMutation()
 
   const forgotPasswordStepTwo = async (e) => {
     e.preventDefault()
@@ -26,7 +26,7 @@ const ForgotPasswordStepTwo = ({token}) => {
     }
 
     try {
-      await changePassword({token: token, new_password: form.password}).unwrap()
+      await forgotPasswordNew({token: token, new_password: form.password})
       setForm({
         ...form,
         password: '',
