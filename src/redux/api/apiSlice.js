@@ -10,7 +10,6 @@ const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:5432",
   credentials: "include",
   prepareHeaders: (headers, {getState}) => {
-    headers.set('Content-Type', 'application/json')
     const accessToken = getState().auth.accessToken
     if (accessToken) {
       headers.set("Authorization", `Bearer ${accessToken}`)
@@ -27,10 +26,9 @@ const baseQueryWithReAuth = async (args, api, extraOptions) => {
     const user = api.getState().auth.user
     api.dispatch(setCredentials({user, accessToken, refreshToken}))
     response = await baseQuery({
-      url: baseUrl() + '/refresh/access-token',
-      method: apiMethods.post,
-      body: {refresh_token: refreshToken},
-    }, api, extraOptions);
+      url: baseUrl() + '/refresh/access-token/' + encodeURIComponent(refreshToken),
+      method: apiMethods.get
+    }, api, extraOptions)
 
     if (response?.data) {
       api.dispatch(setCredentials(toAuthResMapper(response.data)))

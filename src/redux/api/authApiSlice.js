@@ -23,26 +23,40 @@ const authApiSlice = apiSlice.injectEndpoints({
     }),
     confirmAccount: builder.mutation({
       query: token => ({
-        url: authBaseUrl() + "/confirm/account/token/" + token,
+        url: authBaseUrl() + "/confirm/account/confirmation-token/" + encodeURIComponent(token),
         method: apiMethods.get
       }),
     }),
-    resendConfirmationToken: builder.mutation({
+    refreshConfirmationToken: builder.mutation({
       query: token => ({
-        url: authBaseUrl() + "/refresh/confirmation-token/" + token,
+        url: authBaseUrl() + "/refresh/confirmation-token/" + encodeURIComponent(token),
         method: apiMethods.get
       }),
     }),
     forgotPassword: builder.mutation({
       query: email => ({
-        url: authBaseUrl() + "/confirm/changing/password/email/" + email,
+        url: authBaseUrl() + "/forgot/password/email/" + encodeURIComponent(email),
         method: apiMethods.get
       }),
     }),
-    changePassword: builder.mutation({
+    forgotPasswordNew: builder.mutation({
       query: changePasswordReqDto => ({
-        url: authBaseUrl() + "/change/password",
-        method: apiMethods.post,
+        url: authBaseUrl() + "/forgot/password/new",
+        method: apiMethods.put,
+        body: {...changePasswordReqDto},
+      }),
+    }),
+    updateEmail: builder.mutation({
+      query: changeEmailReqDto => ({
+        url: authBaseUrl() + "/update/email",
+        method: apiMethods.put,
+        body: {...changeEmailReqDto},
+      }),
+    }),
+    updatePassword: builder.mutation({
+      query: changePasswordReqDto => ({
+        url: authBaseUrl() + "/update/password",
+        method: apiMethods.put,
         body: {...changePasswordReqDto},
       }),
     })
@@ -53,7 +67,9 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useConfirmAccountMutation,
-  useResendConfirmationTokenMutation,
+  useRefreshConfirmationTokenMutation,
   useForgotPasswordMutation,
-  useChangePasswordMutation
+  useForgotPasswordNewMutation,
+  useUpdateEmailMutation,
+  useUpdatePasswordMutation
 } = authApiSlice

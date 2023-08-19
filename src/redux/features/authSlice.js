@@ -2,39 +2,59 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: {user: null, accessToken: null, refreshToken: null},
+  initialState: {user: null, accessToken: null, refreshToken: null, oauth2Error: null},
   reducers: {
     setCredentials: (state, action) => {
-      const {user, accessToken, refreshToken, confirmed} = action.payload
+      const {user, id, accessToken, refreshToken, confirmed} = action.payload
       state.user = user
+      state.id = id
       state.accessToken = accessToken
       state.refreshToken = refreshToken
       state.confirmed = confirmed
     },
-    logOut: (state, action) => {
+    logOut: (state) => {
       state.user = null
+      state.id = null
       state.accessToken = null
       state.refreshToken = null
       state.confirmed = null
     },
+    setConfirmation: (state, action) => {
+      const {confirmed} = action.payload
+      state.confirmed = confirmed
+    },
+    setOAuth2Error: (state, action) => {
+      const {error} = action.payload
+      state.oauth2Error = error
+    }
   }
 })
 
-export const {setCredentials, logOut} = authSlice.actions
+export const {
+  setCredentials,
+  logOut,
+  setConfirmation,
+  setOAuth2Error
+} = authSlice.actions
 
 export default authSlice.reducer
 
-export const selectCurrentUser = (state) => state.auth.user
+export const selectUser = (state) => state.auth.user
 
-export const selectCurrentAccessToken = (state) => state.auth.accessToken
+export const selectUserId = (state) => state.auth.id
 
-export const selectCurrentRefreshToken = (state) => state.auth.refreshToken
+export const selectAccessToken = (state) => state.auth.accessToken
 
-export const selectCurrentConfirmed = (state) => state.auth.confirmed
+export const selectRefreshToken = (state) => state.auth.refreshToken
+
+export const isConfirmed = (state) => state.auth.confirmed
+
+export const selectOAuth2Error = (state) => state.auth.oauth2Error
 
 export const toAuthResMapper = (res) => {
   return {
     user: res.email,
+    id: res.id,
     accessToken: res.access_token,
     refreshToken: res.refresh_token,
     confirmed: res.confirmed
