@@ -25,8 +25,15 @@ import people02 from "./people02.png";
 import people03 from "./people03.png";
 import loginImg from "./login.png"
 import googleLogo from "./googleLogo.png"
-import defaultUser from "./defaultUser.jpg"
+import defaultUser from "./defaultUser.png"
 import sessionExpired from "./sessionExpired.png"
+import messageBlack from "./message-black.png"
+import arrowRightBlack from "./arrow-right-black.png"
+import messageWhite from "./message-white.png"
+import arrowRightWhite from "./arrow-right-white.png"
+import locked from "./locked.png"
+import lockedYellow from "./locked-yellow.png"
+import information from "./information.png"
 
 export {
   card,
@@ -57,5 +64,12 @@ export {
   loginImg,
   googleLogo,
   defaultUser,
-  sessionExpired
+  sessionExpired,
+  messageBlack,
+  arrowRightBlack,
+  messageWhite,
+  arrowRightWhite,
+  locked,
+  lockedYellow,
+  information
 }

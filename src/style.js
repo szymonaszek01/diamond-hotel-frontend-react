@@ -14,8 +14,9 @@ const styles = {
   marginX: "sm:mx-16 mx-6",
   marginY: "sm:my-16 my-6",
 
-  input: 'mt-4 h-11 font-poppins text-[14px] sm:text-[12px] lg:text-[14px]',
-  button: 'bg-yellow-gradient rounded-[10px] font-poppins p-2 cursor-pointer',
+  page: `bg-primary w-full min-h-[100vh] flex flex-col`,
+  input: 'h-11 font-poppins text-[14px] sm:text-[12px] lg:text-[14px]',
+  button: 'bg-yellow-gradient font-poppins rounded-[10px] font-poppins p-2 cursor-pointer text-[16px] outline-0',
   error: 'error'
 }
 
