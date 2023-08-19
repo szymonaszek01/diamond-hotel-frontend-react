@@ -18,8 +18,9 @@ import ForgotPasswordStepOne from "./ForgotPasswordStepOne";
 import GetStarted from "./GetStarted";
 import Layout from "./Layout";
 import RegisterForm from "./RegisterForm";
-import ResendConfirmationToken from "./ResendConfirmationToken";
+import ResendConfirmAccountEmail from "./ResendConfirmAccountEmail";
 import Steps from "./Steps";
+import DashboardUserDetailsCard from "./DashboardUserDetailsCard";
 
 export {
   AccountNotConfirmed,
@@ -41,7 +42,8 @@ export {
   Opinion,
   Product,
   RegisterForm,
-  ResendConfirmationToken,
+  ResendConfirmAccountEmail,
   Stats,
-  Steps
+  Steps,
+  DashboardUserDetailsCard
 }
