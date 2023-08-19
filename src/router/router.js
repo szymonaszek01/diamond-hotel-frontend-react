@@ -8,6 +8,7 @@ import ConfirmAccountPage from "../pages/public/confirmAccount.page";
 import ForgotPasswordPage from "../pages/public/forgotPassword.page";
 import SignUpPage from "../pages/public/signUp.page";
 import UserDashboardPage from "../pages/private/user-dashboard.page";
+import EditProfilePage from "../pages/private/edit-profile.page";
 
 const Router = () => {
   return (
@@ -25,6 +26,7 @@ const Router = () => {
         {/* private router */}
         <Route element={<Authenticator/>}>
           <Route path="/dashboard" element={<UserDashboardPage/>}/>
+          <Route path="/edit-profile" element={<EditProfilePage/>}/>
         </Route>
       </Route>
     </Routes>
