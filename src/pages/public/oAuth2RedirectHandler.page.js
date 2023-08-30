@@ -2,18 +2,14 @@ import {Navigate, useLocation} from "react-router-dom";
 import {setAccountDetails, setOAuth2Error} from "../../redux/features/authSlice";
 import {store} from "../../redux/store";
 import {useDispatch} from "react-redux";
+import {urlParam} from "../../util";
 
 const OAuth2RedirectHandlerPage = () => {
-  const getUrlParam = (name) => {
-    const queryParams = new URLSearchParams(window.location.search)
-    const encodedParam = queryParams.get(name)
-
-    return encodedParam ? decodeURIComponent(encodedParam) : null
-  }
-
   const location = useLocation()
   const dispatch = useDispatch()
-  const error = getUrlParam("error")
+  const search = window.location.search;
+
+  const error = urlParam("error", search)
   if (error) {
     dispatch(setOAuth2Error({error: error}))
     return (
@@ -21,11 +17,11 @@ const OAuth2RedirectHandlerPage = () => {
     )
   }
 
-  const accessToken = getUrlParam("access-token")
-  const refreshToken = getUrlParam("refresh-token")
-  const user = getUrlParam("email")
-  const confirmed = getUrlParam("confirmed") === "true"
-  const id = Number.parseInt(getUrlParam("id"))
+  const accessToken = urlParam("access-token", search)
+  const refreshToken = urlParam("refresh-token", search)
+  const user = urlParam("email", search)
+  const confirmed = urlParam("confirmed", search) === "true"
+  const id = Number.parseInt(urlParam("id", search))
   if (accessToken && user) {
     store.dispatch(setAccountDetails({user, id, accessToken, refreshToken, confirmed}))
   }

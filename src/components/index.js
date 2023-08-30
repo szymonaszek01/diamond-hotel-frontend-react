@@ -21,6 +21,10 @@ import RegisterForm from "./RegisterForm";
 import ResendConfirmAccountEmail from "./ResendConfirmAccountEmail";
 import Steps from "./Steps";
 import DashboardUserDetailsCard from "./DashboardUserDetailsCard";
+import CustomPhoneInput from "./CustomPhoneInput";
+import CustomStandardInput from "./CustomStandardInput";
+import CustomUploadFileInput from "./CustomUploadFileInput";
+import Modal from "./Modal"
 
 export {
   AccountNotConfirmed,
@@ -30,6 +34,10 @@ export {
   Contact,
   CTA,
   CustomLoadingOverlay,
+  CustomPhoneInput,
+  CustomStandardInput,
+  CustomUploadFileInput,
+  DashboardUserDetailsCard,
   FeedbackCard,
   Footer,
   ForgotPasswordStepOne,
@@ -38,6 +46,7 @@ export {
   Hero,
   Layout,
   LoginForm,
+  Modal,
   Navbar,
   Opinion,
   Product,
@@ -45,5 +54,4 @@ export {
   ResendConfirmAccountEmail,
   Stats,
   Steps,
-  DashboardUserDetailsCard
 }

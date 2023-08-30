@@ -2,19 +2,27 @@ import {useState} from "react";
 import {useRegisterAccountMutation} from "../redux/api/authApiSlice";
 import {setAccountDetails, toAuthResMapper, toRegisterReqMapper, validatePassword} from "../redux/features/authSlice";
 import {toast, ToastContainer} from "react-toastify";
-import {CustomLoadingOverlay, Steps} from "../components";
+import {CustomLoadingOverlay, CustomStandardInput, CustomPhoneInput, Steps} from "../components";
 import styles, {layout} from "../style";
 import {loginImg} from "../assets";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import PhoneInput from "react-phone-number-input";
 import {motion} from "framer-motion"
+import {inputsInfo} from "../constants";
+import {requiredInputsErrorMessage} from "../util";
 
-const StepForm = ({form, step, standardInput, phoneInput}) => {
+const StepForm = ({form, step, isError, onChange}) => {
   return (
-    <motion.div key={`form-${step}`} initial={{scale: 0}} animate={{rotate: 360, scale: 1}} className="w-full">
-      {form.filter(input => input.name !== "phone").map(input => standardInput(input))}
-      {form.filter(input => input.name === "phone").map(input => phoneInput(input))}
+    <motion.div key={`form-${step}`} initial={{scale: 0}} animate={{rotate: 360, scale: 1}}
+                className="w-full flex flex-col mt-7 gap-7">
+      {form.filter(input => input.name !== "phone").map(input => <CustomStandardInput attributes={input}
+                                                                                      error={isError(input)}
+                                                                                      onChange={onChange}
+                                                                                      placeholder={true}/>)}
+      {form.filter(input => input.name === "phone").map(input => <CustomPhoneInput attributes={input}
+                                                                                   error={isError(input)}
+                                                                                   onChange={onChange}
+                                                                                   placeholder={true}/>)}
     </motion.div>
   )
 }
@@ -25,49 +33,26 @@ const RegisterForm = () => {
   const [registerAccount, {isLoading}] = useRegisterAccountMutation()
   const [step, setStep] = useState(1)
   const [form, setForm] = useState({
-    email: {value: '', type: 'email', label: 'email', name: 'email'},
-    password: {value: '', type: 'password', label: 'password', name: 'password'},
-    repeated: {value: '', type: 'password', label: 'repeated password', name: 'repeated'},
-    firstname: {value: '', type: 'text', label: 'firstname', name: 'firstname'},
-    lastname: {value: '', type: 'text', label: 'lastname', name: 'lastname'},
-    age: {value: '', type: 'number', label: 'age', name: 'age'},
-    country: {value: '', type: 'text', label: 'country', name: 'country'},
-    passport: {value: '', type: 'text', label: 'passport number', name: 'passport'},
-    phone: {value: '', type: 'text', label: 'phone number', name: 'phone'},
-    city: {value: '', type: 'text', label: 'city', name: 'city'},
-    street: {value: '', type: 'text', label: 'street', name: 'street'},
-    postal: {value: '', type: 'text', label: 'postal code', name: 'postal'}
+    email: {...inputsInfo.user.email, value: ''},
+    password: {...inputsInfo.user.password, value: ''},
+    repeated: {...inputsInfo.user.repeated, value: ''},
+    firstname: {...inputsInfo.user.firstname, value: ''},
+    lastname: {...inputsInfo.user.lastname, value: ''},
+    age: {...inputsInfo.user.age, value: ''},
+    country: {...inputsInfo.user.country, value: ''},
+    passport: {...inputsInfo.user.passport, value: ''},
+    phone: {...inputsInfo.user.phone, value: ''},
+    city: {...inputsInfo.user.city, value: ''},
+    street: {...inputsInfo.user.street, value: ''},
+    postal: {...inputsInfo.user.postal, value: ''}
   })
   const [error, setError] = useState({
     userExists: false,
     fields: []
   })
 
-  const renderStandardInput = (input) => {
-    return (
-      <input type={input.type} key={`input-${input.name}`}
-             className={`${styles.input} ${error.fields.find(field => field === input.name) ? styles.error : ''} mt-7`}
-             name={input.name} value={input.value} placeholder={input.label} onChange={onChange}/>
-    )
-  }
-
-  const renderPhoneInput = (input) => {
-    return (
-      <PhoneInput
-        key={`input-${input.name}`}
-        className={`${styles.input} phone ${error.fields.find(field => field === input.name) ? styles.error : ''} mt-7`}
-        placeholder={input.label}
-        value={input.value}
-        name={input.name} onChange={onChange}/>
-    )
-  }
-
-  const renderErrorMessage = (inputs) => {
-    return `Please, fill ${
-      inputs.map(input => {
-        return "'" + input.label + "'"
-      })
-    } ${inputs.length > 1 ? 'fields' : 'field'}`
+  const isError = (input) => {
+    return error.fields.find(field => field === input.name)
   }
 
   const getInputsByStep = () => {
@@ -89,7 +74,7 @@ const RegisterForm = () => {
         ...error,
         fields: invalidInputs.map(invalidInput => invalidInput.name)
       })
-      toast.error(renderErrorMessage(invalidInputs))
+      toast.error(requiredInputsErrorMessage(invalidInputs))
       return
     }
 
@@ -159,15 +144,14 @@ const RegisterForm = () => {
           <h2 className={`flex ${styles.heading2} z-[99] justify-center sm:justify-start`}>Sign up</h2>
 
           <Steps steps={4} count={step} error={error.fields.length > 0}/>
-          <StepForm step={step} form={getInputsByStep()} standardInput={renderStandardInput}
-                    phoneInput={renderPhoneInput}/>
+          <StepForm step={step} form={getInputsByStep()} isError={isError} onChange={onChange}/>
 
           <div className="flex flex-row justify-center items-center sm:justify-start gap-5">
             <button className={`${step > 1 ? '' : 'hidden'} mt-4 ${styles.button}`}
                     onClick={previousStep}>
               Previous
             </button>
-            <button className={`mt-4 ${styles.button}`}
+            <button className={`mt-6 ${styles.button}`}
                     onClick={step === 4 ? registerUser : nextStep}>
               {step === 4 ? 'Sign up' : 'Next'}
             </button>

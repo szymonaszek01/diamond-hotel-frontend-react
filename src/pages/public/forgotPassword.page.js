@@ -1,20 +1,15 @@
 import {Footer, Navbar, ForgotPasswordStepOne, ForgotPasswordStepTwo} from "../../components";
 import styles from "../../style";
 import {loginImg} from "../../assets";
+import {urlParam} from "../../util";
 
 const ForgotPasswordPage = () => {
-  const getUrlParam = (name) => {
-    const queryParams = new URLSearchParams(window.location.search)
-    const encodedParam = queryParams.get(name)
-
-    return encodedParam ? decodeURIComponent(encodedParam) : null
-  }
-
   const navConfig = {
     page: null,
     isToggled: false
   }
-  const confirmationToken = getUrlParam("confirmation-token")
+
+  const confirmationToken = urlParam("confirmation-token", window.location.search)
 
   return (
     <div className={styles.page}>

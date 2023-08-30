@@ -5,13 +5,14 @@ import {useNavigate} from "react-router-dom";
 import {useLoginAccountMutation} from "../redux/api/authApiSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {selectOAuth2Error, setAccountDetails, setOAuth2Error, toAuthResMapper} from "../redux/features/authSlice";
-import {CustomLoadingOverlay} from "../components";
+import {CustomLoadingOverlay, CustomStandardInput} from "../components";
 import {toast, ToastContainer} from 'react-toastify';
+import {inputsInfo} from "../constants";
 
 const LoginForm = () => {
   const [form, setForm] = useState({
-    email: '',
-    password: ''
+    email: {...inputsInfo.user.email, value: '', autoComplete: 'username'},
+    password: {...inputsInfo.user.password, value: '', name: 'current-password', autoComplete: 'current-password'}
   })
   const [error, setError] = useState(false)
   const [rememberMe, setRememberMe] = useState(false);
@@ -32,12 +33,12 @@ const LoginForm = () => {
     e.preventDefault()
 
     try {
-      const response = await loginAccount({email: form.email, password: form.password}).unwrap()
+      const response = await loginAccount({email: form.email.value, password: form.password.value}).unwrap()
       dispatch(setAccountDetails(toAuthResMapper(response)))
       setForm({
         ...form,
-        password: '',
-        repeated: ''
+        email: {...form.email, value: ''},
+        password: {...form.password, value: ''}
       })
       navigate('/dashboard')
 
@@ -47,15 +48,19 @@ const LoginForm = () => {
     }
   }
 
+  const getInputByName = (name) => {
+    return name === "email" ? form.email : form.password
+  }
+
   const onChange = (e) => {
     let inputName = e.target.name
-    if (inputName === 'current-password') {
-      inputName = 'password'
+    if (inputName === "current-password") {
+      inputName = "password"
     }
     setError(false)
     setForm({
       ...form,
-      [inputName]: e.target.value
+      [inputName]: {...getInputByName(inputName), value: e.target.value}
     })
   }
 
@@ -74,18 +79,17 @@ const LoginForm = () => {
             <img src={googleLogo} alt="loginForm" onClick={loginOAuth2}
                  className="w-[5%] sm:w-[10%] md:w-[8%] lg:w-[6%] h-auto cursor-pointer"/>
           </div>
-          <div className="flex flex-row justify-center items-center w-[100%] mt-2 gap-4">
+          <div className="flex flex-row justify-center items-center w-[100%] gap-4">
             <hr className="border-1 w-[100%]"/>
             <p className={`${styles.paragraph} text-[15px] sm:text-[12px] lg:text-[15px] text-white`}>Or</p>
             <hr className="border-1 w-[100%]"/>
           </div>
-          <input placeholder="email" type="email" id="email" name="email" autoComplete={rememberMe ? 'username' : ''}
-                 value={form.email} className={`${styles.input} ${error ? styles.error : ''} z-[99]`}
-                 onChange={onChange}/>
-          <input placeholder="password" type="password" id="current-password" name="current-password"
-                 autoComplete={rememberMe ? 'current-password' : ''}
-                 value={form.password} className={`${styles.input} ${error ? styles.error : ''} mt-7 z-[99]`}
-                 onChange={onChange}/>
+          <div className="flex flex-col gap-7 w-full mt-1">
+            <CustomStandardInput attributes={form.email} placeholder={true} error={error} autoComplete={rememberMe}
+                                 onChange={onChange}/>
+            <CustomStandardInput attributes={form.password} placeholder={true} error={error} autoComplete={rememberMe}
+                                 onChange={onChange}/>
+          </div>
           <div className="flex flex-col sm:flex-row justify-between items-center w-[100%] mt-2">
             <div className="flex items-center gap-2 w-[100%]">
               <input type="checkbox" onChange={handleRememberMeInput} className="h-4 p-0"/>
@@ -97,7 +101,7 @@ const LoginForm = () => {
               className={`${styles.paragraph} text-[15px] sm:text-[12px] lg:text-[15px] text-gradient w-[100%] flex justify-start sm:justify-end`}>Forgot
               password?</a>
           </div>
-          <button className="mt-4 bg-yellow-gradient rounded-[10px] font-poppins p-2" onClick={loginLocal}>Sign in
+          <button className="bg-yellow-gradient rounded-[10px] font-poppins p-2 mt-3" onClick={loginLocal}>Sign in
           </button>
           <p
             className={`${styles.paragraph} text-[15px] sm:text-[12px] lg:text-[15px] text-white w-[100%] mt-4`}>Don't

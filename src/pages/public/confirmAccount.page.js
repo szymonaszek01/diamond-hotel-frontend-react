@@ -6,20 +6,14 @@ import {useDispatch} from "react-redux";
 import styles from "../../style";
 import {CustomLoadingOverlay, Footer, Navbar, ResendConfirmAccountEmail} from "../../components";
 import {useEffect} from "react";
+import {urlParam} from "../../util";
 
 const ConfirmAccountPage = () => {
-  const getUrlParam = (name) => {
-    const queryParams = new URLSearchParams(window.location.search)
-    const encodedParam = queryParams.get(name)
-
-    return encodedParam ? decodeURIComponent(encodedParam) : null
-  }
-
   const [confirmAccount, {isLoading}] = useConfirmAccountMutation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const confirmationToken = getUrlParam("confirmation-token")
+  const confirmationToken = urlParam("confirmation-token", window.location.search)
   if (!confirmationToken) {
     navigate('/')
   }

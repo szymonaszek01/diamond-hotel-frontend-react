@@ -1,4 +1,4 @@
-import {CustomLoadingOverlay, Footer, Navbar} from "../../components";
+import {CustomLoadingOverlay, CustomStandardInput, CustomPhoneInput, CustomUploadFileInput, Modal, Footer, Navbar} from "../../components";
 import styles from "../../style";
 import {inputsInfo, itemsInfo, privateNavLinks} from "../../constants";
 import {toast, ToastContainer} from "react-toastify";
@@ -9,11 +9,7 @@ import {selectUserDetails} from "../../redux/features/userSlice";
 import {logOut, setConfirmation, validatePassword} from "../../redux/features/authSlice";
 import {useUpdateUserDetailsMutation, useUpdateUserImageMutation} from "../../redux/api/userApiSlice";
 import {defaultUser, locked} from "../../assets";
-import Modal from "../../components/Modal";
-import CustomStandardInput from "../../components/CustomStandardInput";
 import {requiredInputsErrorMessage} from "../../util";
-import CustomPhoneInput from "../../components/CustomPhoneInput";
-import CustomUploadFileInput from "../../components/CustomUploadFileInput";
 import {useNavigate} from "react-router-dom";
 
 const Menu = ({items, onClick}) => {

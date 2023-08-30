@@ -2,14 +2,15 @@ import {useUpdateForgottenAccountPasswordMutation} from "../redux/api/authApiSli
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {toast, ToastContainer} from "react-toastify";
-import {CustomLoadingOverlay} from "../components";
+import {CustomLoadingOverlay, CustomStandardInput} from "../components";
 import styles from "../style";
 import {validatePassword} from "../redux/features/authSlice";
+import {inputsInfo} from "../constants";
 
 const ForgotPasswordStepTwo = ({token}) => {
   const [form, setForm] = useState({
-    password: '',
-    repeated: ''
+    password: {...inputsInfo.user.password, value: ''},
+    repeated: {...inputsInfo.user.repeated, value: ''}
   })
   const [error, setError] = useState(false)
   const navigate = useNavigate()
@@ -18,7 +19,7 @@ const ForgotPasswordStepTwo = ({token}) => {
   const forgotPasswordStepTwo = async (e) => {
     e.preventDefault()
 
-    const result = validatePassword(form.password, form.repeated)
+    const result = validatePassword(form.password.value, form.repeated.value)
     if (result) {
       setError(true)
       toast.error(result)
@@ -26,11 +27,11 @@ const ForgotPasswordStepTwo = ({token}) => {
     }
 
     try {
-      await updateForgottenAccountPassword({token: token, new_password: form.password})
+      await updateForgottenAccountPassword({token: token, new_password: form.password.value})
       setForm({
         ...form,
-        password: '',
-        repeated: ''
+        password: {...form.password, value: ''},
+        repeated: {...form.repeated, value: ''}
       })
       toast.success('Password was changed successfully')
       setTimeout(() => {
@@ -43,11 +44,16 @@ const ForgotPasswordStepTwo = ({token}) => {
     }
   }
 
+  const getInputByName = (name) => {
+    return name === "password" ? form.password : form.repeated
+  }
+
   const onChange = (e) => {
+    const inputName = e.target.name
     setError(false)
     setForm({
       ...form,
-      [e.target.name]: e.target.value
+      [inputName]: {...getInputByName(inputName), value: e.target.value}
     })
   }
 
@@ -60,16 +66,10 @@ const ForgotPasswordStepTwo = ({token}) => {
       {/* gradient end */}
 
       <h2 className={`flex ${styles.heading2} z-[99] justify-center sm:justify-start`}>Change password</h2>
-
-      <input placeholder="new password" type="password" name="password"
-             value={form.password} className={`${styles.input} ${error ? styles.error : ''} z-[99]`}
-             required
-             onChange={onChange}/>
-
-      <input placeholder="repeated password" type="password" name="repeated"
-             value={form.repeated} className={`${styles.input} ${error ? styles.error : ''} z-[99]`}
-             required
-             onChange={onChange}/>
+      <CustomStandardInput attributes={form.password} placeholder={true} error={error}
+                           onChange={onChange}/>
+      <CustomStandardInput attributes={form.repeated} placeholder={true} error={error}
+                           onChange={onChange}/>
       <div>
 
       </div>
