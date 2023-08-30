@@ -1,15 +1,16 @@
 import styles from "../../style";
-import {useGetUserDetailsMutation} from "../../redux/api/userApiSlice";
+import {useGetUserByIdMutation} from "../../redux/api/userApiSlice";
 import {isConfirmed, selectUserId, setConfirmation} from "../../redux/features/authSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {setUserDetails, toUserDetailsResMapper} from "../../redux/features/userSlice";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {privateNavLinks} from "../../constants";
 import {AccountNotConfirmed, CustomLoadingOverlay, DashboardUserDetailsCard, Footer, Navbar} from "../../components";
 
 const UserDashboardPage = () => {
-  const [getUserDetails, {isLoading}] = useGetUserDetailsMutation()
+  const [getUser, {isLoading}] = useGetUserByIdMutation()
   const dispatch = useDispatch()
+  const [allRequiredData, setAllRequiredData] = useState(true)
   const userId = useSelector(selectUserId)
   const confirmed = useSelector(isConfirmed)
 
@@ -22,9 +23,11 @@ const UserDashboardPage = () => {
   useEffect(() => {
     const loadUserDetails = async () => {
       try {
-        const response = await getUserDetails(userId).unwrap()
+        const response = await getUser(userId).unwrap()
         dispatch(setUserDetails(toUserDetailsResMapper(response)))
         dispatch(setConfirmation({confirmed: response.confirmed}))
+        const res = Object.entries(response).filter(([kay, value]) => (value === null || value.length < 1) && (kay !== "picture")).map(([_, value]) => value).length === 0
+        setAllRequiredData(res)
 
       } catch (error) {
         console.log(error)
@@ -32,7 +35,7 @@ const UserDashboardPage = () => {
     }
 
     loadUserDetails().then(() => console.log("Success login"))
-  }, [userId, getUserDetails, dispatch, confirmed])
+  }, [userId, getUser, dispatch, confirmed])
 
   return isLoading ? (<CustomLoadingOverlay message={"Loading..."}/>) : (
     <div className={styles.page}>
@@ -60,7 +63,7 @@ const UserDashboardPage = () => {
             className="absolute z-[2] invisible sm:visible w-[80%] h-[80%] rounded-full white__gradient bottom-40"/>
           <div className={`${styles.flexCenter} flex-col z-[99] sm:relative`}>
             <div className={`w-[80%] sm:w-[50%] mt-5`}>
-              <DashboardUserDetailsCard/>
+              <DashboardUserDetailsCard allRequiredData={allRequiredData}/>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import {useRefreshConfirmationTokenMutation} from "../redux/api/authApiSlice";
+import {useUpdateConfirmationTokenMutation} from "../redux/api/authApiSlice";
 import {toast, ToastContainer} from "react-toastify";
 import styles from "../style";
 import {sessionExpired} from "../assets";
@@ -6,14 +6,14 @@ import {CustomLoadingOverlay} from "../components";
 import {useNavigate} from "react-router-dom";
 
 const ResendConfirmAccountEmail = ({token}) => {
-  const [refreshConfirmationToken, {isLoading}] = useRefreshConfirmationTokenMutation()
+  const [updateConfirmationToken, {isLoading}] = useUpdateConfirmationTokenMutation()
   const navigate = useNavigate()
 
   const resend = async (e) => {
     e.preventDefault()
 
     try {
-      await refreshConfirmationToken(token)
+      await updateConfirmationToken(token)
       toast.success('Confirmation link was sent to your email account successfully.')
       setTimeout(() => {
         navigate("/")

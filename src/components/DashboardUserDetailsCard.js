@@ -1,14 +1,13 @@
 import styles from "../style";
 import {arrowRightBlack, close, defaultUser, information, messageBlack} from "../assets";
 import {useSelector} from "react-redux";
-import {allRequiredUserDetailsProvided, selectUserDetails} from "../redux/features/userSlice";
+import {selectUserDetails} from "../redux/features/userSlice";
 import {ToastContainer} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 
-const DashboardUserDetailsCard = () => {
+const DashboardUserDetailsCard = ({allRequiredData}) => {
   const userDetails = useSelector(selectUserDetails)
-  const allRequiredData = useSelector(allRequiredUserDetailsProvided)
   const navigate = useNavigate()
   const [warning, setWarning] = useState(true)
 
@@ -26,11 +25,14 @@ const DashboardUserDetailsCard = () => {
         <div className={`${allRequiredData || !warning ? 'hidden' : ''} p-5`}>
           <div className="text-white p-5 flex flex-col box-shadow justify-center items-start gap-5 rounded-[10px]">
             <div className="flex flex-col sm:flex-row justify-center sm:justify-end items-center w-full">
-              <img src={close} alt="close" className="w-[17px] h-auto cursor-pointer" onClick={() => setWarning(false)}/>
+              <img src={close} alt="close" className="w-[17px] h-auto cursor-pointer"
+                   onClick={() => setWarning(false)}/>
             </div>
             <div className="flex flex-col sm:flex-row justify-center sm:justify-start items-center gap-5 w-full">
               <img src={information} alt="information" className="w-[40px] h-auto"/>
-              <p className={`${styles.paragraph} text-sm text-white break-all`}>Please, fill all required data to in your <span className={`${styles.paragraph} text-sm font-semibold text-white cursor-pointer break-all`} onClick={() => navigate("/edit-profile")}>user profile</span> to get full access.</p>
+              <p className={`${styles.paragraph} text-sm text-white break-all`}>Please, fill all required data to in
+                your <span className={`${styles.paragraph} text-sm font-semibold text-white cursor-pointer break-all`}
+                           onClick={() => navigate("/edit-profile")}>user profile</span> to get full access.</p>
             </div>
           </div>
         </div>

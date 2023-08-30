@@ -7,23 +7,23 @@ const baseUrl = () => {
 
 const userApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
-    getUserDetails: builder.mutation({
+    getUserById: builder.mutation({
       query: id => ({
-        url: baseUrl() + "/id/" + encodeURIComponent(id) + "/details/info",
+        url: baseUrl() + "/id/" + encodeURIComponent(id),
         method: apiMethods.get
       })
     }),
-    updateImage: builder.mutation({
+    updateUserImage: builder.mutation({
       query: ({formData, email}) => ({
-        url: baseUrl() + "/email/" + encodeURIComponent(email) + "/update/image",
-        method: apiMethods.put
+        url: baseUrl() + "/email/" + encodeURIComponent(email) + "/picture",
+        method: apiMethods.post
         ,
         body: formData
       })
     }),
-    updateDetails: builder.mutation({
+    updateUserDetails: builder.mutation({
       query: ({details, email}) => ({
-        url: baseUrl() + "/email/" + encodeURIComponent(email) + "/update/details",
+        url: baseUrl() + "/email/" + encodeURIComponent(email) + "/details",
         method: apiMethods.put,
         body: details
       })
@@ -32,7 +32,7 @@ const userApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
-  useGetUserDetailsMutation,
-  useUpdateImageMutation,
-  useUpdateDetailsMutation
+  useGetUserByIdMutation,
+  useUpdateUserImageMutation,
+  useUpdateUserDetailsMutation
 } = userApiSlice

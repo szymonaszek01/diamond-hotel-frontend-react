@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import {setCredentials, toAuthResMapper} from "../../redux/features/authSlice";
+import {setAccountDetails, toAuthResMapper} from "../../redux/features/authSlice";
 import {toast, ToastContainer} from "react-toastify";
 import {useConfirmAccountMutation} from "../../redux/api/authApiSlice";
 import {useDispatch} from "react-redux";
@@ -34,7 +34,7 @@ const ConfirmAccountPage = () => {
     const confirm = async () => {
       try {
         const response = await confirmAccount(confirmationToken).unwrap()
-        dispatch(setCredentials(toAuthResMapper(response)))
+        dispatch(setAccountDetails(toAuthResMapper(response)))
         navigate('/dashboard')
 
       } catch (error) {

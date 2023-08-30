@@ -21,7 +21,7 @@ const Router = () => {
         <Route path="/sign-in/oauth2/callback" element={<OAuth2RedirectHandlerPage/>}/>
         <Route path="/session-expired" element={<SessionExpiredPage/>}/>
         <Route path="/account/confirmation" element={<ConfirmAccountPage/>}/>
-        <Route path="/change/password" element={<ForgotPasswordPage/>}/>
+        <Route path="/forgot/password" element={<ForgotPasswordPage/>}/>
 
         {/* private router */}
         <Route element={<Authenticator/>}>

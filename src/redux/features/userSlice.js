@@ -16,13 +16,6 @@ export default userSlice.reducer
 
 export const selectUserDetails = (state) => state.user.details
 
-export const allRequiredUserDetailsProvided = (state) => {
-  if (!state.user.details) {
-    return false
-  }
-  return Object.values(state.user.details).filter(value => value === null || value.length < 1).length === 0
-}
-
 export const toUserDetailsResMapper = (res) => {
   return {
     id: res.id,

@@ -4,10 +4,10 @@ import {inputsInfo, itemsInfo, privateNavLinks} from "../../constants";
 import {toast, ToastContainer} from "react-toastify";
 import {useDispatch, useSelector} from "react-redux";
 import {useState} from "react";
-import {useUpdateEmailMutation, useUpdatePasswordMutation} from "../../redux/api/authApiSlice";
+import {useUpdateAccountEmailMutation, useUpdateAccountPasswordMutation} from "../../redux/api/authApiSlice";
 import {selectUserDetails} from "../../redux/features/userSlice";
 import {logOut, setConfirmation, validatePassword} from "../../redux/features/authSlice";
-import {useUpdateDetailsMutation, useUpdateImageMutation} from "../../redux/api/userApiSlice";
+import {useUpdateUserDetailsMutation, useUpdateUserImageMutation} from "../../redux/api/userApiSlice";
 import {defaultUser, locked} from "../../assets";
 import Modal from "../../components/Modal";
 import CustomStandardInput from "../../components/CustomStandardInput";
@@ -140,10 +140,10 @@ const EditProfilePage = () => {
   })
   const [error, setError] = useState({fields: []})
 
-  const [updateEmail, {isLoading: isUpdatingEmailForm}] = useUpdateEmailMutation()
-  const [updatePassword, {isLoading: isUpdatingPasswordForm}] = useUpdatePasswordMutation()
-  const [updateDetails, {isLoading: isUpdatingDetailsForm}] = useUpdateDetailsMutation()
-  const [updateImage, {isLoading: isUpdatingImageForm}] = useUpdateImageMutation()
+  const [updateAccountEmail, {isLoading: isUpdatingEmailForm}] = useUpdateAccountEmailMutation()
+  const [updateAccountPassword, {isLoading: isUpdatingPasswordForm}] = useUpdateAccountPasswordMutation()
+  const [updateUserDetails, {isLoading: isUpdatingDetailsForm}] = useUpdateUserDetailsMutation()
+  const [updateUserImage, {isLoading: isUpdatingImageForm}] = useUpdateUserImageMutation()
 
   const onInputChange = (e) => {
     if (e === undefined) {
@@ -199,11 +199,11 @@ const EditProfilePage = () => {
     return true
   }
 
-  const updateUserEmail = async (e) => {
+  const updateUserEmailOnClick = async (e) => {
     e.preventDefault()
 
     try {
-      await updateEmail({email: details.email, new_email: form.email.value}).unwrap()
+      await updateAccountEmail({email: details.email, new_email: form.email.value}).unwrap()
       dispatch(setConfirmation({confirmed: false}))
       dispatch(logOut())
       navigate("/")
@@ -213,11 +213,11 @@ const EditProfilePage = () => {
         ...error,
         fields: selectedMenuItemInputs().map(input => input.name)
       })
-      toast.error("Updating email failed")
+      toast.error("User with this email exists.")
     }
   }
 
-  const updateUserPassword = async (e) => {
+  const updateUserPasswordOnClick = async (e) => {
     e.preventDefault()
 
     if (!isSelectedFormValid()) {
@@ -235,7 +235,7 @@ const EditProfilePage = () => {
     }
 
     try {
-      await updatePassword({email: details.email, new_password: form.password.value}).unwrap()
+      await updateAccountPassword({email: details.email, new_password: form.password.value}).unwrap()
       setForm({...form, password: {...form.password, value: ""}, repeated: {...form.repeated, value: ""}})
       toast.success("Password successfully updated")
 
@@ -244,15 +244,15 @@ const EditProfilePage = () => {
         ...error,
         fields: selectedMenuItemInputs().map(input => input.name)
       })
-      toast.error("Updating password failed")
+      toast.error("User with this password exists.")
     }
   }
 
-  const updateUserDetails = async (e) => {
+  const updateUserDetailsOnClick = async (e) => {
     e.preventDefault()
 
     try {
-      await updateDetails({
+      await updateUserDetails({
         details: {
           firstname: form.firstname.value,
           lastname: form.lastname.value,
@@ -276,13 +276,13 @@ const EditProfilePage = () => {
     }
   }
 
-  const updateUserImage = async (e) => {
+  const updateUserImageOnClick = async (e) => {
     e.preventDefault()
 
     try {
       let formData = new FormData()
       formData.set("image", form.image.files[0])
-      const response = await updateImage({formData: formData, email: details.email}).unwrap()
+      const response = await updateUserImage({formData: formData, email: details.email}).unwrap()
       setForm({...form, image: {...form.image, picture: response.image, files: []}})
       toast.success("Image successfully updated")
 
@@ -303,13 +303,13 @@ const EditProfilePage = () => {
 
     const selectedItemName = selectedMenuItem().name
     if (selectedItemName === "email") {
-      updateUserEmail(e).then(() => console.log("Updating email..."))
+      updateUserEmailOnClick(e).then(() => console.log("Updating email..."))
     } else if (selectedItemName === "password") {
-      updateUserPassword(e).then(() => console.log("Updating password..."))
+      updateUserPasswordOnClick(e).then(() => console.log("Updating password..."))
     } else if (selectedItemName === "details") {
-      updateUserDetails(e).then(() => console.log("Updating details..."))
+      updateUserDetailsOnClick(e).then(() => console.log("Updating details..."))
     } else {
-      updateUserImage(e).then(() => console.log("Updating image..."))
+      updateUserImageOnClick(e).then(() => console.log("Updating image..."))
     }
   }
 

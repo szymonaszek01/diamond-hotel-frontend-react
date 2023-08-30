@@ -2,9 +2,9 @@ import styles, {layout} from "../style";
 import {googleLogo, loginImg} from "../assets";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {useLoginMutation} from "../redux/api/authApiSlice";
+import {useLoginAccountMutation} from "../redux/api/authApiSlice";
 import {useDispatch, useSelector} from "react-redux";
-import {selectOAuth2Error, setCredentials, setOAuth2Error, toAuthResMapper} from "../redux/features/authSlice";
+import {selectOAuth2Error, setAccountDetails, setOAuth2Error, toAuthResMapper} from "../redux/features/authSlice";
 import {CustomLoadingOverlay} from "../components";
 import {toast, ToastContainer} from 'react-toastify';
 
@@ -16,7 +16,7 @@ const LoginForm = () => {
   const [error, setError] = useState(false)
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate()
-  const [login, {isLoading}] = useLoginMutation()
+  const [loginAccount, {isLoading}] = useLoginAccountMutation()
   const dispatch = useDispatch()
   const oAuthError = useSelector(selectOAuth2Error)
   if (oAuthError) {
@@ -32,8 +32,8 @@ const LoginForm = () => {
     e.preventDefault()
 
     try {
-      const response = await login({email: form.email, password: form.password}).unwrap()
-      dispatch(setCredentials(toAuthResMapper(response)))
+      const response = await loginAccount({email: form.email, password: form.password}).unwrap()
+      dispatch(setAccountDetails(toAuthResMapper(response)))
       setForm({
         ...form,
         password: '',
@@ -93,7 +93,7 @@ const LoginForm = () => {
                 me</p>
             </div>
             <a
-              href="/change/password"
+              href="/forgot/password"
               className={`${styles.paragraph} text-[15px] sm:text-[12px] lg:text-[15px] text-gradient w-[100%] flex justify-start sm:justify-end`}>Forgot
               password?</a>
           </div>

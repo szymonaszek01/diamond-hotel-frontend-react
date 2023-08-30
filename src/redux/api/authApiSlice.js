@@ -7,69 +7,69 @@ const authBaseUrl = () => {
 
 const authApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
-    login: builder.mutation({
-      query: loginReqDto => ({
-        url: authBaseUrl() + "/login",
+    loginAccount: builder.mutation({
+      query: body => ({
+        url: authBaseUrl() + "/account/login",
         method: apiMethods.post,
-        body: {...loginReqDto}
+        body: {...body}
       })
     }),
-    register: builder.mutation({
-      query: registerReqDto => ({
-        url: authBaseUrl() + "/register",
+    registerAccount: builder.mutation({
+      query: body => ({
+        url: authBaseUrl() + "/account/registration",
         method: apiMethods.post,
-        body: {...registerReqDto},
+        body: {...body},
       }),
     }),
     confirmAccount: builder.mutation({
       query: token => ({
-        url: authBaseUrl() + "/confirm/account/confirmation-token/" + encodeURIComponent(token),
-        method: apiMethods.get
+        url: authBaseUrl() + "/confirmation-token/" + encodeURIComponent(token) + "/account/confirmation",
+        method: apiMethods.put
       }),
     }),
-    refreshConfirmationToken: builder.mutation({
+    updateConfirmationToken: builder.mutation({
       query: token => ({
-        url: authBaseUrl() + "/refresh/confirmation-token/" + encodeURIComponent(token),
-        method: apiMethods.get
+        url: authBaseUrl() + "/confirmation-token/" + encodeURIComponent(token),
+        method: apiMethods.put
       }),
     }),
-    forgotPassword: builder.mutation({
+    forgotAccountPassword: builder.mutation({
       query: email => ({
-        url: authBaseUrl() + "/forgot/password/email/" + encodeURIComponent(email),
+        url: authBaseUrl() + "/email/" + encodeURIComponent(email) + "/account/forgotten/password",
         method: apiMethods.get
       }),
     }),
-    forgotPasswordNew: builder.mutation({
-      query: changePasswordReqDto => ({
-        url: authBaseUrl() + "/forgot/password/new",
+    updateForgottenAccountPassword: builder.mutation({
+      query: body => ({
+        url: authBaseUrl() + "/account/forgotten/password",
         method: apiMethods.put,
-        body: {...changePasswordReqDto},
+        body: {...body},
       }),
     }),
-    updateEmail: builder.mutation({
-      query: changeEmailReqDto => ({
-        url: authBaseUrl() + "/update/email",
+    updateAccountEmail: builder.mutation({
+      query: body => ({
+        url: authBaseUrl() + "/account/email",
         method: apiMethods.put,
-        body: {...changeEmailReqDto},
+        body: {...body},
       }),
     }),
-    updatePassword: builder.mutation({
-      query: changePasswordReqDto => ({
-        url: authBaseUrl() + "/update/password",
+    updateAccountPassword: builder.mutation({
+      query: body => ({
+        url: authBaseUrl() + "/account/password",
         method: apiMethods.put,
-        body: {...changePasswordReqDto},
+        body: {...body},
       }),
     })
   })
 })
 
 export const {
-  useLoginMutation,
-  useRegisterMutation,
+  useLoginAccountMutation,
+  useRegisterAccountMutation,
   useConfirmAccountMutation,
-  useRefreshConfirmationTokenMutation,
-  useForgotPasswordMutation,
-  useForgotPasswordNewMutation,
-  useUpdateEmailMutation,
-  useUpdatePasswordMutation
+  useUpdateConfirmationTokenMutation,
+  useForgotAccountPasswordMutation,
+  useUpdateForgottenAccountPasswordMutation,
+  useUpdateAccountEmailMutation,
+  useUpdateAccountPasswordMutation
 } = authApiSlice

@@ -1,5 +1,5 @@
 import {Navigate, useLocation} from "react-router-dom";
-import {setCredentials, setOAuth2Error} from "../../redux/features/authSlice";
+import {setAccountDetails, setOAuth2Error} from "../../redux/features/authSlice";
 import {store} from "../../redux/store";
 import {useDispatch} from "react-redux";
 
@@ -27,7 +27,7 @@ const OAuth2RedirectHandlerPage = () => {
   const confirmed = getUrlParam("confirmed") === "true"
   const id = Number.parseInt(getUrlParam("id"))
   if (accessToken && user) {
-    store.dispatch(setCredentials({user, id, accessToken, refreshToken, confirmed}))
+    store.dispatch(setAccountDetails({user, id, accessToken, refreshToken, confirmed}))
   }
 
   const getPathName = () => {

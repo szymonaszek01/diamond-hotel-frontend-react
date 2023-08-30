@@ -1,4 +1,4 @@
-import {useForgotPasswordMutation} from "../redux/api/authApiSlice";
+import {useForgotAccountPasswordMutation} from "../redux/api/authApiSlice";
 import {toast, ToastContainer} from "react-toastify";
 import {CustomLoadingOverlay} from "../components";
 import styles from "../style";
@@ -9,13 +9,13 @@ const ForgotPasswordStepOne = () => {
   const [email, setEmail] = useState('')
   const [error, setError] = useState(false)
   const navigate = useNavigate()
-  const [forgotPassword, {isLoading}] = useForgotPasswordMutation()
+  const [forgotAccountPassword, {isLoading}] = useForgotAccountPasswordMutation()
 
   const forgotPasswordStepOne = async (e) => {
     e.preventDefault()
 
     try {
-      await forgotPassword(email)
+      await forgotAccountPassword(email)
       setEmail('')
       toast.success('Link was sent to your email account successfully')
       setTimeout(() => {

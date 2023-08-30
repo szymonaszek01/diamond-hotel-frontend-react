@@ -1,6 +1,6 @@
 import {useState} from "react";
-import {useRegisterMutation} from "../redux/api/authApiSlice";
-import {setCredentials, toAuthResMapper, toRegisterReqMapper, validatePassword} from "../redux/features/authSlice";
+import {useRegisterAccountMutation} from "../redux/api/authApiSlice";
+import {setAccountDetails, toAuthResMapper, toRegisterReqMapper, validatePassword} from "../redux/features/authSlice";
 import {toast, ToastContainer} from "react-toastify";
 import {CustomLoadingOverlay, Steps} from "../components";
 import styles, {layout} from "../style";
@@ -22,7 +22,7 @@ const StepForm = ({form, step, standardInput, phoneInput}) => {
 const RegisterForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [register, {isLoading}] = useRegisterMutation()
+  const [registerAccount, {isLoading}] = useRegisterAccountMutation()
   const [step, setStep] = useState(1)
   const [form, setForm] = useState({
     email: {value: '', type: 'email', label: 'email', name: 'email'},
@@ -113,8 +113,8 @@ const RegisterForm = () => {
     e.preventDefault()
 
     try {
-      const response = await register(toRegisterReqMapper(form)).unwrap()
-      dispatch(setCredentials(toAuthResMapper(response)))
+      const response = await registerAccount(toRegisterReqMapper(form)).unwrap()
+      dispatch(setAccountDetails(toAuthResMapper(response)))
       navigate('/dashboard')
 
     } catch (error) {
