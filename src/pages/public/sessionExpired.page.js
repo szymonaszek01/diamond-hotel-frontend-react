@@ -26,10 +26,6 @@ const SessionExpiredPage = () => {
             <div className="flex flex-col w-[50%] items-center justify-center text-center">
               <img src={sessionExpired} alt="sessionExpired"
                    className="w-[90%] h-auto z-50"/>
-              {/* gradient start */}
-              <div className="absolute z-[0] w-[40%] h-[35%] top-0 pink__gradient"/>
-              <div className="absolute z-[1] w-[80%] h-[80%] rounded-full white__gradient bottom-40"/>
-              {/* gradient end */}
               <h4 className="font-poppins font-semibold text-gradient text-[18px] leading-[23.4px] mb-1">
                 Your session has expired
               </h4>

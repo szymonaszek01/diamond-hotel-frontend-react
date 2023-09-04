@@ -34,6 +34,9 @@ import arrowRightWhite from "./arrow-right-white.png"
 import locked from "./locked.png"
 import lockedYellow from "./locked-yellow.png"
 import information from "./information.png"
+import logo2 from "./logo2.png"
+import menu2 from "./menu2.svg"
+import close2 from "./close2.svg"
 
 export {
   card,
@@ -71,5 +74,8 @@ export {
   arrowRightWhite,
   locked,
   lockedYellow,
-  information
+  information,
+  logo2,
+  menu2,
+  close2
 }

@@ -21,7 +21,8 @@ const ConfirmAccountPage = () => {
   const navConfig = {
     page: null,
     isToggled: false,
-    navbarLinks: null
+    navbarLinks: null,
+    logoWhite: true
   }
 
   useEffect(() => {
@@ -50,7 +51,7 @@ const ConfirmAccountPage = () => {
 
       <ToastContainer className={"toast-style"}/>
 
-      <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
+      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <div className="flex justify-center items-center mt-4 mb-16">
             <ResendConfirmAccountEmail token={confirmationToken}/>

@@ -6,19 +6,22 @@ import {urlParam} from "../../util";
 const ForgotPasswordPage = () => {
   const navConfig = {
     page: null,
-    isToggled: false
+    isToggled: false,
+    logoWhite: true
   }
 
   const confirmationToken = urlParam("confirmation-token", window.location.search)
 
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page}`}>
+      <div className="absolute z-[0] w-[60%] h-[60%] -left-[50%] rounded-full blue__gradient bottom-40"/>
+
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar {...navConfig}/>
         </div>
       </div>
-      <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
+      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <div className="flex justify-center items-center">
             <div className="h-[100vh] sm:h-[100%] sm:w-[100%] max-w-[75%] flex sm:flex-row flex-col">

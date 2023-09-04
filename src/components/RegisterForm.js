@@ -151,7 +151,7 @@ const RegisterForm = () => {
                     onClick={previousStep}>
               Previous
             </button>
-            <button className={`mt-6 ${styles.button}`}
+            <button className={`mt-4 ${styles.button}`}
                     onClick={step === 4 ? registerUser : nextStep}>
               {step === 4 ? 'Sign up' : 'Next'}
             </button>

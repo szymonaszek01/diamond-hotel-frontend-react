@@ -3,8 +3,8 @@ import {logo} from "../assets";
 import {socialMedia} from "../constants";
 
 const Footer = () => (
-  <section className={`${styles.flexCenter} ${styles.paddingY} flex flex-col mt-auto ${styles.paddingX}`}>
-    <div className={`${styles.flexStart} md:flex-row flex-col mb-8 w-full`}>
+  <section className={`${styles.flexCenter} ${styles.paddingY} flex flex-col ${styles.paddingX}`}>
+    <div className={`${styles.flexStart} md:flex-row flex-col w-full`}>
       <div className="flex-[1] flex flex-col mr-10">
         <img
           src={logo}

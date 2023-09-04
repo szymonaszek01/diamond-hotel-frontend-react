@@ -21,6 +21,7 @@ import RegisterForm from "./RegisterForm";
 import ResendConfirmAccountEmail from "./ResendConfirmAccountEmail";
 import Steps from "./Steps";
 import DashboardUserDetailsCard from "./DashboardUserDetailsCard";
+import DashboardWeatherCard from "./DashboardWeatherCard";
 import CustomPhoneInput from "./CustomPhoneInput";
 import CustomStandardInput from "./CustomStandardInput";
 import CustomUploadFileInput from "./CustomUploadFileInput";
@@ -38,6 +39,7 @@ export {
   CustomStandardInput,
   CustomUploadFileInput,
   DashboardUserDetailsCard,
+  DashboardWeatherCard,
   FeedbackCard,
   Footer,
   ForgotPasswordStepOne,

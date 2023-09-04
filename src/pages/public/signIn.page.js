@@ -9,7 +9,9 @@ const SignInPage = () => {
   const navConfig = {
     page: "Sign in",
     isToggled: true,
-    navbarLinks: publicNavLinks
+    navbarLinks: publicNavLinks,
+    textWhite: true,
+    logoWhite: true
   }
 
   const user = useSelector(selectUser)
@@ -17,17 +19,17 @@ const SignInPage = () => {
 
   return user ? (<Navigate to="/dashboard" state={{from: location}} replace/>) : (
     <div className={styles.page}>
+      <div className="absolute z-[0] w-[60%] h-[60%] -left-[50%] rounded-full blue__gradient bottom-40"/>
+
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar {...navConfig}/>
         </div>
       </div>
 
-      <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
+      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <LoginForm/>
-          <div className="absolute z-[0] w-[40%] h-[35%] top-0 pink__gradient"/>
-          <div className="absolute z-[1] w-[80%] h-[80%] rounded-full white__gradient bottom-40"/>
         </div>
       </div>
       <Footer/>

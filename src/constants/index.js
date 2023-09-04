@@ -16,6 +16,17 @@ import {
   twitter
 } from "../assets";
 
+export const measurement = {
+  temperatureDay: "temperatureDay",
+  temperatureNight: "temperatureNight",
+  pressure: "pressure",
+  wind: "wind",
+  humidity: "humidity",
+  clouds: "clouds",
+  rain: "rain",
+  uvi: "uvi"
+}
+
 export const apiMethods = {
   get: "GET",
   post: "POST",

@@ -45,10 +45,6 @@ const ForgotPasswordStepOne = () => {
   return isLoading ? (<CustomLoadingOverlay message={"Loading..."}/>) : (
     <div className="flex flex-col justify-center sm:justify-start items-center sm:items-start gap-5">
       <ToastContainer className={"toast-style"}/>
-      {/* gradient start */}
-      <div className="absolute z-[0] w-[40%] h-[35%] top-0 pink__gradient"/>
-      <div className="absolute z-[1] w-[80%] h-[80%] rounded-full white__gradient bottom-40"/>
-      {/* gradient end */}
       <h2 className={`flex ${styles.heading2} z-[99] justify-center sm:justify-start`}>Do you forget the password?</h2>
       <p className={`${styles.paragraph} text-[15px] sm:text-[12px] lg:text-[15px] text-white z-[99]`}>
         Please enter the email address that was registered for your account, To have a new password.

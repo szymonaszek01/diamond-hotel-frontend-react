@@ -318,11 +318,8 @@ const EditProfilePage = () => {
           <Navbar {...navConfig} />
         </div>
       </div>
-      <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter} z-99`}>
+      <div className={`${styles.paddingX} ${styles.flexCenter} z-99`}>
         <div className={`${styles.boxWidth}`}>
-          <div className="absolute z-[1] invisible sm:visible w-[40%] h-[35%] top-0 pink__gradient"/>
-          <div className="absolute z-[2] invisible sm:visible w-[80%] h-[80%] rounded-full white__gradient bottom-40"/>
-
           <div className="mt-5 flex flex-row justify-center items-center">
             <div className="w-[80%] flex flex-col sm:flex-row items-start justify-between">
               <Menu items={items} onClick={onMenuItemClick}/>

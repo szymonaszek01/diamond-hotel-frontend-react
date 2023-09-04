@@ -29,10 +29,6 @@ const ResendConfirmAccountEmail = ({token}) => {
       <ToastContainer className={"toast-style"}/>
       <img src={sessionExpired} alt="confirmAccount"
            className="w-[90%] h-auto z-50"/>
-      {/* gradient start */}
-      <div className="absolute z-[0] w-[40%] h-[35%] top-0 pink__gradient"/>
-      <div className="absolute z-[1] w-[80%] h-[80%] rounded-full white__gradient bottom-40"/>
-      {/* gradient end */}
       <h4 className="font-poppins font-semibold text-gradient text-[18px] leading-[23.4px] mb-1">
         Account confirmation failed
       </h4>

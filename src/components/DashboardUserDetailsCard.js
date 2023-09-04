@@ -12,16 +12,18 @@ const DashboardUserDetailsCard = ({allRequiredData}) => {
   const [warning, setWarning] = useState(true)
 
   return (
-    <div className={`${styles.boxWidth}`}>
+    <div className={`flex flex-col`}>
       <ToastContainer className={"toast-style"}/>
-      <p className={`flex font-poppins mt-11 sm:mt-0 text-white text-[18px] leading-[30.8px] font-bold`}>What's
-        up, {userDetails?.firstname}?</p>
-      <div className="flex flex-col sm:flex-row sm:text-start justify-between w-full">
-        <h2 className={`flex mt-1 sm:mt-0 font-poppins font-bold text-[28px] text-gradient items-center`}>
-          Book your dream room now</h2>
-        <button className={`${styles.button} mt-4 sm:mt-0`}>Add reservation</button>
+      <div className="flex flex-col bg-black-gradient sm:flex-row rounded-[10px] box-shadow p-5 gap-1">
+        <div className="flex flex-col sm:text-start justify-between w-full">
+          <p className={`flex font-poppins sm:mt-0 text-white text-xs font-thin`}>What's
+            up, {userDetails?.firstname}?</p>
+          <h2 className={`flex sm:mt-0 font-poppins font-bold text-[28px] text-gradient items-center`}>
+            Book your dream room now</h2>
+        </div>
+        <button className={`${styles.button} box-shadow bg-black mt-4 sm:mt-0 text-xs`}>Add reservation</button>
       </div>
-      <div className="bg-black-gradient rounded-[10px] box-shadow w-full mt-7">
+      <div className="bg-black-gradient rounded-[10px] box-shadow w-full mt-20">
         <div className={`${allRequiredData || !warning ? 'hidden' : ''} p-5`}>
           <div className="text-white p-5 flex flex-col box-shadow justify-center items-start gap-5 rounded-[10px]">
             <div className="flex flex-col sm:flex-row justify-center sm:justify-end items-center w-full">
@@ -46,7 +48,7 @@ const DashboardUserDetailsCard = ({allRequiredData}) => {
             <p
               className={`font-poppins text-[20px] text-gradient font-bold break-all mt-1`}>{userDetails?.firstname} {userDetails?.lastname}</p>
             <p className={`font-poppins text-[13.5px] text-white break-all mt-1`}>{userDetails?.email}</p>
-            <a href="/edit-profile" className={`${styles.button} mt-4`}>Edit profile</a>
+            <a href="/edit-profile" className={`${styles.button} mt-4 text-xs`}>Edit profile</a>
           </div>
         </div>
         <div
@@ -55,7 +57,7 @@ const DashboardUserDetailsCard = ({allRequiredData}) => {
           <div
             className={`flex flex-col sm:flex-row justify-between bg-yellow-gradient items-center text-center sm:text-start rounded-[10px] py-3 px-4 message-button w-full cursor-pointer gap-3 sm:gap-0`}>
             <img id="message" className="w-[23px] h-[23px] object-contain" src={messageBlack} alt="message"/>
-            <p className={`font-poppins text-[16px] break-all text-black`}>Please let us know about special
+            <p className={`font-poppins text-xs break-all text-black`}>Please let us know about special
               requests</p>
             <img id="arrow-right" src={arrowRightBlack} alt="arrow-up" className="w-[23px] h-[23px] object-contain"/>
           </div>
