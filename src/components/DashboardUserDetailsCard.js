@@ -14,16 +14,7 @@ const DashboardUserDetailsCard = ({allRequiredData}) => {
   return (
     <div className={`flex flex-col`}>
       <ToastContainer className={"toast-style"}/>
-      <div className="flex flex-col bg-black-gradient sm:flex-row rounded-[10px] box-shadow p-5 gap-1">
-        <div className="flex flex-col sm:text-start justify-between w-full">
-          <p className={`flex font-poppins sm:mt-0 text-white text-xs font-thin`}>What's
-            up, {userDetails?.firstname}?</p>
-          <h2 className={`flex sm:mt-0 font-poppins font-bold text-[28px] text-gradient items-center`}>
-            Book your dream room now</h2>
-        </div>
-        <button className={`${styles.button} box-shadow bg-black mt-4 sm:mt-0 text-xs`}>Add reservation</button>
-      </div>
-      <div className="bg-black-gradient rounded-[10px] box-shadow w-full mt-20">
+      <div className="bg-black-gradient rounded-[10px] box-shadow w-full">
         <div className={`${allRequiredData || !warning ? 'hidden' : ''} p-5`}>
           <div className="text-white p-5 flex flex-col box-shadow justify-center items-start gap-5 rounded-[10px]">
             <div className="flex flex-col sm:flex-row justify-center sm:justify-end items-center w-full">

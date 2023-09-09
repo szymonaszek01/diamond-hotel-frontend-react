@@ -7,7 +7,7 @@ import {useEffect, useState} from "react";
 import {privateNavLinks} from "../../constants";
 import {
   AccountNotConfirmed,
-  CustomLoadingOverlay,
+  CustomLoadingOverlay, DashboardFindRoomCard,
   DashboardUserDetailsCard,
   DashboardWeatherCard,
   Footer,
@@ -71,6 +71,7 @@ const UserDashboardPage = () => {
           <div className={`${styles.flexCenter} flex-col z-[99] sm:relative`}>
             <div className={`w-[80%] sm:w-[50%] mt-5 flex flex-col gap-20`}>
               <DashboardWeatherCard/>
+              <DashboardFindRoomCard/>
               <DashboardUserDetailsCard allRequiredData={allRequiredData}/>
             </div>
           </div>

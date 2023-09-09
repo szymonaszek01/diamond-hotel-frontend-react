@@ -1,4 +1,12 @@
-import {CustomLoadingOverlay, CustomStandardInput, CustomPhoneInput, CustomUploadFileInput, Modal, Footer, Navbar} from "../../components";
+import {
+  CustomLoadingOverlay,
+  CustomPhoneInput,
+  CustomStandardInput,
+  CustomUploadFileInput,
+  Footer,
+  Modal,
+  Navbar
+} from "../../components";
 import styles from "../../style";
 import {inputsInfo, itemsInfo, privateNavLinks} from "../../constants";
 import {toast, ToastContainer} from "react-toastify";
@@ -106,7 +114,9 @@ const EditProfilePage = () => {
   const navConfig = {
     page: "Edit user profile",
     isToggled: true,
-    navbarLinks: privateNavLinks
+    navbarLinks: privateNavLinks,
+    textWhite: true,
+    logoWhite: true
   }
 
   const navigate = useNavigate()
