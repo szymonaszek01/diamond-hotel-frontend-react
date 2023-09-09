@@ -80,6 +80,13 @@ export const inputsInfo = {
     city: {type: 'text', label: 'city', name: 'city'},
     street: {type: 'text', label: 'street', name: 'street'},
     postal: {type: 'text', label: 'postal code', name: 'postal'}
+  },
+  roomType: {
+    checkIn: {type: '', label: 'Check in', name: 'checkIn'},
+    checkOut: {type: '', label: 'Check out', name: 'checkOut'},
+    rooms: {type: 'number', label: 'Rooms', name: 'rooms'},
+    adults: {type: 'number', label: 'Adults', name: 'adults'},
+    children: {type: 'number', label: 'Children', name: 'children'}
   }
 }
 

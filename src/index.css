@@ -2,6 +2,7 @@
 @import 'react-toastify/dist/ReactToastify.css';
 @import 'react-phone-number-input/style.css';
 @import 'reactjs-popup/dist/index.css';
+@import "react-datepicker/dist/react-datepicker.css";
 
 
 @tailwind base;
@@ -328,4 +329,69 @@ input[type=file]::file-selector-button {
   width: 100%;
   margin-bottom: -7px;
   max-height: 300px;
+}
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container,
+.react-datepicker__input-container input {
+  width: 100%;
+}
+
+.react-datepicker {
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  font-family: Poppins, sans-serif;
+}
+
+.react-datepicker-popper {
+  z-index: 99;
+}
+
+.react-datepicker__header {
+  background: linear-gradient(
+    157.81deg,
+    #fdf5df 0.89%,
+    #f1e6c6 17.23%,
+    #eee0b2 42.04%,
+    #c7be99ff 55.12%,
+    #d0bf79 71.54%,
+    #b0a265 100%
+  );
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.react-datepicker__month {
+  font-family: Poppins, serif;
+}
+
+.react-datepicker__day--selected {
+  background: linear-gradient(
+    157.81deg,
+    #fdf5df 0.89%,
+    #f1e6c6 17.23%,
+    #eee0b2 42.04%,
+    #c7be99ff 55.12%,
+    #d0bf79 71.54%,
+    #b0a265 100%
+  );
+}
+
+.room-type-background-image {
+  background: url("https://images.ctfassets.net/rxqefefl3t5b/2MvpllaTS44GZBPDvxPip6/22fb7211be34011ef52eaff3eb26a77e/shutterstock_444622738.jpg?fl=progressive&q=80") no-repeat;
+  background-size: cover;
+}
+
+.custom-overlay {
+  background: rgba(0, 0, 0, 0.78);
+  background-size: cover;
+}
+
+.custom-hidden {
+  display: none;
+}
+
+.custom-hidden .react-datepicker-wrapper {
+  display: none;
 }
