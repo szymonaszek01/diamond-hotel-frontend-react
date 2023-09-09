@@ -9,6 +9,7 @@ import ForgotPasswordPage from "../pages/public/forgotPassword.page";
 import SignUpPage from "../pages/public/signUp.page";
 import UserDashboardPage from "../pages/private/user-dashboard.page";
 import EditProfilePage from "../pages/private/edit-profile.page";
+import FindRoomPage from "../pages/private/find-room.page";
 
 const Router = () => {
   return (
@@ -27,6 +28,7 @@ const Router = () => {
         <Route element={<Authenticator/>}>
           <Route path="/dashboard" element={<UserDashboardPage/>}/>
           <Route path="/edit-profile" element={<EditProfilePage/>}/>
+          <Route path="/find-room" element={<FindRoomPage/>}/>
         </Route>
       </Route>
     </Routes>

@@ -20,12 +20,14 @@ import Layout from "./Layout";
 import RegisterForm from "./RegisterForm";
 import ResendConfirmAccountEmail from "./ResendConfirmAccountEmail";
 import Steps from "./Steps";
+import DashboardFindRoomCard from "./DashboardFindRoomCard";
 import DashboardUserDetailsCard from "./DashboardUserDetailsCard";
 import DashboardWeatherCard from "./DashboardWeatherCard";
 import CustomPhoneInput from "./CustomPhoneInput";
 import CustomStandardInput from "./CustomStandardInput";
 import CustomUploadFileInput from "./CustomUploadFileInput";
-import Modal from "./Modal"
+import Modal from "./Modal";
+import FindRoomForm from "./FindRoomForm";
 
 export {
   AccountNotConfirmed,
@@ -38,6 +40,7 @@ export {
   CustomPhoneInput,
   CustomStandardInput,
   CustomUploadFileInput,
+  DashboardFindRoomCard,
   DashboardUserDetailsCard,
   DashboardWeatherCard,
   FeedbackCard,
@@ -56,4 +59,5 @@ export {
   ResendConfirmAccountEmail,
   Stats,
   Steps,
+  FindRoomForm
 }
