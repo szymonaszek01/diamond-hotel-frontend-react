@@ -67,26 +67,28 @@ export const apiErrors = {
 
 export const inputsInfo = {
   user: {
-    image: {type: 'file', label: 'image', name: 'image'},
-    email: {type: 'email', label: 'email', name: 'email'},
-    password: {type: 'password', label: 'password', name: 'password'},
-    repeated: {type: 'password', label: 'repeated password', name: 'repeated'},
-    firstname: {type: 'text', label: 'firstname', name: 'firstname'},
-    lastname: {type: 'text', label: 'lastname', name: 'lastname'},
-    age: {type: 'number', label: 'age', name: 'age'},
-    country: {type: 'text', label: 'country', name: 'country'},
-    passport: {type: 'text', label: 'passport number', name: 'passport'},
-    phone: {type: 'text', label: 'phone number', name: 'phone'},
-    city: {type: 'text', label: 'city', name: 'city'},
-    street: {type: 'text', label: 'street', name: 'street'},
-    postal: {type: 'text', label: 'postal code', name: 'postal'}
+    image: {type: 'file', label: 'Image', name: 'image'},
+    email: {type: 'email', label: 'Email', name: 'email'},
+    password: {type: 'password', label: 'Password', name: 'password'},
+    repeated: {type: 'password', label: 'Repeated password', name: 'repeated'},
+    firstname: {type: 'text', label: 'Firstname', name: 'firstname'},
+    lastname: {type: 'text', label: 'Lastname', name: 'lastname'},
+    age: {type: 'number', label: 'Age', name: 'age'},
+    country: {type: 'text', label: 'Country', name: 'country'},
+    passport: {type: 'text', label: 'Passport number', name: 'passport'},
+    phone: {type: 'text', label: 'Phone number', name: 'phone'},
+    city: {type: 'text', label: 'City', name: 'city'},
+    street: {type: 'text', label: 'Street', name: 'street'},
+    postal: {type: 'text', label: 'Postal code', name: 'postal'}
   },
   roomType: {
     checkIn: {type: '', label: 'Check in', name: 'checkIn'},
     checkOut: {type: '', label: 'Check out', name: 'checkOut'},
     rooms: {type: 'number', label: 'Rooms', name: 'rooms'},
     adults: {type: 'number', label: 'Adults', name: 'adults'},
-    children: {type: 'number', label: 'Children', name: 'children'}
+    children: {type: 'number', label: 'Children', name: 'children'},
+    names: {type: '', label: 'Room type', name: 'names'},
+    pricePerHotelNight: {type: 'number', label: 'Price per hotel night', name: 'pricePerHotelNight'}
   }
 }
 

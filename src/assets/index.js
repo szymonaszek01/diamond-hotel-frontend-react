@@ -37,6 +37,11 @@ import information from "./information.png"
 import logo2 from "./logo2.png"
 import menu2 from "./menu2.svg"
 import close2 from "./close2.svg"
+import filtersIcon from "./filters.png"
+import minus from "./minus.png"
+import plus from "./plus.png"
+import info from "./info.png"
+import infoMenu from "./infoMenu.png"
 
 export {
   card,
@@ -77,5 +82,10 @@ export {
   information,
   logo2,
   menu2,
-  close2
+  close2,
+  filtersIcon,
+  minus,
+  plus,
+  info,
+  infoMenu
 }
