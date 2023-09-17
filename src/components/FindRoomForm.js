@@ -1,21 +1,43 @@
-import styles from "../style";
-import DatePicker from "react-datepicker";
 import {useState} from "react";
 import {inputsInfo} from "../constants";
-import {CustomLoadingOverlay, CustomStandardInput} from "./index";
+import {CustomDatePicker, CustomLoadingOverlay, CustomStandardInput, CustomTag, FindRoomFormFilters} from "./index";
 import {useGetRoomAvailabilityListMutation} from "../redux/api/roomApiSlice";
 import {toast} from "react-toastify";
+import styles from "../style";
+import {toRoomTypeDetailsListMapper} from "../redux/features/roomTypeSlice";
 
-const FindRoomForm = () => {
+const FindRoomForm = ({setRoomTypeDetailsList, filters}) => {
   const [form, setForm] = useState({
-    checkIn: {...inputsInfo.roomType.checkIn, value: new Date(), hidden: true},
-    checkOut: {...inputsInfo.roomType.checkOut, value: new Date(), hidden: true},
-    rooms: {...inputsInfo.roomType.rooms, value: ''},
-    adults: {...inputsInfo.roomType.adults, value: ''},
-    children: {...inputsInfo.roomType.children, value: ''},
+    checkIn: {...inputsInfo.roomType.checkIn, value: new Date()},
+    checkOut: {...inputsInfo.roomType.checkOut, value: new Date()},
+    rooms: {...inputsInfo.roomType.rooms, value: 0},
+    adults: {...inputsInfo.roomType.adults, value: 0},
+    children: {...inputsInfo.roomType.children, value: 0}
   })
-  const [error, setError] = useState(false)
   const [getRoomAvailabilityList, {isLoading}] = useGetRoomAvailabilityListMutation()
+  const [error, setError] = useState(false)
+  const [filtersValues, setFiltersValues] = useState({
+    pricePerHotelNight: 0,
+    roomTypeIdList: []
+  })
+  const [filtersLabels, setFiltersLabels] = useState([])
+
+  const onSaveFilters = (inputs) => {
+    if (inputs.roomTypeIdList.length < 1) {
+      inputs.roomTypeIdList = []
+    }
+
+    setError(false)
+
+    setFiltersValues({
+      ...filtersValues,
+      pricePerHotelNight: inputs.pricePerHotelNight.value,
+      roomTypeIdList: inputs.roomTypeIdList.map(roomTypeId => roomTypeId.value)
+    })
+    setFiltersLabels([
+      inputs.pricePerHotelNight.label
+    ].concat(inputs.roomTypeIdList.map(roomTypeId => roomTypeId.label)))
+  }
 
   const checkAvailabilityOnClick = async (e) => {
     e.preventDefault()
@@ -27,10 +49,16 @@ const FindRoomForm = () => {
         rooms: form.rooms.value,
         adults: form.adults.value,
         children: form.children.value,
-        roomTypeIdList: null,
-        pricePerHotelNight: null
+        roomTypeIdList: filtersValues.roomTypeIdList,
+        pricePerHotelNight: filtersValues.pricePerHotelNight
       }).unwrap()
-      console.log(response)
+
+      setError(false)
+      setRoomTypeDetailsList(toRoomTypeDetailsListMapper({
+        checkIn: form.checkIn.value,
+        checkOut: form.checkOut.value,
+        res: response
+      }))
 
     } catch (error) {
       setError(true)
@@ -40,6 +68,14 @@ const FindRoomForm = () => {
 
   const onInputChange = (name, value) => {
     const result = Object.values(form).find(input => input.name === name)
+    if ((name === form.checkIn.name && !datesValid(value, form.checkOut.value))
+      || (name === form.checkOut.name && !datesValid(form.checkIn.value, value))) {
+      return
+    }
+    if (((name === form.rooms.name || name === form.adults.name) && value < 1)
+      || (name === form.children.name && value < 0)) {
+      return
+    }
 
     setError(false)
 
@@ -49,44 +85,32 @@ const FindRoomForm = () => {
     })
   }
 
+  const datesValid = (firstDate, secondDate) => {
+    return (secondDate - firstDate) > 0
+  }
+
   return isLoading ? (<CustomLoadingOverlay message={"Loading..."}/>) : (
-    <div className="flex flex-col border-white border-[1px] rounded-[10px] box-shadow p-5 w-full gap-5 sm:gap-10">
+    <div key={`find-room-form`} className="flex flex-col bg-black-gradient rounded-[10px] box-shadow p-5 w-full gap-5">
+      <div className={filters ? "flex flex-col sm:flex-row justify-end gap-2 items-center" : "hidden"}>
+        {filtersLabels.filter(filterLabel => filterLabel !== "0€").map(filterLabel => <CustomTag value={filterLabel}/>)}
+        <FindRoomFormFilters onSave={onSaveFilters}/>
+      </div>
       <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-5">
-        <input className={`${styles.input} ${form.checkIn.hidden ? "" : "custom-hidden"} w-full`}
-               placeholder={form.checkIn.label} onClick={() => {
-          setForm({
-            ...form,
-            checkIn: {...form.checkIn, hidden: false}
-          })
-        }}/>
-        <div className={`${form.checkIn.hidden ? "custom-hidden" : ""} w-full`}>
-          <DatePicker className={`${styles.input} ${error ? styles.error : ''} w-full`}
-                      selected={form?.checkIn?.value}
-                      onChange={(date) => onInputChange(form.checkIn.name, date)}/>
-        </div>
-        <input className={`${styles.input} ${form.checkOut.hidden ? "" : "custom-hidden"} w-full`}
-               placeholder={form.checkOut.label} onClick={() => {
-          setForm({
-            ...form,
-            checkOut: {...form.checkOut, hidden: false}
-          })
-        }}/>
-        <div className={`${form.checkOut.hidden ? "custom-hidden" : ""} w-full`}>
-          <DatePicker className={`${styles.input} ${error ? styles.error : ''} w-full`}
-                      selected={form?.checkOut?.value}
-                      onChange={(date) => onInputChange(form.checkOut.name, date)}/>
-        </div>
+        <CustomDatePicker attributes={form?.checkIn} error={error}
+                          onChange={(date) => onInputChange(form?.checkIn.name, date)} label={true}/>
+        <CustomDatePicker attributes={form?.checkOut} error={error}
+                          onChange={(date) => onInputChange(form?.checkOut.name, date)} label={true}/>
       </div>
       <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-5">
         <CustomStandardInput attributes={form.rooms} error={error}
-                             onChange={(e) => onInputChange(e.target.name, e.target.value)} placeholder={true}/>
+                             onChange={(e) => onInputChange(e.target.name, e.target.value)} label={true}/>
         <CustomStandardInput attributes={form.adults} error={error}
-                             onChange={(e) => onInputChange(e.target.name, e.target.value)} placeholder={true}/>
+                             onChange={(e) => onInputChange(e.target.name, e.target.value)} label={true}/>
         <CustomStandardInput attributes={form.children} error={error}
-                             onChange={(e) => onInputChange(e.target.name, e.target.value)} placeholder={true}/>
+                             onChange={(e) => onInputChange(e.target.name, e.target.value)} label={true}/>
       </div>
       <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-5">
-        <button className={`bg-white rounded-[10px] font-poppins p-2 cursor-pointer text-sm box-shadow outline-0`}
+        <button className={`${styles.button} outline-0`}
                 onClick={checkAvailabilityOnClick}>Check availability
         </button>
       </div>
