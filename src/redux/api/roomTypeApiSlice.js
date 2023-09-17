@@ -7,6 +7,12 @@ const baseUrl = () => {
 
 const roomTypeApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
+    getRoomTypeById: builder.mutation({
+      query: ({id}) => ({
+        url: baseUrl() + "/id/" + id,
+        method: apiMethods.get
+      })
+    }),
     getRoomTypeList: builder.mutation({
       query: () => ({
         url: baseUrl() + "/all",
@@ -20,7 +26,7 @@ const roomTypeApiSlice = apiSlice.injectEndpoints({
       })
     }),
     getRoomTypeEquipment: builder.mutation({
-      query: id => ({
+      query: ({id}) => ({
         url: baseUrl() + "/id/" + id + "/equipment",
         method: apiMethods.get
       })
@@ -29,6 +35,7 @@ const roomTypeApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
+  useGetRoomTypeByIdMutation,
   useGetRoomTypeListMutation,
   useGetRoomTypeNameListMutation,
   useGetRoomTypeEquipmentMutation
