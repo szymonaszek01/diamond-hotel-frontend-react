@@ -328,7 +328,7 @@ const EditProfilePage = () => {
           <Navbar {...navConfig} />
         </div>
       </div>
-      <div className={`${styles.paddingX} ${styles.flexCenter} z-99`}>
+      <div className={`${styles.paddingX} items-start z-99 min-h-[75vh] mt-16`}>
         <div className={`${styles.boxWidth}`}>
           <div className="mt-5 flex flex-row justify-center items-center">
             <div className="w-[80%] flex flex-col sm:flex-row items-start justify-between">

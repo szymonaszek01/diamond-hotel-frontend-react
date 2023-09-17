@@ -54,7 +54,7 @@ const UserDashboardPage = () => {
           <Navbar {...navConfig} />
           <div className="absolute rotate-180 z-[0] left-0 w-full">
             <svg className="waves"
-                 viewBox="0 24 150 28" preserveAspectRatio="none" shapeRendering="auto">
+                 viewBox="0 20 100 32" preserveAspectRatio="none" shapeRendering="auto">
               <defs>
                 <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/>
               </defs>
