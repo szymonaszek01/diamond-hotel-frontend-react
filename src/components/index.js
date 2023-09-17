@@ -28,6 +28,16 @@ import CustomStandardInput from "./CustomStandardInput";
 import CustomUploadFileInput from "./CustomUploadFileInput";
 import Modal from "./Modal";
 import FindRoomForm from "./FindRoomForm";
+import Label from "./Label";
+import CustomDatePicker from "./CustomDatePicker";
+import CustomSelectComponent from "./CustomSelectComponent";
+import FindRoomFormFilters from "./FindRoomFormFilters";
+import RoomTypeDescription from "./RoomTypeDescription";
+import CustomTag from "./CustomTag";
+import CustomTagWithLabel from "./CustomTagWithLabel";
+import PlusMinusButton from "./PlusMinusButton";
+import RoomTypeCard from "./RoomTypeCard"
+import SelectedRoomsSummaryCard from "./SelectedRoomsSummaryCard";
 
 export {
   AccountNotConfirmed,
@@ -59,5 +69,15 @@ export {
   ResendConfirmAccountEmail,
   Stats,
   Steps,
-  FindRoomForm
+  FindRoomForm,
+  Label,
+  CustomDatePicker,
+  CustomSelectComponent,
+  FindRoomFormFilters,
+  RoomTypeDescription,
+  CustomTag,
+  CustomTagWithLabel,
+  PlusMinusButton,
+  RoomTypeCard,
+  SelectedRoomsSummaryCard
 }
