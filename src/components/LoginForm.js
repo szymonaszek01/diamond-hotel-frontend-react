@@ -85,9 +85,9 @@ const LoginForm = () => {
             <hr className="border-1 w-[100%]"/>
           </div>
           <div className="flex flex-col gap-7 w-full mt-1">
-            <CustomStandardInput attributes={form.email} placeholder={true} error={error} autoComplete={rememberMe}
+            <CustomStandardInput attributes={form.email} label={true} error={error} autoComplete={rememberMe}
                                  onChange={onChange}/>
-            <CustomStandardInput attributes={form.password} placeholder={true} error={error} autoComplete={rememberMe}
+            <CustomStandardInput attributes={form.password} label={true} error={error} autoComplete={rememberMe}
                                  onChange={onChange}/>
           </div>
           <div className="flex flex-col sm:flex-row justify-between items-center w-[100%] mt-2">

@@ -18,16 +18,16 @@ const StepForm = ({form, step, isError, onChange}) => {
       {form.filter(input => input.name !== "phone").map(input => <CustomStandardInput attributes={input}
                                                                                       error={isError(input)}
                                                                                       onChange={onChange}
-                                                                                      placeholder={true}/>)}
+                                                                                      label={true}/>)}
       {form.filter(input => input.name === "phone").map(input => <CustomPhoneInput attributes={input}
                                                                                    error={isError(input)}
                                                                                    onChange={onChange}
-                                                                                   placeholder={true}/>)}
+                                                                                   label={true}/>)}
     </motion.div>
   )
 }
 
-const RegisterForm = () => {
+const   RegisterForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [registerAccount, {isLoading}] = useRegisterAccountMutation()
@@ -141,8 +141,6 @@ const RegisterForm = () => {
           <img src={loginImg} alt="billing" className="w-[100%] h-auto"/>
         </div>
         <div className="flex flex-col justify-center items-center sm:items-start w-[100%] sm:px-10 z-50 ">
-          <h2 className={`flex ${styles.heading2} z-[99] justify-center sm:justify-start`}>Sign up</h2>
-
           <Steps steps={4} count={step} error={error.fields.length > 0}/>
           <StepForm step={step} form={getInputsByStep()} isError={isError} onChange={onChange}/>
 
