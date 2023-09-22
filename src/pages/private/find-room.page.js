@@ -13,10 +13,23 @@ const FindRoomPage = () => {
     textWhite: true
   }
 
+  const [reservationDetails, setReservationDetails] = useState({
+    checkIn: new Date(),
+    checkOut: new Date(),
+    adults: 0,
+    children: 0,
+    flightNumber: ""
+  })
   const [roomTypeDetailsList, setRoomTypeDetailsList] = useState([])
 
   const isRoomTypeDetailsListEmpty = () => {
     return roomTypeDetailsList.length < 1
+  }
+
+  const updateReservationDetails = (name, value) => {
+    if (Object.keys(reservationDetails).find(key => key === name)) {
+      setReservationDetails({...reservationDetails, [name]: value})
+    }
   }
 
   const updateRoomTypeDetails = ({id, selectedRooms, cost}) => {
@@ -51,7 +64,7 @@ const FindRoomPage = () => {
           className={`flex ${isRoomTypeDetailsListEmpty() ? "flex-col justify-center items-center" : "flex-col sm:flex-row gap-16 sm:gap-28 w-[80%]"} min-h-[75vh] relative z-99`}>
           <div
             className={`${isRoomTypeDetailsListEmpty() ? "w-[80%] flex flex-col sm:flex-row items-center" : "w-full flex flex-col items-start mt-16"} gap-16 ${isRoomTypeDetailsListEmpty() ? "sm:gap-28" : "sm:gap-16"}`}>
-            <FindRoomForm setRoomTypeDetailsList={setRoomTypeDetailsList}
+            <FindRoomForm updateReservationDetails={updateReservationDetails} setRoomTypeDetailsList={setRoomTypeDetailsList}
                           filters={!isRoomTypeDetailsListEmpty()}/>
             {isRoomTypeDetailsListEmpty() ? (
               <div key={`content-${randomCode(4)}`} className="flex flex-col gap-1 w-full text-center sm:text-start">
@@ -71,8 +84,10 @@ const FindRoomPage = () => {
           </div>
           <SelectedRoomsSummaryCard
             roomTypeDetailsList={roomTypeDetailsList}
-            active={isRoomTypeDetailsListEmpty()}
+            reservationDetails={reservationDetails}
             updateRoomTypeDetails={updateRoomTypeDetails}
+            updateReservationDetails={updateReservationDetails}
+            active={isRoomTypeDetailsListEmpty()}
           />
         </div>
       </div>
