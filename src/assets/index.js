@@ -42,6 +42,8 @@ import minus from "./minus.png"
 import plus from "./plus.png"
 import info from "./info.png"
 import infoMenu from "./infoMenu.png"
+import money from "./money.png"
+import back from "./back.png"
 
 export {
   card,
@@ -87,5 +89,7 @@ export {
   minus,
   plus,
   info,
-  infoMenu
+  infoMenu,
+  money,
+  back
 }

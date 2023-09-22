@@ -16,6 +16,8 @@ import {
   twitter
 } from "../assets";
 
+export const stripePublicKey = "pk_test_51NCOIJHClfuzSQRfRrX2oW3tN4OQBgzAHgbbxFrOZvEmc2uoZ0Jlk87UNmBV1SteuRKFJQfJzEpcoI0c39c4LWTM00lvEcKXkR"
+
 export const measurement = {
   temperatureDay: "temperatureDay",
   temperatureNight: "temperatureNight",
@@ -89,6 +91,9 @@ export const inputsInfo = {
     children: {type: 'number', label: 'Children', name: 'children'},
     names: {type: '', label: 'Room type', name: 'names'},
     pricePerHotelNight: {type: 'number', label: 'Price per hotel night', name: 'pricePerHotelNight'}
+  },
+  flight: {
+    flightNumber: {type: 'text', label: 'Flight number', name: 'flightNumber'},
   }
 }
 
