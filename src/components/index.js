@@ -38,6 +38,9 @@ import CustomTagWithLabel from "./CustomTagWithLabel";
 import PlusMinusButton from "./PlusMinusButton";
 import RoomTypeCard from "./RoomTypeCard"
 import SelectedRoomsSummaryCard from "./SelectedRoomsSummaryCard";
+import PaymentForm from "./PaymentForm";
+import FlightForm from "./FlightForm";
+import ButtonWithIcon from "./ButtonWithIcon";
 
 export {
   AccountNotConfirmed,
@@ -79,5 +82,8 @@ export {
   CustomTagWithLabel,
   PlusMinusButton,
   RoomTypeCard,
-  SelectedRoomsSummaryCard
+  SelectedRoomsSummaryCard,
+  PaymentForm,
+  FlightForm,
+  ButtonWithIcon
 }

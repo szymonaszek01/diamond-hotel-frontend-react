@@ -68,7 +68,7 @@ const RoomTypeCard = ({id, availableRooms, selectedRooms, updateRoomTypeDetails}
         </div>
         <div
           className={`flex flex-col sm:flex-row ${tagCommonBorderStyle} border-x-[1px] border-b-[1px] rounded-[3px] ${tagCommonTextStyle}`}>
-          <CustomTagWithLabel value={`${roomType?.pricePerHotelNight}€`} label={"Price per hotel night"}
+          <CustomTagWithLabel value={`${roomType?.pricePerHotelNight}$`} label={"Price per hotel night"}
                               styles={tagCommonTextStyle}/>
         </div>
       </div>

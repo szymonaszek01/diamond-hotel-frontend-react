@@ -6,7 +6,7 @@ import {toast} from "react-toastify";
 import styles from "../style";
 import {toRoomTypeDetailsListMapper} from "../redux/features/roomTypeSlice";
 
-const FindRoomForm = ({setRoomTypeDetailsList, filters}) => {
+const FindRoomForm = ({setRoomTypeDetailsList, updateReservationDetails, filters}) => {
   const [form, setForm] = useState({
     checkIn: {...inputsInfo.roomType.checkIn, value: new Date()},
     checkOut: {...inputsInfo.roomType.checkOut, value: new Date()},
@@ -54,11 +54,7 @@ const FindRoomForm = ({setRoomTypeDetailsList, filters}) => {
       }).unwrap()
 
       setError(false)
-      setRoomTypeDetailsList(toRoomTypeDetailsListMapper({
-        checkIn: form.checkIn.value,
-        checkOut: form.checkOut.value,
-        res: response
-      }))
+      setRoomTypeDetailsList(toRoomTypeDetailsListMapper(response))
 
     } catch (error) {
       setError(true)
@@ -83,6 +79,8 @@ const FindRoomForm = ({setRoomTypeDetailsList, filters}) => {
       ...form,
       [name]: {...result, value: value ?? new Date()}
     })
+
+    updateReservationDetails(name, value)
   }
 
   const datesValid = (firstDate, secondDate) => {
@@ -92,7 +90,7 @@ const FindRoomForm = ({setRoomTypeDetailsList, filters}) => {
   return isLoading ? (<CustomLoadingOverlay message={"Loading..."}/>) : (
     <div key={`find-room-form`} className="flex flex-col bg-black-gradient rounded-[10px] box-shadow p-5 w-full gap-5">
       <div className={filters ? "flex flex-col sm:flex-row justify-end gap-2 items-center" : "hidden"}>
-        {filtersLabels.filter(filterLabel => filterLabel !== "0€").map(filterLabel => <CustomTag value={filterLabel}/>)}
+        {filtersLabels.filter(filterLabel => filterLabel !== "0$").map(filterLabel => <CustomTag value={filterLabel}/>)}
         <FindRoomFormFilters onSave={onSaveFilters}/>
       </div>
       <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-5">

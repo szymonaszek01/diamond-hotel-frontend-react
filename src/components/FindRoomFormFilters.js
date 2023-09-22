@@ -48,11 +48,12 @@ const FindRoomFormFilters = ({onSave}) => {
     <div key={`room-filters`}>
       <ToastContainer className={"toast-style"}/>
       <Popup
-        trigger={<button
-          className="flex items-center justify-center p-2 border-white border-[1px] rounded-[3px] gap-2">
-          <img src={filtersIcon} alt="filters" className="w-[14px] h-auto"/>
-          <p className="font-poppins font-thin text-xs text-white">Filters</p>
-        </button>} modal nested>
+        trigger={
+          <button
+            className="flex items-center justify-center p-2 border-white border-[1px] rounded-[3px] gap-2">
+            <img src={filtersIcon} alt="filters" className="w-[14px] h-auto"/>
+            <p className="font-poppins font-thin text-xs text-white">Filters</p>
+          </button>} modal nested>
         {close => (
           <div className="flex flex-col bg-transparent rounded-[10px] items-center justify-center">
             <div className="w-[60%] bg-black-gradient box-shadow rounded-[10px] p-5 flex flex-col gap-5">
@@ -69,7 +70,7 @@ const FindRoomFormFilters = ({onSave}) => {
                   onSave({
                     pricePerHotelNight: {
                       value: filters.pricePerHotelNight.value,
-                      label: filters.pricePerHotelNight.value + "€"
+                      label: filters.pricePerHotelNight.value + "$"
                     },
                     roomTypeIdList: filters.names.value ?? []
                   })
