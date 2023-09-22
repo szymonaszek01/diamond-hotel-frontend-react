@@ -22,11 +22,9 @@ export const toRoomTypeSelectMapper = (res) => {
   })
 }
 
-export const toRoomTypeDetailsListMapper = ({checkIn, checkOut, res}) => {
+export const toRoomTypeDetailsListMapper = (res) => {
   return res.room_available_list.map(room_available => {
     return {
-      checkIn: checkIn,
-      checkOut: checkOut,
       id: room_available.room_type_id,
       availableRooms: room_available.availability,
       selectedRooms: 0,
