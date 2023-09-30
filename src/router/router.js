@@ -10,6 +10,7 @@ import SignUpPage from "../pages/public/signUp.page";
 import UserDashboardPage from "../pages/private/user-dashboard.page";
 import EditProfilePage from "../pages/private/edit-profile.page";
 import FindRoomPage from "../pages/private/find-room.page";
+import ReservationPage from "../pages/private/reservation.page";
 
 const Router = () => {
   return (
@@ -29,6 +30,7 @@ const Router = () => {
           <Route path="/dashboard" element={<UserDashboardPage/>}/>
           <Route path="/edit-profile" element={<EditProfilePage/>}/>
           <Route path="/find-room" element={<FindRoomPage/>}/>
+          <Route path="/reservations" element={<ReservationPage/>}/>
         </Route>
       </Route>
     </Routes>

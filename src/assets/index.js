@@ -44,6 +44,8 @@ import info from "./info.png"
 import infoMenu from "./infoMenu.png"
 import money from "./money.png"
 import back from "./back.png"
+import infoMenuBlack from "./infoMenuBlack.png"
+import moreArrow from "./more-arrow.png"
 
 export {
   card,
@@ -91,5 +93,7 @@ export {
   info,
   infoMenu,
   money,
-  back
+  back,
+  infoMenuBlack,
+  moreArrow
 }

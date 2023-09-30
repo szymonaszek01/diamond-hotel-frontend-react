@@ -319,6 +319,10 @@ input[type=file]::file-selector-button {
   filter: blur(900px);
 }
 
+.li-circle {
+  list-style: inside;
+}
+
 .white__gradient {
   background: rgba(255, 255, 255, 0.4);
   filter: blur(750px);
