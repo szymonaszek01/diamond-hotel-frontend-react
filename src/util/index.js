@@ -25,3 +25,24 @@ export const randomCode = (length) => {
 
   return result
 }
+
+export const transferObjectKeyToLabel = (obj) => {
+  let result = obj.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase().replaceAll('_', ' ')
+  return result.charAt(0).toUpperCase() + result.slice(1);
+}
+
+export const updateOptionList = ({optionList, setOptionList, selectedId, key, newValue, previousValue}) => {
+  const previousSelectedOption = optionList.find(option => option.isSelected)
+  const newSelectedOption = optionList.find(option => option.id === selectedId)
+  if (!previousSelectedOption || !newSelectedOption || previousSelectedOption.id === newSelectedOption.id) {
+    return
+  }
+
+  previousSelectedOption[key] = previousValue
+  newSelectedOption[key] = newValue
+  let newOptionList = optionList.filter(option => option.id !== previousSelectedOption.id && option.id !== newSelectedOption.id)
+  newOptionList.push(previousSelectedOption, newSelectedOption)
+  newOptionList.sort((obj1, obj2) => obj1.id - obj2.id)
+
+  setOptionList(newOptionList)
+}
