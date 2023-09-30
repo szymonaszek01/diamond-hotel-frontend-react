@@ -1,11 +1,15 @@
 import styles from "../../style";
 import {Footer, Navbar} from "../../components";
 import {sessionExpired} from "../../assets";
+import {publicNavLinks} from "../../constants";
 
 const SessionExpiredPage = () => {
   const navConfig = {
     page: null,
-    isToggled: false
+    isToggled: false,
+    navbarLinks: publicNavLinks,
+    textWhite: true,
+    logoWhite: true
   }
 
   const nextPath = (path) => {
@@ -20,7 +24,7 @@ const SessionExpiredPage = () => {
         </div>
       </div>
 
-      <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
+      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <div className="flex justify-center items-center mt-4 mb-16">
             <div className="flex flex-col w-[50%] items-center justify-center text-center">
