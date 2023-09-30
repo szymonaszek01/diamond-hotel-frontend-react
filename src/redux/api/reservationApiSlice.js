@@ -19,11 +19,19 @@ const reservationApiSlice = apiSlice.injectEndpoints({
         url: baseUrl() + "/id/" + id,
         method: apiMethods.get
       })
+    }),
+    getReservationListByUserProfileId: builder.mutation({
+      query: ({userProfileId, filters}) => ({
+        url: baseUrl() + "/all/user-profile-id/" + userProfileId,
+        method: apiMethods.get,
+        params: filters
+      })
     })
   })
 })
 
 export const {
   useCreateReservationMutation,
-  useGetReservationByIdMutation
+  useGetReservationByIdMutation,
+  useGetReservationListByUserProfileIdMutation
 } = reservationApiSlice
