@@ -7,7 +7,7 @@ const baseUrl = () => {
 }
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5432",
+  baseUrl: "https://diamond-hotel-backend.onrender.com",
   credentials: "include",
   prepareHeaders: (headers, {getState}) => {
     const accessToken = getState().auth.accessToken
