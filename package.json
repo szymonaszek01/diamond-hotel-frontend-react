@@ -30,7 +30,7 @@
   },
   "scripts": {
     "start": "react-scripts start --legacy-peer-deps",
-    "build": "set \"CI=false\" && npm install --legacy-peer-deps",
+    "build": "npm install --legacy-peer-deps",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
