@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectUserDetails} from "../redux/features/userSlice";
 import {useNavigate} from "react-router-dom";
 import {money} from "../assets";
+import {toPaymentChargeReqDtoMapper} from "../redux/features/paymentSlice";
 
 const PaymentForm = ({reservationDetails, roomSelectedList}) => {
   const dispatch = useDispatch()
@@ -36,11 +37,17 @@ const PaymentForm = ({reservationDetails, roomSelectedList}) => {
       const tokenId = token.id
       const amount = response.payment.cost
 
-      response = await chargePayment({id: paymentId, token: tokenId, amount: amount}).unwrap()
+      response = await chargePayment(toPaymentChargeReqDtoMapper({
+        paymentId,
+        reservationId,
+        userProfileId: userDetails.id,
+        token: tokenId,
+        amount
+      })).unwrap()
 
       const charge = response.charge
       dispatch(setReservation({id: reservationId, paymentId: paymentId, charge: charge}))
-      navigate("/reservation")
+      navigate("/reservations")
 
     } catch (error) {
       toast.error("Payment failed. Please, try to do it again later.")

@@ -41,6 +41,16 @@ import SelectedRoomsSummaryCard from "./SelectedRoomsSummaryCard";
 import PaymentForm from "./PaymentForm";
 import FlightForm from "./FlightForm";
 import ButtonWithIcon from "./ButtonWithIcon";
+import Table from "./Table"
+import TableRow from "./TableRow"
+import TableCell from "./TableCell";
+import TableActionMenu from "./TableActionMenu";
+import TableHeader from "./TableHeader";
+import PageFormSelector from "./PageFormSelector";
+import ReservationForm from "./ReservationForm";
+import TransactionForm from "./TransactionForm";
+import ReservedRoomForm from "./ReservedRoomForm";
+import TableSlider from "./TableSlider";
 
 export {
   AccountNotConfirmed,
@@ -85,5 +95,15 @@ export {
   SelectedRoomsSummaryCard,
   PaymentForm,
   FlightForm,
-  ButtonWithIcon
+  ButtonWithIcon,
+  Table,
+  TableRow,
+  TableCell,
+  TableActionMenu,
+  TableHeader,
+  PageFormSelector,
+  ReservationForm,
+  TransactionForm,
+  ReservedRoomForm,
+  TableSlider
 }
