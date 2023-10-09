@@ -18,10 +18,10 @@ const RoomTypeDescription = ({id, name, pricePerHotelNight, image, equipment}) =
         {close => (
           <div className="flex flex-col bg-transparent rounded-[10px] items-center justify-center">
             <div className="w-full bg-black-gradient box-shadow rounded-[10px] p-5 flex flex-col gap-5">
-              <div className="flex flex-col sm:flex-row gap-5 items-start">
-                <div className="flex flex-col gap-5">
-                  <p className="text-white font-poppins font-semibold text-4xl">{name}</p>
-                  <div className="flex flex-wrap gap-1 mt-3">
+              <div className="flex flex-col sm:flex-row gap-5 items-center xs:items-start">
+                <div className="flex flex-col gap-5 text-center xs:text-start">
+                  <p className="text-white font-poppins font-semibold text-4xl break-all xs:break-normal">{name}</p>
+                  <div className="flex flex-col xs:flex-wrap gap-1 mt-3 items-center xs:items-start">
                     {pricePerHotelNight ? (<CustomTag value={`${pricePerHotelNight}$`}/>) : ''}
                     {equipment?.map(obj => <CustomTag value={obj}/>)}
                   </div>

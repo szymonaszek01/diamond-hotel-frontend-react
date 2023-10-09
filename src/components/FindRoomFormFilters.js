@@ -56,7 +56,7 @@ const FindRoomFormFilters = ({onSave}) => {
           </button>} modal nested>
         {close => (
           <div className="flex flex-col bg-transparent rounded-[10px] items-center justify-center">
-            <div className="w-[60%] bg-black-gradient box-shadow rounded-[10px] p-5 flex flex-col gap-5">
+            <div className="w-full sm:w-[60%] bg-black-gradient box-shadow rounded-[10px] p-5 flex flex-col gap-5">
               <div className="flex flex-col gap-5 w-full">
                 <CustomStandardInput attributes={filters.pricePerHotelNight} error={error}
                                      onChange={(e) => onInputChange(e.target.name, e.target.value)} label={true}/>

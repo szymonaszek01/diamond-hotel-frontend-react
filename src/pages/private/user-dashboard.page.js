@@ -67,17 +67,16 @@ const UserDashboardPage = () => {
       </div>
       {userId && !confirmed ? (<AccountNotConfirmed/>) : ''}
       <div className={`bg-black-gradient ${styles.paddingX} ${styles.flexCenter} z-99`}>
-        <div className={`${styles.boxWidth}`}>
+        <div className={`${styles.boxWidth} mb-20`}>
           <div className={`${styles.flexCenter} flex-col z-[99] sm:relative`}>
             <div className={`w-[80%] sm:w-[50%] mt-5 flex flex-col gap-20`}>
-              <DashboardWeatherCard/>
-              <DashboardFindRoomCard/>
               <DashboardUserDetailsCard allRequiredData={allRequiredData}/>
+              <DashboardFindRoomCard/>
+              <DashboardWeatherCard/>
             </div>
           </div>
         </div>
       </div>
-      )
       <Footer/>
     </div>
   )

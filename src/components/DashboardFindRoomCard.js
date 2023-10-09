@@ -6,14 +6,12 @@ const DashboardFindRoomCard = () => {
   const userDetails = useSelector(selectUserDetails)
 
   return (
-    <div className="flex flex-col bg-black-gradient sm:flex-row rounded-[10px] box-shadow p-5 gap-1">
-      <div className="flex flex-col sm:text-start justify-between w-full">
-        <p className={`flex font-poppins sm:mt-0 text-white text-xs font-thin`}>What's
-          up, {userDetails?.firstname}?</p>
-        <h2 className={`flex sm:mt-0 font-poppins font-bold text-[28px] text-gradient items-center`}>
-          Book your dream room now</h2>
+    <div className="flex flex-col items-center sm:items-start justify-center gap-4">
+      <div className="flex flex-col text-center sm:text-start justify-between w-full">
+        <p className={`text-sm text-white font-poppins font-thin leading-8`}>
+          <strong className={"text-2xl font-semibold"}>Book your dream room</strong><br/>Discover a world of comfort, luxury, and relaxation at Diamond hotel. Our doors are open, and we're ready to make your stay unforgettable.</p>
       </div>
-      <a href="/find-room" className={`${styles.button} flex items-center text-center box-shadow text-xs`}>Book a room</a>
+      <a href="/find-room" className={`${styles.button} items-center text-center box-shadow text-sm p-3 box-shadow`}>Book a room</a>
     </div>
   )
 }

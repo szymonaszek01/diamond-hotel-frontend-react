@@ -88,16 +88,18 @@ const ReservationForm = () => {
     <div key={`reservation-table-${randomCode(7)}`} className="flex flex-col w-full items-center justify-center mt-8">
       <div className={"flex flex-col items-start justify-center w-full gap-8"}>
         <TableSlider optionList={optionList} setOptionList={setOptionList} setPage={setPage} itemWidth={'170px'}/>
-        <p className={`text-xs text-white font-poppins font-thin break-all ml-2 leading-7`}>
+        {reservationTable.rowList.length ? (<p className={`text-xs text-white font-poppins font-thin break-all ml-2 leading-7`}>
           <strong className={"text-sm font-semibold"}>Reservation Details</strong><br/>
           Below, you'll find a list of your confirmed reservations, including key information such as reservation
-          numbers, dates, and accommodation details.</p>
-        <Table columnList={reservationTable.columnList} rowList={reservationTable.rowList}
-               actionList={reservationTable.actionList}/>
-        <div className={reservationTable.rowList.length % 5 !== 0 ? 'hidden' : ''}>
+          numbers, dates, and accommodation details.</p>) : (<p className={`text-xs text-white font-poppins font-thin break-all ml-2 leading-7`}>
+          <strong className={"text-sm font-semibold"}>Empty reservation list</strong><br/>
+          Please, book a room and see the details.</p>)}
+        {reservationTable.rowList.length > 0 ? <Table columnList={reservationTable.columnList} rowList={reservationTable.rowList}
+                                                       actionList={reservationTable.actionList}/> : ''}
+        {reservationTable.rowList.length > 0 ? (<div className={reservationTable.rowList.length % 5 !== 0 ? 'hidden' : ''}>
           <ButtonWithIcon text={"More"} img={moreArrow} imgAlt={"more"} imgWidth={"15px"}
                           action={() => setPage(page + 1)}/>
-        </div>
+        </div>) : ''}
       </div>
     </div>
   )

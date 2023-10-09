@@ -12,7 +12,7 @@ const DashboardUserDetailsCard = ({allRequiredData}) => {
   const [warning, setWarning] = useState(true)
 
   return (
-    <div className={`flex flex-col`}>
+    <div className={`flex flex-col z-50`}>
       <ToastContainer className={"toast-style"}/>
       <div className="bg-black-gradient rounded-[10px] box-shadow w-full">
         <div className={`${allRequiredData || !warning ? 'hidden' : ''} p-5`}>
@@ -34,20 +34,19 @@ const DashboardUserDetailsCard = ({allRequiredData}) => {
             <img src={userDetails?.picture ? "data:image/png;base64," + userDetails?.picture : defaultUser}
                  className={`${userDetails?.picture ? 'rounded-[10px]' : ''}`} alt="user-profile-img"/>
           </div>
-          <div className="flex flex-col justify-center items-center sm:items-start">
+          <div className="flex flex-col justify-center items-center sm:items-start text-center sm:text-start">
             <p className={`font-poppins text-[13.5px] text-white break-all sm:mt-0`}>{userDetails?.role}</p>
             <p
               className={`font-poppins text-[20px] text-gradient font-bold break-all mt-1`}>{userDetails?.firstname} {userDetails?.lastname}</p>
             <p className={`font-poppins text-[13.5px] text-white break-all mt-1`}>{userDetails?.email}</p>
-            <a href="/edit-profile" className={`${styles.button} mt-4 text-xs`}>Edit profile</a>
+            <a href="/edit-profile" className={`${styles.button} mt-4 text-sm p-3 box-shadow`}>Edit profile</a>
           </div>
         </div>
         <div
-          className="mt-3 p-5 flex flex-col justify-start items-center sm:items-start gap-5 bg-black-gradient rounded-b-[10px]">
+          className="mt-3 p-5 flex flex-col justify-start items-center sm:items-start gap-5 rounded-b-[10px] ">
           <p className={`font-poppins text-[13.5px] text-white break-all`}>Before your arrival</p>
           <div
             className={`flex flex-col sm:flex-row justify-between bg-yellow-gradient items-center text-center sm:text-start rounded-[10px] py-3 px-4 message-button w-full cursor-pointer gap-3 sm:gap-0`}>
-            <img id="message" className="w-[23px] h-[23px] object-contain" src={messageBlack} alt="message"/>
             <p className={`font-poppins text-xs break-all text-black`}>Please let us know about special
               requests</p>
             <img id="arrow-right" src={arrowRightBlack} alt="arrow-up" className="w-[23px] h-[23px] object-contain"/>

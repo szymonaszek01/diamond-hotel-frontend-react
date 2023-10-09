@@ -59,11 +59,11 @@ const FindRoomPage = () => {
           <Navbar {...navConfig} />
         </div>
       </div>
-      <div className="flex w-full items-center justify-center">
+      <div className="flex w-full items-center justify-center sm:mt-0 mb-16">
         <div
           className={`flex ${isRoomTypeDetailsListEmpty() ? "flex-col justify-center items-center" : "flex-col sm:flex-row gap-16 sm:gap-28 w-[80%]"} min-h-[75vh] relative z-99`}>
           <div
-            className={`${isRoomTypeDetailsListEmpty() ? "w-[80%] flex flex-col sm:flex-row items-center" : "w-full flex flex-col items-start mt-16"} gap-16 ${isRoomTypeDetailsListEmpty() ? "sm:gap-28" : "sm:gap-16"}`}>
+            className={`${isRoomTypeDetailsListEmpty() ? "w-[80%] flex flex-col sm:flex-row items-center" : "w-full flex flex-col items-start"} mt-16 gap-16 ${isRoomTypeDetailsListEmpty() ? "sm:gap-28" : "sm:gap-16"}`}>
             <FindRoomForm updateReservationDetails={updateReservationDetails} setRoomTypeDetailsList={setRoomTypeDetailsList}
                           filters={!isRoomTypeDetailsListEmpty()}/>
             {isRoomTypeDetailsListEmpty() ? (

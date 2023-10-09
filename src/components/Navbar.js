@@ -16,11 +16,11 @@ const Navbar = ({page, isToggled, navbarLinks, logoWhite, textWhite}) => {
 
   const renderMobileView = () => {
     return !isToggled ? '' : (
-      <div className="relative sm:hidden flex flex-1 justify-end items-center z-[99]">
+      <div className="relative sm:hidden flex justify-end items-center z-[99] ml-4">
         <img
           src={toggle ? textWhite ? close : close2 : textWhite ? menu : menu2}
           alt="menu"
-          className="w-[28px] h-[28px] object-contain"
+          className="w-[23px] h-[23px]"
           onClick={() => setToggle(!toggle)}
         />
 
@@ -29,19 +29,19 @@ const Navbar = ({page, isToggled, navbarLinks, logoWhite, textWhite}) => {
             !toggle ? "hidden" : "flex"
           } p-6 bg-transparent absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar bg-black-gradient`}
         >
-          <ul className="list-none flex justify-end items-start flex-1 flex-col">
-            {navbarLinks?.find(nav => nav.main.title === page)?.sections.map((section, _) => (
+          <ul className="list-none flex justify-end items-start flex-1 flex-col ul-navbar">
+            {navbarLinks?.find(nav => nav.main.title === page)?.sections.map((section, index) => (
               <li
                 key={section.id}
-                className={`font-poppins font-medium cursor-pointer text-white text-[14px] mb-4}`}
+                className={`font-poppins font-medium cursor-pointer text-white text-[14px]`}
               >
                 <a href={`#${section.id}`}>{section.title}</a>
               </li>
             ))}
-            {navbarLinks?.filter(nav => nav.main.title !== page && page).map((nav, index) => (
+            {navbarLinks?.filter(nav => nav.main.title !== page && page).map((nav) => (
               <li
                 key={nav.main.id}
-                className={`font-poppins font-medium cursor-pointer text-[14px] text-white ${index === navbarLinks?.length - 1 ? "mb-0" : "mb-4"}`}
+                className={`font-poppins font-medium cursor-pointer text-[14px] text-white`}
               >
                 <a href={nav.main.path} onClick={() => logOutUser(nav.main.id)}>{nav.main.title}</a>
               </li>
