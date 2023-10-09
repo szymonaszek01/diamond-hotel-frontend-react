@@ -30,15 +30,17 @@ const FlightForm = ({reservationDetails, updateReservationDetails, roomSelectedL
                                      error={false}
                                      onChange={onInputChange}/>
               </div>
-              <div className="flex flex-col gap-1 w-full sm:w-[80%] text-center sm:text-start mb-5">
-                <h2 className="font-poppins font-semibold text-white text-[40px] w-full">Flight number</h2>
-                <p className="font-poppins font-normal text-white text-[15px]">To ensure a smooth and hassle-free
+              <div className="flex flex-col w-full sm:w-[80%] text-center sm:text-start mb-5">
+                <h2 className="font-poppins font-semibold text-white text-[25px] xs:text-[40px] w-full break-words">Flight number</h2>
+                <p className="xs:hidden font-poppins font-normal text-white text-[15px] mt-1">If you prefer not to provide your flight number,
+                  simply click the "Pay" button to complete your booking.</p>
+                <p className={`hidden xs:block font-poppins font-normal text-white text-[15px] mt-1`}>To ensure a smooth and hassle-free
                   experience, please provide your flight details below. While providing your flight number is optional,
                   it can help us better assist you during your journey. If you prefer not to provide your flight number,
                   simply click the "Pay" button to complete your booking.</p>
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row w-full items-center justify-end gap-5">
+            <div className="flex flex-col sm:flex-row w-full items-center justify-start xs:justify-end gap-5">
               <ButtonWithIcon img={back} imgWidth={"20px"} imgAlt={"back"} text={"Back"} action={close}/>
               <PaymentForm reservationDetails={reservationDetails} roomSelectedList={roomSelectedList}/>
             </div>
