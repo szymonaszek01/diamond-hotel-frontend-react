@@ -1,7 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { apiSlice } from './api/apiSlice';
-import authReducer from '../redux/features/authSlice.js';
-import userReducer from './features/userSlice';
+import { apiSlice } from '../api/apiSlice';
+import authReducer from '../features/auth/authSlice.js';
+import userReducer from '../features/user/userSlice';
+import weatherReducer from '../features/weather/weatherSlice';
+import roomTypeReducer from '../features/roomType/roomTypeSlice';
+import reservationReducer from '../features/reservation/reservationSlice';
 import { persistReducer, persistStore } from 'redux-persist';
 import storageSession from 'reduxjs-toolkit-persist/lib/storage/session';
 
@@ -14,6 +17,9 @@ const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
   auth: authReducer,
   user: userReducer,
+  weather: weatherReducer,
+  roomType: roomTypeReducer,
+  reservation: reservationReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
