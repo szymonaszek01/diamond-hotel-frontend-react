@@ -8,8 +8,10 @@ export const toRoomSelectedListMapper = (roomTypeDetailsList) => {
 };
 
 export const toRoomSelectedCostMapper = (res) => {
+  const { room_selected_cost } = res;
+  const { name, cost } = room_selected_cost;
   return {
-    name: res.room_selected_cost.name,
-    cost: res.room_selected_cost.cost,
+    name: name,
+    cost: cost,
   };
 };
