@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { close, close2, logo, logo2, menu, menu2 } from '../assets';
-import { logOut } from '../redux/features/authSlice';
+import { logOut } from '../redux/features/auth/authSlice';
 import { useDispatch } from 'react-redux';
 
 const Navbar = ({ page, isToggled, navbarLinks, logoWhite, textWhite }) => {

@@ -10,7 +10,7 @@ import {
 import { useGetRoomAvailabilityListMutation } from '../redux/api/roomApiSlice';
 import { toast } from 'react-toastify';
 import styles from '../style';
-import { toRoomTypeDetailsListMapper } from '../redux/features/roomTypeSlice';
+import { toRoomTypeDetailsListMapper } from '../redux/features/roomType/roomTypeMapper';
 
 const FindRoomForm = ({ setRoomTypeDetailsList, updateReservationDetails, filters }) => {
   const [form, setForm] = useState({

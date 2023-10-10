@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import { setAccountDetails, setOAuth2Error } from '../../redux/features/authSlice';
-import { store } from '../../redux/store';
+import { setAccountDetails, setOAuth2Error } from '../../redux/features/auth/authSlice';
+import { store } from '../../redux/store/store';
 import { useDispatch } from 'react-redux';
 import { urlParam } from '../../util';
 

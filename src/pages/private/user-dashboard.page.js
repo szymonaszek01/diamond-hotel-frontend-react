@@ -1,8 +1,9 @@
 import styles from '../../style';
 import { useGetUserByIdMutation } from '../../redux/api/userApiSlice';
-import { isConfirmed, selectUserId, setConfirmation } from '../../redux/features/authSlice';
+import { isConfirmed, selectUserId, setConfirmation } from '../../redux/features/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserDetails, toUserDetailsResMapper } from '../../redux/features/userSlice';
+import { setUserDetails } from '../../redux/features/user/userSlice';
+import { toUserDetailsResMapper } from '../../redux/features/user/userMapper';
 import { useEffect, useState } from 'react';
 import { privateNavLinks } from '../../constants';
 import {

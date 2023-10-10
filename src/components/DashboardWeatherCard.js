@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import styles from '../style';
 import { ToastContainer } from 'react-toastify';
 import { measurement } from '../constants';
-import { toWeatherListMapper } from '../redux/features/weatherSlice';
+import { toWeatherListMapper } from '../redux/features/weather/weatherMapper';
 import { useGetWeatherListMutation } from '../redux/api/weatherApiSlice';
 import { CustomLoadingOverlay } from './index';
 import { arrowRightWhite } from '../assets';
 import { motion } from 'framer-motion';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectWeatherList, setWeatherList } from '../redux/features/weather/weatherSlice';
 
 const MeasurementItem = ({ obj, precision }) => {
   return (
@@ -35,7 +37,7 @@ const SelectedWeatherItem = ({ weather, index }) => {
         </span>
         <span>
           Stay informed about the weather conditions in your area and plan ahead with our upcoming
-          weather forecast..
+          weather forecast.
         </span>
       </p>
       <motion.div
@@ -119,10 +121,13 @@ const DailyWeatherItem = ({ weather, index }) => {
 };
 
 const DashboardWeatherCard = () => {
+  const weatherListFromState = useSelector(selectWeatherList);
+  const dispatch = useDispatch();
+
   const [getWeatherList, { isLoading }] = useGetWeatherListMutation();
-  const [weatherList, setWeatherList] = useState([]);
+  const [dailyWeatherList, setDailyWeatherList] = useState(weatherListFromState);
   const [selectedWeather, setSelectedWeather] = useState({
-    weather: {},
+    weather: weatherListFromState?.at(0),
     index: 0,
   });
 
@@ -133,7 +138,7 @@ const DashboardWeatherCard = () => {
     const updatedIndex = selectedWeather.index + 1;
     setSelectedWeather({
       ...selectedWeather,
-      weather: weatherList.at(updatedIndex),
+      weather: dailyWeatherList.at(updatedIndex),
       index: updatedIndex,
     });
   };
@@ -145,7 +150,7 @@ const DashboardWeatherCard = () => {
     const updatedIndex = selectedWeather.index - 1;
     setSelectedWeather({
       ...selectedWeather,
-      weather: weatherList.at(updatedIndex),
+      weather: dailyWeatherList.at(updatedIndex),
       index: updatedIndex,
     });
   };
@@ -155,15 +160,18 @@ const DashboardWeatherCard = () => {
       try {
         const response = await getWeatherList().unwrap();
         const mappedResponse = toWeatherListMapper(response);
-        setWeatherList(mappedResponse);
+        setDailyWeatherList(mappedResponse);
+        dispatch(setWeatherList({ all: mappedResponse }));
         setSelectedWeather({ ...selectedWeather, weather: mappedResponse.at(0), index: 0 });
       } catch (error) {
         console.log(error);
       }
     };
 
-    loadWeatherList().then(() => console.log('Loaded weather list'));
-  }, [getWeatherList]);
+    if (dailyWeatherList.length < 1) {
+      loadWeatherList().then(() => console.log('Loaded weather list'));
+    }
+  }, [dailyWeatherList.length, dispatch, getWeatherList, selectedWeather]);
 
   return isLoading ? (
     <CustomLoadingOverlay message={'Loading...'} />
@@ -180,7 +188,7 @@ const DashboardWeatherCard = () => {
             onClick={previousDailyWeather}
           />
           <div className="relative flex flex-col lg:flex-row gap-7 w-[80%] h-[350px] xs:h-[200px] lg:h-full overflow-y-hidden lg:overflow-x-hidden">
-            {weatherList.slice(selectedWeather.index).map((weather, index) => (
+            {dailyWeatherList.slice(selectedWeather.index).map((weather, index) => (
               <DailyWeatherItem weather={weather} index={index} />
             ))}
           </div>

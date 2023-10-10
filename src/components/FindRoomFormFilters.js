@@ -6,11 +6,21 @@ import { inputsInfo } from '../constants';
 import { filtersIcon } from '../assets';
 import { toast, ToastContainer } from 'react-toastify';
 import { useGetRoomTypeListMutation } from '../redux/api/roomTypeApiSlice';
-import { toRoomTypeSelectMapper } from '../redux/features/roomTypeSlice';
+import { toRoomTypeSelectMapper } from '../redux/features/roomType/roomTypeMapper';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectRoomTypeList, setRoomTypeList } from '../redux/features/roomType/roomTypeSlice';
 
 const FindRoomFormFilters = ({ onSave }) => {
+  const roomTypeListFromState = useSelector(selectRoomTypeList);
+  const dispatch = useDispatch();
+
   const [filters, setFilters] = useState({
-    names: { ...inputsInfo.roomType.names, value: '', options: [], selected: [] },
+    names: {
+      ...inputsInfo.roomType.names,
+      value: '',
+      options: toRoomTypeSelectMapper(roomTypeListFromState),
+      selected: [],
+    },
     pricePerHotelNight: { ...inputsInfo.roomType.pricePerHotelNight, value: 0 },
   });
   const [error, setError] = useState(false);
@@ -35,14 +45,17 @@ const FindRoomFormFilters = ({ onSave }) => {
           ...filters,
           names: { ...filters.names, options: toRoomTypeSelectMapper(response) },
         });
+        dispatch(setRoomTypeList({ all: response }));
       } catch (error) {
         setError(true);
         toast.error('Failed to load room types');
       }
     };
 
-    loadRoomTypeList().then(() => console.log('Loaded room type list'));
-  }, [getRoomTypeList]);
+    if (filters.names.options.length < 1) {
+      loadRoomTypeList().then(() => console.log('Loaded room type list'));
+    }
+  }, [dispatch, filters, getRoomTypeList]);
 
   return isLoading ? (
     <CustomLoadingOverlay message={'Loading...'} />
@@ -78,7 +91,7 @@ const FindRoomFormFilters = ({ onSave }) => {
               <div className="flex flex-col sm:flex-row gap-5">
                 <button
                   className={`${styles.button} text-black`}
-                  onClick={(e) => {
+                  onClick={() => {
                     close();
                     onSave({
                       pricePerHotelNight: {

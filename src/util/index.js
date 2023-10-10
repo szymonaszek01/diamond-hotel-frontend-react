@@ -60,3 +60,31 @@ export const updateOptionList = ({
 
   setOptionList(newOptionList);
 };
+
+export const validatePassword = (password, repeated) => {
+  if (password !== repeated) {
+    return 'Passwords are not equaled';
+  }
+
+  if (!new RegExp('.{8,}').test(password)) {
+    return 'Your password must be between 8-15 characters';
+  }
+
+  if (!new RegExp('(?=.*?[A-Z])').test(password)) {
+    return 'Your password must contain at least 1 capital letter';
+  }
+
+  if (!new RegExp('(?=.*?[a-z])').test(password)) {
+    return 'Your password must contain at least 1 lowercase letter';
+  }
+
+  if (!new RegExp('(?=.*?[0-9])').test(password)) {
+    return 'Your password must contain at least 1 number';
+  }
+
+  if (!new RegExp('(?=.*[#$@!%&*?])').test(password)) {
+    return 'Your password must contain at least 1 special sign';
+  }
+
+  return null;
+};

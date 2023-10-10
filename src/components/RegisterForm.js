@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import { useRegisterAccountMutation } from '../redux/api/authApiSlice';
-import {
-  setAccountDetails,
-  toAuthResMapper,
-  toRegisterReqMapper,
-  validatePassword,
-} from '../redux/features/authSlice';
+import { setAccountDetails } from '../redux/features/auth/authSlice';
+import { toAuthResMapper, toRegisterReqMapper } from '../redux/features/auth/authMapper';
+import { validatePassword } from '../util/index';
 import { toast, ToastContainer } from 'react-toastify';
 import { CustomLoadingOverlay, CustomPhoneInput, CustomStandardInput, Steps } from '../components';
 import styles, { layout } from '../style';

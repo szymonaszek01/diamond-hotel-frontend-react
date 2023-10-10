@@ -16,8 +16,9 @@ import {
   useUpdateAccountEmailMutation,
   useUpdateAccountPasswordMutation,
 } from '../../redux/api/authApiSlice';
-import { selectUserDetails } from '../../redux/features/userSlice';
-import { logOut, setConfirmation, validatePassword } from '../../redux/features/authSlice';
+import { selectUserDetails } from '../../redux/features/user/userSlice';
+import { logOut, setConfirmation } from '../../redux/features/auth/authSlice';
+import { validatePassword } from '../../util/index';
 import {
   useUpdateUserDetailsMutation,
   useUpdateUserImageMutation,

@@ -1,7 +1,7 @@
 import styles from '../style';
 import { arrowRightBlack, close, defaultUser, information } from '../assets';
 import { useSelector } from 'react-redux';
-import { selectUserDetails } from '../redux/features/userSlice';
+import { selectUserDetails } from '../redux/features/user/userSlice';
 import { ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';

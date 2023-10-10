@@ -95,11 +95,16 @@ const FindRoomPage = () => {
               <div
                 key={`content-${randomCode(4)}`}
                 className="flex flex-col gap-1 w-full text-center sm:text-start">
-                <h2 className={styles.heading2}>Welcome to Our Booking Page</h2>
-                <p className={styles.paragraph}>
-                  We're thrilled that you've chosen to book your stay with us! At Diamond Hotel,
-                  we're committed to providing you with a comfortable and memorable experience.
-                  Please use the booking form below to reserve your room.
+                <p
+                  className={`flex flex-col text-sm text-dimWhite font-poppins font-thin leading-10 sm:leading-8 gap-5 break-words`}>
+                  <span className={'text-5xl font-semibold text-white leading-[65px]'}>
+                    Welcome to Our Booking Page
+                  </span>
+                  <span>
+                    We're thrilled that you've chosen to book your stay with us! At Diamond Hotel,
+                    we're committed to providing you with a comfortable and memorable experience.
+                    Please use the booking form below to reserve your room.
+                  </span>
                 </p>
               </div>
             ) : (

@@ -1,18 +1,28 @@
 import { useEffect, useState } from 'react';
-import { toReservationTableMapper } from '../redux/features/reservationSlice';
-import { useSelector } from 'react-redux';
-import { selectUserDetails } from '../redux/features/userSlice';
+import { toReservationTableMapper } from '../redux/features/reservation/reservationMapper';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUserDetails } from '../redux/features/user/userSlice';
 import { useGetReservationListByUserProfileIdMutation } from '../redux/api/reservationApiSlice';
 import { ButtonWithIcon, CustomLoadingOverlay, Table, TableSlider } from './index';
 import { randomCode } from '../util';
 import { moreArrow } from '../assets';
+import {
+  selectReservationList,
+  selectReservationPage,
+  setReservationList,
+} from '../redux/features/reservation/reservationSlice';
 
 const ReservationForm = () => {
   const userDetails = useSelector(selectUserDetails);
-  const [page, setPage] = useState(0);
+  const reservationListFromState = useSelector(selectReservationList);
+  const reservationPageFromState = useSelector(selectReservationPage);
+  const dispatch = useDispatch();
+  const { columnList, rowList } = toReservationTableMapper(reservationListFromState);
+
+  const [page, setPage] = useState(reservationPageFromState);
   const [reservationTable, setReservationTable] = useState({
-    columnList: [],
-    rowList: [],
+    columnList: columnList,
+    rowList: rowList,
     actionList: [],
   });
   const [optionList, setOptionList] = useState([
@@ -50,7 +60,7 @@ const ReservationForm = () => {
           return;
         }
 
-        let filters = { page: page, size: 5 };
+        let filters = { page: page ?? 0, size: 5 };
         if (selectedOption.queryParamName.length > 0 && selectedOption.value.length > 0) {
           filters = { ...filters, [selectedOption.queryParamName]: selectedOption.value };
         }
@@ -66,6 +76,7 @@ const ReservationForm = () => {
           return;
         }
 
+        dispatch(setReservationList({ all: response, page: page }));
         newRowList = newRowList.concat(rowList);
         setReservationTable({
           ...reservationTable,
@@ -77,8 +88,17 @@ const ReservationForm = () => {
       }
     };
 
-    loadReservationListByUserProfileId().then(() => console.log('Loaded reservation list'));
-  }, [getReservationListByUserProfileId, optionList, page]);
+    if (reservationTable.columnList.length < 1) {
+      loadReservationListByUserProfileId().then(() => console.log('Loaded reservation list'));
+    }
+  }, [
+    dispatch,
+    getReservationListByUserProfileId,
+    optionList,
+    page,
+    reservationTable,
+    userDetails.id,
+  ]);
 
   return isLoading ? (
     <CustomLoadingOverlay message={'Loading...'} />

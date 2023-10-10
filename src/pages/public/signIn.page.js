@@ -1,7 +1,7 @@
 import styles from '../../style';
 import { Footer, LoginForm, Navbar } from '../../components';
 import { publicNavLinks } from '../../constants';
-import { selectUser } from '../../redux/features/authSlice';
+import { selectUser } from '../../redux/features/auth/authSlice';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 

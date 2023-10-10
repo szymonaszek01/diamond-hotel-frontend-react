@@ -4,18 +4,14 @@ import { CustomLoadingOverlay } from './index';
 import { toast, ToastContainer } from 'react-toastify';
 import { useCreateReservationMutation } from '../redux/api/reservationApiSlice';
 import { useChargePaymentMutation } from '../redux/api/paymentApiSlice';
-import {
-  setReservation,
-  toReservationCreateReqDtoMapper,
-} from '../redux/features/reservationSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectUserDetails } from '../redux/features/userSlice';
+import { toReservationCreateReqDtoMapper } from '../redux/features/reservation/reservationMapper';
+import { useSelector } from 'react-redux';
+import { selectUserDetails } from '../redux/features/user/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { money } from '../assets';
-import { toPaymentChargeReqDtoMapper } from '../redux/features/paymentSlice';
+import { toPaymentChargeReqDtoMapper } from '../redux/features/payment/paymentMapper';
 
 const PaymentForm = ({ reservationDetails, roomSelectedList }) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const userDetails = useSelector(selectUserDetails);
@@ -43,7 +39,7 @@ const PaymentForm = ({ reservationDetails, roomSelectedList }) => {
       const tokenId = token.id;
       const amount = response.payment.cost;
 
-      response = await chargePayment(
+      await chargePayment(
         toPaymentChargeReqDtoMapper({
           paymentId,
           reservationId,
@@ -53,8 +49,6 @@ const PaymentForm = ({ reservationDetails, roomSelectedList }) => {
         })
       ).unwrap();
 
-      const charge = response.charge;
-      dispatch(setReservation({ id: reservationId, paymentId: paymentId, charge: charge }));
       navigate('/reservations');
     } catch (error) {
       toast.error('Payment failed. Please, try to do it again later.');

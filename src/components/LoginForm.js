@@ -8,8 +8,8 @@ import {
   selectOAuth2Error,
   setAccountDetails,
   setOAuth2Error,
-  toAuthResMapper,
-} from '../redux/features/authSlice';
+} from '../redux/features/auth/authSlice';
+import { toAuthResMapper } from '../redux/features/auth/authMapper';
 import { CustomLoadingOverlay, CustomStandardInput } from '../components';
 import { toast, ToastContainer } from 'react-toastify';
 import { inputsInfo } from '../constants';

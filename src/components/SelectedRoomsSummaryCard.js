@@ -3,7 +3,10 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { CustomLoadingOverlay, FlightForm } from './index';
 import { randomCode } from '../util';
-import { toRoomSelectedCostMapper, toRoomSelectedListMapper } from '../redux/features/roomSlice';
+import {
+  toRoomSelectedCostMapper,
+  toRoomSelectedListMapper,
+} from '../redux/features/room/roomMapper';
 
 const RoomSelectedCost = ({ checkIn, checkOut, rooms, roomTypeId, updateRoomTypeDetails }) => {
   const [getRoomSelectedCost, { isLoading }] = useGetRoomSelectedCostMutation();

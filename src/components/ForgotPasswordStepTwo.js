@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import { CustomLoadingOverlay, CustomStandardInput } from '../components';
 import styles from '../style';
-import { validatePassword } from '../redux/features/authSlice';
+import { validatePassword } from '../util/index';
 import { inputsInfo } from '../constants';
 
 const ForgotPasswordStepTwo = ({ token }) => {

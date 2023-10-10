@@ -1,7 +1,7 @@
 import styles from '../style';
 import { locked } from '../assets';
 import { useDispatch } from 'react-redux';
-import { logOut } from '../redux/features/authSlice';
+import { logOut } from '../redux/features/auth/authSlice';
 
 export const AccountNotConfirmed = () => {
   const dispatch = useDispatch();

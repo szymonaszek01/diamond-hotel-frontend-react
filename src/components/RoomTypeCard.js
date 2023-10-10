@@ -4,7 +4,7 @@ import {
   PlusMinusButton,
   RoomTypeDescription,
 } from './index';
-import { toRoomTypeMapper } from '../redux/features/roomTypeSlice';
+import { toRoomTypeMapper } from '../redux/features/roomType/roomTypeMapper';
 import { toast } from 'react-toastify';
 import {
   useGetRoomTypeByIdMutation,

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { selectExpired, selectRefreshToken } from '../redux/features/authSlice';
+import { selectExpired, selectRefreshToken } from '../redux/features/auth/authSlice';
 
 export const Authenticator = () => {
   const refreshToken = useSelector(selectRefreshToken);

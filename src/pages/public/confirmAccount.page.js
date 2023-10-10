@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { setAccountDetails, toAuthResMapper } from '../../redux/features/authSlice';
+import { setAccountDetails } from '../../redux/features/auth/authSlice';
+import { toAuthResMapper } from '../../redux/features/auth/authMapper';
 import { toast, ToastContainer } from 'react-toastify';
 import { useConfirmAccountMutation } from '../../redux/api/authApiSlice';
 import { useDispatch } from 'react-redux';
