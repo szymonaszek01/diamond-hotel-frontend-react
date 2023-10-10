@@ -1,37 +1,37 @@
-import {apiSlice} from "./apiSlice";
-import {apiMethods} from "../../constants";
+import { apiSlice } from './apiSlice';
+import { apiMethods } from '../../constants';
 
 const baseUrl = () => {
-  return "/api/v1/reservation"
-}
+  return '/api/v1/reservation';
+};
 
 const reservationApiSlice = apiSlice.injectEndpoints({
-  endpoints: builder => ({
+  endpoints: (builder) => ({
     createReservation: builder.mutation({
       query: (body) => ({
-        url: baseUrl() + "/create",
+        url: baseUrl() + '/create',
         method: apiMethods.post,
-        body: body
-      })
+        body: body,
+      }),
     }),
     getReservationById: builder.mutation({
-      query: ({id}) => ({
-        url: baseUrl() + "/id/" + id,
-        method: apiMethods.get
-      })
+      query: ({ id }) => ({
+        url: baseUrl() + '/id/' + id,
+        method: apiMethods.get,
+      }),
     }),
     getReservationListByUserProfileId: builder.mutation({
-      query: ({userProfileId, filters}) => ({
-        url: baseUrl() + "/all/user-profile-id/" + userProfileId,
+      query: ({ userProfileId, filters }) => ({
+        url: baseUrl() + '/all/user-profile-id/' + userProfileId,
         method: apiMethods.get,
-        params: filters
-      })
-    })
-  })
-})
+        params: filters,
+      }),
+    }),
+  }),
+});
 
 export const {
   useCreateReservationMutation,
   useGetReservationByIdMutation,
-  useGetReservationListByUserProfileIdMutation
-} = reservationApiSlice
+  useGetReservationListByUserProfileIdMutation,
+} = reservationApiSlice;

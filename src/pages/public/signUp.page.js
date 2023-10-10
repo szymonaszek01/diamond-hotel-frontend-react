@@ -1,34 +1,34 @@
-import {Footer, Navbar, RegisterForm} from "../../components";
-import styles from "../../style";
-import {publicNavLinks} from "../../constants";
+import { Footer, Navbar, RegisterForm } from '../../components';
+import styles from '../../style';
+import { publicNavLinks } from '../../constants';
 
 const SignUpPage = () => {
   const navConfig = {
-    page: "Sign up",
+    page: 'Sign up',
     isToggled: true,
     navbarLinks: publicNavLinks,
     textWhite: true,
-    logoWhite: true
-  }
+    logoWhite: true,
+  };
 
   return (
     <div className={styles.page}>
-      <div className="absolute z-[0] w-[60%] h-[60%] -left-[50%] rounded-full blue__gradient bottom-40"/>
+      <div className="absolute z-[0] w-[60%] h-[60%] -left-[50%] rounded-full blue__gradient bottom-40" />
 
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
-          <Navbar {...navConfig}/>
+          <Navbar {...navConfig} />
         </div>
       </div>
 
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
-          <RegisterForm/>
+          <RegisterForm />
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default SignUpPage
+export default SignUpPage;

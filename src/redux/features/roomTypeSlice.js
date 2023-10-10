@@ -6,29 +6,29 @@ export const toRoomTypeMapper = (obj) => {
     children: obj.children,
     pricePerHotelNight: obj.price_per_hotel_night,
     image: obj.image,
-  }
-}
+  };
+};
 
 export const toRoomTypeListMapper = (res) => {
-  return res.map(obj => toRoomTypeMapper(obj))
-}
+  return res.map((obj) => toRoomTypeMapper(obj));
+};
 
 export const toRoomTypeSelectMapper = (res) => {
-  return res.map(obj => {
+  return res.map((obj) => {
     return {
       value: obj.id,
-      label: obj.name
-    }
-  })
-}
+      label: obj.name,
+    };
+  });
+};
 
 export const toRoomTypeDetailsListMapper = (res) => {
-  return res.room_available_list.map(room_available => {
+  return res.room_available_list.map((room_available) => {
     return {
       id: room_available.room_type_id,
       availableRooms: room_available.availability,
       selectedRooms: 0,
-      cost: 0
-    }
-  })
-}
+      cost: 0,
+    };
+  });
+};

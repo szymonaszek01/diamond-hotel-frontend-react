@@ -1,29 +1,26 @@
-import {apiSlice} from "./apiSlice";
-import {apiMethods} from "../../constants";
+import { apiSlice } from './apiSlice';
+import { apiMethods } from '../../constants';
 
 const baseUrl = () => {
-  return "/api/v1/payment"
-}
+  return '/api/v1/payment';
+};
 
 const paymentApiSlice = apiSlice.injectEndpoints({
-  endpoints: builder => ({
+  endpoints: (builder) => ({
     chargePayment: builder.mutation({
       query: (body) => ({
-        url: baseUrl() + "/charge",
+        url: baseUrl() + '/charge',
         method: apiMethods.put,
-        body: body
-      })
+        body: body,
+      }),
     }),
     cancelPayment: builder.mutation({
-      query: ({id}) => ({
-        url: baseUrl() + "/id/" + id + "/cancel",
-        method: apiMethods.put
-      })
-    })
-  })
-})
+      query: ({ id }) => ({
+        url: baseUrl() + '/id/' + id + '/cancel',
+        method: apiMethods.put,
+      }),
+    }),
+  }),
+});
 
-export const {
-  useChargePaymentMutation,
-  useCancelPaymentMutation
-} = paymentApiSlice
+export const { useChargePaymentMutation, useCancelPaymentMutation } = paymentApiSlice;

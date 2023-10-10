@@ -1,5 +1,3 @@
-const TransactionForm = () => {
+const TransactionForm = () => {};
 
-}
-
-export default TransactionForm
+export default TransactionForm;

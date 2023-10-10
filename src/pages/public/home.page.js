@@ -1,43 +1,53 @@
-import {Navbar, Hero, Stats, Business, Product, Contact, Opinion, CTA, Footer} from "../../components"
-import styles from "../../style"
-import {publicNavLinks} from "../../constants";
+import {
+  Business,
+  Contact,
+  CTA,
+  Footer,
+  Hero,
+  Navbar,
+  Opinion,
+  Product,
+  Stats,
+} from '../../components';
+import styles from '../../style';
+import { publicNavLinks } from '../../constants';
 
 const HomePage = () => {
   const navConfig = {
-    page: "Home",
+    page: 'Home',
     isToggled: true,
     navbarLinks: publicNavLinks,
     textWhite: true,
-    logoWhite: true
-  }
+    logoWhite: true,
+  };
 
   return (
     <div className={styles.page}>
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
-          <Navbar {...navConfig}/>
+          <Navbar {...navConfig} />
         </div>
       </div>
 
       <div className={`${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
-          <Hero/>
+          <Hero />
         </div>
       </div>
 
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
-          <Stats/>
-          <Business/>
-          <Product/>
-          <Contact/>
-          <Opinion/>
-          <CTA/>
+          <Stats />
+          <Business />
+          <Product />
+          <Contact />
+          <Opinion />
+          <CTA />
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

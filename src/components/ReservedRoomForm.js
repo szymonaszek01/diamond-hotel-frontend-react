@@ -1,5 +1,3 @@
-const ReservedRoomForm = () => {
+const ReservedRoomForm = () => {};
 
-}
-
-export default ReservedRoomForm
+export default ReservedRoomForm;

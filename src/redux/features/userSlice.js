@@ -1,20 +1,20 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const userSlice = createSlice({
-  name: "user",
-  initialState: {details: null},
+  name: 'user',
+  initialState: { details: null },
   reducers: {
     setUserDetails: (state, action) => {
-      state.details = action.payload
-    }
-  }
-})
+      state.details = action.payload;
+    },
+  },
+});
 
-export const {setUserDetails} = userSlice.actions
+export const { setUserDetails } = userSlice.actions;
 
-export default userSlice.reducer
+export default userSlice.reducer;
 
-export const selectUserDetails = (state) => state.user.details
+export const selectUserDetails = (state) => state.user.details;
 
 export const toUserDetailsResMapper = (res) => {
   return {
@@ -32,6 +32,6 @@ export const toUserDetailsResMapper = (res) => {
     role: res.role,
     authProvider: res.auth_provider,
     picture: res.picture,
-    confirmed: res.confirmed
-  }
-}
+    confirmed: res.confirmed,
+  };
+};

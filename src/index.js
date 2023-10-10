@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {Provider} from "react-redux";
-import {persistor, store} from "./redux/store";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {PersistGate} from 'redux-persist/integration/react';
+import { Provider } from 'react-redux';
+import { persistor, store } from './redux/store';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,14 +15,13 @@ root.render(
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           <Routes>
-            <Route path="/*" element={<App/>}/>
+            <Route path="/*" element={<App />} />
           </Routes>
         </BrowserRouter>
       </PersistGate>
     </Provider>
   </React.Fragment>
-)
-
+);
 
 // If you want to start measuring performance in your redux, pass a function
 // to log results (for example: reportWebVitals(console.log))
