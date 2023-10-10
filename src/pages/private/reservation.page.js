@@ -52,18 +52,23 @@ const ReservationPage = () => {
         </div>
       </div>
       <div className="flex flex-col w-full items-center justify-center mt-8">
-        <div className={"flex flex-col items-center text-center sm:text-start sm:items-start justify-center w-[60%] gap-8"}>
+        <div
+          className={"flex flex-col items-center text-center sm:text-start sm:items-start justify-center w-[60%] gap-8"}>
           <PageFormSelector optionList={optionList} setOptionList={setOptionList} cardWidth={"200px"}/>
-          <p className={`text-sm text-white font-poppins font-thin ml-2 leading-8`}>
-            <strong className={"text-2xl font-semibold"}>Your Reservations</strong><br/>Welcome to your reservation
-            list.
-            Here, you can view and manage all your upcoming reservations with Diamond hotel. Whether you're checking in,
-            making changes, or need more details about your bookings, it's all right here.</p>
-          <p className={`text-sm text-white font-poppins font-thin ml-2 leading-8`}>
-            <strong className={"text-2xl font-semibold"}>Manage Your Reservations</strong><br/>For each reservation
-            listed, you'll have options to manage your booking. Here are some common actions:
-
-            <ul>
+          <p className={`flex flex-col gap-2 text-sm text-dimWhite font-poppins font-thin ml-2 leading-10 sm:leading-8`}>
+            <span className={"text-2xl font-semibold text-white leading-[50px] sm:leading-8"}>Your Reservations</span>
+            <span>
+              Welcome to your reservation list.
+              Here, you can view and manage all your upcoming reservations with Diamond hotel. Whether you're checking in,
+              making changes, or need more details about your bookings, it's all right here.
+            </span>
+          </p>
+          <p className={`flex flex-col text-sm text-dimWhite font-poppins font-thin ml-2 leading-10 sm:leading-8`}>
+            <span className={"text-2xl font-semibold text-white leading-[50px] sm:leading-8"}>Manage Your Reservations</span>
+            <span className={"mt-2"}>
+              For each reservation listed, you'll have options to manage your booking. Here are some common actions:
+            </span>
+            <ul className={"text-white mt-5"}>
               <li className={"li-circle"}><strong className={"text-sm font-semibold text-gradient"}>View
                 Details:</strong> Click to see all the details of your reservation, including room types, special
                 requests, and pricing information.

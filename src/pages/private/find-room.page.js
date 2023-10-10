@@ -59,7 +59,7 @@ const FindRoomPage = () => {
           <Navbar {...navConfig} />
         </div>
       </div>
-      <div className="flex w-full items-center justify-center sm:mt-0 mb-16">
+      <div className="flex w-full items-center justify-center mb-16">
         <div
           className={`flex ${isRoomTypeDetailsListEmpty() ? "flex-col justify-center items-center" : "flex-col sm:flex-row gap-16 sm:gap-28 w-[80%]"} min-h-[75vh] relative z-99`}>
           <div

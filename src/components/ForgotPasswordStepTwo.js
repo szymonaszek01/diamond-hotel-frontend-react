@@ -60,14 +60,27 @@ const ForgotPasswordStepTwo = ({token}) => {
   return isLoading ? (<CustomLoadingOverlay message={"Loading..."}/>) : (
     <div className="flex flex-col justify-center sm:justify-start items-center sm:items-start gap-5">
       <ToastContainer className={"toast-style"}/>
-      <h2 className={`flex ${styles.heading2} z-[99] justify-center sm:justify-start`}>Change password</h2>
+      <p
+        className={`flex flex-col text-sm text-center sm:text-start text-dimWhite font-poppins font-thin leading-10 sm:leading-8`}>
+        <span className={"text-4xl font-semibold text-white leading-[50px]"}>Your new password must meet the following
+          criteria</span>
+        <span>
+          <ul>
+            <li className={"li-circle"}>At least 8 characters long
+            </li>
+            <li className={"li-circle"}>Include both uppercase and lowercase letters
+            </li>
+            <li className={"li-circle"}>Contain at least one number
+            </li>
+            <li className={"li-circle"}>Include at least one special character (e.g., !, @, #)
+            </li>
+          </ul>
+        </span>
+      </p>
       <CustomStandardInput attributes={form.password} placeholder={true} error={error}
                            onChange={onChange}/>
       <CustomStandardInput attributes={form.repeated} placeholder={true} error={error}
                            onChange={onChange}/>
-      <div>
-
-      </div>
       <button className={`${styles.button} z-[99]`}
               onClick={forgotPasswordStepTwo}>Confirm
       </button>

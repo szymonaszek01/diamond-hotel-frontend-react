@@ -16,7 +16,7 @@ const Navbar = ({page, isToggled, navbarLinks, logoWhite, textWhite}) => {
 
   const renderMobileView = () => {
     return !isToggled ? '' : (
-      <div className="relative sm:hidden flex justify-end items-center z-[99] ml-4">
+      <div className="sm:hidden flex justify-end items-center ml-4">
         <img
           src={toggle ? textWhite ? close : close2 : textWhite ? menu : menu2}
           alt="menu"
@@ -53,7 +53,7 @@ const Navbar = ({page, isToggled, navbarLinks, logoWhite, textWhite}) => {
   }
 
   return (
-    <nav className={`w-full flex py-4 justify-between items-center navbar relative z-[55]`}>
+    <nav className={`w-full flex py-4 justify-between items-center navbar relative z-50`}>
       <img src={logoWhite ? logo : logo2} alt="hoobank" className="w-[175px] h-[21px]"/>
       <ul className={`list-none sm:flex hidden justify-end items-center flex-1`}>
         {navbarLinks?.find(nav => nav.main.title === page)?.sections.map((section, index) => (

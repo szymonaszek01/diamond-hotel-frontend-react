@@ -136,20 +136,22 @@ const   RegisterForm = () => {
   return isLoading ? (<CustomLoadingOverlay message={"Loading..."}/>) : (
     <section id="login-form" className={`${layout.section} ${styles.flexCenter}`}>
       <ToastContainer className={"toast-style"}/>
-      <div className="h-[100vh] sm:h-[100%] sm:w-[100%] max-w-[75%] flex sm:flex-row flex-col rounded-[10px]">
+      <div className="min-h-[100vh] sm:min-h-[100%] sm:w-[100%] max-w-[75%] flex sm:flex-row flex-col rounded-[10px]">
         <div className="flex justify-center sm:justify-start w-[100%]">
           <img src={loginImg} alt="billing" className="w-[100%] h-auto"/>
         </div>
         <div className="flex flex-col justify-center items-center sm:items-start w-[100%] sm:px-10 z-50 ">
+          <p className={`flex flex-col text-sm text-center sm:text-start text-dimWhite font-poppins font-thin leading-10 sm:leading-8 gap-5`}>
+            <span className={"text-4xl font-semibold text-white"}>Sign up</span><span>Welcome to Diamond hotel! Join our community and unlock a world of opportunities. Signing up is quick and easy.</span></p>
           <Steps steps={4} count={step} error={error.fields.length > 0}/>
           <StepForm step={step} form={getInputsByStep()} isError={isError} onChange={onChange}/>
 
           <div className="flex flex-row justify-center items-center sm:justify-start gap-5">
-            <button className={`${step > 1 ? '' : 'hidden'} mt-4 ${styles.button}`}
+            <button className={`${step > 1 ? '' : 'hidden'} mt-5 ${styles.button}`}
                     onClick={previousStep}>
               Previous
             </button>
-            <button className={`mt-4 ${styles.button}`}
+            <button className={`mt-5 ${styles.button}`}
                     onClick={step === 4 ? registerUser : nextStep}>
               {step === 4 ? 'Sign up' : 'Next'}
             </button>
