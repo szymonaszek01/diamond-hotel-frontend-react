@@ -20,7 +20,25 @@ const paymentApiSlice = apiSlice.injectEndpoints({
         method: apiMethods.put,
       }),
     }),
+    getPaymentListByUserProfileId: builder.mutation({
+      query: ({ userProfileId, filters }) => ({
+        url: baseUrl() + '/all/user-profile-id/' + userProfileId,
+        method: apiMethods.get,
+        params: filters,
+      }),
+    }),
+    countPaymentListByUserProfileId: builder.mutation({
+      query: ({ userProfileId }) => ({
+        url: baseUrl() + '/all/number/user-profile-id/' + userProfileId,
+        method: apiMethods.get,
+      }),
+    }),
   }),
 });
 
-export const { useChargePaymentMutation, useCancelPaymentMutation } = paymentApiSlice;
+export const {
+  useChargePaymentMutation,
+  useCancelPaymentMutation,
+  useGetPaymentListByUserProfileIdMutation,
+  useCountPaymentListByUserProfileIdMutation,
+} = paymentApiSlice;

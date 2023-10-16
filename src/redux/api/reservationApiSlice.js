@@ -27,6 +27,12 @@ const reservationApiSlice = apiSlice.injectEndpoints({
         params: filters,
       }),
     }),
+    countReservationListByUserProfileId: builder.mutation({
+      query: ({ userProfileId }) => ({
+        url: baseUrl() + '/all/number/user-profile-id/' + userProfileId,
+        method: apiMethods.get,
+      }),
+    }),
   }),
 });
 
@@ -34,4 +40,5 @@ export const {
   useCreateReservationMutation,
   useGetReservationByIdMutation,
   useGetReservationListByUserProfileIdMutation,
+  useCountReservationListByUserProfileIdMutation,
 } = reservationApiSlice;

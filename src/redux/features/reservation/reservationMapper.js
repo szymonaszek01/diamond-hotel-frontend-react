@@ -1,5 +1,3 @@
-import { transferObjectKeyToLabel } from '../../../util';
-
 export const toReservationCreateReqDtoMapper = ({
   userProfileId,
   checkIn,
@@ -35,31 +33,18 @@ export const toReservationCreateResDtoMapper = (res) => {
 };
 
 export const toReservationTableMapper = (res) => {
-  let columnList = [];
-  const rowList = res.map((reservation, index) => {
-    if (index === 0) {
-      columnList = Object.keys(reservation)
-        .filter((key) => key !== 'user_profile')
-        .map((key) => transferObjectKeyToLabel(key));
-    }
-
-    return Object.entries(reservation).map(([key, value]) => {
-      if (key === 'user_profile') {
-        return { name: transferObjectKeyToLabel(key), value: '' };
-      }
-      if (key === 'flight') {
-        return {
-          name: transferObjectKeyToLabel(key),
-          value: value !== null ? value.flight_number : '-',
-        };
-      }
-
-      if (key === 'payment') {
-        value = value.status;
-      }
-
-      return { name: transferObjectKeyToLabel(key), value: value };
-    });
+  const columnList = ['Id', 'Adults', 'Children', 'Flight', 'Payment', 'Check in', 'Check out'];
+  const rowList = res.map((reservation) => {
+    const { id, adults, children, flight, payment, check_in, check_out } = reservation;
+    return [
+      { name: 'Id', value: id },
+      { name: 'Adults', value: adults },
+      { name: 'Children', value: children },
+      { name: 'Flight', value: flight !== null ? flight.flight_number : '-' },
+      { name: 'Payment', value: payment.id },
+      { name: 'Check in', value: check_in },
+      { name: 'Check out', value: check_out },
+    ];
   });
 
   return { columnList, rowList };
