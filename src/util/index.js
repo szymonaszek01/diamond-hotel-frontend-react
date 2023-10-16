@@ -28,7 +28,8 @@ export const transferObjectKeyToLabel = (obj) => {
   let result = obj
     .replace(/([a-z])([A-Z])/g, '$1 $2')
     .toLowerCase()
-    .replaceAll('_', ' ');
+    .replaceAll('_', ' ')
+    .replaceAll('-', ' ');
   return result.charAt(0).toUpperCase() + result.slice(1);
 };
 
@@ -39,25 +40,32 @@ export const updateOptionList = ({
   key,
   newValue,
   previousValue,
+  updatingApi,
 }) => {
-  const previousSelectedOption = optionList.find((option) => option.isSelected);
   const newSelectedOption = optionList.find((option) => option.id === selectedId);
-  if (
-    !previousSelectedOption ||
-    !newSelectedOption ||
-    previousSelectedOption.id === newSelectedOption.id
-  ) {
+  const previousSelectedOption = optionList.find((option) => option.isSelected);
+  let newOptionList = [];
+  if (!previousSelectedOption || !newSelectedOption) {
     return;
   }
 
-  previousSelectedOption[key] = previousValue;
-  newSelectedOption[key] = newValue;
-  let newOptionList = optionList.filter(
-    (option) => option.id !== previousSelectedOption.id && option.id !== newSelectedOption.id
-  );
-  newOptionList.push(previousSelectedOption, newSelectedOption);
-  newOptionList.sort((obj1, obj2) => obj1.id - obj2.id);
+  if (updatingApi) {
+    newSelectedOption[key] = newValue;
+    newOptionList = optionList.filter((option) => option.id !== newSelectedOption.id);
+    newOptionList.push(newSelectedOption);
+  } else {
+    if (previousSelectedOption === newSelectedOption) {
+      return;
+    }
+    previousSelectedOption[key] = previousValue;
+    newSelectedOption[key] = newValue;
+    newOptionList = optionList.filter(
+      (option) => option.id !== previousSelectedOption.id && option.id !== newSelectedOption.id
+    );
+    newOptionList.push(previousSelectedOption, newSelectedOption);
+  }
 
+  newOptionList.sort((obj1, obj2) => obj1.id - obj2.id);
   setOptionList(newOptionList);
 };
 
