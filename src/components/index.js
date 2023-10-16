@@ -47,10 +47,8 @@ import TableCell from './TableCell';
 import TableActionMenu from './TableActionMenu';
 import TableHeader from './TableHeader';
 import PageFormSelector from './PageFormSelector';
-import ReservationForm from './ReservationForm';
-import TransactionForm from './TransactionForm';
-import ReservedRoomForm from './ReservedRoomForm';
 import TableSlider from './TableSlider';
+import TableForm from './TableForm';
 
 export {
   AccountNotConfirmed,
@@ -102,8 +100,6 @@ export {
   TableActionMenu,
   TableHeader,
   PageFormSelector,
-  ReservationForm,
-  TransactionForm,
-  ReservedRoomForm,
   TableSlider,
+  TableForm,
 };
