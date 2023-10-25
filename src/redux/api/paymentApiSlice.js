@@ -7,24 +7,17 @@ const baseUrl = () => {
 
 const paymentApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    chargePayment: builder.mutation({
-      query: (body) => ({
-        url: baseUrl() + '/charge',
-        method: apiMethods.put,
-        body: body,
-      }),
-    }),
-    cancelPayment: builder.mutation({
-      query: ({ id }) => ({
-        url: baseUrl() + '/id/' + id + '/cancel',
-        method: apiMethods.put,
-      }),
-    }),
     getPaymentListByUserProfileId: builder.mutation({
       query: ({ userProfileId, filters }) => ({
         url: baseUrl() + '/all/user-profile-id/' + userProfileId,
         method: apiMethods.get,
         params: filters,
+      }),
+    }),
+    getPaymentPdfDocumentById: builder.mutation({
+      query: ({ id }) => ({
+        url: baseUrl() + '/id/' + id + '/pdf',
+        method: apiMethods.get,
       }),
     }),
     countPaymentListByUserProfileId: builder.mutation({
@@ -37,8 +30,7 @@ const paymentApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-  useChargePaymentMutation,
-  useCancelPaymentMutation,
   useGetPaymentListByUserProfileIdMutation,
+  useGetPaymentPdfDocumentByIdMutation,
   useCountPaymentListByUserProfileIdMutation,
 } = paymentApiSlice;
