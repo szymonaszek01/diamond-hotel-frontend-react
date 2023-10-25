@@ -13,6 +13,7 @@ const TableForm = ({
   api,
   toTableMapper,
   text,
+  actionList,
 }) => {
   const userDetails = useSelector(selectUserDetails);
   const dispatch = useDispatch();
@@ -21,7 +22,6 @@ const TableForm = ({
   const [table, setTable] = useState({
     columnList: [],
     rowList: [],
-    actionList: [],
   });
 
   useEffect(() => {
@@ -88,7 +88,11 @@ const TableForm = ({
           <Table
             columnList={table.columnList}
             rowList={table.rowList}
-            actionList={table.actionList}
+            actionList={actionList?.filter((action) =>
+              action.optionIdList.find(
+                (optionId) => optionId === optionList.find((option) => option.isSelected).id
+              )
+            )}
           />
         ) : (
           ''

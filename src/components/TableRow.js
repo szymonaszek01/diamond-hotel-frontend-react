@@ -1,5 +1,5 @@
 import { randomCode } from '../util';
-import { TableActionMenu, TableCell } from './index';
+import { TableActionModal, TableCell } from './index';
 
 const TableRow = ({ index, columnList, cellList, isLastRow, actionList }) => {
   const isEven = index % 2 === 0;
@@ -18,7 +18,12 @@ const TableRow = ({ index, columnList, cellList, isLastRow, actionList }) => {
 
         return foundCell ? <TableCell value={foundCell.value} /> : ``;
       })}
-      <TableActionMenu actionList={actionList} id={id} />
+      <TableActionModal
+        id={id}
+        cellList={cellList}
+        actionList={actionList}
+        hidden={!actionList || actionList.length < 1}
+      />
     </div>
   );
 };

@@ -31,6 +31,10 @@ const FindRoomFormFilters = ({ onSave }) => {
 
     setError(false);
 
+    if (name === 'pricePerHotelNight' && value < 0) {
+      value = 0;
+    }
+
     setFilters({
       ...filters,
       [name]: { ...result, value: value },

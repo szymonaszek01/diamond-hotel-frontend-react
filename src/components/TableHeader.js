@@ -1,7 +1,7 @@
 import { randomCode } from '../util';
-import { TableActionMenu, TableCell } from './index';
+import { TableActionModal, TableCell } from './index';
 
-const TableHeader = ({ columnList }) => {
+const TableHeader = ({ columnList, hidden }) => {
   return (
     <div
       key={`header-${randomCode(7)}`}
@@ -9,7 +9,9 @@ const TableHeader = ({ columnList }) => {
       {columnList.map((column) => (
         <TableCell value={column} textColor={'text-gradient'} fontStyle={'font-bold'} />
       ))}
-      <TableActionMenu hidden={true} />
+      <div className={hidden ? 'hidden' : 'invisible'}>
+        <TableActionModal hidden={false} />
+      </div>
     </div>
   );
 };

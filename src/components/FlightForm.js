@@ -1,11 +1,24 @@
-import { ButtonWithIcon, CustomStandardInput, PaymentForm } from './index';
+import { ButtonWithIcon, CustomLoadingOverlay, CustomStandardInput } from './index';
 import styles from '../style';
 import Popup from 'reactjs-popup';
 import { useState } from 'react';
-import { inputsInfo } from '../constants';
-import { back } from '../assets';
+import { inputsInfo, stripePublicKey } from '../constants';
+import { back, cardWithClock, money } from '../assets';
+import StripeCheckout from 'react-stripe-checkout';
+import { toast } from 'react-toastify';
+import { toReservationCreateReqDtoMapper } from '../redux/features/reservation/reservationMapper';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectUserDetails } from '../redux/features/user/userSlice';
+import {
+  useCreateReservationMutation,
+  useUpdateReservationPaymentMutation,
+} from '../redux/api/reservationApiSlice';
 
 const FlightForm = ({ reservationDetails, updateReservationDetails, roomSelectedList }) => {
+  const navigate = useNavigate();
+  const userDetails = useSelector(selectUserDetails);
+
   const [form, setForm] = useState({
     flightNumber: { ...inputsInfo.flight.flightNumber, value: '' },
   });
@@ -15,7 +28,56 @@ const FlightForm = ({ reservationDetails, updateReservationDetails, roomSelected
     updateReservationDetails(e.target.name, e.target.value);
   };
 
-  return (
+  const [createReservation, { isLoading: isCreateReservationLoading }] =
+    useCreateReservationMutation();
+  const [updateReservationPayment, { isLoading: isUpdateReservationPaymentLoading }] =
+    useUpdateReservationPaymentMutation();
+
+  const createReservationOnClick = async () => {
+    try {
+      await createReservation(
+        toReservationCreateReqDtoMapper({
+          userProfileId: userDetails.id,
+          checkIn: reservationDetails.checkIn.toISOString().split('T')?.at(0),
+          checkOut: reservationDetails.checkOut.toISOString().split('T')?.at(0),
+          adults: reservationDetails.adults,
+          children: reservationDetails.children,
+          flightNumber: reservationDetails.flightNumber,
+          roomSelectedList,
+        })
+      );
+
+      navigate('/reservations');
+    } catch (error) {
+      toast.error('Creating reservation failed. Please, try to do it again later.');
+    }
+  };
+
+  const createPaymentOnClick = async (token) => {
+    try {
+      const { id } = await createReservation(
+        toReservationCreateReqDtoMapper({
+          userProfileId: userDetails.id,
+          checkIn: reservationDetails.checkIn.toISOString().split('T')?.at(0),
+          checkOut: reservationDetails.checkOut.toISOString().split('T')?.at(0),
+          adults: reservationDetails.adults,
+          children: reservationDetails.children,
+          flightNumber: reservationDetails.flightNumber,
+          roomSelectedList,
+        })
+      ).unwrap();
+
+      await updateReservationPayment({ id, paymentToken: token.id });
+
+      navigate('/reservations');
+    } catch (error) {
+      toast.error('Creating reservation or payment. Please, try to do it again later.');
+    }
+  };
+
+  return isCreateReservationLoading || isUpdateReservationPaymentLoading ? (
+    <CustomLoadingOverlay message={'Loading...'} />
+  ) : (
     <Popup
       trigger={<button className={`${styles.button} w-full`}>Book&Pay</button>}
       modal
@@ -45,14 +107,18 @@ const FlightForm = ({ reservationDetails, updateReservationDetails, roomSelected
                 </p>
                 <p
                   className={`hidden xs:block font-poppins font-normal text-white text-[15px] mt-1`}>
-                  To ensure a smooth and hassle-free experience, please provide your flight details
-                  below. While providing your flight number is optional, it can help us better
-                  assist you during your journey. If you prefer not to provide your flight number,
-                  simply click the "Pay" button to complete your booking.
+                  While providing your flight number is optional, it can help us better assist you
+                  during your journey. If you prefer not to provide your flight number, simply click
+                  the "Pay now or later" button to complete your booking.
+                  <br />
+                  <br />
+                  <strong>
+                    If you choose "Pay later" option, you have 24 hours to make a payment.
+                  </strong>
                 </p>
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row w-full items-center justify-start xs:justify-end gap-5">
+            <div className="flex flex-col sm:flex-row gap-5 w-full items-center justify-start xs:justify-end">
               <ButtonWithIcon
                 img={back}
                 imgWidth={'20px'}
@@ -60,10 +126,23 @@ const FlightForm = ({ reservationDetails, updateReservationDetails, roomSelected
                 text={'Back'}
                 action={close}
               />
-              <PaymentForm
-                reservationDetails={reservationDetails}
-                roomSelectedList={roomSelectedList}
-              />
+              <button
+                onClick={createReservationOnClick}
+                className="flex items-center justify-center p-2 border-white border-[1px] rounded-[3px] gap-2">
+                <img src={cardWithClock} alt="pay later" className="w-[20px] h-auto" />
+                <p className="font-poppins font-thin text-xs text-white">Pay Later</p>
+              </button>
+              <StripeCheckout
+                stripeKey={stripePublicKey}
+                token={createPaymentOnClick}
+                currency={'USD'}
+                name={'Diamond hotel'}
+                description={`New reservation`}>
+                <button className="flex items-center justify-center p-2 border-white border-[1px] rounded-[3px] gap-2">
+                  <img src={money} alt="money" className="w-[20px] h-auto" />
+                  <p className="font-poppins font-thin text-xs text-white">Pay now</p>
+                </button>
+              </StripeCheckout>
             </div>
           </div>
         </div>

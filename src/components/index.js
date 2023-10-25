@@ -32,23 +32,24 @@ import Label from './Label';
 import CustomDatePicker from './CustomDatePicker';
 import CustomSelectComponent from './CustomSelectComponent';
 import FindRoomFormFilters from './FindRoomFormFilters';
-import RoomTypeDescription from './RoomTypeDescription';
 import CustomTag from './CustomTag';
 import CustomTagWithLabel from './CustomTagWithLabel';
 import PlusMinusButton from './PlusMinusButton';
 import RoomTypeCard from './RoomTypeCard';
 import SelectedRoomsSummaryCard from './SelectedRoomsSummaryCard';
-import PaymentForm from './PaymentForm';
 import FlightForm from './FlightForm';
 import ButtonWithIcon from './ButtonWithIcon';
 import Table from './Table';
 import TableRow from './TableRow';
 import TableCell from './TableCell';
-import TableActionMenu from './TableActionMenu';
+import TableActionModal from './TableActionModal';
 import TableHeader from './TableHeader';
 import PageFormSelector from './PageFormSelector';
 import TableSlider from './TableSlider';
 import TableForm from './TableForm';
+import CancelOrPayAction from './CancelOrPayAction';
+import PdfAction from './PdfAction';
+import RoomTypeDetailsAction from './RoomTypeDetailsAction';
 
 export {
   AccountNotConfirmed,
@@ -85,21 +86,22 @@ export {
   CustomDatePicker,
   CustomSelectComponent,
   FindRoomFormFilters,
-  RoomTypeDescription,
   CustomTag,
   CustomTagWithLabel,
   PlusMinusButton,
   RoomTypeCard,
   SelectedRoomsSummaryCard,
-  PaymentForm,
   FlightForm,
   ButtonWithIcon,
   Table,
   TableRow,
   TableCell,
-  TableActionMenu,
+  TableActionModal,
   TableHeader,
   PageFormSelector,
   TableSlider,
   TableForm,
+  CancelOrPayAction,
+  PdfAction,
+  RoomTypeDetailsAction,
 };

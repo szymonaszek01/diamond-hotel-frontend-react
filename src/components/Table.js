@@ -6,7 +6,7 @@ const Table = ({ columnList, rowList, actionList }) => {
     <div
       key={`table-${randomCode(7)}`}
       className="flex flex-col items-start justify-center w-[100%] rounded-[3px] p-4 box-shadow outline-none">
-      <TableHeader columnList={columnList} />
+      <TableHeader columnList={columnList} hidden={!actionList || actionList.length < 1} />
       {rowList.map((row, index) => (
         <TableRow
           index={index}
