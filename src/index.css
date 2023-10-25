@@ -327,6 +327,10 @@ input[type=file]::file-selector-button {
   list-style: inside;
 }
 
+.popup-overlay {
+  background: rgba(0, 0, 0, 0.64);
+}
+
 .white__gradient {
   background: rgba(255, 255, 255, 0.4);
   filter: blur(750px);
@@ -412,4 +416,8 @@ input[type=file]::file-selector-button {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+
+.popup-arrow {
+  display: none;
 }

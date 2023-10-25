@@ -46,6 +46,11 @@ import money from './money.png';
 import back from './back.png';
 import infoMenuBlack from './infoMenuBlack.png';
 import moreArrow from './more-arrow.png';
+import pdf from './pdf.png';
+import cancel from './cancel.png';
+import moneyBlack from './moneyBlack.png';
+import detailsIcon from './details.png';
+import cardWithClock from './credit.png';
 
 export {
   card,
@@ -96,4 +101,9 @@ export {
   back,
   infoMenuBlack,
   moreArrow,
+  pdf,
+  cancel,
+  moneyBlack,
+  detailsIcon,
+  cardWithClock,
 };
