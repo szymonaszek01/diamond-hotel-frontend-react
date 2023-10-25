@@ -18,22 +18,17 @@ export const toReservationCreateReqDtoMapper = ({
   };
 };
 
-export const toReservationCreateResDtoMapper = (res) => {
-  const { id, check_in, check_out, adults, children, flight, payment } = res;
-  return {
-    id: id,
-    checkIn: check_in,
-    checkOut: check_out,
-    adults: adults,
-    children: children,
-    flightId: flight.id,
-    paymentId: payment.id,
-    cost: payment.cost,
-  };
-};
-
 export const toReservationTableMapper = (res) => {
-  const columnList = ['Id', 'Adults', 'Children', 'Flight', 'Payment', 'Check in', 'Check out'];
+  const columnList = [
+    'Id',
+    'Adults',
+    'Children',
+    'Flight',
+    'Payment',
+    'Status',
+    'Check in',
+    'Check out',
+  ];
   const rowList = res.map((reservation) => {
     const { id, adults, children, flight, payment, check_in, check_out } = reservation;
     return [
@@ -42,6 +37,11 @@ export const toReservationTableMapper = (res) => {
       { name: 'Children', value: children },
       { name: 'Flight', value: flight !== null ? flight.flight_number : '-' },
       { name: 'Payment', value: payment.id },
+      {
+        name: 'Status',
+        value:
+          payment.status?.charAt(0).toUpperCase() + payment.status?.slice(1).replaceAll('-', ' '),
+      },
       { name: 'Check in', value: check_in },
       { name: 'Check out', value: check_out },
     ];
