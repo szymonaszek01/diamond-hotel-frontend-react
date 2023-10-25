@@ -13,6 +13,12 @@ const roomTypeApiSlice = apiSlice.injectEndpoints({
         method: apiMethods.get,
       }),
     }),
+    getRoomTypeByName: builder.mutation({
+      query: ({ name }) => ({
+        url: baseUrl() + '/name/' + encodeURIComponent(name),
+        method: apiMethods.get,
+      }),
+    }),
     getRoomTypeList: builder.mutation({
       query: () => ({
         url: baseUrl() + '/all',
@@ -36,6 +42,7 @@ const roomTypeApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetRoomTypeByIdMutation,
+  useGetRoomTypeByNameMutation,
   useGetRoomTypeListMutation,
   useGetRoomTypeNameListMutation,
   useGetRoomTypeEquipmentMutation,
