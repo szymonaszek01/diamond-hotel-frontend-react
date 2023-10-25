@@ -36,7 +36,8 @@ const LoginForm = () => {
   }
 
   const loginOAuth2 = async () => {
-    window.location.href = 'http://localhost:5432/api/v1/user-profile/login/oauth2/google';
+    window.location.href =
+      'https://diamond-hotel-backend.onrender.com/api/v1/user-profile/login/oauth2/google';
   };
 
   const loginLocal = async (e) => {
