@@ -93,7 +93,7 @@ export const inputsInfo = {
     names: { type: '', label: 'Room type', name: 'names' },
     pricePerHotelNight: {
       type: 'number',
-      label: 'Price per hotel night',
+      label: 'Price per hotel night ($)',
       name: 'pricePerHotelNight',
     },
   },
@@ -146,31 +146,6 @@ export const publicNavLinks = [
       {
         id: 'opinion',
         title: 'Opinion',
-      },
-    ],
-  },
-  {
-    main: {
-      id: 'offer',
-      title: 'Offer',
-      path: '/offer',
-    },
-    sections: [
-      {
-        id: 'rooms',
-        title: 'Rooms',
-      },
-      {
-        id: 'restaurant',
-        title: 'Restaurant',
-      },
-      {
-        id: 'pools',
-        title: 'Pools',
-      },
-      {
-        id: 'spa-and-sport',
-        title: 'Spa&Sport',
       },
     ],
   },
