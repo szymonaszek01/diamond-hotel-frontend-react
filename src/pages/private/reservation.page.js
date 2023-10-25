@@ -1,16 +1,22 @@
 import styles from '../../style';
 import {
+  CancelOrPayAction,
   CustomLoadingOverlay,
   Footer,
   Navbar,
   PageFormSelector,
+  PdfAction,
+  RoomTypeDetailsAction,
   TableForm,
 } from '../../components';
 import { privateNavLinks } from '../../constants';
 import { useEffect, useState } from 'react';
 import {
   useCountReservationListByUserProfileIdMutation,
+  useDeleteReservationByIdMutation,
   useGetReservationListByUserProfileIdMutation,
+  useGetReservationPdfDocumentByIdMutation,
+  useUpdateReservationPaymentMutation,
 } from '../../redux/api/reservationApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserDetails } from '../../redux/features/user/userSlice';
@@ -18,6 +24,7 @@ import { updateOptionList } from '../../util';
 import {
   useCountPaymentListByUserProfileIdMutation,
   useGetPaymentListByUserProfileIdMutation,
+  useGetPaymentPdfDocumentByIdMutation,
 } from '../../redux/api/paymentApiSlice';
 import {
   useCountReservedRoomListByUserProfileIdMutation,
@@ -39,12 +46,15 @@ const ReservationPage = () => {
   const userDetails = useSelector(selectUserDetails);
   const dispatch = useDispatch();
 
+  // Table
   const [countReservationListByUserProfileId, { isLoading: isCountReservationListLoading }] =
     useCountReservationListByUserProfileIdMutation();
   const [countReservedRoomListByUserProfileId, { isLoading: isCountReservedRoomListLoading }] =
     useCountReservedRoomListByUserProfileIdMutation();
   const [countPaymentListByUserProfileId, { isLoading: isCountPaymentListLoading }] =
     useCountPaymentListByUserProfileIdMutation();
+
+  // Page form selectors
   const [getReservationListByUserProfileId, { isGetReservationListLoading }] =
     useGetReservationListByUserProfileIdMutation();
   const [getReservedRoomListByUserProfileId, { isGetReservedRoomListLoading }] =
@@ -52,24 +62,50 @@ const ReservationPage = () => {
   const [getPaymentListByUserProfileId, { isGetPaymentListLoading }] =
     useGetPaymentListByUserProfileIdMutation();
 
-  const isLoading = () => {
-    return (
-      isCountReservationListLoading ||
-      isCountReservedRoomListLoading ||
-      isCountPaymentListLoading ||
-      isGetReservationListLoading ||
-      isGetReservedRoomListLoading ||
-      isGetPaymentListLoading
-    );
-  };
+  // Action list
+  const [getReservationPdfDocumentById, { isLoading: isGetReservationPdfDocumentByIdLoading }] =
+    useGetReservationPdfDocumentByIdMutation();
+  const [deleteReservationById, { isLoading: isDeleteReservationByIdLoading }] =
+    useDeleteReservationByIdMutation();
+  const [updateReservationPayment, { isLoading: isUpdateReservationPaymentLoading }] =
+    useUpdateReservationPaymentMutation();
+  const [getPaymentPdfDocumentById, { isLoading: isGetPaymentPdfDocumentByIdLoading }] =
+    useGetPaymentPdfDocumentByIdMutation();
 
   const [pageForm, setPageForm] = useState([
     {
-      id: 0,
+      id: 1,
       name: 'reservation',
       label: 'Reservations',
       value: 0,
       isSelected: true,
+      tableActionList: [
+        {
+          optionIdList: [1, 2, 3],
+          excluded: [],
+          parameterList: [],
+          api: ({ id }) => getReservationPdfDocumentById({ id }),
+          form: ({ id, api }) => <PdfAction id={id} api={api} />,
+        },
+        {
+          optionIdList: [1, 2, 3],
+          excluded: [],
+          parameterList: [],
+          api: ({ id }) => deleteReservationById({ id }),
+          form: ({ id, api }) => (
+            <CancelOrPayAction name={'reservation'} minDays={7} type={'cancel'} id={id} api={api} />
+          ),
+        },
+        {
+          optionIdList: [1, 3],
+          excluded: [{ name: 'Status', value: 'Approved' }],
+          parameterList: [],
+          api: ({ id, token }) => updateReservationPayment({ id, paymentToken: token.id }),
+          form: ({ id, api }) => (
+            <CancelOrPayAction name={'reservation'} minDays={7} type={'pay'} id={id} api={api} />
+          ),
+        },
+      ],
       tableSliderCardWidth: '170px',
       tableText:
         "Below, you'll find a list of your confirmed reservations, including key information such\n" +
@@ -81,11 +117,26 @@ const ReservationPage = () => {
         getReservationListByUserProfileId({ userProfileId, filters }),
     },
     {
-      id: 1,
+      id: 2,
       name: 'reserved-room',
       label: 'Reserved rooms',
       value: 0,
       isSelected: false,
+      tableActionList: [
+        {
+          optionIdList: [1, 2, 3],
+          excluded: [],
+          parameterList: ['Room type'],
+          api: undefined,
+          form: ({ requiredCellList }) => (
+            <RoomTypeDetailsAction
+              name={
+                requiredCellList.find((requiredCell) => requiredCell.name === 'Room type')?.value
+              }
+            />
+          ),
+        },
+      ],
       tableSliderCardWidth: '170px',
       tableText:
         "Below, you'll find a list of your confirmed room reservations, including key information\n" +
@@ -97,11 +148,20 @@ const ReservationPage = () => {
         getReservedRoomListByUserProfileId({ userProfileId, filters }),
     },
     {
-      id: 2,
-      name: 'payments',
+      id: 3,
+      name: 'payment',
       label: 'Payments',
       value: 0,
       isSelected: false,
+      tableActionList: [
+        {
+          optionIdList: [1, 2, 3],
+          excluded: [],
+          parameterList: [],
+          api: ({ id }) => getPaymentPdfDocumentById({ id }),
+          form: ({ id, api }) => <PdfAction id={id} api={api} />,
+        },
+      ],
       tableSliderCardWidth: '170px',
       tableText:
         "Below, you'll find a list of your recent payments and transactions, including key\n" +
@@ -116,21 +176,21 @@ const ReservationPage = () => {
 
   const [tableSliderOptionList, setTableSliderOptionList] = useState([
     {
-      id: 0,
+      id: 1,
       label: 'All',
       queryParamName: '',
       value: '',
       isSelected: true,
     },
     {
-      id: 1,
+      id: 2,
       label: 'Approved',
       queryParamName: 'payment-status',
       value: 'approved',
       isSelected: false,
     },
     {
-      id: 2,
+      id: 3,
       label: 'Waiting for payment',
       queryParamName: 'payment-status',
       value: 'waiting-for-payment',
@@ -168,7 +228,16 @@ const ReservationPage = () => {
     );
   }, [dispatch, userDetails.id]);
 
-  return isLoading() ? (
+  return isCountReservationListLoading ||
+    isCountReservedRoomListLoading ||
+    isCountPaymentListLoading ||
+    isGetReservationListLoading ||
+    isGetReservedRoomListLoading ||
+    isGetPaymentListLoading ||
+    isGetReservationPdfDocumentByIdLoading ||
+    isDeleteReservationByIdLoading ||
+    isUpdateReservationPaymentLoading ||
+    isGetPaymentPdfDocumentByIdLoading ? (
     <CustomLoadingOverlay message={'Loading...'} />
   ) : (
     <div className={`${styles.page}`}>
@@ -234,6 +303,7 @@ const ReservationPage = () => {
                 setOptionList={setTableSliderOptionList}
                 optionCardWidth={form.tableSliderCardWidth}
                 api={form.apiTableForm}
+                actionList={form.tableActionList}
                 toTableMapper={form.mapper}
                 text={form.tableText}
               />
