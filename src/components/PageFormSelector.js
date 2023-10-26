@@ -1,10 +1,20 @@
 import { randomCode, updateOptionList } from '../util';
 
-const SelectorCard = ({ optionList, setOptionList, id, label, value, isSelected, cardWidth }) => {
+const SelectorCard = ({
+  optionList,
+  setOptionList,
+  id,
+  label,
+  value,
+  isSelected,
+  cardWidth,
+  setPage,
+}) => {
   return (
     <div
       key={`selector-card-${randomCode(7)}`}
-      onClick={() =>
+      onClick={() => {
+        setPage(0);
         updateOptionList({
           optionList,
           setOptionList,
@@ -12,8 +22,8 @@ const SelectorCard = ({ optionList, setOptionList, id, label, value, isSelected,
           key: 'isSelected',
           newValue: true,
           previousValue: false,
-        })
-      }
+        });
+      }}
       className={`w-full sm:w-[${cardWidth}] flex flex-col items-start justify-center p-6 rounded-[3px] border-[0.5px] ${
         isSelected ? 'border-white' : 'border-[#FFFFFF66]'
       } cursor-pointer`}>
@@ -33,7 +43,7 @@ const SelectorCard = ({ optionList, setOptionList, id, label, value, isSelected,
   );
 };
 
-const PageFormSelector = ({ optionList, setOptionList, cardWidth }) => {
+const PageFormSelector = ({ optionList, setOptionList, cardWidth, setPage }) => {
   return (
     <div
       key={`page-form-selector-${randomCode(7)}`}
@@ -47,6 +57,7 @@ const PageFormSelector = ({ optionList, setOptionList, cardWidth }) => {
           value={option.value}
           isSelected={option.isSelected}
           cardWidth={cardWidth}
+          setPage={setPage}
         />
       ))}
     </div>

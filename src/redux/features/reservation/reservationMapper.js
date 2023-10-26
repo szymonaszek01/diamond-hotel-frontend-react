@@ -35,7 +35,7 @@ export const toReservationTableMapper = (res) => {
       { name: 'Id', value: id },
       { name: 'Adults', value: adults },
       { name: 'Children', value: children },
-      { name: 'Flight', value: flight !== null ? flight.flight_number : '-' },
+      { name: 'Flight', value: flight !== null ? flight.flight_number ?? '-' : '-' },
       { name: 'Payment', value: payment.id },
       {
         name: 'Status',

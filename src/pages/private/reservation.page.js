@@ -44,6 +44,7 @@ const ReservationPage = () => {
 
   const userDetails = useSelector(selectUserDetails);
   const dispatch = useDispatch();
+  const [page, setPage] = useState(0);
 
   // Table
   const [countReservationListByUserProfileId] = useCountReservationListByUserProfileIdMutation();
@@ -225,7 +226,12 @@ const ReservationPage = () => {
           className={
             'flex flex-col items-center text-center sm:text-start sm:items-start justify-center w-[60%] gap-8'
           }>
-          <PageFormSelector optionList={pageForm} setOptionList={setPageForm} cardWidth={'200px'} />
+          <PageFormSelector
+            optionList={pageForm}
+            setOptionList={setPageForm}
+            cardWidth={'200px'}
+            setPage={(value) => setPage(value)}
+          />
           <p
             className={`flex flex-col gap-2 text-sm text-dimWhite font-poppins font-thin ml-2 leading-10 sm:leading-8`}>
             <span className={'text-2xl font-semibold text-white leading-[50px] sm:leading-8'}>
@@ -280,6 +286,8 @@ const ReservationPage = () => {
                 actionList={form.tableActionList}
                 toTableMapper={form.mapper}
                 text={form.tableText}
+                page={page}
+                setPage={(value) => setPage(value)}
               />
             ))}
         </div>

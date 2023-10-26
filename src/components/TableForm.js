@@ -14,11 +14,12 @@ const TableForm = ({
   toTableMapper,
   text,
   actionList,
+  page,
+  setPage,
 }) => {
   const userDetails = useSelector(selectUserDetails);
   const dispatch = useDispatch();
 
-  const [page, setPage] = useState(0);
   const [table, setTable] = useState({
     columnList: [],
     rowList: [],
@@ -52,7 +53,7 @@ const TableForm = ({
     };
 
     loadTableForm();
-  }, [dispatch, api, optionList, setPage, userDetails.id]);
+  }, [dispatch, api, optionList, page, userDetails.id]);
 
   return (
     <div
