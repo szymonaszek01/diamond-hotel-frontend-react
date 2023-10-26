@@ -11,8 +11,8 @@ export const toPaymentTableMapper = (res) => {
       { name: 'Id', value: id },
       { name: 'Cost', value: `${cost} $` },
       { name: 'Status', value: transferObjectKeyToLabel(status) },
-      { name: 'Code', value: token },
-      { name: 'Charge', value: charge },
+      { name: 'Code', value: token ?? '-' },
+      { name: 'Charge', value: charge ?? '-' },
       { name: 'Created at', value: `${createdDate} ${createdHour}:${createdMinute}` },
     ];
   });
