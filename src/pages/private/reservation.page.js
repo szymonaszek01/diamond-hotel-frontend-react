@@ -1,7 +1,6 @@
 import styles from '../../style';
 import {
   CancelOrPayAction,
-  CustomLoadingOverlay,
   Footer,
   Navbar,
   PageFormSelector,
@@ -47,30 +46,20 @@ const ReservationPage = () => {
   const dispatch = useDispatch();
 
   // Table
-  const [countReservationListByUserProfileId, { isLoading: isCountReservationListLoading }] =
-    useCountReservationListByUserProfileIdMutation();
-  const [countReservedRoomListByUserProfileId, { isLoading: isCountReservedRoomListLoading }] =
-    useCountReservedRoomListByUserProfileIdMutation();
-  const [countPaymentListByUserProfileId, { isLoading: isCountPaymentListLoading }] =
-    useCountPaymentListByUserProfileIdMutation();
+  const [countReservationListByUserProfileId] = useCountReservationListByUserProfileIdMutation();
+  const [countReservedRoomListByUserProfileId] = useCountReservedRoomListByUserProfileIdMutation();
+  const [countPaymentListByUserProfileId] = useCountPaymentListByUserProfileIdMutation();
 
   // Page form selectors
-  const [getReservationListByUserProfileId, { isGetReservationListLoading }] =
-    useGetReservationListByUserProfileIdMutation();
-  const [getReservedRoomListByUserProfileId, { isGetReservedRoomListLoading }] =
-    useGetReservedRoomListByUserProfileIdMutation();
-  const [getPaymentListByUserProfileId, { isGetPaymentListLoading }] =
-    useGetPaymentListByUserProfileIdMutation();
+  const [getReservationListByUserProfileId] = useGetReservationListByUserProfileIdMutation();
+  const [getReservedRoomListByUserProfileId] = useGetReservedRoomListByUserProfileIdMutation();
+  const [getPaymentListByUserProfileId] = useGetPaymentListByUserProfileIdMutation();
 
   // Action list
-  const [getReservationPdfDocumentById, { isLoading: isGetReservationPdfDocumentByIdLoading }] =
-    useGetReservationPdfDocumentByIdMutation();
-  const [deleteReservationById, { isLoading: isDeleteReservationByIdLoading }] =
-    useDeleteReservationByIdMutation();
-  const [updateReservationPayment, { isLoading: isUpdateReservationPaymentLoading }] =
-    useUpdateReservationPaymentMutation();
-  const [getPaymentPdfDocumentById, { isLoading: isGetPaymentPdfDocumentByIdLoading }] =
-    useGetPaymentPdfDocumentByIdMutation();
+  const [getReservationPdfDocumentById] = useGetReservationPdfDocumentByIdMutation();
+  const [getPaymentPdfDocumentById] = useGetPaymentPdfDocumentByIdMutation();
+  const [deleteReservationById] = useDeleteReservationByIdMutation();
+  const [updateReservationPayment] = useUpdateReservationPaymentMutation();
 
   const [pageForm, setPageForm] = useState([
     {
@@ -84,14 +73,14 @@ const ReservationPage = () => {
           optionIdList: [1, 2, 3],
           excluded: [],
           parameterList: [],
-          api: ({ id }) => getReservationPdfDocumentById({ id }),
+          api: async ({ id }) => await getReservationPdfDocumentById({ id }),
           form: ({ id, api }) => <PdfAction id={id} api={api} />,
         },
         {
           optionIdList: [1, 2, 3],
           excluded: [],
           parameterList: [],
-          api: ({ id }) => deleteReservationById({ id }),
+          api: async ({ id }) => await deleteReservationById({ id }),
           form: ({ id, api }) => (
             <CancelOrPayAction name={'reservation'} minDays={7} type={'cancel'} id={id} api={api} />
           ),
@@ -100,7 +89,8 @@ const ReservationPage = () => {
           optionIdList: [1, 3],
           excluded: [{ name: 'Status', value: 'Approved' }],
           parameterList: [],
-          api: ({ id, token }) => updateReservationPayment({ id, paymentToken: token.id }),
+          api: async ({ id, token }) =>
+            await updateReservationPayment({ id, paymentToken: token.id }),
           form: ({ id, api }) => (
             <CancelOrPayAction name={'reservation'} minDays={7} type={'pay'} id={id} api={api} />
           ),
@@ -111,10 +101,10 @@ const ReservationPage = () => {
         "Below, you'll find a list of your confirmed reservations, including key information such\n" +
         '            as reservation numbers, dates, and accommodation details.',
       mapper: (res) => toReservationTableMapper(res),
-      apiPageFormSelector: ({ userProfileId }) =>
-        countReservationListByUserProfileId({ userProfileId }),
-      apiTableForm: ({ userProfileId, filters }) =>
-        getReservationListByUserProfileId({ userProfileId, filters }),
+      apiPageFormSelector: async ({ userProfileId }) =>
+        await countReservationListByUserProfileId({ userProfileId }),
+      apiTableForm: async ({ userProfileId, filters }) =>
+        await getReservationListByUserProfileId({ userProfileId, filters }),
     },
     {
       id: 2,
@@ -142,10 +132,10 @@ const ReservationPage = () => {
         "Below, you'll find a list of your confirmed room reservations, including key information\n" +
         '            such as reservation id, room number and other details.\n',
       mapper: (res) => toReservedRoomTableMapper(res),
-      apiPageFormSelector: ({ userProfileId }) =>
-        countReservedRoomListByUserProfileId({ userProfileId }),
-      apiTableForm: ({ userProfileId, filters }) =>
-        getReservedRoomListByUserProfileId({ userProfileId, filters }),
+      apiPageFormSelector: async ({ userProfileId }) =>
+        await countReservedRoomListByUserProfileId({ userProfileId }),
+      apiTableForm: async ({ userProfileId, filters }) =>
+        await getReservedRoomListByUserProfileId({ userProfileId, filters }),
     },
     {
       id: 3,
@@ -158,7 +148,7 @@ const ReservationPage = () => {
           optionIdList: [1, 2, 3],
           excluded: [],
           parameterList: [],
-          api: ({ id }) => getPaymentPdfDocumentById({ id }),
+          api: async ({ id }) => await getPaymentPdfDocumentById({ id }),
           form: ({ id, api }) => <PdfAction id={id} api={api} />,
         },
       ],
@@ -167,10 +157,10 @@ const ReservationPage = () => {
         "Below, you'll find a list of your recent payments and transactions, including key\n" +
         '            information such as payment dates, amounts, and payment statuses.',
       mapper: (res) => toPaymentTableMapper(res),
-      apiPageFormSelector: ({ userProfileId }) =>
-        countPaymentListByUserProfileId({ userProfileId }),
-      apiTableForm: ({ userProfileId, filters }) =>
-        getPaymentListByUserProfileId({ userProfileId, filters }),
+      apiPageFormSelector: async ({ userProfileId }) =>
+        await countPaymentListByUserProfileId({ userProfileId }),
+      apiTableForm: async ({ userProfileId, filters }) =>
+        await getPaymentListByUserProfileId({ userProfileId, filters }),
     },
   ]);
 
@@ -199,47 +189,31 @@ const ReservationPage = () => {
   ]);
 
   useEffect(() => {
-    const loadPageFormSelector = async () => {
+    const loadPageFormSelector = () => {
       for (const tableOption of pageForm) {
-        try {
-          const response = await tableOption
-            .apiPageFormSelector({
-              userProfileId: userDetails.id,
-            })
-            .unwrap();
-
-          updateOptionList({
-            optionList: pageForm,
-            setOptionList: setPageForm,
-            selectedId: tableOption.id,
-            key: 'value',
-            newValue: response,
-            previousValue: tableOption.value,
-            updatingApi: true,
-          });
-        } catch (error) {
-          console.log(error);
-        }
+        tableOption
+          .apiPageFormSelector({
+            userProfileId: userDetails.id,
+          })
+          .then((response) => {
+            updateOptionList({
+              optionList: pageForm,
+              setOptionList: setPageForm,
+              selectedId: tableOption.id,
+              key: 'value',
+              newValue: response?.data,
+              previousValue: tableOption.value,
+              updatingApi: true,
+            });
+          })
+          .catch((error) => console.log(error));
       }
     };
 
-    loadPageFormSelector().then(() =>
-      console.log('Loaded number of reservations, transactions and reserved rooms')
-    );
+    loadPageFormSelector();
   }, [dispatch, userDetails.id]);
 
-  return isCountReservationListLoading ||
-    isCountReservedRoomListLoading ||
-    isCountPaymentListLoading ||
-    isGetReservationListLoading ||
-    isGetReservedRoomListLoading ||
-    isGetPaymentListLoading ||
-    isGetReservationPdfDocumentByIdLoading ||
-    isDeleteReservationByIdLoading ||
-    isUpdateReservationPaymentLoading ||
-    isGetPaymentPdfDocumentByIdLoading ? (
-    <CustomLoadingOverlay message={'Loading...'} />
-  ) : (
+  return (
     <div className={`${styles.page}`}>
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>

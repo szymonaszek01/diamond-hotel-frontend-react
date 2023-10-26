@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import { privateNavLinks } from '../../constants';
 import {
   AccountNotConfirmed,
-  CustomLoadingOverlay,
   DashboardFindRoomCard,
   DashboardUserDetailsCard,
   DashboardWeatherCard,
@@ -17,7 +16,7 @@ import {
 } from '../../components';
 
 const UserDashboardPage = () => {
-  const [getUser, { isLoading }] = useGetUserByIdMutation();
+  const [getUser] = useGetUserByIdMutation();
   const dispatch = useDispatch();
   const [allRequiredData, setAllRequiredData] = useState(true);
   const userId = useSelector(selectUserId);
@@ -50,9 +49,7 @@ const UserDashboardPage = () => {
     loadUserDetails().then(() => console.log('Loaded user'));
   }, [userId, getUser, dispatch, confirmed]);
 
-  return isLoading ? (
-    <CustomLoadingOverlay message={'Loading...'} />
-  ) : (
+  return (
     <div className={styles.page}>
       <div className={`${styles.paddingX} ${styles.flexCenter} bg-[#FFFFFF]`}>
         <div className={`${styles.boxWidth}`}>

@@ -419,11 +419,23 @@ const EditProfilePage = () => {
     }
   };
 
+  const getTextForLoadingOverlay = () => {
+    if (isUpdatingEmailForm) {
+      return 'email address';
+    } else if (isUpdatingPasswordForm) {
+      return 'password';
+    } else if (isUpdatingDetailsForm) {
+      return 'user details';
+    } else {
+      return 'profile picture';
+    }
+  };
+
   return isUpdatingEmailForm ||
     isUpdatingPasswordForm ||
     isUpdatingDetailsForm ||
     isUpdatingImageForm ? (
-    <CustomLoadingOverlay message={'Loading...'} />
+    <CustomLoadingOverlay message={`We're updating your ${getTextForLoadingOverlay()}...`} />
   ) : (
     <div className={styles.page}>
       <ToastContainer className={'toast-style'} />
