@@ -1,6 +1,6 @@
 import styles from '../style';
 import Popup from 'reactjs-popup';
-import { CustomLoadingOverlay, CustomSelectComponent, CustomStandardInput } from './index';
+import { CustomSelectComponent, CustomStandardInput } from './index';
 import { useEffect, useState } from 'react';
 import { inputsInfo } from '../constants';
 import { filtersIcon } from '../assets';
@@ -24,7 +24,7 @@ const FindRoomFormFilters = ({ onSave }) => {
     pricePerHotelNight: { ...inputsInfo.roomType.pricePerHotelNight, value: 0 },
   });
   const [error, setError] = useState(false);
-  const [getRoomTypeList, { isLoading }] = useGetRoomTypeListMutation();
+  const [getRoomTypeList] = useGetRoomTypeListMutation();
 
   const onInputChange = (name, value) => {
     const result = Object.values(filters).find((input) => input.name === name);
@@ -61,9 +61,7 @@ const FindRoomFormFilters = ({ onSave }) => {
     }
   }, [dispatch, filters, getRoomTypeList]);
 
-  return isLoading ? (
-    <CustomLoadingOverlay message={'Loading...'} />
-  ) : (
+  return (
     <div key={`room-filters`}>
       <ToastContainer className={'toast-style'} />
       <Popup

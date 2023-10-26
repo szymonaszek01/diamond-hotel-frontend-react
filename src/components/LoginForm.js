@@ -80,7 +80,7 @@ const LoginForm = () => {
   const handleRememberMeInput = (e) => setRememberMe(e.target.checked);
 
   return isLoading ? (
-    <CustomLoadingOverlay message={'Loading...'} />
+    <CustomLoadingOverlay message={'Please wait while we securely log you in...'} />
   ) : (
     <section id="login-form" className={`${layout.section} ${styles.flexCenter}`}>
       <ToastContainer className={'toast-style'} />

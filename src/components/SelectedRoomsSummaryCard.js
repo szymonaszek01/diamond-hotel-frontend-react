@@ -1,7 +1,7 @@
 import { useGetRoomSelectedCostMutation } from '../redux/api/roomApiSlice';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { CustomLoadingOverlay, FlightForm } from './index';
+import { FlightForm } from './index';
 import { randomCode } from '../util';
 import {
   toRoomSelectedCostMapper,
@@ -9,7 +9,7 @@ import {
 } from '../redux/features/room/roomMapper';
 
 const RoomSelectedCost = ({ checkIn, checkOut, rooms, roomTypeId, updateRoomTypeDetails }) => {
-  const [getRoomSelectedCost, { isLoading }] = useGetRoomSelectedCostMutation();
+  const [getRoomSelectedCost] = useGetRoomSelectedCostMutation();
   const [roomSelectedCost, setRoomSelectedCost] = useState({
     name: '',
     cost: 0,
@@ -35,9 +35,7 @@ const RoomSelectedCost = ({ checkIn, checkOut, rooms, roomTypeId, updateRoomType
     loadRoomSelectedCost().then(() => console.log('Failed to load room selected cost.'));
   }, [checkIn, checkOut, rooms, roomTypeId, getRoomSelectedCost]);
 
-  return isLoading ? (
-    <CustomLoadingOverlay message={'Loading...'} />
-  ) : (
+  return (
     <div
       key={`room-selected-cost-${randomCode(5)}`}
       className="flex flex-row items-center justify-between">

@@ -4,7 +4,6 @@ import { ToastContainer } from 'react-toastify';
 import { measurement } from '../constants';
 import { toWeatherListMapper } from '../redux/features/weather/weatherMapper';
 import { useGetWeatherListMutation } from '../redux/api/weatherApiSlice';
-import { CustomLoadingOverlay } from './index';
 import { arrowRightWhite } from '../assets';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
@@ -124,7 +123,7 @@ const DashboardWeatherCard = () => {
   const weatherListFromState = useSelector(selectWeatherList);
   const dispatch = useDispatch();
 
-  const [getWeatherList, { isLoading }] = useGetWeatherListMutation();
+  const [getWeatherList] = useGetWeatherListMutation();
   const [dailyWeatherList, setDailyWeatherList] = useState(weatherListFromState);
   const [selectedWeather, setSelectedWeather] = useState({
     weather: weatherListFromState?.at(0),
@@ -173,9 +172,7 @@ const DashboardWeatherCard = () => {
     }
   }, [dailyWeatherList.length, dispatch, getWeatherList, selectedWeather]);
 
-  return isLoading ? (
-    <CustomLoadingOverlay message={'Loading...'} />
-  ) : (
+  return (
     <div className={`${styles.boxWidth}`}>
       <ToastContainer className={'toast-style'} />
       <div className="relative rounded-[10px] w-full">

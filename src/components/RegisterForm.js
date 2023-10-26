@@ -150,7 +150,7 @@ const RegisterForm = () => {
   };
 
   return isLoading ? (
-    <CustomLoadingOverlay message={'Loading...'} />
+    <CustomLoadingOverlay message={"Hang on! We're creating your account..."} />
   ) : (
     <section id="login-form" className={`${layout.section} ${styles.flexCenter}`}>
       <ToastContainer className={'toast-style'} />

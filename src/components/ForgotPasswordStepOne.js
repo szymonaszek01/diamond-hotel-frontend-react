@@ -41,7 +41,7 @@ const ForgotPasswordStepOne = () => {
   };
 
   return isLoading ? (
-    <CustomLoadingOverlay message={'Loading...'} />
+    <CustomLoadingOverlay message={"We're processing your password reset request..."} />
   ) : (
     <div className="flex flex-col justify-center sm:justify-start items-center sm:items-start gap-5">
       <ToastContainer className={'toast-style'} />

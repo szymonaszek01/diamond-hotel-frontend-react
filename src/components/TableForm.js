@@ -25,35 +25,33 @@ const TableForm = ({
   });
 
   useEffect(() => {
-    const loadTableForm = async () => {
-      try {
-        const selectedOption = optionList.find((option) => option.isSelected);
-        let filters = { page: page ?? 0, size: 5 };
-        if (selectedOption.queryParamName.length > 0 && selectedOption.value.length > 0) {
-          filters = { ...filters, [selectedOption.queryParamName]: selectedOption.value };
-        }
-
-        const response = await api({
-          userProfileId: userDetails.id,
-          filters: filters,
-        }).unwrap();
-
-        const { columnList, rowList } = toTableMapper(response);
-        if (table.rowList.length % 5 === 0 && rowList.length === 0 && page > 0) {
-          setPage(page - 1);
-        }
-
-        setTable({
-          ...table,
-          columnList: columnList,
-          rowList: page === 0 ? rowList : table.rowList.concat(rowList),
-        });
-      } catch (error) {
-        console.log(error);
+    const loadTableForm = () => {
+      const selectedOption = optionList.find((option) => option.isSelected);
+      let filters = { page: page ?? 0, size: 5 };
+      if (selectedOption.queryParamName.length > 0 && selectedOption.value.length > 0) {
+        filters = { ...filters, [selectedOption.queryParamName]: selectedOption.value };
       }
+
+      api({
+        userProfileId: userDetails.id,
+        filters: filters,
+      })
+        .then((response) => {
+          const { columnList, rowList } = toTableMapper(response?.data);
+          if (table.rowList.length % 5 === 0 && rowList.length === 0 && page > 0) {
+            setPage(page - 1);
+          }
+
+          setTable({
+            ...table,
+            columnList: columnList,
+            rowList: page === 0 ? rowList : table.rowList.concat(rowList),
+          });
+        })
+        .catch((error) => console.log(error));
     };
 
-    loadTableForm().then(() => console.log('Loaded table row list'));
+    loadTableForm();
   }, [dispatch, api, optionList, setPage, userDetails.id]);
 
   return (

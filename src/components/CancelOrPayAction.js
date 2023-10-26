@@ -4,7 +4,6 @@ import Popup from 'reactjs-popup';
 import styles from '../style';
 import { stripePublicKey } from '../constants';
 import StripeCheckout from 'react-stripe-checkout';
-import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 const CancelOrPayAction = ({ name, minDays, type, id, api }) => {
@@ -20,23 +19,17 @@ const CancelOrPayAction = ({ name, minDays, type, id, api }) => {
     },
   };
 
-  const deleteOnClick = async (e) => {
-    try {
-      e.preventDefault();
-      await api({ id }).unwrap();
-      window.location.reload();
-    } catch (error) {
-      console.log(`Failed to cancel payment.`);
-    }
+  const deleteOnClick = (e) => {
+    e.preventDefault();
+    api({ id })
+      .then(() => window.location.reload())
+      .catch((error) => console.log(error));
   };
 
-  const payOnClick = async (token) => {
-    try {
-      await api({ id, token });
-      window.location.reload();
-    } catch (error) {
-      toast.error('Payment created successfully');
-    }
+  const payOnClick = (token) => {
+    api({ id, token })
+      .then(() => window.location.reload())
+      .catch((error) => console.log(error));
   };
 
   return (

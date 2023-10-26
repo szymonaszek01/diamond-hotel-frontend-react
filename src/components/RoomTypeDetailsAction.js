@@ -1,7 +1,7 @@
 import { randomCode } from '../util';
 import { close, detailsIcon } from '../assets';
 import Popup from 'reactjs-popup';
-import { CustomLoadingOverlay, CustomTag } from './index';
+import { CustomTag } from './index';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectRoomTypeList, setRoomTypeEquipment } from '../redux/features/roomType/roomTypeSlice';
@@ -28,10 +28,8 @@ const RoomTypeDetailsAction = ({ roomTypeFromParent, name, customStyles }) => {
     equipment: providedDetails ? providedDetails.equipment : [],
   });
 
-  const [getRoomTypeByName, { isLoading: isGetRoomTypeByNameLoading }] =
-    useGetRoomTypeByNameMutation();
-  const [getRoomTypeEquipment, { isLoading: isGetRoomTypeEquipmentLoading }] =
-    useGetRoomTypeEquipmentMutation();
+  const [getRoomTypeByName] = useGetRoomTypeByNameMutation();
+  const [getRoomTypeEquipment] = useGetRoomTypeEquipmentMutation();
 
   useEffect(() => {
     const loadRoomTypeByName = async () => {
@@ -59,9 +57,7 @@ const RoomTypeDetailsAction = ({ roomTypeFromParent, name, customStyles }) => {
     }
   }, [getRoomTypeByName, getRoomTypeEquipment]);
 
-  return isGetRoomTypeByNameLoading || isGetRoomTypeEquipmentLoading ? (
-    <CustomLoadingOverlay message={'Loading...'} />
-  ) : (
+  return (
     <Popup
       key={`room-type-details-action-${randomCode(3)}`}
       trigger={

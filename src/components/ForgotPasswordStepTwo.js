@@ -58,7 +58,7 @@ const ForgotPasswordStepTwo = ({ token }) => {
   };
 
   return isLoading ? (
-    <CustomLoadingOverlay message={'Loading...'} />
+    <CustomLoadingOverlay message={"We're updating your password..."} />
   ) : (
     <div className="flex flex-col justify-center sm:justify-start items-center sm:items-start gap-5">
       <ToastContainer className={'toast-style'} />

@@ -1,9 +1,4 @@
-import {
-  CustomLoadingOverlay,
-  CustomTagWithLabel,
-  PlusMinusButton,
-  RoomTypeDetailsAction,
-} from './index';
+import { CustomTagWithLabel, PlusMinusButton, RoomTypeDetailsAction } from './index';
 import { useEffect, useState } from 'react';
 import { randomCode } from '../util';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,9 +28,8 @@ const RoomTypeCard = ({ id, availableRooms, selectedRooms, updateRoomTypeDetails
     equipment: roomTypeFromState ? roomTypeFromState.equipment : [],
   });
 
-  const [getRoomTypeById, { isLoading: isGetRoomTypeByIdLoading }] = useGetRoomTypeByIdMutation();
-  const [getRoomTypeEquipment, { isLoading: isGetRoomTypeEquipmentLoading }] =
-    useGetRoomTypeEquipmentMutation();
+  const [getRoomTypeById] = useGetRoomTypeByIdMutation();
+  const [getRoomTypeEquipment] = useGetRoomTypeEquipmentMutation();
 
   useEffect(() => {
     const loadRoomTypeByName = async () => {
@@ -63,9 +57,7 @@ const RoomTypeCard = ({ id, availableRooms, selectedRooms, updateRoomTypeDetails
     }
   }, [getRoomTypeById, getRoomTypeEquipment]);
 
-  return isGetRoomTypeByIdLoading || isGetRoomTypeEquipmentLoading ? (
-    <CustomLoadingOverlay message={'Loading...'} />
-  ) : (
+  return (
     <div
       key={`room-type-card-${randomCode(5)}`}
       className="relative flex flex-col gap-5 sm:gap-0 sm:flex-row bg-black-gradient box-shadow w-full rounded-[10px] items-center justify-between p-5">

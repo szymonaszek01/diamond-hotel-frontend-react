@@ -8,7 +8,7 @@ import {
   FindRoomFormFilters,
 } from './index';
 import { useGetRoomAvailabilityListMutation } from '../redux/api/roomApiSlice';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import styles from '../style';
 import { toRoomTypeDetailsListMapper } from '../redux/features/roomType/roomTypeMapper';
 
@@ -65,7 +65,7 @@ const FindRoomForm = ({ setRoomTypeDetailsList, updateReservationDetails, filter
       setRoomTypeDetailsList(toRoomTypeDetailsListMapper(response));
     } catch (error) {
       setError(true);
-      toast.error('Required number of rooms is not found with this filters');
+      toast.error("Apologies, but we couldn't find any rooms that match your filters");
     }
   };
 
@@ -99,11 +99,12 @@ const FindRoomForm = ({ setRoomTypeDetailsList, updateReservationDetails, filter
   };
 
   return isLoading ? (
-    <CustomLoadingOverlay message={'Loading...'} />
+    <CustomLoadingOverlay message={'Searching for available rooms. Just a moment...'} />
   ) : (
     <div
       key={`find-room-form`}
       className="flex flex-col bg-black-gradient rounded-[10px] box-shadow p-5 w-full gap-5">
+      <ToastContainer className={'toast-style'} />
       <div
         className={filters ? 'flex flex-col sm:flex-row justify-end gap-2 items-center' : 'hidden'}>
         {filtersLabels
