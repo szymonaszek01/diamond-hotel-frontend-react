@@ -51,6 +51,11 @@ import cancel from './cancel.png';
 import moneyBlack from './moneyBlack.png';
 import detailsIcon from './details.png';
 import cardWithClock from './credit.png';
+import search from './search.png';
+import closeRed from './close-red.svg';
+import settings from './settings.png';
+import approved from './approved.png';
+import waiting from './waiting.png';
 
 export {
   card,
@@ -106,4 +111,9 @@ export {
   moneyBlack,
   detailsIcon,
   cardWithClock,
+  search,
+  closeRed,
+  settings,
+  approved,
+  waiting,
 };
