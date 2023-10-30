@@ -112,3 +112,30 @@ export const toPdfResponseMapper = (response) => {
   const { file_name, encoded_file } = response;
   return { fileName: file_name, encodedFile: encoded_file };
 };
+
+export const findJsonObjectListWithSearchValue = (
+  searchValue,
+  jsonObjectList,
+  keyListFromObjectToCompare
+) => {
+  return []
+    .concat(jsonObjectList)
+    .filter((obj) => isSearchValueInObject(obj, searchValue, keyListFromObjectToCompare));
+};
+
+export const isSearchValueInObject = (obj, searchValue, keyListFromObjectToCompare) => {
+  return Object.values(obj).find((value) => {
+    const typeOfValue = typeof value;
+    if (typeOfValue.toLowerCase() === 'object') {
+      return (
+        Object.entries(value).find(
+          ([objectKey, objectValue]) =>
+            keyListFromObjectToCompare.includes(objectKey) &&
+            ('' + objectValue).toLowerCase().includes(searchValue.toLowerCase())
+        ) !== undefined
+      );
+    }
+
+    return ('' + value).toLowerCase().includes(searchValue.toLowerCase());
+  });
+};

@@ -1,7 +1,7 @@
 import { randomCode } from '../util';
 import { TableHeader, TableRow } from './index';
 
-const Table = ({ columnList, rowList, actionList }) => {
+const Table = ({ name, columnList, rowList, actionList }) => {
   return (
     <div
       key={`table-${randomCode(7)}`}

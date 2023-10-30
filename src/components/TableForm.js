@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserDetails } from '../redux/features/user/userSlice';
 import { useEffect, useState } from 'react';
-import { ButtonWithIcon, Table, TableSlider } from './index';
-import { randomCode, transferObjectKeyToLabel } from '../util';
+import { ButtonWithIcon, CustomSearchInput, Table, TableSlider } from './index';
+import { transferObjectKeyToLabel } from '../util';
 import { moreArrow } from '../assets';
 
 const TableForm = ({
@@ -23,7 +23,18 @@ const TableForm = ({
   const [table, setTable] = useState({
     columnList: [],
     rowList: [],
+    loadedRowList: [],
   });
+
+  const setFoundJsonObjectList = (foundJsonObjectListWithSearchValue) => {
+    setTable({
+      ...table,
+      rowList:
+        foundJsonObjectListWithSearchValue.length > 0
+          ? foundJsonObjectListWithSearchValue
+          : table.loadedRowList,
+    });
+  };
 
   useEffect(() => {
     const loadTableForm = () => {
@@ -42,11 +53,13 @@ const TableForm = ({
           if (table.rowList.length % 5 === 0 && rowList.length === 0 && page > 0) {
             setPage(page - 1);
           }
+          const updatedRowList = page === 0 ? rowList : table.rowList.concat(rowList);
 
           setTable({
             ...table,
             columnList: columnList,
-            rowList: page === 0 ? rowList : table.rowList.concat(rowList),
+            rowList: updatedRowList,
+            loadedRowList: updatedRowList,
           });
         })
         .catch((error) => console.log(error));
@@ -57,7 +70,7 @@ const TableForm = ({
 
   return (
     <div
-      key={`${tableName}-table-${randomCode(7)}`}
+      key={`table-${tableName}`}
       className="flex flex-col w-full items-center justify-center mt-8">
       <div className={'flex flex-col items-start justify-center w-full gap-8'}>
         <TableSlider
@@ -84,15 +97,24 @@ const TableForm = ({
           </p>
         )}
         {table.rowList.length > 0 ? (
-          <Table
-            columnList={table.columnList}
-            rowList={table.rowList}
-            actionList={actionList?.filter((action) =>
-              action.optionIdList.find(
-                (optionId) => optionId === optionList.find((option) => option.isSelected).id
-              )
-            )}
-          />
+          <div className={`w-full flex flex-col gap-8`}>
+            <CustomSearchInput
+              name={`table-${tableName}`}
+              placeholder={'Search'}
+              jsonObjectList={table.loadedRowList}
+              setFoundJsonObjectList={setFoundJsonObjectList}
+            />
+            <Table
+              name={tableName}
+              columnList={table.columnList}
+              rowList={table.rowList}
+              actionList={actionList?.filter((action) =>
+                action.optionIdList.find(
+                  (optionId) => optionId === optionList.find((option) => option.isSelected).id
+                )
+              )}
+            />
+          </div>
         ) : (
           ''
         )}

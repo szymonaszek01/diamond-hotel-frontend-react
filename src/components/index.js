@@ -50,6 +50,7 @@ import TableForm from './TableForm';
 import CancelOrPayAction from './CancelOrPayAction';
 import PdfAction from './PdfAction';
 import RoomTypeDetailsAction from './RoomTypeDetailsAction';
+import CustomSearchInput from './CustomSearchInput';
 
 export {
   AccountNotConfirmed,
@@ -104,4 +105,5 @@ export {
   CancelOrPayAction,
   PdfAction,
   RoomTypeDetailsAction,
+  CustomSearchInput,
 };
