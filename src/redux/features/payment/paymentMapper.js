@@ -1,4 +1,5 @@
 import { transferObjectKeyToLabel } from '../../../util';
+import { approved, waiting } from '../../../assets';
 
 export const toPaymentTableMapper = (res) => {
   const columnList = ['Id', 'Cost', 'Status', 'Code', 'Charge', 'Created at'];
@@ -10,7 +11,11 @@ export const toPaymentTableMapper = (res) => {
     return [
       { name: 'Id', value: id },
       { name: 'Cost', value: `${cost} $` },
-      { name: 'Status', value: transferObjectKeyToLabel(status) },
+      {
+        name: 'Status',
+        value: transferObjectKeyToLabel(status),
+        icon: payment.status?.toLowerCase().includes('approved') ? approved : waiting,
+      },
       { name: 'Code', value: token ?? '-' },
       { name: 'Charge', value: charge ?? '-' },
       { name: 'Created at', value: `${createdDate} ${createdHour}:${createdMinute}` },

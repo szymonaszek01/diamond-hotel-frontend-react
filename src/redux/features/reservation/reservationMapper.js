@@ -1,3 +1,6 @@
+import { approved, waiting } from '../../../assets';
+import { transferObjectKeyToLabel } from '../../../util';
+
 export const toReservationCreateReqDtoMapper = ({
   userProfileId,
   checkIn,
@@ -39,8 +42,8 @@ export const toReservationTableMapper = (res) => {
       { name: 'Payment', value: payment.id },
       {
         name: 'Status',
-        value:
-          payment.status?.charAt(0).toUpperCase() + payment.status?.slice(1).replaceAll('-', ' '),
+        value: transferObjectKeyToLabel(payment.status),
+        icon: payment.status?.toLowerCase().includes('approved') ? approved : waiting,
       },
       { name: 'Check in', value: check_in },
       { name: 'Check out', value: check_out },

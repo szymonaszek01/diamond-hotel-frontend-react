@@ -16,7 +16,7 @@ const TableRow = ({ index, columnList, cellList, isLastRow, actionList }) => {
       {columnList.map((column) => {
         const foundCell = cellList.find((cell) => cell.name === column);
 
-        return foundCell ? <TableCell value={foundCell.value} /> : ``;
+        return foundCell ? <TableCell value={foundCell.value} icon={foundCell.icon} /> : ``;
       })}
       <TableActionModal
         id={id}
