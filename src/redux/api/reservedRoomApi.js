@@ -8,10 +8,10 @@ const baseUrl = () => {
 const reservedRoomApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getReservedRoomListByUserProfileId: builder.mutation({
-      query: ({ userProfileId, filters }) => ({
+      query: ({ userProfileId, filters, sort }) => ({
         url: baseUrl() + '/all/user-profile-id/' + userProfileId,
         method: apiMethods.get,
-        params: filters,
+        params: { ...filters, sort },
       }),
     }),
     countReservedRoomListByUserProfileId: builder.mutation({

@@ -8,10 +8,10 @@ const baseUrl = () => {
 const paymentApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getPaymentListByUserProfileId: builder.mutation({
-      query: ({ userProfileId, filters }) => ({
+      query: ({ userProfileId, filters, sort }) => ({
         url: baseUrl() + '/all/user-profile-id/' + userProfileId,
         method: apiMethods.get,
-        params: filters,
+        params: { ...filters, sort },
       }),
     }),
     getPaymentPdfDocumentById: builder.mutation({

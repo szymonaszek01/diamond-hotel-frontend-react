@@ -104,8 +104,8 @@ const ReservationPage = () => {
       mapper: (res) => toReservationTableMapper(res),
       apiPageFormSelector: async ({ userProfileId }) =>
         await countReservationListByUserProfileId({ userProfileId }),
-      apiTableForm: async ({ userProfileId, filters }) =>
-        await getReservationListByUserProfileId({ userProfileId, filters }),
+      apiTableForm: async ({ userProfileId, filters, sort }) =>
+        await getReservationListByUserProfileId({ userProfileId, filters, sort }),
     },
     {
       id: 2,
@@ -135,8 +135,8 @@ const ReservationPage = () => {
       mapper: (res) => toReservedRoomTableMapper(res),
       apiPageFormSelector: async ({ userProfileId }) =>
         await countReservedRoomListByUserProfileId({ userProfileId }),
-      apiTableForm: async ({ userProfileId, filters }) =>
-        await getReservedRoomListByUserProfileId({ userProfileId, filters }),
+      apiTableForm: async ({ userProfileId, filters, sort }) =>
+        await getReservedRoomListByUserProfileId({ userProfileId, filters, sort }),
     },
     {
       id: 3,
@@ -160,8 +160,8 @@ const ReservationPage = () => {
       mapper: (res) => toPaymentTableMapper(res),
       apiPageFormSelector: async ({ userProfileId }) =>
         await countPaymentListByUserProfileId({ userProfileId }),
-      apiTableForm: async ({ userProfileId, filters }) =>
-        await getPaymentListByUserProfileId({ userProfileId, filters }),
+      apiTableForm: async ({ userProfileId, filters, sort }) =>
+        await getPaymentListByUserProfileId({ userProfileId, filters, sort }),
     },
   ]);
 

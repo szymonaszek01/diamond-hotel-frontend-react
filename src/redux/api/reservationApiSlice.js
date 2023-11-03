@@ -21,10 +21,10 @@ const reservationApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     getReservationListByUserProfileId: builder.mutation({
-      query: ({ userProfileId, filters }) => ({
+      query: ({ userProfileId, filters, sort }) => ({
         url: baseUrl() + '/all/user-profile-id/' + userProfileId,
         method: apiMethods.get,
-        params: filters,
+        params: { ...filters, sort },
       }),
     }),
     getReservationPdfDocumentById: builder.mutation({

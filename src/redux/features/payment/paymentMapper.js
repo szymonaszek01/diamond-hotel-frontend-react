@@ -2,7 +2,39 @@ import { transferObjectKeyToLabel } from '../../../util';
 import { approved, waiting } from '../../../assets';
 
 export const toPaymentTableMapper = (res) => {
-  const columnList = ['Id', 'Cost', 'Status', 'Code', 'Charge', 'Created at'];
+  const columnList = [
+    {
+      name: 'Id',
+      sort: {
+        name: 'id',
+        value: '',
+      },
+    },
+    {
+      name: 'Cost',
+      sort: {
+        name: 'cost',
+        value: '',
+      },
+    },
+    {
+      name: 'Created at',
+      sort: {
+        name: 'created_at',
+        value: '',
+      },
+    },
+    {
+      name: 'Status',
+    },
+    {
+      name: 'Code',
+    },
+    {
+      name: 'Charge',
+    },
+  ];
+
   const rowList = res.map((payment) => {
     const { id, cost, status, token, charge, created_at } = payment;
     const createdDate = new Date(created_at).toISOString().split('T')?.at(0);
