@@ -1,7 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserDetails } from '../redux/features/user/userSlice';
 import { useEffect, useState } from 'react';
-import { ButtonWithIcon, CustomSearchInput, Table, TableSlider } from './index';
+import {
+  ButtonWithIcon,
+  CustomLoadingOverlay,
+  CustomSearchInput,
+  Table,
+  TableSlider,
+} from './index';
 import { transferObjectKeyToLabel } from '../util';
 import { moreArrow } from '../assets';
 
@@ -25,6 +31,15 @@ const TableForm = ({
     rowList: [],
     loadedRowList: [],
   });
+  const [loading, setLoading] = useState(false);
+
+  const updateColumnList = (updatedColumn) => {
+    const newColumnList = table.columnList.map((column) =>
+      column.name === updatedColumn.name ? updatedColumn : column
+    );
+
+    getTableData(newColumnList);
+  };
 
   const setFoundJsonObjectList = (foundJsonObjectListWithSearchValue) => {
     setTable({
@@ -38,37 +53,47 @@ const TableForm = ({
 
   useEffect(() => {
     const loadTableForm = () => {
-      const selectedOption = optionList.find((option) => option.isSelected);
-      let filters = { page: page ?? 0, size: 5 };
-      if (selectedOption.queryParamName.length > 0 && selectedOption.value.length > 0) {
-        filters = { ...filters, [selectedOption.queryParamName]: selectedOption.value };
-      }
-
-      api({
-        userProfileId: userDetails.id,
-        filters: filters,
-      })
-        .then((response) => {
-          const { columnList, rowList } = toTableMapper(response?.data);
-          if (table.rowList.length % 5 === 0 && rowList.length === 0 && page > 0) {
-            setPage(page - 1);
-          }
-          const updatedRowList = page === 0 ? rowList : table.rowList.concat(rowList);
-
-          setTable({
-            ...table,
-            columnList: columnList,
-            rowList: updatedRowList,
-            loadedRowList: updatedRowList,
-          });
-        })
-        .catch((error) => console.log(error));
+      getTableData([]);
     };
 
     loadTableForm();
   }, [dispatch, api, optionList, page, userDetails.id]);
 
-  return (
+  const getTableData = (newColumnList) => {
+    setLoading(true);
+
+    const selectedOption = optionList.find((option) => option.isSelected);
+    let filters = { page: 0, size: 5 * (page + 1) };
+    let sort = newColumnList.length > 0 ? newColumnList.map((column) => column.sort) : [];
+    if (selectedOption.queryParamName.length > 0 && selectedOption.value.length > 0) {
+      filters = { ...filters, [selectedOption.queryParamName]: selectedOption.value };
+    }
+
+    api({
+      userProfileId: userDetails.id,
+      filters: filters,
+      sort: JSON.stringify(sort.filter((obj) => obj !== undefined)),
+    })
+      .then((response) => {
+        const { columnList, rowList } = toTableMapper(response?.data);
+        if (table.rowList.length % 5 === 0 && rowList.length === 0 && page > 0) {
+          setPage(page - 1);
+        }
+
+        setTable({
+          ...table,
+          columnList: newColumnList.length > 1 ? newColumnList : columnList,
+          rowList: rowList,
+          loadedRowList: rowList,
+        });
+      })
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false));
+  };
+
+  return loading ? (
+    <CustomLoadingOverlay message={'Loading table data...'} />
+  ) : (
     <div
       key={`table-${tableName}`}
       className="flex flex-col w-full items-center justify-center mt-8">
@@ -113,20 +138,34 @@ const TableForm = ({
                   (optionId) => optionId === optionList.find((option) => option.isSelected).id
                 )
               )}
+              updateColumnList={updateColumnList}
             />
           </div>
         ) : (
           ''
         )}
         {table.rowList.length > 0 ? (
-          <div className={table.rowList.length % 5 !== 0 ? 'hidden' : ''}>
-            <ButtonWithIcon
-              text={'More'}
-              img={moreArrow}
-              imgAlt={'more'}
-              imgWidth={'15px'}
-              action={() => setPage(page + 1)}
-            />
+          <div
+            className={`w-full flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-5`}>
+            <div className={table.rowList.length % 5 !== 0 ? 'hidden' : ''}>
+              <ButtonWithIcon
+                text={'More'}
+                img={moreArrow}
+                imgAlt={'more'}
+                imgWidth={'15px'}
+                action={() => setPage(page + 1)}
+              />
+            </div>
+            <div className={page < 1 ? 'hidden' : ''}>
+              <ButtonWithIcon
+                text={'Less'}
+                img={moreArrow}
+                imgAlt={'Less'}
+                imgWidth={'15px'}
+                action={() => setPage(page > 0 ? page - 1 : 0)}
+                customIconStyle={`rotate-180`}
+              />
+            </div>
           </div>
         ) : (
           ''

@@ -14,7 +14,7 @@ const TableRow = ({ index, columnList, cellList, isLastRow, actionList }) => {
         isLastRow ? 'border-b-[1px] border-[#ebeef1]' : ''
       }`}>
       {columnList.map((column) => {
-        const foundCell = cellList.find((cell) => cell.name === column);
+        const foundCell = cellList.find((cell) => cell.name === column.name);
 
         return foundCell ? <TableCell value={foundCell.value} icon={foundCell.icon} /> : ``;
       })}

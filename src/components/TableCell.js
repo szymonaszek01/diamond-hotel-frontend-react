@@ -1,16 +1,28 @@
 import { randomCode } from '../util';
+import Sort from './Sort';
 
-const TableCell = ({ value, icon, textColor, fontStyle }) => {
+const TableCell = ({
+  tableName,
+  value,
+  icon,
+  textColor,
+  fontStyle,
+  isHeader,
+  updateColumnList,
+}) => {
   return (
     <div
       key={`cell-${randomCode(4)}`}
-      className={`flex flex-col text-center sm:text-start items-center justify-start w-[100px] bg-transparent`}>
+      className={`flex flex-row text-center gap-2 items-center justify-center w-[100px] bg-transparent`}>
       <p
-        className={`${icon ? 'hidden' : ''} text-[0.79rem] ${
-          textColor ?? 'text-white'
-        } font-poppins ${fontStyle ?? 'font-thin'} break-all`}>
-        {value}
+        className={`${icon ? 'hidden' : ''} text-xs ${textColor ?? 'text-white'} font-poppins ${
+          fontStyle ?? 'font-thin'
+        } break-words`}>
+        {isHeader ? value.name : value}
       </p>
+      <div className={isHeader && value.sort ? '' : 'hidden'}>
+        <Sort tableName={tableName} column={value} updateColumnList={updateColumnList} />
+      </div>
       <img src={icon} alt={`status`} className={`${icon ? '' : 'hidden'} w-[19px] h-auto`} />
     </div>
   );
