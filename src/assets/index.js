@@ -56,6 +56,8 @@ import closeRed from './close-red.svg';
 import settings from './settings.png';
 import approved from './approved.png';
 import waiting from './waiting.png';
+import sortArrowActive from './sort-arrow-active.png';
+import sortArrowNotActive from './sort-arrow-not-active.png';
 
 export {
   card,
@@ -116,4 +118,6 @@ export {
   settings,
   approved,
   waiting,
+  sortArrowActive,
+  sortArrowNotActive,
 };

@@ -51,6 +51,7 @@ import CancelOrPayAction from './CancelOrPayAction';
 import PdfAction from './PdfAction';
 import RoomTypeDetailsAction from './RoomTypeDetailsAction';
 import CustomSearchInput from './CustomSearchInput';
+import Sort from './Sort';
 
 export {
   AccountNotConfirmed,
@@ -106,4 +107,5 @@ export {
   PdfAction,
   RoomTypeDetailsAction,
   CustomSearchInput,
+  Sort,
 };
