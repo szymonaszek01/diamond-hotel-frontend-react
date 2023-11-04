@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useRegisterAccountMutation } from '../redux/api/authApiSlice';
-import { setAccountDetails } from '../redux/features/auth/authSlice';
+import { setAccountDetails, setFullAccess } from '../redux/features/auth/authSlice';
 import { toAuthResMapper, toRegisterReqMapper } from '../redux/features/auth/authMapper';
-import { validatePassword } from '../util/index';
+import { isFullAccess, validatePassword } from '../util/index';
 import { toast, ToastContainer } from 'react-toastify';
 import { CustomLoadingOverlay, CustomPhoneInput, CustomStandardInput, Steps } from '../components';
 import styles, { layout } from '../style';
@@ -12,6 +12,9 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { inputsInfo } from '../constants';
 import { requiredInputsErrorMessage } from '../util';
+import { setUserDetails } from '../redux/features/user/userSlice';
+import { toUserDetailsResMapper } from '../redux/features/user/userMapper';
+import { useGetUserByIdMutation } from '../redux/api/userApiSlice';
 
 const StepForm = ({ form, step, isError, onChange }) => {
   return (
@@ -47,7 +50,8 @@ const StepForm = ({ form, step, isError, onChange }) => {
 const RegisterForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [registerAccount, { isLoading }] = useRegisterAccountMutation();
+  const [registerAccount, { isLoading: isRegisterAccountLoading }] = useRegisterAccountMutation();
+  const [getUser, { isLoading: isGetUserLoading }] = useGetUserByIdMutation();
   const [step, setStep] = useState(1);
   const [form, setForm] = useState({
     email: { ...inputsInfo.user.email, value: '' },
@@ -115,8 +119,14 @@ const RegisterForm = () => {
     e.preventDefault();
 
     try {
-      const response = await registerAccount(toRegisterReqMapper(form)).unwrap();
+      let response = await registerAccount(toRegisterReqMapper(form)).unwrap();
       dispatch(setAccountDetails(toAuthResMapper(response)));
+
+      response = await getUser(response.id).unwrap();
+      const userDetails = toUserDetailsResMapper(response);
+      dispatch(setFullAccess({ fullAccess: isFullAccess(userDetails) }));
+      dispatch(setUserDetails(userDetails));
+
       navigate('/dashboard');
     } catch (error) {
       setStep(1);
@@ -149,7 +159,7 @@ const RegisterForm = () => {
     }
   };
 
-  return isLoading ? (
+  return isRegisterAccountLoading || isGetUserLoading ? (
     <CustomLoadingOverlay message={"Hang on! We're creating your account..."} />
   ) : (
     <section id="login-form" className={`${layout.section} ${styles.flexCenter}`}>

@@ -7,12 +7,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   selectOAuth2Error,
   setAccountDetails,
+  setFullAccess,
   setOAuth2Error,
 } from '../redux/features/auth/authSlice';
 import { toAuthResMapper } from '../redux/features/auth/authMapper';
 import { CustomLoadingOverlay, CustomStandardInput } from '../components';
 import { toast, ToastContainer } from 'react-toastify';
 import { inputsInfo } from '../constants';
+import { setUserDetails } from '../redux/features/user/userSlice';
+import { toUserDetailsResMapper } from '../redux/features/user/userMapper';
+import { isFullAccess } from '../util';
+import { useGetUserByIdMutation } from '../redux/api/userApiSlice';
 
 const LoginForm = () => {
   const [form, setForm] = useState({
@@ -27,7 +32,8 @@ const LoginForm = () => {
   const [error, setError] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
-  const [loginAccount, { isLoading }] = useLoginAccountMutation();
+  const [loginAccount, { isLoading: isLoginAccountLoading }] = useLoginAccountMutation();
+  const [getUser, { isLoading: isGetUserLoading }] = useGetUserByIdMutation();
   const dispatch = useDispatch();
   const oAuthError = useSelector(selectOAuth2Error);
   if (oAuthError) {
@@ -37,23 +43,30 @@ const LoginForm = () => {
 
   const loginOAuth2 = async () => {
     window.location.href =
-      'https://diamond-hotel-backend.onrender.com/api/v1/user-profile/login/oauth2/google';
+      process.env.REACT_APP_SERVER_URI + '/api/v1/user-profile/login/oauth2/google';
   };
 
   const loginLocal = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await loginAccount({
+      let response = await loginAccount({
         email: form.email.value,
         password: form.password.value,
       }).unwrap();
       dispatch(setAccountDetails(toAuthResMapper(response)));
+
+      response = await getUser(response.id).unwrap();
+      const userDetails = toUserDetailsResMapper(response);
+      dispatch(setFullAccess({ fullAccess: isFullAccess(userDetails) }));
+      dispatch(setUserDetails(userDetails));
+
       setForm({
         ...form,
         email: { ...form.email, value: '' },
         password: { ...form.password, value: '' },
       });
+
       navigate('/dashboard');
     } catch (error) {
       setError(true);
@@ -79,7 +92,7 @@ const LoginForm = () => {
 
   const handleRememberMeInput = (e) => setRememberMe(e.target.checked);
 
-  return isLoading ? (
+  return isLoginAccountLoading || isGetUserLoading ? (
     <CustomLoadingOverlay message={'Please wait while we securely log you in...'} />
   ) : (
     <section id="login-form" className={`${layout.section} ${styles.flexCenter}`}>

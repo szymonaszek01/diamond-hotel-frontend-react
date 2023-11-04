@@ -1,13 +1,8 @@
 import styles from '../../style';
-import { useGetUserByIdMutation } from '../../redux/api/userApiSlice';
-import { isConfirmed, selectUserId, setConfirmation } from '../../redux/features/auth/authSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { setUserDetails } from '../../redux/features/user/userSlice';
-import { toUserDetailsResMapper } from '../../redux/features/user/userMapper';
-import { useEffect, useState } from 'react';
+import { isConfirmed, selectFullAccess } from '../../redux/features/auth/authSlice';
+import { useSelector } from 'react-redux';
 import { privateNavLinks } from '../../constants';
 import {
-  AccountNotConfirmed,
   DashboardFindRoomCard,
   DashboardUserDetailsCard,
   DashboardWeatherCard,
@@ -15,12 +10,9 @@ import {
   Navbar,
 } from '../../components';
 
-const UserDashboardPage = () => {
-  const [getUser] = useGetUserByIdMutation();
-  const dispatch = useDispatch();
-  const [allRequiredData, setAllRequiredData] = useState(true);
-  const userId = useSelector(selectUserId);
+const DashboardPage = () => {
   const confirmed = useSelector(isConfirmed);
+  const fullAccess = useSelector(selectFullAccess);
 
   const navConfig = {
     page: 'Home',
@@ -28,26 +20,8 @@ const UserDashboardPage = () => {
     navbarLinks: privateNavLinks,
     logoWhite: false,
     textWhite: false,
+    fullAccess: fullAccess,
   };
-
-  useEffect(() => {
-    const loadUserDetails = async () => {
-      try {
-        const response = await getUser(userId).unwrap();
-        dispatch(setUserDetails(toUserDetailsResMapper(response)));
-        dispatch(setConfirmation({ confirmed: response.confirmed }));
-        const res =
-          Object.entries(response)
-            .filter(([kay, value]) => (value === null || value.length < 1) && kay !== 'picture')
-            .map(([_, value]) => value).length === 0;
-        setAllRequiredData(res);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    loadUserDetails().then(() => console.log('Loaded user'));
-  }, [userId, getUser, dispatch, confirmed]);
 
   return (
     <div className={styles.page}>
@@ -73,12 +47,11 @@ const UserDashboardPage = () => {
           </div>
         </div>
       </div>
-      {userId && !confirmed ? <AccountNotConfirmed /> : ''}
       <div className={`bg-black-gradient ${styles.paddingX} ${styles.flexCenter} z-99`}>
         <div className={`${styles.boxWidth} mb-20`}>
           <div className={`${styles.flexCenter} flex-col z-[99] sm:relative`}>
             <div className={`w-[80%] sm:w-[50%] mt-5 flex flex-col gap-20`}>
-              <DashboardUserDetailsCard allRequiredData={allRequiredData} />
+              <DashboardUserDetailsCard allRequiredData={true} />
               <DashboardFindRoomCard />
               <DashboardWeatherCard />
             </div>
@@ -90,4 +63,4 @@ const UserDashboardPage = () => {
   );
 };
 
-export default UserDashboardPage;
+export default DashboardPage;

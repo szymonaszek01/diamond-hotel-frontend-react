@@ -1,9 +1,6 @@
 import styles from '../../style';
 import { Footer, LoginForm, Navbar } from '../../components';
 import { publicNavLinks } from '../../constants';
-import { selectUser } from '../../redux/features/auth/authSlice';
-import { useSelector } from 'react-redux';
-import { Navigate, useLocation } from 'react-router-dom';
 
 const SignInPage = () => {
   const navConfig = {
@@ -12,14 +9,10 @@ const SignInPage = () => {
     navbarLinks: publicNavLinks,
     textWhite: true,
     logoWhite: true,
+    fullAccess: true,
   };
 
-  const user = useSelector(selectUser);
-  const location = useLocation();
-
-  return user ? (
-    <Navigate to="/dashboard" state={{ from: location }} replace />
-  ) : (
+  return (
     <div className={styles.page}>
       <div className="absolute z-[0] w-[60%] h-[60%] -left-[50%] rounded-full blue__gradient bottom-40" />
 

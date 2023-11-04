@@ -8,15 +8,18 @@ const authSlice = createSlice({
     refreshToken: null,
     oauth2Error: null,
     expired: false,
+    confirmed: null,
+    fullAccess: null,
   },
   reducers: {
     setAccountDetails: (state, action) => {
-      const { user, id, accessToken, refreshToken } = action.payload;
+      const { user, id, accessToken, refreshToken, confirmed } = action.payload;
       state.user = user;
       state.id = id;
       state.accessToken = accessToken;
       state.refreshToken = refreshToken;
       state.expired = false;
+      state.confirmed = confirmed;
     },
     logOut: (state) => {
       state.user = null;
@@ -25,6 +28,7 @@ const authSlice = createSlice({
       state.refreshToken = null;
       state.confirmed = null;
       state.expired = false;
+      state.fullAccess = null;
     },
     setConfirmation: (state, action) => {
       const { confirmed } = action.payload;
@@ -41,12 +45,23 @@ const authSlice = createSlice({
       state.refreshToken = null;
       state.confirmed = null;
       state.expired = true;
+      state.fullAccess = null;
+    },
+    setFullAccess: (state, action) => {
+      const { fullAccess } = action.payload;
+      state.fullAccess = fullAccess;
     },
   },
 });
 
-export const { setAccountDetails, logOut, setConfirmation, setOAuth2Error, setSessionExpired } =
-  authSlice.actions;
+export const {
+  setAccountDetails,
+  logOut,
+  setConfirmation,
+  setOAuth2Error,
+  setSessionExpired,
+  setFullAccess,
+} = authSlice.actions;
 
 export default authSlice.reducer;
 
@@ -55,6 +70,8 @@ export const selectUser = (state) => state.auth.user;
 export const selectUserId = (state) => state.auth.id;
 
 export const selectAccessToken = (state) => state.auth.accessToken;
+
+export const selectFullAccess = (state) => state.auth.fullAccess;
 
 export const selectExpired = (state) => state.auth.expired;
 

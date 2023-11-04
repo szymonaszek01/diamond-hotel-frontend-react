@@ -9,6 +9,7 @@ const SignUpPage = () => {
     navbarLinks: publicNavLinks,
     textWhite: true,
     logoWhite: true,
+    fullAccess: true,
   };
 
   return (
