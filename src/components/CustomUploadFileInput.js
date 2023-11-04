@@ -14,7 +14,7 @@ const CustomUploadFileInput = ({ attributes, onChange, error, image }) => {
         } w-[8.5rem]`}>
         <img
           src={image.src}
-          className={`${!image.default ? 'rounded-[10px]' : ''} max-w-[100px]`}
+          className={`${!image.default ? 'rounded-[10px]' : ''} max-w-[105px]`}
           alt={image.alt}
         />
       </div>
