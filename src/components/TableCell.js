@@ -17,7 +17,7 @@ const TableCell = ({
       <p
         className={`${icon ? 'hidden' : ''} text-xs ${textColor ?? 'text-white'} font-poppins ${
           fontStyle ?? 'font-thin'
-        } break-words`}>
+        } ${value.length > 16 ? 'break-all' : 'break-words'}`}>
         {isHeader ? value.name : value}
       </p>
       <div className={isHeader && value.sort ? '' : 'hidden'}>

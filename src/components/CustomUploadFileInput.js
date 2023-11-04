@@ -9,12 +9,12 @@ const CustomUploadFileInput = ({ attributes, onChange, error, image }) => {
   const renderImage = () => {
     return (
       <div
-        className={`flex w-[20%] justify-start rounded-[10px] h-auto ${
+        className={`flex w-[20%] justify-center rounded-[10px] h-auto ${
           !image.default ? '' : 'p-5 box-shadow'
         } w-[8.5rem]`}>
         <img
           src={image.src}
-          className={`${!image.default ? 'rounded-[10px]' : ''}`}
+          className={`${!image.default ? 'rounded-[10px]' : ''} max-w-[100px]`}
           alt={image.alt}
         />
       </div>

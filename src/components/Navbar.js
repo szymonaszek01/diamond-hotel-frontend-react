@@ -4,7 +4,7 @@ import { close, close2, logo, logo2, menu, menu2 } from '../assets';
 import { logOut } from '../redux/features/auth/authSlice';
 import { useDispatch } from 'react-redux';
 
-const Navbar = ({ page, isToggled, navbarLinks, logoWhite, textWhite }) => {
+const Navbar = ({ page, isToggled, navbarLinks, logoWhite, textWhite, fullAccess }) => {
   const [toggle, setToggle] = useState(isToggled);
   const dispatch = useDispatch();
 
@@ -32,8 +32,8 @@ const Navbar = ({ page, isToggled, navbarLinks, logoWhite, textWhite }) => {
           } p-6 bg-transparent absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar bg-black-gradient`}>
           <ul className="list-none flex justify-end items-start flex-1 flex-col ul-navbar">
             {navbarLinks
-              ?.find((nav) => nav.main.title === page)
-              ?.sections.map((section, index) => (
+              ?.find((nav) => nav.main.title === page && fullAccess)
+              ?.sections.map((section) => (
                 <li
                   key={section.id}
                   className={`font-poppins font-medium cursor-pointer text-white text-[14px]`}>
@@ -41,7 +41,16 @@ const Navbar = ({ page, isToggled, navbarLinks, logoWhite, textWhite }) => {
                 </li>
               ))}
             {navbarLinks
-              ?.filter((nav) => nav.main.title !== page && page)
+              ?.filter(
+                (nav) =>
+                  nav.main.title !== page &&
+                  page &&
+                  (fullAccess ||
+                    (!fullAccess &&
+                      (nav.main.id === 'log-out' ||
+                        nav.main.id === 'dashboard' ||
+                        nav.main.id === 'settings')))
+              )
               .map((nav) => (
                 <li
                   key={nav.main.id}
@@ -62,7 +71,7 @@ const Navbar = ({ page, isToggled, navbarLinks, logoWhite, textWhite }) => {
       <img src={logoWhite ? logo : logo2} alt="hoobank" className="w-[175px] h-[21px]" />
       <ul className={`list-none sm:flex hidden justify-end items-center flex-1`}>
         {navbarLinks
-          ?.find((nav) => nav.main.title === page)
+          ?.find((nav) => nav.main.title === page && fullAccess)
           ?.sections.map((section, index) => (
             <li
               key={section.id}
@@ -73,7 +82,16 @@ const Navbar = ({ page, isToggled, navbarLinks, logoWhite, textWhite }) => {
             </li>
           ))}
         {navbarLinks
-          ?.filter((nav) => nav.main.title !== page && page)
+          ?.filter(
+            (nav) =>
+              nav.main.title !== page &&
+              page &&
+              (fullAccess ||
+                (!fullAccess &&
+                  (nav.main.id === 'log-out' ||
+                    nav.main.id === 'dashboard' ||
+                    nav.main.id === 'settings')))
+          )
           .map((nav, index) => (
             <li
               key={nav.main.id}
