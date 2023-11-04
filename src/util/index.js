@@ -139,3 +139,25 @@ export const isSearchValueInObject = (obj, searchValue, keyListFromObjectToCompa
     return ('' + value).toLowerCase().includes(searchValue.toLowerCase());
   });
 };
+
+export const isFullAccess = (response) => {
+  const { age, country, passportNumber, phoneNumber, city, street, postalCode, confirmed } =
+    response;
+  return !(
+    age === null ||
+    country === null ||
+    country.length < 1 ||
+    passportNumber === null ||
+    passportNumber.length < 1 ||
+    phoneNumber === null ||
+    phoneNumber.length < 1 ||
+    city === null ||
+    city.length < 1 ||
+    street === null ||
+    street.length < 1 ||
+    postalCode === null ||
+    postalCode.length < 1 ||
+    confirmed === null ||
+    confirmed === false
+  );
+};

@@ -8,7 +8,7 @@ const baseUrl = () => {
 };
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://diamond-hotel-backend.onrender.com',
+  baseUrl: process.env.REACT_APP_SERVER_URI,
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const accessToken = getState().auth.accessToken;

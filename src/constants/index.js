@@ -16,8 +16,7 @@ import {
   twitter,
 } from '../assets';
 
-export const stripePublicKey =
-  'pk_test_51NCOIJHClfuzSQRfRrX2oW3tN4OQBgzAHgbbxFrOZvEmc2uoZ0Jlk87UNmBV1SteuRKFJQfJzEpcoI0c39c4LWTM00lvEcKXkR';
+export const stripePublicKey = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
 
 export const measurement = {
   temperatureDay: 'temperatureDay',
@@ -178,22 +177,6 @@ export const privateNavLinks = [
   },
   {
     main: {
-      id: 'messages',
-      title: 'Messages',
-      path: '/messages',
-    },
-    sections: [],
-  },
-  {
-    main: {
-      id: 'services',
-      title: 'Services',
-      path: '/services',
-    },
-    sections: [],
-  },
-  {
-    main: {
       id: 'reservations',
       title: 'Reservations',
       path: '/reservations',
@@ -204,7 +187,7 @@ export const privateNavLinks = [
     main: {
       id: 'settings',
       title: 'Settings',
-      path: '/settings',
+      path: '/edit-profile',
     },
     sections: [],
   },
