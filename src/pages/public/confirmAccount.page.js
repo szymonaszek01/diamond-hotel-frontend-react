@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { setAccountDetails } from '../../redux/features/auth/authSlice';
+import { setAccountDetails, setFullAccess } from '../../redux/features/auth/authSlice';
 import { toAuthResMapper } from '../../redux/features/auth/authMapper';
 import { toast, ToastContainer } from 'react-toastify';
 import { useConfirmAccountMutation } from '../../redux/api/authApiSlice';
@@ -7,10 +7,14 @@ import { useDispatch } from 'react-redux';
 import styles from '../../style';
 import { CustomLoadingOverlay, Footer, Navbar, ResendConfirmAccountEmail } from '../../components';
 import { useEffect } from 'react';
-import { urlParam } from '../../util';
+import { isFullAccess, urlParam } from '../../util';
+import { toUserDetailsResMapper } from '../../redux/features/user/userMapper';
+import { setUserDetails } from '../../redux/features/user/userSlice';
+import { useGetUserByIdMutation } from '../../redux/api/userApiSlice';
 
 const ConfirmAccountPage = () => {
-  const [confirmAccount, { isLoading }] = useConfirmAccountMutation();
+  const [confirmAccount, { isLoading: isConfirmAccountLoading }] = useConfirmAccountMutation();
+  const [getUser, { isLoading: isGetUserLoading }] = useGetUserByIdMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -29,8 +33,14 @@ const ConfirmAccountPage = () => {
   useEffect(() => {
     const confirm = async () => {
       try {
-        const response = await confirmAccount(confirmationToken).unwrap();
+        let response = await confirmAccount(confirmationToken).unwrap();
         dispatch(setAccountDetails(toAuthResMapper(response)));
+
+        response = await getUser(response.id).unwrap();
+        const userDetails = toUserDetailsResMapper(response);
+        dispatch(setFullAccess({ fullAccess: isFullAccess(userDetails) }));
+        dispatch(setUserDetails(userDetails));
+
         navigate('/dashboard');
       } catch (error) {
         toast.error('Account confirmation Failed.');
@@ -38,9 +48,9 @@ const ConfirmAccountPage = () => {
     };
 
     confirm().then(() => console.log('Account confirmed'));
-  }, [confirmAccount, confirmationToken, dispatch, navigate]);
+  }, [confirmAccount, getUser, confirmationToken, dispatch, navigate]);
 
-  return isLoading ? (
+  return isConfirmAccountLoading || isGetUserLoading ? (
     <CustomLoadingOverlay message={'Loading...'} />
   ) : (
     <div className={styles.page}>

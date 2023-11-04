@@ -9,14 +9,19 @@ import {
 import { privateNavLinks } from '../../constants';
 import { useState } from 'react';
 import { randomCode } from '../../util';
+import { useSelector } from 'react-redux';
+import { selectFullAccess } from '../../redux/features/auth/authSlice';
 
 const FindRoomPage = () => {
+  const fullAccess = useSelector(selectFullAccess);
+
   const navConfig = {
     page: 'Find room',
     isToggled: true,
     navbarLinks: privateNavLinks,
     logoWhite: true,
     textWhite: true,
+    fullAccess: fullAccess,
   };
 
   const [reservationDetails, setReservationDetails] = useState({

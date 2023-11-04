@@ -16,9 +16,14 @@ import {
   useUpdateAccountEmailMutation,
   useUpdateAccountPasswordMutation,
 } from '../../redux/api/authApiSlice';
-import { selectUserDetails } from '../../redux/features/user/userSlice';
-import { logOut, setConfirmation } from '../../redux/features/auth/authSlice';
-import { validatePassword } from '../../util/index';
+import { selectUserDetails, setUserDetails } from '../../redux/features/user/userSlice';
+import {
+  logOut,
+  selectFullAccess,
+  setConfirmation,
+  setFullAccess,
+} from '../../redux/features/auth/authSlice';
+import { isFullAccess, validatePassword } from '../../util/index';
 import {
   useUpdateUserDetailsMutation,
   useUpdateUserImageMutation,
@@ -26,6 +31,7 @@ import {
 import { defaultUser, locked } from '../../assets';
 import { requiredInputsErrorMessage } from '../../util';
 import { useNavigate } from 'react-router-dom';
+import { toUserDetailsResMapper } from '../../redux/features/user/userMapper';
 
 const Menu = ({ items, onClick }) => {
   const renderItem = (item) => {
@@ -154,12 +160,15 @@ const UpdateForm = ({ title, form, error, onUpdate, onChange, isOAuth2User }) =>
 };
 
 const EditProfilePage = () => {
+  const fullAccess = useSelector(selectFullAccess);
+
   const navConfig = {
-    page: 'Edit user profile',
+    page: 'Settings',
     isToggled: true,
     navbarLinks: privateNavLinks,
     textWhite: true,
     logoWhite: true,
+    fullAccess: fullAccess,
   };
 
   const navigate = useNavigate();
@@ -170,7 +179,7 @@ const EditProfilePage = () => {
     image: {
       ...inputsInfo.user.image,
       value: '',
-      picture: details.picture,
+      picture: details.picture ?? '',
       files: [],
       menu: itemsInfo.user.image.name,
     },
@@ -305,8 +314,11 @@ const EditProfilePage = () => {
     e.preventDefault();
 
     try {
-      await updateAccountEmail({ email: details.email, new_email: form.email.value }).unwrap();
-      dispatch(setConfirmation({ confirmed: false }));
+      const response = await updateAccountEmail({
+        email: details.email,
+        new_email: form.email.value,
+      }).unwrap();
+      dispatch(setConfirmation({ confirmed: response.confirmed }));
       dispatch(logOut());
       navigate('/');
     } catch (error) {
@@ -336,10 +348,11 @@ const EditProfilePage = () => {
     }
 
     try {
-      await updateAccountPassword({
+      const response = await updateAccountPassword({
         email: details.email,
         new_password: form.password.value,
       }).unwrap();
+      dispatch(setUserDetails(toUserDetailsResMapper(response)));
       setForm({
         ...form,
         password: { ...form.password, value: '' },
@@ -359,7 +372,7 @@ const EditProfilePage = () => {
     e.preventDefault();
 
     try {
-      await updateUserDetails({
+      const response = await updateUserDetails({
         details: {
           firstname: form.firstname.value,
           lastname: form.lastname.value,
@@ -373,7 +386,10 @@ const EditProfilePage = () => {
         },
         email: details.email,
       }).unwrap();
+      dispatch(setFullAccess({ fullAccess: isFullAccess(toUserDetailsResMapper(response)) }));
+      dispatch(setUserDetails(toUserDetailsResMapper(response)));
       toast.success('User details successfully updated');
+      navigate('/dashboard');
     } catch (error) {
       setError({
         ...error,
@@ -390,6 +406,7 @@ const EditProfilePage = () => {
       let formData = new FormData();
       formData.set('image', form.image.files[0]);
       const response = await updateUserImage({ formData: formData, email: details.email }).unwrap();
+      dispatch(setUserDetails({ ...details, picture: response.image }));
       setForm({ ...form, image: { ...form.image, picture: response.image, files: [] } });
       toast.success('Image successfully updated');
     } catch (error) {
@@ -446,17 +463,44 @@ const EditProfilePage = () => {
       </div>
       <div className={`${styles.paddingX} items-start z-99 min-h-[75vh] mt-16`}>
         <div className={`${styles.boxWidth}`}>
-          <div className="mt-5 flex flex-row justify-center items-center">
-            <div className="w-[80%] flex flex-col sm:flex-row items-start justify-between">
-              <Menu items={items} onClick={onMenuItemClick} />
-              <UpdateForm
-                title={selectedMenuItem().name}
-                form={selectedMenuItemInputs()}
-                error={error}
-                onChange={onInputChange}
-                onUpdate={onModalUpdate}
-                isOAuth2User={details.authProvider === 'OAUTH2'}
-              />
+          <div className="flex flex-col w-full items-center justify-center mb-16">
+            <div
+              className={
+                'flex flex-col items-center text-center sm:text-start sm:items-start justify-center w-[75%] gap-14'
+              }>
+              <p
+                className={`flex w-full flex-col gap-2 text-sm text-dimWhite font-poppins font-thin ml-2 leading-10 sm:leading-8`}>
+                <span className={'text-2xl font-semibold text-white leading-[50px] sm:leading-8'}>
+                  Settings
+                </span>
+                <span>
+                  Welcome to your user settings page, where you have the power to customize your
+                  experience and manage your account. Here, you can tailor your preferences to make
+                  your time with us truly unique.
+                </span>
+              </p>
+              <p
+                className={`break-words flex w-full flex-col gap-2 text-sm text-dimWhite font-poppins font-thin ml-2 leading-10 sm:leading-8`}>
+                <span className={'text-2xl font-semibold text-white leading-[50px] sm:leading-8'}>
+                  Questions or Concerns?
+                </span>
+                <span>
+                  If you have any questions, concerns, or need assistance with your settings, please
+                  contact our support team at diamond.hotel.contact@gmail.com or +960 1234567. Your
+                  experience is in your hands. Tailor it to perfection!
+                </span>
+              </p>
+              <div className="w-full flex flex-col sm:flex-row items-start justify-between">
+                <Menu items={items} onClick={onMenuItemClick} />
+                <UpdateForm
+                  title={selectedMenuItem().name}
+                  form={selectedMenuItemInputs()}
+                  error={error}
+                  onChange={onInputChange}
+                  onUpdate={onModalUpdate}
+                  isOAuth2User={details.authProvider === 'OAUTH2'}
+                />
+              </div>
             </div>
           </div>
         </div>

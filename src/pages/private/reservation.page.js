@@ -32,14 +32,18 @@ import {
 import { toReservationTableMapper } from '../../redux/features/reservation/reservationMapper';
 import { toReservedRoomTableMapper } from '../../redux/features/reservedRoom/reservedRoomMapper';
 import { toPaymentTableMapper } from '../../redux/features/payment/paymentMapper';
+import { selectFullAccess } from '../../redux/features/auth/authSlice';
 
 const ReservationPage = () => {
+  const fullAccess = useSelector(selectFullAccess);
+
   const navConfig = {
-    page: 'Reservation list',
+    page: 'Reservations',
     isToggled: true,
     navbarLinks: privateNavLinks,
     logoWhite: true,
     textWhite: true,
+    fullAccess: fullAccess,
   };
 
   const userDetails = useSelector(selectUserDetails);

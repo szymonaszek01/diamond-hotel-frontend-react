@@ -19,6 +19,7 @@ const HomePage = () => {
     navbarLinks: publicNavLinks,
     textWhite: true,
     logoWhite: true,
+    fullAccess: true,
   };
 
   return (
