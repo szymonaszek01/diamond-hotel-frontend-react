@@ -2,7 +2,7 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { isConfirmed, selectFullAccess, selectUserId } from '../redux/features/auth/authSlice';
 
-const Confirmator = () => {
+const FullAccessAuthenticator = () => {
   const location = useLocation();
   const userId = useSelector(selectUserId);
   const confirmed = useSelector(isConfirmed);
@@ -16,4 +16,4 @@ const Confirmator = () => {
   );
 };
 
-export default Confirmator;
+export default FullAccessAuthenticator;

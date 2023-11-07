@@ -15,3 +15,5 @@ export const { setUserDetails } = userSlice.actions;
 export default userSlice.reducer;
 
 export const selectUserDetails = (state) => state.user.details;
+
+export const selectUserRole = (state) => state.user.role;

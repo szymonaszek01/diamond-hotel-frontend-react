@@ -16,6 +16,11 @@ import {
   twitter,
 } from '../assets';
 
+export const role = {
+  user: 'USER',
+  admin: 'ADMIN',
+};
+
 export const stripePublicKey = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
 
 export const measurement = {

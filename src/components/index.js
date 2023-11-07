@@ -10,13 +10,11 @@ import Contact from './Contact';
 import LoginForm from './LoginForm';
 import CustomLoadingOverlay from './CustomLoadingOverlay';
 import AccountNotConfirmed from './AccountNotConfirmed';
-import Authenticator from './Autheticator';
 import Button from './Button';
 import FeedbackCard from './FeedbackCard';
 import ForgotPasswordStepTwo from './ForgotPasswordStepTwo';
 import ForgotPasswordStepOne from './ForgotPasswordStepOne';
 import GetStarted from './GetStarted';
-import Layout from './Layout';
 import RegisterForm from './RegisterForm';
 import ResendConfirmAccountEmail from './ResendConfirmAccountEmail';
 import Steps from './Steps';
@@ -52,11 +50,9 @@ import PdfAction from './PdfAction';
 import RoomTypeDetailsAction from './RoomTypeDetailsAction';
 import CustomSearchInput from './CustomSearchInput';
 import Sort from './Sort';
-import Confirmator from './Confirmator';
 
 export {
   AccountNotConfirmed,
-  Authenticator,
   Business,
   Button,
   Contact,
@@ -74,7 +70,6 @@ export {
   ForgotPasswordStepTwo,
   GetStarted,
   Hero,
-  Layout,
   LoginForm,
   Modal,
   Navbar,
@@ -109,5 +104,4 @@ export {
   RoomTypeDetailsAction,
   CustomSearchInput,
   Sort,
-  Confirmator,
 };
