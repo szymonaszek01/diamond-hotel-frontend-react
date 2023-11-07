@@ -1,95 +1,47 @@
-import Navbar from './Navbar';
-import Product from './Product';
-import Business from './Business';
-import CTA from './CTA';
-import Stats from './Stats';
-import Footer from './Footer';
-import Opinion from './Opinion';
-import Hero from './Hero';
-import Contact from './Contact';
-import LoginForm from './LoginForm';
-import CustomLoadingOverlay from './CustomLoadingOverlay';
-import AccountNotConfirmed from './AccountNotConfirmed';
-import Button from './Button';
-import FeedbackCard from './FeedbackCard';
-import ForgotPasswordStepTwo from './ForgotPasswordStepTwo';
-import ForgotPasswordStepOne from './ForgotPasswordStepOne';
-import GetStarted from './GetStarted';
-import RegisterForm from './RegisterForm';
-import ResendConfirmAccountEmail from './ResendConfirmAccountEmail';
-import Steps from './Steps';
-import DashboardFindRoomCard from './DashboardFindRoomCard';
-import DashboardUserDetailsCard from './DashboardUserDetailsCard';
-import DashboardWeatherCard from './DashboardWeatherCard';
-import CustomPhoneInput from './CustomPhoneInput';
-import CustomStandardInput from './CustomStandardInput';
-import CustomUploadFileInput from './CustomUploadFileInput';
-import Modal from './Modal';
-import FindRoomForm from './FindRoomForm';
-import Label from './Label';
-import CustomDatePicker from './CustomDatePicker';
-import CustomSelectComponent from './CustomSelectComponent';
-import FindRoomFormFilters from './FindRoomFormFilters';
-import CustomTag from './CustomTag';
-import CustomTagWithLabel from './CustomTagWithLabel';
-import PlusMinusButton from './PlusMinusButton';
-import RoomTypeCard from './RoomTypeCard';
-import SelectedRoomsSummaryCard from './SelectedRoomsSummaryCard';
-import FlightForm from './FlightForm';
-import ButtonWithIcon from './ButtonWithIcon';
-import Table from './Table';
-import TableRow from './TableRow';
-import TableCell from './TableCell';
-import TableActionModal from './TableActionModal';
-import TableHeader from './TableHeader';
-import PageFormSelector from './PageFormSelector';
-import TableSlider from './TableSlider';
-import TableForm from './TableForm';
-import CancelOrPayAction from './CancelOrPayAction';
-import PdfAction from './PdfAction';
-import RoomTypeDetailsAction from './RoomTypeDetailsAction';
-import CustomSearchInput from './CustomSearchInput';
-import Sort from './Sort';
+import Navbar from './other/Navbar';
+import Footer from './other/Footer';
+import CustomLoadingOverlay from './other/CustomLoadingOverlay';
+import Steps from './other/Steps';
+import CustomPhoneInput from './input/CustomPhoneInput';
+import CustomStandardInput from './input/CustomStandardInput';
+import CustomUploadFileInput from './input/CustomUploadFileInput';
+import Modal from './other/Modal';
+import Label from './other/Label';
+import CustomDatePicker from './input/CustomDatePicker';
+import CustomSelectComponent from './input/CustomSelectComponent';
+import CustomTag from './tag/CustomTag';
+import CustomTagWithLabel from './tag/CustomTagWithLabel';
+import PlusMinusButton from './button/PlusMinusButton';
+import ButtonWithIcon from './button/ButtonWithIcon';
+import Table from './table/Table';
+import TableRow from './table/TableRow';
+import TableCell from './table/TableCell';
+import TableActionModal from './table/TableActionModal';
+import TableHeader from './table/TableHeader';
+import PageFormSelector from './other/PageFormSelector';
+import TableSlider from './table/TableSlider';
+import TableForm from './table/TableForm';
+import CancelOrPayAction from './action/CancelOrPayAction';
+import PdfAction from './action/PdfAction';
+import RoomTypeDetailsAction from './action/RoomTypeDetailsAction';
+import CustomSearchInput from './input/CustomSearchInput';
+import Sort from './table/Sort';
 
 export {
-  AccountNotConfirmed,
-  Business,
-  Button,
-  Contact,
-  CTA,
   CustomLoadingOverlay,
   CustomPhoneInput,
   CustomStandardInput,
   CustomUploadFileInput,
-  DashboardFindRoomCard,
-  DashboardUserDetailsCard,
-  DashboardWeatherCard,
-  FeedbackCard,
   Footer,
-  ForgotPasswordStepOne,
-  ForgotPasswordStepTwo,
-  GetStarted,
-  Hero,
-  LoginForm,
   Modal,
   Navbar,
-  Opinion,
-  Product,
-  RegisterForm,
-  ResendConfirmAccountEmail,
-  Stats,
   Steps,
-  FindRoomForm,
   Label,
   CustomDatePicker,
   CustomSelectComponent,
-  FindRoomFormFilters,
   CustomTag,
   CustomTagWithLabel,
   PlusMinusButton,
-  RoomTypeCard,
-  SelectedRoomsSummaryCard,
-  FlightForm,
   ButtonWithIcon,
   Table,
   TableRow,

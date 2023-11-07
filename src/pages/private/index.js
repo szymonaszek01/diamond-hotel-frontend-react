@@ -1,8 +1,8 @@
-import DashboardPage from './dashboard.page';
-import DashboardWithoutFullAccessPage from './dashboard-without-full-access-page';
-import EditProfilePage from './edit-profile.page';
-import FindRoomPage from './find-room.page';
-import ReservationPage from './reservation.page';
+import DashboardPage from './dashboard/dashboard.page';
+import DashboardWithoutFullAccessPage from './dashboard/dashboard-without-full-access-page';
+import EditProfilePage from './editprofile/edit-profile.page';
+import FindRoomPage from './findroom/find-room.page';
+import ReservationPage from './reservation/reservation.page';
 
 export {
   DashboardPage,
