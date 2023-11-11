@@ -5,7 +5,7 @@ const Table = ({ name, columnList, rowList, actionList, updateColumnList }) => {
   return (
     <div
       key={`table-${randomCode(7)}`}
-      className="flex flex-col items-start justify-center w-[100%] rounded-[3px] p-4 box-shadow outline-none">
+      className="flex flex-col items-start justify-center w-[100%] rounded-[3px] px-4 pb-4 box-shadow outline-none">
       <TableHeader
         tableName={name}
         columnList={columnList}
