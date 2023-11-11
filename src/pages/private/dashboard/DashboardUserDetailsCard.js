@@ -5,6 +5,7 @@ import { selectUserDetails } from '../../../redux/features/user/userSlice';
 import { ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { role } from '../../../constants';
 
 const DashboardUserDetailsCard = ({ allRequiredData }) => {
   const userDetails = useSelector(selectUserDetails);
@@ -66,11 +67,18 @@ const DashboardUserDetailsCard = ({ allRequiredData }) => {
           </div>
         </div>
         <div className="sm:mt-3 pb-5 px-5 sm:p-5 flex flex-col justify-start items-center sm:items-start gap-5 rounded-b-[10px] ">
-          <p className={`font-poppins text-[13.5px] text-white break-all`}>Before your arrival</p>
+          <p className={`font-poppins text-[13.5px] text-white break-all`}>
+            {userDetails.role === role.user ? 'Before your arrival' : 'As an administrator'}
+          </p>
           <div
-            className={`flex flex-col sm:flex-row justify-between bg-yellow-gradient items-center text-center sm:text-start rounded-[10px] py-3 px-4 message-button w-full cursor-pointer gap-3 sm:gap-0`}>
+            className={`flex flex-col sm:flex-row justify-between bg-yellow-gradient items-center text-center sm:text-start rounded-[4px] py-3 px-4 message-button w-full cursor-pointer gap-3 sm:gap-0 cursor-pointer`}
+            onClick={() =>
+              navigate(userDetails.role === role.admin ? '/reservations' : '/dashboard')
+            }>
             <p className={`font-poppins text-xs break-all text-black`}>
-              Please let us know about special requests
+              {userDetails.role === role.user
+                ? 'Please let us know about special requests'
+                : 'PLease check upcoming reservations'}
             </p>
             <img
               id="arrow-right"

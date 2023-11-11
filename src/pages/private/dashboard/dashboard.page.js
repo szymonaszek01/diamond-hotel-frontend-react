@@ -1,15 +1,26 @@
 import styles from '../../../style';
 import { isConfirmed, selectFullAccess } from '../../../redux/features/auth/authSlice';
-import { useSelector } from 'react-redux';
-import { privateNavLinks } from '../../../constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { privateNavLinks, role } from '../../../constants';
 import { Footer, Navbar } from '../../../components';
 import DashboardUserDetailsCard from './DashboardUserDetailsCard';
 import DashboardFindRoomCard from './DashboardFindRoomCard';
 import DashboardWeatherCard from './DashboardWeatherCard';
+import { selectUserRole } from '../../../redux/features/user/userSlice';
+import DashboardAddRoomCard from './DashboardAddRoomCard';
+import { useEffect } from 'react';
+import { setRoomTypeList } from '../../../redux/features/roomType/roomTypeSlice';
+import {
+  useGetRoomTypeEquipmentMutation,
+  useGetRoomTypeListMutation,
+} from '../../../redux/api/roomTypeApiSlice';
+import { toRoomTypeListMapper } from '../../../redux/features/roomType/roomTypeMapper';
 
 const DashboardPage = () => {
   const confirmed = useSelector(isConfirmed);
   const fullAccess = useSelector(selectFullAccess);
+  const userRole = useSelector(selectUserRole);
+  const dispatch = useDispatch();
 
   const navConfig = {
     page: 'Home',
@@ -19,6 +30,39 @@ const DashboardPage = () => {
     textWhite: false,
     fullAccess: fullAccess,
   };
+
+  const [getRoomTypeList] = useGetRoomTypeListMutation();
+  const [getRoomTypeEquipment] = useGetRoomTypeEquipmentMutation();
+
+  useEffect(() => {
+    let response;
+    let roomTypeList;
+
+    const loadRoomTypeList = async () => {
+      try {
+        response = await getRoomTypeList().unwrap();
+        roomTypeList = toRoomTypeListMapper(response);
+      } catch (error) {
+        console.log('Failed to load room types');
+      }
+    };
+
+    const loadRoomTypeEquipment = async () => {
+      for (const roomType of roomTypeList) {
+        try {
+          response = await getRoomTypeEquipment({ id: roomType.id }).unwrap();
+          roomType['equipment'] = response;
+        } catch (error) {
+          console.log(`Failed to load ${roomType.name} equipment`);
+        }
+      }
+      dispatch(setRoomTypeList({ all: roomTypeList }));
+    };
+
+    loadRoomTypeList().then(() => {
+      loadRoomTypeEquipment().then(() => console.log('Loaded room type list with equipment'));
+    });
+  }, [dispatch, getRoomTypeEquipment, getRoomTypeList]);
 
   return (
     <div className={styles.page}>
@@ -49,7 +93,7 @@ const DashboardPage = () => {
           <div className={`${styles.flexCenter} flex-col z-[99] sm:relative`}>
             <div className={`w-[80%] sm:w-[50%] mt-5 flex flex-col gap-20`}>
               <DashboardUserDetailsCard allRequiredData={true} />
-              <DashboardFindRoomCard />
+              {userRole === role.user ? <DashboardFindRoomCard /> : <DashboardAddRoomCard />}
               <DashboardWeatherCard />
             </div>
           </div>

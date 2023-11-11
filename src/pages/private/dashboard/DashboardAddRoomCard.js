@@ -1,29 +1,29 @@
 import styles from '../../../style';
 
-const DashboardFindRoomCard = () => {
+const DashboardAddRoomCard = () => {
   return (
     <div
-      key={`dashboard-find-room-card`}
+      key={`dashboard-add-room-card`}
       className="flex flex-col items-center sm:items-start justify-center gap-4">
       <div className="flex flex-col text-center sm:text-start justify-between w-full">
         <p
           className={`flex flex-col text-sm text-dimWhite font-poppins font-thin leading-10 sm:leading-8 gap-5`}>
           <span className={'text-3xl font-semibold text-white leading-[50px] sm:leading-8'}>
-            Book your dream room
+            Add a New Room or Room Type
           </span>
           <span>
-            Discover a world of comfort, luxury, and relaxation at Diamond hotel. Our doors are
-            open, and we're ready to make your stay unforgettable.
+            Ready to attract more guests and boost revenue? Consider adding a new room or room type
+            today! More rooms mean more bookings and increased revenue potential.
           </span>
         </p>
       </div>
       <a
-        href="/find-room"
+        href="/add-room"
         className={`${styles.button} items-center text-center box-shadow text-sm p-3 box-shadow`}>
-        Book a room
+        Get started
       </a>
     </div>
   );
 };
 
-export default DashboardFindRoomCard;
+export default DashboardAddRoomCard;
