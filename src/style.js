@@ -18,7 +18,7 @@ const styles = {
   page: `bg-black-gradient w-full min-h-[100vh] flex flex-col`,
   input: 'h-11 font-poppins text-sm',
   button:
-    'bg-yellow-gradient font-poppins rounded-[10px] font-poppins p-2 cursor-pointer text-sm outline-0',
+    'bg-yellow-gradient font-poppins rounded-[4px] font-poppins p-2 cursor-pointer text-sm outline-0',
   error: 'error',
 };
 
@@ -32,4 +32,4 @@ export const layout = {
   sectionInfo: `flex-1 ${styles.flexStart} flex-col`,
 };
 
-export default styles
+export default styles;

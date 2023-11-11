@@ -104,6 +104,14 @@ export const inputsInfo = {
   flight: {
     flightNumber: { type: 'text', label: 'Flight number', name: 'flightNumber' },
   },
+  reservation: {
+    minDate: { type: '', label: 'Min date', name: 'minDate' },
+    maxDate: { type: '', label: 'Max date', name: 'maxDate' },
+    userProfileEmail: { type: 'text', label: 'User profile email', name: 'userProfileEmail' },
+    minPaymentCost: { type: 'number', label: 'Min payment cost ($)', name: 'minPaymentCost' },
+    maxPaymentCost: { type: 'number', label: 'Max payment cost ($)', name: 'maxPaymentCost' },
+    paymentCharge: { type: 'text', label: 'Payment charge', name: 'paymentCharge' },
+  },
 };
 
 export const itemsInfo = {
