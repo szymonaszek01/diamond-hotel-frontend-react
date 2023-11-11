@@ -13,6 +13,7 @@ import {
   SignUpPage,
 } from '../pages/public';
 import {
+  AddRoomPage,
   DashboardPage,
   DashboardWithoutFullAccessPage,
   EditProfilePage,
@@ -46,7 +47,9 @@ const Router = () => {
             </Route>
 
             {/* admin */}
-            <Route element={<AdminAuthenticator />}></Route>
+            <Route element={<AdminAuthenticator />}>
+              <Route path="/add-room" element={<AddRoomPage />} />
+            </Route>
           </Route>
 
           {/* account not confirmed */}
