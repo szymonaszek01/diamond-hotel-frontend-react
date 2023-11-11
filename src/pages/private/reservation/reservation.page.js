@@ -8,12 +8,14 @@ import {
   RoomTypeDetailsAction,
   TableForm,
 } from '../../../components';
-import { privateNavLinks } from '../../../constants';
+import { privateNavLinks, role } from '../../../constants';
 import { useEffect, useState } from 'react';
 import {
   useCountReservationListByUserProfileIdMutation,
+  useCountReservationListMutation,
   useDeleteReservationByIdMutation,
   useGetReservationListByUserProfileIdMutation,
+  useGetReservationListMutation,
   useGetReservationPdfDocumentByIdMutation,
   useUpdateReservationPaymentMutation,
 } from '../../../redux/api/reservationApiSlice';
@@ -22,20 +24,28 @@ import { selectUserDetails } from '../../../redux/features/user/userSlice';
 import { updateOptionList } from '../../../util';
 import {
   useCountPaymentListByUserProfileIdMutation,
+  useCountPaymentListMutation,
   useGetPaymentListByUserProfileIdMutation,
+  useGetPaymentListMutation,
   useGetPaymentPdfDocumentByIdMutation,
 } from '../../../redux/api/paymentApiSlice';
 import {
   useCountReservedRoomListByUserProfileIdMutation,
+  useCountReservedRoomListMutation,
   useGetReservedRoomListByUserProfileIdMutation,
+  useGetReservedRoomListMutation,
 } from '../../../redux/api/reservedRoomApi';
 import { toReservationTableMapper } from '../../../redux/features/reservation/reservationMapper';
 import { toReservedRoomTableMapper } from '../../../redux/features/reservedRoom/reservedRoomMapper';
 import { toPaymentTableMapper } from '../../../redux/features/payment/paymentMapper';
 import { selectFullAccess } from '../../../redux/features/auth/authSlice';
+import ReservationFilters from './ReservationFilters';
 
 const ReservationPage = () => {
   const fullAccess = useSelector(selectFullAccess);
+  const userDetails = useSelector(selectUserDetails);
+  const dispatch = useDispatch();
+  const [page, setPage] = useState(0);
 
   const navConfig = {
     page: 'Reservations',
@@ -46,16 +56,18 @@ const ReservationPage = () => {
     fullAccess: fullAccess,
   };
 
-  const userDetails = useSelector(selectUserDetails);
-  const dispatch = useDispatch();
-  const [page, setPage] = useState(0);
-
   // Table
+  const [countReservationList] = useCountReservationListMutation();
+  const [countReservedRoomList] = useCountReservedRoomListMutation();
+  const [countPaymentList] = useCountPaymentListMutation();
   const [countReservationListByUserProfileId] = useCountReservationListByUserProfileIdMutation();
   const [countReservedRoomListByUserProfileId] = useCountReservedRoomListByUserProfileIdMutation();
   const [countPaymentListByUserProfileId] = useCountPaymentListByUserProfileIdMutation();
 
   // Page form selectors
+  const [getReservationList] = useGetReservationListMutation();
+  const [getReservedRoomList] = useGetReservedRoomListMutation();
+  const [getPaymentList] = useGetPaymentListMutation();
   const [getReservationListByUserProfileId] = useGetReservationListByUserProfileIdMutation();
   const [getReservedRoomListByUserProfileId] = useGetReservedRoomListByUserProfileIdMutation();
   const [getPaymentListByUserProfileId] = useGetPaymentListByUserProfileIdMutation();
@@ -105,11 +117,15 @@ const ReservationPage = () => {
       tableText:
         "Below, you'll find a list of your confirmed reservations, including key information such\n" +
         '            as reservation numbers, dates, and accommodation details.',
-      mapper: (res) => toReservationTableMapper(res),
+      mapper: (res) => toReservationTableMapper(res, userDetails.role),
       apiPageFormSelector: async ({ userProfileId }) =>
-        await countReservationListByUserProfileId({ userProfileId }),
+        userDetails.role === role.admin
+          ? await countReservationList()
+          : await countReservationListByUserProfileId({ userProfileId }),
       apiTableForm: async ({ userProfileId, filters, sort }) =>
-        await getReservationListByUserProfileId({ userProfileId, filters, sort }),
+        userDetails.role === role.admin
+          ? await getReservationList({ filters, sort })
+          : await getReservationListByUserProfileId({ userProfileId, filters, sort }),
     },
     {
       id: 2,
@@ -136,11 +152,15 @@ const ReservationPage = () => {
       tableText:
         "Below, you'll find a list of your confirmed room reservations, including key information\n" +
         '            such as reservation id, room number and other details.\n',
-      mapper: (res) => toReservedRoomTableMapper(res),
+      mapper: (res) => toReservedRoomTableMapper(res, userDetails.role),
       apiPageFormSelector: async ({ userProfileId }) =>
-        await countReservedRoomListByUserProfileId({ userProfileId }),
+        userDetails.role === role.admin
+          ? await countReservedRoomList()
+          : await countReservedRoomListByUserProfileId({ userProfileId }),
       apiTableForm: async ({ userProfileId, filters, sort }) =>
-        await getReservedRoomListByUserProfileId({ userProfileId, filters, sort }),
+        userDetails.role === role.admin
+          ? await getReservedRoomList({ filters, sort })
+          : await getReservedRoomListByUserProfileId({ userProfileId, filters, sort }),
     },
     {
       id: 3,
@@ -161,11 +181,15 @@ const ReservationPage = () => {
       tableText:
         "Below, you'll find a list of your recent payments and transactions, including key\n" +
         '            information such as payment dates, amounts, and payment statuses.',
-      mapper: (res) => toPaymentTableMapper(res),
+      mapper: (res) => toPaymentTableMapper(res, userDetails.role),
       apiPageFormSelector: async ({ userProfileId }) =>
-        await countPaymentListByUserProfileId({ userProfileId }),
+        userDetails.role === role.admin
+          ? await countPaymentList()
+          : await countPaymentListByUserProfileId({ userProfileId }),
       apiTableForm: async ({ userProfileId, filters, sort }) =>
-        await getPaymentListByUserProfileId({ userProfileId, filters, sort }),
+        userDetails.role === role.admin
+          ? await getPaymentList({ filters, sort })
+          : await getPaymentListByUserProfileId({ userProfileId, filters, sort }),
     },
   ]);
 
@@ -173,25 +197,36 @@ const ReservationPage = () => {
     {
       id: 1,
       label: 'All',
-      queryParamName: '',
+      queryParamName: 'payment_status',
       value: '',
       isSelected: true,
     },
     {
       id: 2,
       label: 'Approved',
-      queryParamName: 'payment-status',
+      queryParamName: 'payment_status',
       value: 'approved',
       isSelected: false,
     },
     {
       id: 3,
       label: 'Waiting for payment',
-      queryParamName: 'payment-status',
+      queryParamName: 'payment_status',
       value: 'waiting-for-payment',
       isSelected: false,
     },
   ]);
+
+  const [advancedFilters, setAdvancedFilters] = useState({
+    minDate: { queryParamName: 'min_date', value: '' },
+    maxDate: { queryParamName: 'max_date', value: '' },
+    userProfileEmail: { queryParamName: 'user_profile_email', value: '' },
+    flightNumber: { queryParamName: 'flight_number', value: '' },
+    minPaymentCost: { queryParamName: 'min_payment_cost', value: '' },
+    maxPaymentCost: { queryParamName: 'max_payment_cost', value: '' },
+    paymentCharge: { queryParamName: 'payment_charge', value: '' },
+    roomTypeName: { queryParamName: 'room_type_name', value: '' },
+  });
 
   useEffect(() => {
     const loadPageFormSelector = () => {
@@ -289,6 +324,11 @@ const ReservationPage = () => {
                 api={form.apiTableForm}
                 actionList={form.tableActionList}
                 toTableMapper={form.mapper}
+                setAdvancedFilters={setAdvancedFilters}
+                advancedFilters={advancedFilters}
+                advancedFiltersElement={
+                  <ReservationFilters setAdvancedFilters={setAdvancedFilters} />
+                }
                 text={form.tableText}
                 page={page}
                 setPage={(value) => setPage(value)}
