@@ -20,6 +20,13 @@ const reservationApiSlice = apiSlice.injectEndpoints({
         method: apiMethods.get,
       }),
     }),
+    getReservationList: builder.mutation({
+      query: ({ filters, sort }) => ({
+        url: baseUrl() + '/all',
+        method: apiMethods.get,
+        params: { ...filters, sort },
+      }),
+    }),
     getReservationListByUserProfileId: builder.mutation({
       query: ({ userProfileId, filters, sort }) => ({
         url: baseUrl() + '/all/user-profile-id/' + userProfileId,
@@ -30,6 +37,12 @@ const reservationApiSlice = apiSlice.injectEndpoints({
     getReservationPdfDocumentById: builder.mutation({
       query: ({ id }) => ({
         url: baseUrl() + '/id/' + id + '/pdf',
+        method: apiMethods.get,
+      }),
+    }),
+    countReservationList: builder.mutation({
+      query: () => ({
+        url: baseUrl() + '/all/number',
         method: apiMethods.get,
       }),
     }),
@@ -57,8 +70,10 @@ const reservationApiSlice = apiSlice.injectEndpoints({
 export const {
   useCreateReservationMutation,
   useGetReservationByIdMutation,
+  useGetReservationListMutation,
   useGetReservationListByUserProfileIdMutation,
   useGetReservationPdfDocumentByIdMutation,
+  useCountReservationListMutation,
   useCountReservationListByUserProfileIdMutation,
   useUpdateReservationPaymentMutation,
   useDeleteReservationByIdMutation,

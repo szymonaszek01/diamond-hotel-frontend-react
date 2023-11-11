@@ -160,9 +160,7 @@ const LoginForm = () => {
               Forgot password?
             </a>
           </div>
-          <button
-            className="bg-yellow-gradient rounded-[10px] font-poppins p-2 mt-5"
-            onClick={loginLocal}>
+          <button className={`${styles.button} mt-5`} onClick={loginLocal}>
             Sign in
           </button>
           <p

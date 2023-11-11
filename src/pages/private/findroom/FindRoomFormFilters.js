@@ -1,33 +1,27 @@
 import styles from '../../../style';
 import Popup from 'reactjs-popup';
 import { CustomSelectComponent, CustomStandardInput } from '../../../components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { inputsInfo } from '../../../constants';
 import { filtersIcon } from '../../../assets';
-import { toast, ToastContainer } from 'react-toastify';
-import { useGetRoomTypeListMutation } from '../../../redux/api/roomTypeApiSlice';
+import { ToastContainer } from 'react-toastify';
 import { toRoomTypeSelectMapper } from '../../../redux/features/roomType/roomTypeMapper';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectRoomTypeList,
-  setRoomTypeList,
-} from '../../../redux/features/roomType/roomTypeSlice';
+import { useSelector } from 'react-redux';
+import { selectRoomTypeList } from '../../../redux/features/roomType/roomTypeSlice';
 
 const FindRoomFormFilters = ({ onSave }) => {
-  const roomTypeListFromState = useSelector(selectRoomTypeList);
-  const dispatch = useDispatch();
+  const roomTypeList = useSelector(selectRoomTypeList);
 
   const [filters, setFilters] = useState({
     names: {
       ...inputsInfo.roomType.names,
       value: '',
-      options: toRoomTypeSelectMapper(roomTypeListFromState),
+      options: toRoomTypeSelectMapper(roomTypeList),
       selected: [],
     },
     pricePerHotelNight: { ...inputsInfo.roomType.pricePerHotelNight, value: 0 },
   });
   const [error, setError] = useState(false);
-  const [getRoomTypeList] = useGetRoomTypeListMutation();
 
   const onInputChange = (name, value) => {
     const result = Object.values(filters).find((input) => input.name === name);
@@ -44,34 +38,14 @@ const FindRoomFormFilters = ({ onSave }) => {
     });
   };
 
-  useEffect(() => {
-    const loadRoomTypeList = async () => {
-      try {
-        const response = await getRoomTypeList().unwrap();
-        setFilters({
-          ...filters,
-          names: { ...filters.names, options: toRoomTypeSelectMapper(response) },
-        });
-        dispatch(setRoomTypeList({ all: response }));
-      } catch (error) {
-        setError(true);
-        toast.error('Failed to load room types');
-      }
-    };
-
-    if (filters.names.options.length < 1) {
-      loadRoomTypeList().then(() => console.log('Loaded room type list'));
-    }
-  }, [dispatch, filters, getRoomTypeList]);
-
   return (
-    <div key={`room-filters`}>
+    <div key={`room-filters`} className={'w-full sm:w-auto'}>
       <ToastContainer className={'toast-style'} />
       <Popup
         trigger={
-          <button className="flex items-center justify-center p-2 border-white border-[1px] rounded-[3px] gap-2">
-            <img src={filtersIcon} alt="filters" className="w-[14px] h-auto" />
-            <p className="font-poppins font-thin text-xs text-white">Filters</p>
+          <button className="w-full flex items-center justify-center p-2 border-white border-[1px] rounded-[3px] gap-2">
+            <img src={filtersIcon} alt="filters" className="w-[17px] h-auto" />
+            <p className="font-poppins font-thin text-[0.84rem] text-white">Filters</p>
           </button>
         }
         modal

@@ -7,11 +7,24 @@ const baseUrl = () => {
 
 const reservedRoomApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    getReservedRoomList: builder.mutation({
+      query: ({ filters, sort }) => ({
+        url: baseUrl() + '/all',
+        method: apiMethods.get,
+        params: { ...filters, sort },
+      }),
+    }),
     getReservedRoomListByUserProfileId: builder.mutation({
       query: ({ userProfileId, filters, sort }) => ({
         url: baseUrl() + '/all/user-profile-id/' + userProfileId,
         method: apiMethods.get,
         params: { ...filters, sort },
+      }),
+    }),
+    countReservedRoomList: builder.mutation({
+      query: () => ({
+        url: baseUrl() + '/all/number',
+        method: apiMethods.get,
       }),
     }),
     countReservedRoomListByUserProfileId: builder.mutation({
@@ -24,6 +37,8 @@ const reservedRoomApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
+  useGetReservedRoomListMutation,
   useGetReservedRoomListByUserProfileIdMutation,
+  useCountReservedRoomListMutation,
   useCountReservedRoomListByUserProfileIdMutation,
 } = reservedRoomApiSlice;

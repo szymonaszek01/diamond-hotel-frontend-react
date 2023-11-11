@@ -149,7 +149,9 @@ const FindRoomForm = ({ setRoomTypeDetailsList, updateReservationDetails, filter
         />
       </div>
       <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-5">
-        <button className={`${styles.button} outline-0`} onClick={checkAvailabilityOnClick}>
+        <button
+          className={`${styles.button} w-full sm:w-auto outline-0`}
+          onClick={checkAvailabilityOnClick}>
           Check availability
         </button>
       </div>

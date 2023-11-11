@@ -1,5 +1,6 @@
 import { approved, waiting } from '../../../assets';
 import { transferObjectKeyToLabel } from '../../../util';
+import { role } from '../../../constants';
 
 export const toReservationCreateReqDtoMapper = ({
   userProfileId,
@@ -21,7 +22,7 @@ export const toReservationCreateReqDtoMapper = ({
   };
 };
 
-export const toReservationTableMapper = (res) => {
+export const toReservationTableMapper = (res, userRole) => {
   const columnList = [
     {
       name: 'Id',
@@ -70,12 +71,18 @@ export const toReservationTableMapper = (res) => {
       name: 'Flight',
     },
     {
+      name: userRole === role.admin ? 'User' : null,
+    },
+    {
       name: 'Status',
     },
   ];
+
   const rowList = res.map((reservation) => {
-    const { id, adults, children, flight, payment, check_in, check_out } = reservation;
-    return [
+    const { id, user_profile, adults, children, flight, payment, check_in, check_out } =
+      reservation;
+
+    const row = [
       {
         name: 'Id',
         value: id,
@@ -102,7 +109,7 @@ export const toReservationTableMapper = (res) => {
       },
       {
         name: 'Flight',
-        value: flight !== null ? flight.flight_number ?? '-' : '-',
+        value: flight && flight.flight_number ? flight.flight_number : '-',
       },
       {
         name: 'Status',
@@ -110,6 +117,15 @@ export const toReservationTableMapper = (res) => {
         icon: payment.status?.toLowerCase().includes('approved') ? approved : waiting,
       },
     ];
+
+    if (userRole && userRole === role.admin) {
+      row.push({
+        name: 'User',
+        value: user_profile.email,
+      });
+    }
+
+    return row;
   });
 
   return { columnList, rowList };
