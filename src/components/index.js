@@ -18,6 +18,7 @@ import TableRow from './table/TableRow';
 import TableCell from './table/TableCell';
 import TableActionModal from './table/TableActionModal';
 import TableHeader from './table/TableHeader';
+import TableFiltersTagContainer from './table/TableFiltersTagContainer';
 import PageFormSelector from './other/PageFormSelector';
 import TableSlider from './table/TableSlider';
 import TableForm from './table/TableForm';
@@ -26,6 +27,7 @@ import PdfAction from './action/PdfAction';
 import RoomTypeDetailsAction from './action/RoomTypeDetailsAction';
 import CustomSearchInput from './input/CustomSearchInput';
 import Sort from './table/Sort';
+import ClearFiltersButton from './table/ClearFiltersButton';
 
 export {
   CustomLoadingOverlay,
@@ -51,9 +53,11 @@ export {
   PageFormSelector,
   TableSlider,
   TableForm,
+  TableFiltersTagContainer,
   CancelOrPayAction,
   PdfAction,
   RoomTypeDetailsAction,
   CustomSearchInput,
   Sort,
+  ClearFiltersButton,
 };

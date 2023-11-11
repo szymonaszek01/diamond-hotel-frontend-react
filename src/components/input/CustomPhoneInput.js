@@ -2,9 +2,9 @@ import styles from '../../style';
 import PhoneInput from 'react-phone-number-input';
 import { Label } from '../index';
 
-const CustomPhoneInput = ({ attributes, onChange, error, placeholder, label }) => {
+const CustomPhoneInput = ({ attributes, onChange, error, placeholder, label, customStyles }) => {
   return (
-    <div className="flex flex-col w-full">
+    <div className={`flex flex-col ${customStyles ?? 'w-full'}`}>
       <Label hidden={label} value={attributes.value} />
       <PhoneInput
         key={`input-${attributes.name}`}

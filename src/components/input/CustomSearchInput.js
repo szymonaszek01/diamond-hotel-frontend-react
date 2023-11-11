@@ -31,7 +31,7 @@ const CustomSearchInput = ({
     <div key={`custom-search-input-${name}`} className="flex flex-col w-full">
       <Label hidden={label === undefined || label === null} value={label} />
       <div
-        className={`w-full flex flex-row items-center py-[10px] border-[1px] rounded-[10px] ${
+        className={`w-full flex flex-row items-center py-[10px] border-[1px] rounded-[4px] ${
           error ? 'border-red-700' : ' border-white'
         }`}>
         <input

@@ -2,9 +2,9 @@ import { Label } from '../index';
 import styles from '../../style';
 import DatePicker from 'react-datepicker';
 
-const CustomDatePicker = ({ attributes, onChange, error, label }) => {
+const CustomDatePicker = ({ attributes, onChange, error, label, customStyles }) => {
   return (
-    <div className="flex flex-col w-full">
+    <div className={`flex flex-col ${customStyles ?? 'w-full'}`}>
       <Label hidden={label} value={attributes.label} />
       <DatePicker
         key={`input-key-${attributes.name}`}

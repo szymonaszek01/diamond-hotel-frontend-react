@@ -9,7 +9,7 @@ const CustomUploadFileInput = ({ attributes, onChange, error, image }) => {
   const renderImage = () => {
     return (
       <div
-        className={`flex w-[20%] justify-center rounded-[10px] h-auto ${
+        className={`flex w-[20%] justify-center rounded-[4px] h-auto ${
           !image.default ? '' : 'p-5 box-shadow'
         } w-[8.5rem]`}>
         <img
@@ -36,7 +36,7 @@ const CustomUploadFileInput = ({ attributes, onChange, error, image }) => {
       className={`mt-4 ${image.visible ? 'flex flex-col gap-5 items-center justify-center' : ''}`}>
       {image.visible ? renderImage() : ''}
       <div
-        className={`flex flex-col justify-center sm:flex-row sm:justify-start items-center gap-3 mt-3 sm:mt-0 p-2 border-dashed border-white border-[1px] rounded-[10px] ${
+        className={`flex flex-col justify-center sm:flex-row sm:justify-start items-center gap-3 mt-3 sm:mt-0 p-2 border-dashed border-white border-[1px] rounded-[4px] ${
           error ? styles.error : ''
         }`}>
         <button

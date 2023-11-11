@@ -1,14 +1,23 @@
 import Select from 'react-select';
 import { Label } from '../index';
 
-const CustomSelectComponent = ({ attributes, onChange, error, placeholder, label }) => {
+const CustomSelectComponent = ({
+  attributes,
+  onChange,
+  error,
+  placeholder,
+  label,
+  width,
+  multi,
+}) => {
   const customStyles = {
     control: (styles, state) => ({
       ...styles,
       fontFamily: 'Poppins, sans-serif',
       fontSize: '14px',
       background: 'transparent',
-      borderRadius: '10px',
+      backgroundColor: 'transparent',
+      borderRadius: '4px',
       boxShadow: 'none',
       border: error ? '1px solid rgb(220 38 38)' : '1px solid #FFFFFF',
       color: error ? 'rgb(220 38 38)' : '#FFFFFF',
@@ -37,6 +46,14 @@ const CustomSelectComponent = ({ attributes, onChange, error, placeholder, label
         cursor: isDisabled ? 'not-allowed' : 'pointer',
       };
     },
+    singleValue: (styles, { data }) => {
+      return {
+        ...styles,
+        fontFamily: 'Poppins, sans-serif',
+        fontSize: '13px',
+        color: '#FFFFFF',
+      };
+    },
     multiValue: (styles, { data }) => {
       return {
         ...styles,
@@ -56,20 +73,34 @@ const CustomSelectComponent = ({ attributes, onChange, error, placeholder, label
     }),
   };
   return (
-    <div className="flex flex-col w-full">
+    <div className={`flex flex-col ${width ?? 'w-full'}`}>
       <Label hidden={label} value={attributes.label} />
-      <Select
-        name={attributes.name}
-        key={`input-key-${attributes.name}`}
-        id={`input-id-${attributes.name}`}
-        closeMenuOnSelect={false}
-        styles={customStyles}
-        isMulti
-        value={attributes.value}
-        onChange={onChange}
-        options={attributes.options}
-        placeholder={placeholder ? attributes.label : ''}
-      />
+      {multi ? (
+        <Select
+          name={attributes.name}
+          key={`input-key-${attributes.name}`}
+          id={`input-id-${attributes.name}`}
+          closeMenuOnSelect={false}
+          styles={customStyles}
+          isMulti
+          value={attributes.value}
+          onChange={onChange}
+          options={attributes.options}
+          placeholder={placeholder ? attributes.label : ''}
+        />
+      ) : (
+        <Select
+          name={attributes.name}
+          key={`input-key-${attributes.name}`}
+          id={`input-id-${attributes.name}`}
+          closeMenuOnSelect={false}
+          styles={customStyles}
+          value={attributes.value}
+          onChange={onChange}
+          options={attributes.options}
+          placeholder={placeholder ? attributes.label : ''}
+        />
+      )}
     </div>
   );
 };

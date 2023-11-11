@@ -2,63 +2,11 @@ import { randomCode } from '../../util';
 import { close, detailsIcon } from '../../assets';
 import Popup from 'reactjs-popup';
 import { CustomTag } from '../index';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectRoomTypeList,
-  setRoomTypeEquipment,
-} from '../../redux/features/roomType/roomTypeSlice';
-import { toRoomTypeMapper } from '../../redux/features/roomType/roomTypeMapper';
-import {
-  useGetRoomTypeByNameMutation,
-  useGetRoomTypeEquipmentMutation,
-} from '../../redux/api/roomTypeApiSlice';
+import { useSelector } from 'react-redux';
+import { selectRoomTypeList } from '../../redux/features/roomType/roomTypeSlice';
 
-const RoomTypeDetailsAction = ({ roomTypeFromParent, name, customStyles }) => {
-  const dispatch = useDispatch();
-  const roomTypeFromState = useSelector(selectRoomTypeList).find(
-    (obj) => obj.name === name && obj.equipment?.length > 0
-  );
-  const providedDetails = roomTypeFromParent ?? roomTypeFromState;
-
-  const [roomType, setRoomType] = useState({
-    id: providedDetails ? providedDetails.id : 0,
-    name: providedDetails ? providedDetails.name : '',
-    adults: providedDetails ? providedDetails.adults : 0,
-    children: providedDetails ? providedDetails.children : 0,
-    pricePerHotelNight: providedDetails ? providedDetails.pricePerHotelNight : 0,
-    image: providedDetails ? providedDetails.image : '',
-    equipment: providedDetails ? providedDetails.equipment : [],
-  });
-
-  const [getRoomTypeByName] = useGetRoomTypeByNameMutation();
-  const [getRoomTypeEquipment] = useGetRoomTypeEquipmentMutation();
-
-  useEffect(() => {
-    const loadRoomTypeByName = async () => {
-      let result = {};
-
-      try {
-        const response = await getRoomTypeByName({ name }).unwrap();
-        result = { ...toRoomTypeMapper(response) };
-      } catch (error) {
-        console.log('Failed to load room type.');
-      }
-
-      try {
-        const response = await getRoomTypeEquipment({ id: result.id }).unwrap();
-        result = { ...result, equipment: response };
-        setRoomType({ ...roomType, ...result });
-        dispatch(setRoomTypeEquipment(result));
-      } catch (error) {
-        console.log('Failed to load room type equipment.');
-      }
-    };
-
-    if (providedDetails === undefined || providedDetails === null) {
-      loadRoomTypeByName().then(() => console.log('Loaded room type or room type equipment'));
-    }
-  }, [getRoomTypeByName, getRoomTypeEquipment]);
+const RoomTypeDetailsAction = ({ name, customStyles }) => {
+  const roomType = useSelector(selectRoomTypeList).find((obj) => obj.name === name);
 
   return (
     <Popup
