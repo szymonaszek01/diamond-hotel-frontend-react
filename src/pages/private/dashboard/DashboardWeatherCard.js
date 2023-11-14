@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import styles from '../../../style';
-import { ToastContainer } from 'react-toastify';
 import { measurement } from '../../../constants';
 import { toWeatherListMapper } from '../../../redux/features/weather/weatherMapper';
 import { useGetWeatherListMutation } from '../../../redux/api/weatherApiSlice';
@@ -174,7 +173,6 @@ const DashboardWeatherCard = () => {
 
   return (
     <div className={`${styles.boxWidth}`}>
-      <ToastContainer className={'toast-style'} />
       <div className="relative rounded-[10px] w-full">
         <SelectedWeatherItem weather={selectedWeather.weather} index={selectedWeather.index} />
         <div className="flex flex-col lg:flex-row justify-between items-center mt-7 pb-5 w-full">

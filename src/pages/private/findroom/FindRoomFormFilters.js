@@ -4,7 +4,6 @@ import { CustomSelectComponent, CustomStandardInput } from '../../../components'
 import { useState } from 'react';
 import { inputsInfo } from '../../../constants';
 import { filtersIcon } from '../../../assets';
-import { ToastContainer } from 'react-toastify';
 import { toRoomTypeSelectMapper } from '../../../redux/features/roomType/roomTypeMapper';
 import { useSelector } from 'react-redux';
 import { selectRoomTypeList } from '../../../redux/features/roomType/roomTypeSlice';
@@ -40,12 +39,11 @@ const FindRoomFormFilters = ({ onSave }) => {
 
   return (
     <div key={`room-filters`} className={'w-full sm:w-auto'}>
-      <ToastContainer className={'toast-style'} />
       <Popup
         trigger={
-          <button className="w-full flex items-center justify-center p-2 border-white border-[1px] rounded-[3px] gap-2">
+          <button className="w-full flex items-center justify-center py-2.5 px-2 border-white border-[1px] rounded-[3px] gap-2">
             <img src={filtersIcon} alt="filters" className="w-[17px] h-auto" />
-            <p className="font-poppins font-thin text-[0.84rem] text-white">Filters</p>
+            <p className="font-poppins font-thin text-xs text-white">Filters</p>
           </button>
         }
         modal
@@ -61,6 +59,7 @@ const FindRoomFormFilters = ({ onSave }) => {
                   label={true}
                 />
                 <CustomSelectComponent
+                  multi={true}
                   attributes={filters.names}
                   error={error}
                   onChange={(newValue) => onInputChange(filters.names.name, newValue)}

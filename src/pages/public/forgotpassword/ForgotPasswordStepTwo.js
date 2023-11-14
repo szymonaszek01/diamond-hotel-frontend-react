@@ -1,7 +1,7 @@
 import { useUpdateForgottenAccountPasswordMutation } from '../../../redux/api/authApiSlice';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { CustomLoadingOverlay, CustomStandardInput } from '../../../components';
 import styles from '../../../style';
 import { validatePassword } from '../../../util';
@@ -61,7 +61,6 @@ const ForgotPasswordStepTwo = ({ token }) => {
     <CustomLoadingOverlay message={"We're updating your password..."} />
   ) : (
     <div className="flex flex-col justify-center sm:justify-start items-center sm:items-start gap-5">
-      <ToastContainer className={'toast-style'} />
       <p
         className={`flex flex-col text-sm text-center sm:text-start text-dimWhite font-poppins font-thin leading-10 sm:leading-8`}>
         <span className={'text-4xl font-semibold text-white leading-[50px]'}>

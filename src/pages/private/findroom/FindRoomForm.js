@@ -7,7 +7,7 @@ import {
   CustomTag,
 } from '../../../components';
 import { useGetRoomAvailabilityListMutation } from '../../../redux/api/roomApiSlice';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import styles from '../../../style';
 import { toRoomTypeDetailsListMapper } from '../../../redux/features/roomType/roomTypeMapper';
 import FindRoomFormFilters from './FindRoomFormFilters';
@@ -15,18 +15,22 @@ import FindRoomFormFilters from './FindRoomFormFilters';
 const FindRoomForm = ({ setRoomTypeDetailsList, updateReservationDetails, filters }) => {
   const [form, setForm] = useState({
     checkIn: { ...inputsInfo.roomType.checkIn, value: new Date() },
-    checkOut: { ...inputsInfo.roomType.checkOut, value: new Date() },
+    checkOut: {
+      ...inputsInfo.roomType.checkOut,
+      value: new Date(),
+    },
     rooms: { ...inputsInfo.roomType.rooms, value: 0 },
     adults: { ...inputsInfo.roomType.adults, value: 0 },
     children: { ...inputsInfo.roomType.children, value: 0 },
   });
-  const [getRoomAvailabilityList, { isLoading }] = useGetRoomAvailabilityListMutation();
+  const [getRoomAvailabilityList] = useGetRoomAvailabilityListMutation();
   const [error, setError] = useState(false);
   const [filtersValues, setFiltersValues] = useState({
     pricePerHotelNight: 0,
     roomTypeIdList: [],
   });
   const [filtersLabels, setFiltersLabels] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const onSaveFilters = (inputs) => {
     if (inputs.roomTypeIdList.length < 1) {
@@ -49,6 +53,7 @@ const FindRoomForm = ({ setRoomTypeDetailsList, updateReservationDetails, filter
 
   const checkAvailabilityOnClick = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const response = await getRoomAvailabilityList({
@@ -63,9 +68,11 @@ const FindRoomForm = ({ setRoomTypeDetailsList, updateReservationDetails, filter
 
       setError(false);
       setRoomTypeDetailsList(toRoomTypeDetailsListMapper(response));
+      setLoading(false);
     } catch (error) {
       setError(true);
       toast.error("Apologies, but we couldn't find any rooms that match your filters");
+      setLoading(false);
     }
   };
 
@@ -75,6 +82,7 @@ const FindRoomForm = ({ setRoomTypeDetailsList, updateReservationDetails, filter
       (name === form.checkIn.name && !datesValid(value, form.checkOut.value)) ||
       (name === form.checkOut.name && !datesValid(form.checkIn.value, value))
     ) {
+      toast.error('Check in date must be before check out date');
       return;
     }
     if (
@@ -98,13 +106,12 @@ const FindRoomForm = ({ setRoomTypeDetailsList, updateReservationDetails, filter
     return secondDate - firstDate > 0;
   };
 
-  return isLoading ? (
+  return loading ? (
     <CustomLoadingOverlay message={'Searching for available rooms. Just a moment...'} />
   ) : (
     <div
       key={`find-room-form`}
       className="flex flex-col bg-black-gradient rounded-[10px] box-shadow p-5 w-full gap-5">
-      <ToastContainer className={'toast-style'} />
       <div
         className={filters ? 'flex flex-col sm:flex-row justify-end gap-2 items-center' : 'hidden'}>
         {filtersLabels

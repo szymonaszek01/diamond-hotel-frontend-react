@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { setAccountDetails, setFullAccess } from '../../../redux/features/auth/authSlice';
 import { toAuthResMapper } from '../../../redux/features/auth/authMapper';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useConfirmAccountMutation } from '../../../redux/api/authApiSlice';
 import { useDispatch } from 'react-redux';
 import styles from '../../../style';
@@ -60,8 +60,6 @@ const ConfirmAccountPage = () => {
           <Navbar {...navConfig} />
         </div>
       </div>
-
-      <ToastContainer className={'toast-style'} />
 
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>

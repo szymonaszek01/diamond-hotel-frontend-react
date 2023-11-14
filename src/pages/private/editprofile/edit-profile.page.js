@@ -1,7 +1,7 @@
 import { CustomLoadingOverlay, Footer, Navbar } from '../../../components';
 import styles from '../../../style';
 import { inputsInfo, itemsInfo, privateNavLinks } from '../../../constants';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import {
@@ -15,7 +15,12 @@ import {
   setConfirmation,
   setFullAccess,
 } from '../../../redux/features/auth/authSlice';
-import { isFullAccess, requiredInputsErrorMessage, validatePassword } from '../../../util';
+import {
+  isFullAccess,
+  requiredInputsErrorMessage,
+  toFileResponseMapper,
+  validatePassword,
+} from '../../../util';
 import {
   useUpdateUserDetailsMutation,
   useUpdateUserImageMutation,
@@ -272,8 +277,8 @@ const EditProfilePage = () => {
       let formData = new FormData();
       formData.set('image', form.image.files[0]);
       const response = await updateUserImage({ formData: formData, email: details.email }).unwrap();
-      dispatch(setUserDetails({ ...details, picture: response.image }));
-      setForm({ ...form, image: { ...form.image, picture: response.image, files: [] } });
+      const { encodedFile } = toFileResponseMapper(response);
+      setForm({ ...form, image: { ...form.image, picture: encodedFile, files: [] } });
       toast.success('Image successfully updated');
     } catch (error) {
       setError({
@@ -321,7 +326,6 @@ const EditProfilePage = () => {
     <CustomLoadingOverlay message={`We're updating your ${getTextForLoadingOverlay()}...`} />
   ) : (
     <div className={styles.page}>
-      <ToastContainer className={'toast-style'} />
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar {...navConfig} />

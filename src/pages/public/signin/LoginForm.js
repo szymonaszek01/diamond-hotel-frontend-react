@@ -12,7 +12,7 @@ import {
 } from '../../../redux/features/auth/authSlice';
 import { toAuthResMapper } from '../../../redux/features/auth/authMapper';
 import { CustomLoadingOverlay, CustomStandardInput } from '../../../components';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { inputsInfo } from '../../../constants';
 import { setUserDetails } from '../../../redux/features/user/userSlice';
 import { toUserDetailsResMapper } from '../../../redux/features/user/userMapper';
@@ -32,8 +32,9 @@ const LoginForm = () => {
   const [error, setError] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
-  const [loginAccount, { isLoading: isLoginAccountLoading }] = useLoginAccountMutation();
-  const [getUser, { isLoading: isGetUserLoading }] = useGetUserByIdMutation();
+  const [loginAccount] = useLoginAccountMutation();
+  const [getUser] = useGetUserByIdMutation();
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const oAuthError = useSelector(selectOAuth2Error);
   if (oAuthError) {
@@ -48,6 +49,7 @@ const LoginForm = () => {
 
   const loginLocal = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       let response = await loginAccount({
@@ -67,10 +69,12 @@ const LoginForm = () => {
         password: { ...form.password, value: '' },
       });
 
+      setLoading(false);
       navigate('/dashboard');
     } catch (error) {
       setError(true);
       toast.error('Login Failed. You have entered an invalid username or password.');
+      setLoading(false);
     }
   };
 
@@ -92,11 +96,10 @@ const LoginForm = () => {
 
   const handleRememberMeInput = (e) => setRememberMe(e.target.checked);
 
-  return isLoginAccountLoading || isGetUserLoading ? (
+  return loading ? (
     <CustomLoadingOverlay message={'Please wait while we securely log you in...'} />
   ) : (
     <section id="login-form" className={`${layout.section} ${styles.flexCenter}`}>
-      <ToastContainer className={'toast-style'} />
       <div className="min-h-[100vh] sm:min-h-[100%] sm:w-[100%] max-w-[75%] flex sm:flex-row flex-col rounded-[10px]">
         <div className="flex justify-center sm:justify-start w-[100%]">
           <img src={loginImg} alt="google-icon" className="w-[100%] h-auto" />

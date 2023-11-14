@@ -1,5 +1,5 @@
 import { useUpdateConfirmationTokenMutation } from '../../../redux/api/authApiSlice';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import styles from '../../../style';
 import { sessionExpired } from '../../../assets';
 import { CustomLoadingOverlay } from '../../../components';
@@ -27,7 +27,6 @@ const ResendConfirmAccountEmail = ({ token }) => {
     <CustomLoadingOverlay message={'Loading...'} />
   ) : (
     <div className="flex flex-col w-[50%] items-center justify-center text-center">
-      <ToastContainer className={'toast-style'} />
       <img src={sessionExpired} alt="confirmAccount" className="w-[90%] h-auto z-50" />
       <h4 className="font-poppins font-semibold text-gradient text-[18px] leading-[23.4px] mb-1">
         Account confirmation failed

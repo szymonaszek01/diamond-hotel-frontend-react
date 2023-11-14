@@ -2,19 +2,35 @@ import styles from '../../../style';
 import { arrowRightBlack, close, defaultUser, information } from '../../../assets';
 import { useSelector } from 'react-redux';
 import { selectUserDetails } from '../../../redux/features/user/userSlice';
-import { ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { role } from '../../../constants';
+import { toFileResponseMapper } from '../../../util';
+import { useGetUserImageByEmailMutation } from '../../../redux/api/userApiSlice';
 
 const DashboardUserDetailsCard = ({ allRequiredData }) => {
   const userDetails = useSelector(selectUserDetails);
   const navigate = useNavigate();
   const [warning, setWarning] = useState(true);
+  const [image, setImage] = useState('');
+
+  const [getUserImageByEmail] = useGetUserImageByEmailMutation();
+  useEffect(() => {
+    const loadUserImage = async () => {
+      try {
+        const response = await getUserImageByEmail({ email: userDetails.email }).unwrap();
+        const { encodedFile } = toFileResponseMapper(response);
+        setImage(encodedFile);
+      } catch (error) {
+        console.log('Failed to load user image');
+      }
+    };
+
+    loadUserImage().then(() => console.log('User image loaded'));
+  }, [getUserImageByEmail]);
 
   return (
     <div className={`flex flex-col relative z-40`}>
-      <ToastContainer className={'toast-style'} />
       <div className="bg-black-gradient rounded-[10px] box-shadow w-full">
         <div className={`${allRequiredData || !warning ? 'hidden' : ''} p-5`}>
           <div className="text-white p-5 flex flex-col box-shadow justify-center items-start gap-5 rounded-[10px]">
@@ -41,15 +57,10 @@ const DashboardUserDetailsCard = ({ allRequiredData }) => {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row justify-start gap-8 p-5 items-center sm:items-start">
-          <div
-            className={`rounded-[10px] h-auto ${
-              userDetails?.picture ? '' : 'p-5 box-shadow'
-            } w-[120px]`}>
+          <div className={`rounded-[10px] h-auto ${image ? '' : 'p-5 box-shadow'} w-[120px]`}>
             <img
-              src={
-                userDetails?.picture ? 'data:image/png;base64,' + userDetails?.picture : defaultUser
-              }
-              className={`${userDetails?.picture ? 'rounded-[10px]' : ''}`}
+              src={image ? 'data:image/png;base64,' + image : defaultUser}
+              className={`${image ? 'rounded-[10px]' : ''}`}
               alt="user-profile-img"
             />
           </div>
@@ -71,7 +82,7 @@ const DashboardUserDetailsCard = ({ allRequiredData }) => {
             {userDetails.role === role.user ? 'Before your arrival' : 'As an administrator'}
           </p>
           <div
-            className={`flex flex-col sm:flex-row justify-between bg-yellow-gradient items-center text-center sm:text-start rounded-[4px] py-3 px-4 message-button w-full cursor-pointer gap-3 sm:gap-0 cursor-pointer`}
+            className={`flex flex-col sm:flex-row justify-between bg-yellow-gradient items-center text-center sm:text-start rounded-[4px] py-3 px-4 message-button w-full cursor-pointer gap-3 sm:gap-0`}
             onClick={() =>
               navigate(userDetails.role === role.admin ? '/reservations' : '/dashboard')
             }>
