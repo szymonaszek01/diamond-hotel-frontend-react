@@ -1,4 +1,4 @@
-import { decodeBase64ToByteArray, randomCode, toPdfResponseMapper } from '../../util';
+import { decodeBase64ToByteArray, randomCode, toFileResponseMapper } from '../../util';
 import { pdf } from '../../assets';
 
 const PdfAction = ({ api, id }) => {
@@ -7,7 +7,7 @@ const PdfAction = ({ api, id }) => {
 
     api({ id })
       .then((response) => {
-        const { fileName, encodedFile } = toPdfResponseMapper(response?.data);
+        const { fileName, encodedFile } = toFileResponseMapper(response?.data);
         const byteArray = decodeBase64ToByteArray(encodedFile);
         const fileUrl = window.URL.createObjectURL(
           new Blob([byteArray], {

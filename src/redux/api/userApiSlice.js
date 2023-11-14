@@ -13,6 +13,12 @@ const userApiSlice = apiSlice.injectEndpoints({
         method: apiMethods.get,
       }),
     }),
+    getUserImageByEmail: builder.mutation({
+      query: ({ email }) => ({
+        url: baseUrl() + '/email/' + encodeURIComponent(email) + '/picture',
+        method: apiMethods.get,
+      }),
+    }),
     updateUserImage: builder.mutation({
       query: ({ formData, email }) => ({
         url: baseUrl() + '/email/' + encodeURIComponent(email) + '/picture',
@@ -30,5 +36,9 @@ const userApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetUserByIdMutation, useUpdateUserImageMutation, useUpdateUserDetailsMutation } =
-  userApiSlice;
+export const {
+  useGetUserByIdMutation,
+  useGetUserImageByEmailMutation,
+  useUpdateUserImageMutation,
+  useUpdateUserDetailsMutation,
+} = userApiSlice;

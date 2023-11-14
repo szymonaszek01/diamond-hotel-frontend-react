@@ -32,7 +32,7 @@ const RoomSelectedCost = ({ checkIn, checkOut, rooms, roomTypeId, updateRoomType
       }
     };
 
-    loadRoomSelectedCost().then(() => console.log('Failed to load room selected cost.'));
+    loadRoomSelectedCost().then(() => console.log('Selected cost loaded.'));
   }, [checkIn, checkOut, rooms, roomTypeId, getRoomSelectedCost]);
 
   return (

@@ -1,11 +1,10 @@
-import { randomCode } from '../../util';
 import { infoMenu } from '../../assets';
 import Popup from 'reactjs-popup';
 
 const TableActionModal = ({ id, cellList, actionList, hidden }) => {
   return (
     <Popup
-      key={`action-table-${randomCode(6)}-popup`}
+      key={`action-table-${id}-popup`}
       trigger={
         hidden ? (
           ``

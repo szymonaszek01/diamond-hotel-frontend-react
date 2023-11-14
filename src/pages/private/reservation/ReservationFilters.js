@@ -8,13 +8,22 @@ import { useSelector } from 'react-redux';
 import { selectUserRole } from '../../../redux/features/user/userSlice';
 import { toRoomTypeSelectMapper } from '../../../redux/features/roomType/roomTypeMapper';
 import { selectRoomTypeList } from '../../../redux/features/roomType/roomTypeSlice';
+import { getCurrentDate } from '../../../util';
 
 const ReservationFilters = ({ setAdvancedFilters }) => {
   const userRole = useSelector(selectUserRole);
   const roomTypeList = useSelector(selectRoomTypeList);
   const [form, setForm] = useState({
-    minDate: { ...inputsInfo.reservation.minDate, queryParamName: 'min_date', value: new Date() },
-    maxDate: { ...inputsInfo.reservation.maxDate, queryParamName: 'max_date', value: new Date() },
+    minDate: {
+      ...inputsInfo.reservation.minDate,
+      queryParamName: 'min_date',
+      value: getCurrentDate(),
+    },
+    maxDate: {
+      ...inputsInfo.reservation.maxDate,
+      queryParamName: 'max_date',
+      value: getCurrentDate(5),
+    },
     userProfileEmail: {
       ...inputsInfo.reservation.userProfileEmail,
       queryParamName: 'user_profile_email',

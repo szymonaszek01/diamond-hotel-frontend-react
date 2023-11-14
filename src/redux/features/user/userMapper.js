@@ -13,7 +13,6 @@ export const toUserDetailsResMapper = (res) => {
     postal_code,
     role,
     auth_provider,
-    picture,
     confirmed,
   } = res;
   return {
@@ -30,7 +29,6 @@ export const toUserDetailsResMapper = (res) => {
     postalCode: postal_code,
     role: role,
     authProvider: auth_provider,
-    picture: picture,
     confirmed: confirmed,
   };
 };

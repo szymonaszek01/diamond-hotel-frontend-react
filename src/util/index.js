@@ -108,7 +108,7 @@ export const decodeBase64ToByteArray = (base64) => {
   return bytes;
 };
 
-export const toPdfResponseMapper = (response) => {
+export const toFileResponseMapper = (response) => {
   const { file_name, encoded_file } = response;
   return { fileName: file_name, encodedFile: encoded_file };
 };
@@ -160,4 +160,9 @@ export const isFullAccess = (response) => {
     confirmed === null ||
     confirmed === false
   );
+};
+
+export const getCurrentDate = (addDays) => {
+  const day = 1000 * 60 * 60 * 24;
+  return new Date(new Date().getTime() + (addDays ?? 1) * day);
 };

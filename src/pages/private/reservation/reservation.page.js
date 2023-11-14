@@ -139,13 +139,12 @@ const ReservationPage = () => {
           excluded: [],
           parameterList: ['Room type'],
           api: undefined,
-          form: ({ requiredCellList }) => (
-            <RoomTypeDetailsAction
-              name={
-                requiredCellList.find((requiredCell) => requiredCell.name === 'Room type')?.value
-              }
-            />
-          ),
+          form: ({ requiredCellList }) => {
+            const name = requiredCellList.find(
+              (requiredCell) => requiredCell.name === 'Room type'
+            )?.value;
+            return <RoomTypeDetailsAction name={name} />;
+          },
         },
       ],
       tableSliderCardWidth: '170px',

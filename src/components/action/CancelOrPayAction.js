@@ -49,7 +49,8 @@ const CancelOrPayAction = ({ name, minDays, type, id, api }) => {
         </button>
       }
       modal
-      nasted>
+      nested
+      closeOnDocumentClick={false}>
       {(close) => (
         <div className="flex flex-col bg-transparent rounded-[10px] items-center justify-center">
           <div className="w-[80%] bg-black-gradient box-shadow rounded-[10px] p-5 flex flex-col gap-20">

@@ -37,6 +37,12 @@ const roomTypeApiSlice = apiSlice.injectEndpoints({
         method: apiMethods.get,
       }),
     }),
+    getRoomTypeImageById: builder.mutation({
+      query: ({ id }) => ({
+        url: baseUrl() + '/id/' + id + '/image',
+        method: apiMethods.get,
+      }),
+    }),
   }),
 });
 
@@ -46,4 +52,5 @@ export const {
   useGetRoomTypeListMutation,
   useGetRoomTypeNameListMutation,
   useGetRoomTypeEquipmentMutation,
+  useGetRoomTypeImageByIdMutation,
 } = roomTypeApiSlice;

@@ -1,12 +1,11 @@
 export const toRoomTypeMapper = (obj) => {
-  const { id, name, adults, children, price_per_hotel_night, image } = obj;
+  const { id, name, adults, children, price_per_hotel_night } = obj;
   return {
     id: id,
     name: name,
     adults: adults,
     children: children,
     pricePerHotelNight: price_per_hotel_night,
-    image: image,
   };
 };
 
