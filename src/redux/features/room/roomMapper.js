@@ -15,3 +15,11 @@ export const toRoomSelectedCostMapper = (res) => {
     cost: cost,
   };
 };
+
+export const toAddRoomRequestMapper = (form) => {
+  return {
+    number: form.number.value,
+    floor: form.floor.value,
+    room_type_id: form.roomTypeName.value?.value,
+  };
+};

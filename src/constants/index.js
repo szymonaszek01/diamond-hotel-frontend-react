@@ -88,6 +88,10 @@ export const inputsInfo = {
     street: { type: 'text', label: 'Street', name: 'street' },
     postal: { type: 'text', label: 'Postal code', name: 'postal' },
   },
+  room: {
+    number: { type: 'number', label: 'Number', name: 'number' },
+    floor: { type: 'number', label: 'Floor', name: 'floor' },
+  },
   roomType: {
     checkIn: { type: '', label: 'Check in', name: 'checkIn' },
     checkOut: { type: '', label: 'Check out', name: 'checkOut' },

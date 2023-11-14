@@ -3,6 +3,7 @@ import { Footer, Navbar } from '../../../components';
 import { privateNavLinks } from '../../../constants';
 import { useSelector } from 'react-redux';
 import { selectFullAccess } from '../../../redux/features/auth/authSlice';
+import AddRoomForm from './AddRoomForm';
 
 const AddRoomPage = () => {
   const fullAccess = useSelector(selectFullAccess);
@@ -27,7 +28,9 @@ const AddRoomPage = () => {
         <div
           className={
             'flex flex-col items-center text-center sm:text-start sm:items-start justify-center w-[60%] gap-8'
-          }></div>
+          }>
+          <AddRoomForm />
+        </div>
       </div>
       <Footer />
     </div>

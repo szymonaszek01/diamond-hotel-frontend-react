@@ -42,7 +42,18 @@ const roomApiSlice = apiSlice.injectEndpoints({
         },
       }),
     }),
+    createRoom: builder.mutation({
+      query: (body) => ({
+        url: baseUrl() + '/create',
+        method: apiMethods.post,
+        body: body,
+      }),
+    }),
   }),
 });
 
-export const { useGetRoomAvailabilityListMutation, useGetRoomSelectedCostMutation } = roomApiSlice;
+export const {
+  useGetRoomAvailabilityListMutation,
+  useGetRoomSelectedCostMutation,
+  useCreateRoomMutation,
+} = roomApiSlice;
