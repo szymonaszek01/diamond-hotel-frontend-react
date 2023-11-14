@@ -17,12 +17,12 @@ const ReservationFilters = ({ setAdvancedFilters }) => {
     minDate: {
       ...inputsInfo.reservation.minDate,
       queryParamName: 'min_date',
-      value: getCurrentDate(),
+      value: getCurrentDate(1),
     },
     maxDate: {
       ...inputsInfo.reservation.maxDate,
       queryParamName: 'max_date',
-      value: getCurrentDate(5),
+      value: getCurrentDate(6),
     },
     userProfileEmail: {
       ...inputsInfo.reservation.userProfileEmail,

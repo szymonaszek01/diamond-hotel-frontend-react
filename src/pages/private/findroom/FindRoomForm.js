@@ -11,13 +11,14 @@ import { toast } from 'react-toastify';
 import styles from '../../../style';
 import { toRoomTypeDetailsListMapper } from '../../../redux/features/roomType/roomTypeMapper';
 import FindRoomFormFilters from './FindRoomFormFilters';
+import { getCurrentDate } from '../../../util';
 
 const FindRoomForm = ({ setRoomTypeDetailsList, updateReservationDetails, filters }) => {
   const [form, setForm] = useState({
-    checkIn: { ...inputsInfo.roomType.checkIn, value: new Date() },
+    checkIn: { ...inputsInfo.roomType.checkIn, value: getCurrentDate(1) },
     checkOut: {
       ...inputsInfo.roomType.checkOut,
-      value: new Date(),
+      value: getCurrentDate(6),
     },
     rooms: { ...inputsInfo.roomType.rooms, value: 0 },
     adults: { ...inputsInfo.roomType.adults, value: 0 },
@@ -77,6 +78,10 @@ const FindRoomForm = ({ setRoomTypeDetailsList, updateReservationDetails, filter
   };
 
   const onInputChange = (name, value) => {
+    if (value === null || value === undefined) {
+      return;
+    }
+
     const result = Object.values(form).find((input) => input.name === name);
     if (
       (name === form.checkIn.name && !datesValid(value, form.checkOut.value)) ||

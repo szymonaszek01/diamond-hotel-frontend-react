@@ -82,6 +82,7 @@ const FlightForm = ({ reservationDetails, updateReservationDetails, roomSelected
       trigger={<button className={`${styles.button} w-full`}>Book&Pay</button>}
       modal
       nested
+      onOpen={(e) => e.preventDefault()}
       closeOnDocumentClick={false}>
       {(close) => (
         <div className="flex bg-flight-form-image rounded-[10px]">
@@ -150,5 +151,4 @@ const FlightForm = ({ reservationDetails, updateReservationDetails, roomSelected
     </Popup>
   );
 };
-
 export default FlightForm;

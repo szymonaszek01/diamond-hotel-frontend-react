@@ -1,7 +1,7 @@
 import styles from '../../../style';
 import { privateNavLinks } from '../../../constants';
 import { useState } from 'react';
-import { randomCode } from '../../../util';
+import { getCurrentDate, randomCode } from '../../../util';
 import { useSelector } from 'react-redux';
 import { selectFullAccess } from '../../../redux/features/auth/authSlice';
 import { Footer, Navbar } from '../../../components';
@@ -22,8 +22,8 @@ const FindRoomPage = () => {
   };
 
   const [reservationDetails, setReservationDetails] = useState({
-    checkIn: new Date(),
-    checkOut: new Date(),
+    checkIn: getCurrentDate(1),
+    checkOut: getCurrentDate(6),
     adults: 0,
     children: 0,
     flightNumber: '',
