@@ -109,8 +109,8 @@ export const decodeBase64ToByteArray = (base64) => {
 };
 
 export const toFileResponseMapper = (response) => {
-  const { file_name, encoded_file } = response;
-  return { fileName: file_name, encodedFile: encoded_file };
+  const { file_name, encoded_file, file } = response;
+  return { fileName: file_name, encodedFile: encoded_file, file: file };
 };
 
 export const findJsonObjectListWithSearchValue = (

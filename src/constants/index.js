@@ -95,15 +95,18 @@ export const inputsInfo = {
   roomType: {
     checkIn: { type: '', label: 'Check in', name: 'checkIn' },
     checkOut: { type: '', label: 'Check out', name: 'checkOut' },
+    name: { type: 'text', label: 'Name', name: 'name' },
     rooms: { type: 'number', label: 'Rooms', name: 'rooms' },
     adults: { type: 'number', label: 'Adults', name: 'adults' },
     children: { type: 'number', label: 'Children', name: 'children' },
     names: { type: '', label: 'Room type', name: 'names' },
+    image: { type: 'file', label: 'Image', name: 'image' },
     pricePerHotelNight: {
       type: 'number',
       label: 'Price per hotel night ($)',
       name: 'pricePerHotelNight',
     },
+    equipment: { type: '', label: 'Equipment', name: 'equipment' },
   },
   flight: {
     flightNumber: { type: 'text', label: 'Flight number', name: 'flightNumber' },
