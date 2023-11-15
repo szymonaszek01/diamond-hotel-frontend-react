@@ -2,7 +2,16 @@ import styles from '../../style';
 import { useRef, useState } from 'react';
 import { close } from '../../assets';
 
-const CustomUploadFileInput = ({ attributes, onChange, error, image }) => {
+const CustomUploadFileInput = ({
+  attributes,
+  onChange,
+  error,
+  image,
+  customStyles,
+  borderOff,
+  filePathOff,
+  paddingOff,
+}) => {
   const inputRef = useRef(null);
   const [value, setValue] = useState('');
 
@@ -33,14 +42,18 @@ const CustomUploadFileInput = ({ attributes, onChange, error, image }) => {
 
   return (
     <div
-      className={`mt-4 ${image.visible ? 'flex flex-col gap-5 items-center justify-center' : ''}`}>
+      className={`mt-4 ${image.visible ? 'flex flex-col gap-5 items-center justify-center' : ''} ${
+        customStyles ?? 'w-[100px]'
+      }`}>
       {image.visible ? renderImage() : ''}
       <div
-        className={`flex flex-col justify-center sm:flex-row sm:justify-start items-center gap-3 mt-3 sm:mt-0 p-2 border-dashed border-white border-[1px] rounded-[4px] ${
+        className={`flex flex-col justify-center sm:flex-row sm:justify-start items-center gap-3 mt-3 sm:mt-0 ${
+          paddingOff ? '' : 'p-2'
+        } ${borderOff ? '' : 'border-dashed border-white border-[1px]'} rounded-[4px] ${
           error ? styles.error : ''
         }`}>
         <button
-          className={`${value.length > 0 ? 'hidden' : ''} ${styles.button} text-black w-[100px]`}
+          className={`${value.length > 0 ? 'hidden' : ''} ${styles.button} text-black`}
           onClick={onClick}>
           Upload
         </button>
@@ -59,7 +72,7 @@ const CustomUploadFileInput = ({ attributes, onChange, error, image }) => {
           ref={inputRef}
           className="hidden"
         />
-        <p className={`text-white text-xs break-all`}>
+        <p className={`text-white text-xs break-all ${filePathOff ? 'hidden' : ''}`}>
           {value.length > 0 ? value : `Please, choose a file`}
         </p>
       </div>
