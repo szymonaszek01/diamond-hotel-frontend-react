@@ -35,3 +35,14 @@ export const toRoomTypeDetailsListMapper = (res) => {
     };
   });
 };
+
+export const toRoomTypeRequestMapper = (form) => {
+  return {
+    name: form.name.value,
+    adults: form.adults.value,
+    children: form.children.value,
+    price_per_hotel_night: form.pricePerHotelNight.value,
+    image: form.image.value,
+    equipment: form.equipment.value,
+  };
+};
