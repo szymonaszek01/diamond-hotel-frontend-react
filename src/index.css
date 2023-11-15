@@ -190,6 +190,15 @@ input[type="file"] {
   outline: none;
   border-radius: 10px;
   background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    144.39deg,
+    #ffffff -278.56%,
+    #6d6d6d -78.47%,
+    #000000 91.61%
+  );
 }
 
 .modal {
@@ -230,6 +239,7 @@ input[type="file"] {
   margin: auto;
   text-align: center;
 }
+
 @media (max-width: 768px) {
   .popup-content {
     display: flex;
@@ -429,6 +439,12 @@ input[type=file]::file-selector-button {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+
+@media (max-width: 768px) {
+  .bg-flight-form-image {
+    width: 100%;
+  }
 }
 
 .popup-arrow {

@@ -44,12 +44,12 @@ const RoomTypeDetailsAction = ({ name, customStyles }) => {
       onOpen={getRoomTypeImage}
       closeOnDocumentClick={false}>
       {(closePopup) => (
-        <div className="flex flex-col bg-transparent rounded-[10px] items-center justify-center box-shadow">
+        <div className="flex flex-col bg-transparent rounded-[10px] items-center justify-center">
           {loading ? (
             ''
           ) : (
-            <div className="w-full bg-black-gradient rounded-[10px] flex flex-col py-7 gap-5 items-center justify-center">
-              <div className="flex flex-col w-full xs:w-[80%] gap-5 justify-center items-center xs:items-start p-2 xs:p-0">
+            <div className="w-full py-7">
+              <div className="flex flex-col w-full gap-5 justify-center items-center p-2 px-0 xs:px-5">
                 <img
                   src={close}
                   alt={`close`}
@@ -61,9 +61,9 @@ const RoomTypeDetailsAction = ({ name, customStyles }) => {
                 </p>
                 <img
                   src={`data:image/png;base64,${image}`}
-                  className={'opacity-80 w-full h-auto rounded'}
+                  className={'opacity-80 w-[100%] max-w-[600px] h-auto rounded'}
                 />
-                <div className="flex flex-1 flex-wrap gap-3 justify-center items-center xs:justify-start">
+                <div className="flex flex-wrap gap-3 max-w-[500px] justify-center items-center xs:justify-start">
                   <CustomTag value={`${roomType.pricePerHotelNight}$`} />
                   <CustomTag value={`${roomType.adults} adults`} />
                   <CustomTag value={`${roomType.children} children`} />

@@ -71,7 +71,7 @@ const SelectedRoomsSummaryCard = ({
     <div
       className={`${
         active ? 'hidden' : ''
-      } p-5 flex flex-col w-full sm:w-[400px] h-[100%] bg-black-gradient box-shadow rounded-[10px] mt-0 sm:mt-16 gap-5`}>
+      } p-5 flex flex-col w-full sm:w-[400px] h-[100%] sm:h-[308px] bg-black-gradient box-shadow rounded-[10px] mt-0 sm:mt-16 gap-5 justify-center`}>
       <h2 className="font-poppins font-semibold text-white text-sm pb-2 border-b-[1px]">Summary</h2>
       {roomTypeDetailsList?.map((roomTypeDetails) => (
         <RoomSelectedCost

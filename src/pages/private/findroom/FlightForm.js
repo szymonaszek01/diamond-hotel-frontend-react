@@ -86,8 +86,8 @@ const FlightForm = ({ reservationDetails, updateReservationDetails, roomSelected
       closeOnDocumentClick={false}>
       {(close) => (
         <div className="flex bg-flight-form-image rounded-[10px]">
-          <div className="flex flex-col w-full bg-[#00000088] rounded-[10px] items-start justify-between p-5 gap-5">
-            <div className="flex flex-col sm:flex-row justify-start sm:justify-between items-center h-[100%] border-b-[1px] border-white w-full gap-5 sm:gap-16">
+          <div className="flex w-full flex-col bg-[#00000088] rounded-[10px] items-start justify-between p-5 gap-5">
+            <div className="flex flex-col sm:flex-row justify-start sm:justify-between items-center h-[100%] border-b-[1px] border-white gap-5 sm:gap-16">
               <div className="flex flex-col w-full sm:w-[70%]">
                 <CustomStandardInput
                   attributes={form.flightNumber}
