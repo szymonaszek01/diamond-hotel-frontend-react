@@ -18,7 +18,7 @@ const TableActionModal = ({ id, cellList, actionList, hidden }) => {
       nested
       on={['hover']}>
       {(closePopup) => (
-        <div className="flex flex-col p-3 border-none w-full gap-5 bg-yellow-gradient outline-none rounded-[3px] items-start justify-center">
+        <div className="flex flex-col p-3 border-none w-full h-full gap-5 bg-yellow-gradient outline-none rounded-[3px] items-start justify-center">
           {actionList
             ?.filter(
               (action) =>
