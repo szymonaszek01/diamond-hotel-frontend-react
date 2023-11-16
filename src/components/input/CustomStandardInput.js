@@ -9,6 +9,7 @@ const CustomStandardInput = ({
   autoComplete,
   label,
   customStyles,
+  disabled,
 }) => {
   return (
     <div className={`flex flex-col ${customStyles ?? 'w-full'}`}>
@@ -23,6 +24,7 @@ const CustomStandardInput = ({
         value={attributes.name === 'image' ? undefined : attributes.value}
         onChange={onChange}
         autoComplete={autoComplete ? attributes.autoComplete : ''}
+        disabled={disabled ?? false}
       />
     </div>
   );

@@ -29,7 +29,7 @@ const RoomTypeDetailsAction = ({ name, customStyles }) => {
 
   return (
     <Popup
-      key={`room-type-details-action-${name.toLowerCase().replaceAll(' ', '-')}`}
+      key={`room-type-details-action-${name?.toLowerCase().replaceAll(' ', '-')}`}
       trigger={
         <button
           className={`flex w-full flex-row items-center ${
@@ -57,17 +57,17 @@ const RoomTypeDetailsAction = ({ name, customStyles }) => {
                   onClick={() => closePopup()}
                 />
                 <p className="text-white font-poppins font-semibold text-2xl xs:text-4xl break-words text-center xs:text-start xs:break-normal">
-                  {roomType.name}
+                  {roomType?.name}
                 </p>
                 <img
                   src={`data:image/png;base64,${image}`}
                   className={'opacity-80 w-[100%] max-w-[600px] h-auto rounded'}
                 />
                 <div className="flex flex-wrap gap-3 max-w-[500px] justify-center items-center xs:justify-start">
-                  <CustomTag value={`${roomType.pricePerHotelNight}$`} />
-                  <CustomTag value={`${roomType.adults} adults`} />
-                  <CustomTag value={`${roomType.children} children`} />
-                  {roomType.equipment.map((obj) => (
+                  <CustomTag value={`${roomType?.pricePerHotelNight}$`} />
+                  <CustomTag value={`${roomType?.adults} adults`} />
+                  <CustomTag value={`${roomType?.children} children`} />
+                  {roomType?.equipment.map((obj) => (
                     <CustomTag value={obj} />
                   ))}
                 </div>

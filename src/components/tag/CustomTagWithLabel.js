@@ -10,7 +10,7 @@ const CustomTagWithLabel = ({ name, value, label, styles, labelStyle, valueStyle
         className={`font-poppins break-all ${
           valueStyle ?? 'font-semibold text-white text-sm break-all'
         }`}>
-        {value.length > 30 ? value.substring(0, 30) + '...' : value}
+        {value?.length > 30 ? value?.substring(0, 30) + '...' : value ?? ''}
       </p>
     </div>
   );

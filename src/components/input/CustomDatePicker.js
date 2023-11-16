@@ -11,7 +11,7 @@ const CustomDatePicker = ({ attributes, onChange, error, label, customStyles }) 
         id={`input-id-${attributes.name}`}
         className={`${styles.input} ${error ? styles.error : ''} w-full`}
         selected={attributes?.value}
-        onChange={onChange}
+        onSelect={onChange}
       />
     </div>
   );
