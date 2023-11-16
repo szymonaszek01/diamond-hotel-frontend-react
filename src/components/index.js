@@ -28,6 +28,7 @@ import RoomTypeDetailsAction from './action/RoomTypeDetailsAction';
 import CustomSearchInput from './input/CustomSearchInput';
 import Sort from './table/Sort';
 import ClearFiltersButton from './table/ClearFiltersButton';
+import RoomDetailsAction from './action/RoomDetailsAction';
 
 export {
   CustomLoadingOverlay,
@@ -60,4 +61,5 @@ export {
   CustomSearchInput,
   Sort,
   ClearFiltersButton,
+  RoomDetailsAction,
 };

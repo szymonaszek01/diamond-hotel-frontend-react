@@ -49,6 +49,19 @@ const roomApiSlice = apiSlice.injectEndpoints({
         body: body,
       }),
     }),
+    getRoomFloorList: builder.mutation({
+      query: () => ({
+        url: baseUrl() + '/all/floors',
+        method: apiMethods.get,
+      }),
+    }),
+    getRoomDetailsListByFloor: builder.mutation({
+      query: ({ floor, filters }) => ({
+        url: baseUrl() + '/all/floor/' + floor + '/details',
+        method: apiMethods.get,
+        params: { ...filters },
+      }),
+    }),
   }),
 });
 
@@ -56,4 +69,6 @@ export const {
   useGetRoomAvailabilityListMutation,
   useGetRoomSelectedCostMutation,
   useCreateRoomMutation,
+  useGetRoomFloorListMutation,
+  useGetRoomDetailsListByFloorMutation,
 } = roomApiSlice;

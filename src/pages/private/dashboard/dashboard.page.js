@@ -3,11 +3,11 @@ import { isConfirmed, selectFullAccess } from '../../../redux/features/auth/auth
 import { useDispatch, useSelector } from 'react-redux';
 import { privateNavLinks, role } from '../../../constants';
 import { Footer, Navbar } from '../../../components';
-import DashboardUserDetailsCard from './DashboardUserDetailsCard';
-import DashboardFindRoomCard from './DashboardFindRoomCard';
-import DashboardWeatherCard from './DashboardWeatherCard';
+import UserDetailsCard from './UserDetailsCard';
+import FindRoomCard from './FindRoomCard';
+import WeatherCard from './WeatherCard';
 import { selectUserRole } from '../../../redux/features/user/userSlice';
-import DashboardAddRoomCard from './DashboardAddRoomCard';
+import AddRoomCard from './AddRoomCard';
 import { useEffect } from 'react';
 import { setRoomTypeList } from '../../../redux/features/roomType/roomTypeSlice';
 import {
@@ -15,6 +15,7 @@ import {
   useGetRoomTypeListMutation,
 } from '../../../redux/api/roomTypeApiSlice';
 import { toRoomTypeListMapper } from '../../../redux/features/roomType/roomTypeMapper';
+import RoomCard from './RoomCard';
 
 const DashboardPage = () => {
   const confirmed = useSelector(isConfirmed);
@@ -91,10 +92,11 @@ const DashboardPage = () => {
       <div className={`bg-black-gradient ${styles.paddingX} ${styles.flexCenter} z-99`}>
         <div className={`${styles.boxWidth} mb-20`}>
           <div className={`${styles.flexCenter} flex-col z-[99] sm:relative`}>
-            <div className={`w-[80%] sm:w-[70%] mt-5 flex flex-col gap-20`}>
-              <DashboardUserDetailsCard allRequiredData={true} />
-              {userRole === role.user ? <DashboardFindRoomCard /> : <DashboardAddRoomCard />}
-              <DashboardWeatherCard />
+            <div className={`w-[80%] sm:w-[60%] mt-8 flex flex-col gap-28`}>
+              <UserDetailsCard allRequiredData={true} />
+              {userRole === role.admin ? <RoomCard /> : ''}
+              {userRole === role.user ? <FindRoomCard /> : <AddRoomCard />}
+              <WeatherCard />
             </div>
           </div>
         </div>
