@@ -86,13 +86,11 @@ const SelectedRoomsSummaryCard = ({
         <h2 className="font-poppins font-semibold text-white text-sm">Total</h2>
         <h2 className="font-poppins font-semibold text-white text-sm">{getTotal()}$</h2>
       </div>
-      <div className={getRoomSelectedList().length < 1 ? 'hidden' : ''}>
-        <FlightForm
-          reservationDetails={reservationDetails}
-          updateReservationDetails={updateReservationDetails}
-          roomSelectedList={getRoomSelectedList()}
-        />
-      </div>
+      <FlightForm
+        reservationDetails={reservationDetails}
+        updateReservationDetails={updateReservationDetails}
+        roomSelectedList={getRoomSelectedList()}
+      />
     </div>
   );
 };

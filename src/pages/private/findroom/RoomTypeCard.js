@@ -45,7 +45,7 @@ const RoomTypeCard = ({ id, availableRooms, selectedRooms, updateRoomTypeDetails
       </div>
       <div className={`flex flex-col gap-5`}>
         <RoomTypeDetailsAction
-          name={roomType.name}
+          name={roomType?.name}
           customStyles={`bg-yellow-gradient p-2 rounded-[3px] justify-center`}
         />
         <PlusMinusButton

@@ -17,12 +17,12 @@ const ReservationFilters = ({ setAdvancedFilters }) => {
     minDate: {
       ...inputsInfo.reservation.minDate,
       queryParamName: 'min_date',
-      value: getCurrentDate(1),
+      value: '',
     },
     maxDate: {
       ...inputsInfo.reservation.maxDate,
       queryParamName: 'max_date',
-      value: getCurrentDate(6),
+      value: '',
     },
     userProfileEmail: {
       ...inputsInfo.reservation.userProfileEmail,
@@ -72,7 +72,7 @@ const ReservationFilters = ({ setAdvancedFilters }) => {
   };
 
   const datesValid = (firstDate, secondDate) => {
-    return secondDate - firstDate > 0;
+    return secondDate - firstDate > 0 || firstDate === '' || secondDate === '';
   };
 
   const onButtonSubmitClick = () => {
@@ -95,9 +95,6 @@ const ReservationFilters = ({ setAdvancedFilters }) => {
     } else if (attributes.name === 'roomTypeName') {
       return attributes.value !== '' ? attributes.value.label : '';
     } else {
-      if (getDate(form.minDate.value) === getDate(form.maxDate.value)) {
-        return '';
-      }
       return attributes.value ? getDate(attributes.value) : '';
     }
   };

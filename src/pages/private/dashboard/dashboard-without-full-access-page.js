@@ -4,8 +4,8 @@ import { privateNavLinks } from '../../../constants';
 import { useSelector } from 'react-redux';
 import { isConfirmed, selectFullAccess } from '../../../redux/features/auth/authSlice';
 import AccountNotConfirmed from './AccountNotConfirmed';
-import DashboardUserDetailsCard from './DashboardUserDetailsCard';
-import DashboardWeatherCard from './DashboardWeatherCard';
+import UserDetailsCard from './UserDetailsCard';
+import WeatherCard from './WeatherCard';
 
 const DashboardWithoutFullAccessPage = () => {
   const navConfig = {
@@ -46,9 +46,9 @@ const DashboardWithoutFullAccessPage = () => {
       <div className={`bg-black-gradient ${styles.paddingX} ${styles.flexCenter} z-99`}>
         <div className={`${styles.boxWidth} mb-20`}>
           <div className={`${styles.flexCenter} flex-col z-[99] sm:relative`}>
-            <div className={`w-[80%] sm:w-[50%] mt-5 flex flex-col gap-20`}>
+            <div className={`w-[80%] sm:w-[60%] mt-5 flex flex-col gap-20`}>
               {!confirmed ? <AccountNotConfirmed /> : ''}
-              <DashboardUserDetailsCard allRequiredData={fullAccess} />
+              <UserDetailsCard allRequiredData={fullAccess} />
               <p
                 className={`flex flex-col text-sm text-dimWhite font-poppins font-thin leading-10 sm:leading-8 gap-5`}>
                 <span className={'text-3xl font-semibold text-white leading-[50px] sm:leading-8'}>
@@ -60,7 +60,7 @@ const DashboardWithoutFullAccessPage = () => {
                   efficient reservation experience.
                 </span>
               </p>
-              <DashboardWeatherCard />
+              <WeatherCard />
             </div>
           </div>
         </div>

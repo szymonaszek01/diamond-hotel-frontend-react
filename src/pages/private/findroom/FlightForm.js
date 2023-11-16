@@ -47,6 +47,7 @@ const FlightForm = ({ reservationDetails, updateReservationDetails, roomSelected
         })
       );
 
+      toast.success('The payment process was completed successfully.');
       navigate('/reservations');
     } catch (error) {
       toast.error('Creating reservation failed. Please, try to do it again later.');
@@ -69,6 +70,7 @@ const FlightForm = ({ reservationDetails, updateReservationDetails, roomSelected
 
       await updateReservationPayment({ id, paymentToken: token.id });
 
+      toast.success('The payment process was completed successfully.');
       navigate('/reservations');
     } catch (error) {
       toast.error('Creating reservation or payment. Please, try to do it again later.');
@@ -79,7 +81,13 @@ const FlightForm = ({ reservationDetails, updateReservationDetails, roomSelected
     <CustomLoadingOverlay message={'Loading...'} />
   ) : (
     <Popup
-      trigger={<button className={`${styles.button} w-full`}>Book&Pay</button>}
+      trigger={
+        <button
+          disabled={roomSelectedList.length < 1}
+          className={`${styles.button} w-full disabled:cursor-none`}>
+          Book&Pay
+        </button>
+      }
       modal
       nested
       onOpen={(e) => e.preventDefault()}
