@@ -91,6 +91,7 @@ export const inputsInfo = {
   room: {
     number: { type: 'number', label: 'Number', name: 'number' },
     floor: { type: 'number', label: 'Floor', name: 'floor' },
+    occupied: { type: 'number', label: 'Status', name: 'status' },
   },
   roomType: {
     checkIn: { type: '', label: 'Check in', name: 'checkIn' },
@@ -112,6 +113,7 @@ export const inputsInfo = {
     flightNumber: { type: 'text', label: 'Flight number', name: 'flightNumber' },
   },
   reservation: {
+    id: { type: 'number', label: 'Reservation id', name: 'reservationId' },
     minDate: { type: '', label: 'Min date', name: 'minDate' },
     maxDate: { type: '', label: 'Max date', name: 'maxDate' },
     userProfileEmail: { type: 'text', label: 'User profile email', name: 'userProfileEmail' },

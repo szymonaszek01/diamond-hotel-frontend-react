@@ -58,6 +58,7 @@ import approved from './approved.png';
 import waiting from './waiting.png';
 import sortArrowActive from './sort-arrow-active.png';
 import sortArrowNotActive from './sort-arrow-not-active.png';
+import doubleArrow from './double-arrow.png';
 
 export {
   card,
@@ -120,4 +121,5 @@ export {
   waiting,
   sortArrowActive,
   sortArrowNotActive,
+  doubleArrow,
 };
