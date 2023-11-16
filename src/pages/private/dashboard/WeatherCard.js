@@ -118,7 +118,7 @@ const DailyWeatherItem = ({ weather, index }) => {
   );
 };
 
-const DashboardWeatherCard = () => {
+const WeatherCard = () => {
   const weatherListFromState = useSelector(selectWeatherList);
   const dispatch = useDispatch();
 
@@ -172,7 +172,7 @@ const DashboardWeatherCard = () => {
   }, [dailyWeatherList.length, dispatch, getWeatherList, selectedWeather]);
 
   return (
-    <div className={`${styles.boxWidth}`}>
+    <div className={`${styles.boxWidth} bg-black-gradient box-shadow p-8 rounded-[10px]`}>
       <div className="relative rounded-[10px] w-full">
         <SelectedWeatherItem weather={selectedWeather.weather} index={selectedWeather.index} />
         <div className="flex flex-col lg:flex-row justify-between items-center mt-7 pb-5 w-full">
@@ -199,4 +199,4 @@ const DashboardWeatherCard = () => {
   );
 };
 
-export default DashboardWeatherCard;
+export default WeatherCard;

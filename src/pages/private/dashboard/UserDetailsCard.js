@@ -8,7 +8,7 @@ import { role } from '../../../constants';
 import { toFileResponseMapper } from '../../../util';
 import { useGetUserImageByEmailMutation } from '../../../redux/api/userApiSlice';
 
-const DashboardUserDetailsCard = ({ allRequiredData }) => {
+const UserDetailsCard = ({ allRequiredData }) => {
   const userDetails = useSelector(selectUserDetails);
   const navigate = useNavigate();
   const [warning, setWarning] = useState(true);
@@ -104,4 +104,4 @@ const DashboardUserDetailsCard = ({ allRequiredData }) => {
   );
 };
 
-export default DashboardUserDetailsCard;
+export default UserDetailsCard;
