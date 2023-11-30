@@ -29,6 +29,10 @@ import CustomSearchInput from './input/CustomSearchInput';
 import Sort from './table/Sort';
 import ClearFiltersButton from './table/ClearFiltersButton';
 import RoomDetailsAction from './action/RoomDetailsAction';
+import PieChart from './chart/PieChart';
+import LineChart from './chart/LineChart';
+import BarChart from './chart/BarChart';
+import CustomLoadingOverlayNotFixed from './other/CustomLoadingOverlayNotFixed';
 
 export {
   CustomLoadingOverlay,
@@ -62,4 +66,8 @@ export {
   Sort,
   ClearFiltersButton,
   RoomDetailsAction,
+  PieChart,
+  LineChart,
+  BarChart,
+  CustomLoadingOverlayNotFixed,
 };

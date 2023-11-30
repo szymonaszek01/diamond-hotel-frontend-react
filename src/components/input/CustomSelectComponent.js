@@ -32,7 +32,7 @@ const CustomSelectComponent = ({
       return {
         ...styles,
         background: 'linear-gradient(144.39deg, #ffffff -278.56%, #6d6d6d -78.47%, #000000 91.61%)',
-        borderRadius: '10px',
+        borderRadius: '3px',
         border: '1px solid #FFFFFF',
       };
     },
