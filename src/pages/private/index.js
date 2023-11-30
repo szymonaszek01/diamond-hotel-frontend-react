@@ -4,6 +4,7 @@ import EditProfilePage from './editprofile/edit-profile.page';
 import FindRoomPage from './findroom/find-room.page';
 import ReservationPage from './reservation/reservation.page';
 import AddRoomPage from './addroom/add-room-page';
+import StatisticsPage from './statistics/statistics.page';
 
 export {
   DashboardPage,
@@ -12,4 +13,5 @@ export {
   FindRoomPage,
   AddRoomPage,
   ReservationPage,
+  StatisticsPage,
 };

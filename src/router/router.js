@@ -19,6 +19,7 @@ import {
   EditProfilePage,
   FindRoomPage,
   ReservationPage,
+  StatisticsPage,
 } from '../pages/private';
 
 const Router = () => {
@@ -49,6 +50,7 @@ const Router = () => {
             {/* admin */}
             <Route element={<AdminAuthenticator />}>
               <Route path="/add-room" element={<AddRoomPage />} />
+              <Route path="/statistics" element={<StatisticsPage />} />
             </Route>
           </Route>
 

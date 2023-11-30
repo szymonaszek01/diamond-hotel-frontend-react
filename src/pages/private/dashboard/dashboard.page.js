@@ -16,6 +16,7 @@ import {
 } from '../../../redux/api/roomTypeApiSlice';
 import { toRoomTypeListMapper } from '../../../redux/features/roomType/roomTypeMapper';
 import RoomCard from './RoomCard';
+import CheckStatisticsCard from './CheckStatisticsCard';
 
 const DashboardPage = () => {
   const confirmed = useSelector(isConfirmed);
@@ -94,8 +95,9 @@ const DashboardPage = () => {
           <div className={`${styles.flexCenter} flex-col z-[99] sm:relative`}>
             <div className={`w-[80%] sm:w-[60%] mt-8 flex flex-col gap-28`}>
               <UserDetailsCard allRequiredData={true} />
+              {userRole === role.admin ? <AddRoomCard /> : <FindRoomCard />}
               {userRole === role.admin ? <RoomCard /> : ''}
-              {userRole === role.user ? <FindRoomCard /> : <AddRoomCard />}
+              {userRole === role.admin ? <CheckStatisticsCard /> : ''}
               <WeatherCard />
             </div>
           </div>
