@@ -1,20 +1,6 @@
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
-import {
-  email,
-  facebook,
-  instagram,
-  linkedin,
-  localization,
-  people01,
-  people02,
-  people03,
-  send,
-  shield,
-  star,
-  telephone,
-  twitter,
-} from '../assets';
+import { email, facebook, instagram, linkedin, localization, telephone, twitter } from '../assets';
 
 export const role = {
   user: 'USER',

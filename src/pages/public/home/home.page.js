@@ -23,7 +23,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className={`${styles.flexStart} mt-7`}>
+      <div className={`${styles.flexStart} mt-16`}>
         <div className={`${styles.boxWidth}`}>
           <Main />
         </div>
