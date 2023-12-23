@@ -50,8 +50,8 @@ const ForgotPasswordStepOne = () => {
           Do you forget the password?
         </span>
         <span>
-          Please enter the email address that was registered for your account, To have a new
-          password.
+          Please enter the email address that was provided during registration process, to have a
+          new password.
         </span>
       </p>
       <CustomStandardInput

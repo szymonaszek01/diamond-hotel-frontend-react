@@ -1,22 +1,18 @@
 import React, { useEffect } from 'react';
-import { contact, features, leafletMap } from '../../../constants';
-import styles, { layout } from '../../../style';
+import { contact, leafletMap } from '../../../constants';
+import styles from '../../../style';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-const ContactItem = ({ icon, title, content, index }) => (
+const ContactItem = ({ icon, title, content }) => (
   <div
-    className={`flex flex-row py-6 rounded-[20px] ${
-      index !== features.length - 1 ? 'mb-6' : 'mb-0'
-    } feature-card`}>
+    className={`flex flex-col sm:flex-row w-full sm:w-auto items-center justify-center sm:justify-start py-6 rounded-full mb-6`}>
     <div className={`w-[64px] h-[64px] rounded-full ${styles.flexCenter} bg-dimYellow`}>
-      <img src={icon} alt="star" className="w-[50%] h-[50%] object-contain" />
+      <img src={icon} alt={`icon-${title}`} className="w-[50%] h-[50%]" />
     </div>
-    <div className="flex-1 flex flex-col ml-3">
-      <h4 className="font-poppins font-semibold text-white text-[18px] leading-[23.4px] mb-1">
-        {title}
-      </h4>
-      <p className="font-poppins font-normal text-dimWhite text-[16px] leading-[24px]">{content}</p>
+    <div className="flex flex-col justify-center items-center sm:items-start ml-0 sm:ml-3">
+      <h4 className="font-poppins font-semibold text-white break-all text-xl mb-1">{title}</h4>
+      <p className="font-poppins text-dimWhite break-all text-sm">{content}</p>
     </div>
   </div>
 );
@@ -46,15 +42,18 @@ const Contact = () => {
   }, []);
 
   return (
-    <section id="contact" className={layout.section}>
-      <div className={layout.sectionInfo}>
-        <h2 className={styles.heading2}>Contact</h2>
+    <section id="contact" className={`flex sm:flex-row flex-col`}>
+      <div className={`w-full sm:w-[50%]`}>
+        <h2
+          className={`font-poppins font-semibold text-4xl sm:text-5xl text-white sm:text-start text-center mb-6`}>
+          Contact
+        </h2>
         {contact.map((feature, index) => (
           <ContactItem key={feature.id} {...feature} index={index} />
         ))}
       </div>
 
-      <div className={layout.sectionImg}>
+      <div className={`w-full sm:w-[50%] flex ${styles.flexCenter}`}>
         <div id="map-container" className="w-[100%] h-[100%] rounded-[10px]" />
       </div>
     </section>

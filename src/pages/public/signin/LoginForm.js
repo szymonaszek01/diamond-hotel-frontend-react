@@ -1,4 +1,4 @@
-import styles, { layout } from '../../../style';
+import styles from '../../../style';
 import { googleLogo, loginImg } from '../../../assets';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -43,8 +43,7 @@ const LoginForm = () => {
   }
 
   const loginOAuth2 = async () => {
-    window.location.href =
-      process.env.REACT_APP_SERVER_URI + '/api/v1/user-profile/login/oauth2/google';
+    window.location.href = process.env.REACT_APP_SERVER_URI;
   };
 
   const loginLocal = async (e) => {
@@ -99,7 +98,7 @@ const LoginForm = () => {
   return loading ? (
     <CustomLoadingOverlay message={'Please wait while we securely log you in...'} />
   ) : (
-    <section id="login-form" className={`${layout.section} ${styles.flexCenter}`}>
+    <section id="login-form" className={`${styles.flexCenter}`}>
       <div className="min-h-[100vh] sm:min-h-[100%] sm:w-[100%] max-w-[75%] flex sm:flex-row flex-col rounded-[10px]">
         <div className="flex justify-center sm:justify-start w-[100%]">
           <img src={loginImg} alt="google-icon" className="w-[100%] h-auto" />
@@ -109,8 +108,7 @@ const LoginForm = () => {
             className={`flex flex-col text-sm text-center sm:text-start text-dimWhite font-poppins font-thin leading-10 sm:leading-8 gap-5`}>
             <span className={'text-4xl font-semibold text-white'}>Sign In</span>
             <span>
-              Unlock a world of possibilities by signing in to your account. Your journey with us
-              continues here, where you can access personalized features.
+              Get full access to a lot of features and possibilities by signing in to your account.
             </span>
           </p>
           <div className="flex flex-row justify-center sm:justify-start items-center gap-5 mt-5">

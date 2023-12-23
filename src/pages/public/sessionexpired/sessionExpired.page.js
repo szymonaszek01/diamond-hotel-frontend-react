@@ -17,14 +17,14 @@ const SessionExpiredPage = () => {
   };
 
   return (
-    <div className={styles.page}>
-      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
+    <div className={`${styles.page} px-6 sm:px-16`}>
+      <div className={`${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar {...navConfig} />
         </div>
       </div>
 
-      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
+      <div className={`${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <div className="flex justify-center items-center mt-4 mb-16">
             <div className="flex flex-col w-[50%] items-center justify-center text-center">
@@ -32,8 +32,7 @@ const SessionExpiredPage = () => {
               <h4 className="font-poppins font-semibold text-gradient text-[18px] leading-[23.4px] mb-1">
                 Your session has expired
               </h4>
-              <p
-                className={`${styles.paragraph} text-[15px] sm:text-[12px] lg:text-[15px] text-white`}>
+              <p className={`text-[15px] sm:text-[12px] lg:text-[15px] text-white`}>
                 Please sign in again or go back to the home page.
               </p>
               <div className="flex flex-row gap-4">

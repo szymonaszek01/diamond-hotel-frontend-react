@@ -64,14 +64,14 @@ const ForgotPasswordStepTwo = ({ token }) => {
       <p
         className={`flex flex-col text-sm text-center sm:text-start text-dimWhite font-poppins font-thin leading-10 sm:leading-8`}>
         <span className={'text-4xl font-semibold text-white leading-[50px]'}>
-          Your new password must meet the following criteria
+          Remember to meet the following criteria
         </span>
         <span>
           <ul>
             <li className={'li-circle'}>At least 8 characters long</li>
             <li className={'li-circle'}>Include both uppercase and lowercase letters</li>
-            <li className={'li-circle'}>Contain at least one number</li>
-            <li className={'li-circle'}>Include at least one special character (e.g., !, @, #)</li>
+            <li className={'li-circle'}>At least one number</li>
+            <li className={'li-circle'}>At least one special character</li>
           </ul>
         </span>
       </p>

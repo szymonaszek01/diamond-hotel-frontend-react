@@ -83,13 +83,9 @@ const UserDetailsCard = ({ allRequiredData }) => {
           </p>
           <div
             className={`flex flex-col sm:flex-row justify-between bg-yellow-gradient items-center text-center sm:text-start rounded-[4px] py-3 px-4 message-button w-full cursor-pointer gap-3 sm:gap-0`}
-            onClick={() =>
-              navigate(userDetails.role === role.admin ? '/reservations' : '/dashboard')
-            }>
+            onClick={() => navigate('/reservations')}>
             <p className={`font-poppins text-xs break-all text-black`}>
-              {userDetails.role === role.user
-                ? 'Please let us know about special requests'
-                : 'PLease check upcoming reservations'}
+              Please check upcoming reservations
             </p>
             <img
               id="arrow-right"

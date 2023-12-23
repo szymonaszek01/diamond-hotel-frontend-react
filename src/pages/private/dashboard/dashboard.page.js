@@ -68,8 +68,8 @@ const DashboardPage = () => {
 
   return (
     <div className={styles.page}>
-      <div className={`${styles.paddingX} ${styles.flexCenter} bg-[#FFFFFF]`}>
-        <div className={`${styles.boxWidth}`}>
+      <div className={`${styles.flexCenter} bg-[#FFFFFF] w-full`}>
+        <div className={`${styles.boxWidth} px-6 sm:px-16`}>
           <Navbar {...navConfig} />
           <div className="absolute rotate-180 z-[0] left-0 w-full">
             <svg
@@ -90,7 +90,7 @@ const DashboardPage = () => {
           </div>
         </div>
       </div>
-      <div className={`bg-black-gradient ${styles.paddingX} ${styles.flexCenter} z-99`}>
+      <div className={`bg-black-gradient ${styles.flexCenter} z-99`}>
         <div className={`${styles.boxWidth} mb-20`}>
           <div className={`${styles.flexCenter} flex-col z-[99] sm:relative`}>
             <div className={`w-[80%] sm:w-[60%] mt-8 flex flex-col gap-28`}>
@@ -103,7 +103,9 @@ const DashboardPage = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <div className={`w-full px-6 sm:px-16`}>
+        <Footer />
+      </div>
     </div>
   );
 };

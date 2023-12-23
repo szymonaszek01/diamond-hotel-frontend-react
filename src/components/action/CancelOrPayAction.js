@@ -52,8 +52,8 @@ const CancelOrPayAction = ({ name, minDays, type, id, api }) => {
       nested
       closeOnDocumentClick={false}>
       {(close) => (
-        <div className="flex flex-col bg-transparent rounded-[10px] items-center justify-center">
-          <div className="w-[80%] bg-black-gradient box-shadow rounded-[10px] p-5 flex flex-col gap-20">
+        <div className="flex flex-col bg-transparent rounded-[10px] items-start justify-center">
+          <div className="w-[80%] bg-transparent rounded-[10px] p-5 flex flex-col gap-20">
             <p className={`flex flex-col gap-2 text-xs font-poppins font-thin leading-6`}>
               <span className={'text-sm font-semibold text-white leading-8'}>
                 {type === 'cancel' ? textList.cancel.body : textList.pay.body}

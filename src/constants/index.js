@@ -153,20 +153,8 @@ export const publicNavLinks = [
     },
     sections: [
       {
-        id: 'features',
-        title: 'Features',
-      },
-      {
-        id: 'product',
-        title: 'Product',
-      },
-      {
         id: 'contact',
         title: 'Contact',
-      },
-      {
-        id: 'opinion',
-        title: 'Opinion',
       },
     ],
   },
@@ -223,69 +211,21 @@ export const privateNavLinks = [
   },
 ];
 
-export const features = [
-  {
-    id: 'feature-1',
-    icon: star,
-    title: 'Quick room booking',
-    content: 'Keep track of your upcoming stays and manage your reservations with ease',
-  },
-  {
-    id: 'feature-2',
-    icon: shield,
-    title: '100% Secured',
-    content: 'We take proactive steps make sure your information and transactions are secure.',
-  },
-  {
-    id: 'feature-3',
-    icon: send,
-    title: 'Unparalleled room service',
-    content: 'Indulge in our top-notch room service that caters to your every need.',
-  },
-];
-
-export const feedback = [
-  {
-    id: 'feedback-1',
-    content:
-      'I had an amazing experience at this hotel! The staff was incredibly friendly and attentive, ' +
-      'making me feel welcome from the moment I arrived.',
-    name: 'Herman Jensen',
-    img: people01,
-  },
-  {
-    id: 'feedback-2',
-    content:
-      'Staying at this hotel exceeded all my expectations. The level of service was exceptional, ' +
-      'with every staff member going above and beyond to ensure my comfort.',
-    name: 'Steve Mark',
-    img: people02,
-  },
-  {
-    id: 'feedback-3',
-    content:
-      "I can't say enough good things about this hotel. From the moment I stepped foot in the lobby, " +
-      'I was greeted with warmth and professionalism.',
-    name: 'Kenn Gallagher',
-    img: people03,
-  },
-];
-
 export const stats = [
   {
     id: 'stats-1',
-    title: 'User Active',
-    value: '3800+',
+    title: 'User profile',
+    value: '1700+',
   },
   {
     id: 'stats-2',
-    title: 'Trusted by Company',
-    value: '230+',
+    title: 'Reservations',
+    value: '1230+',
   },
   {
     id: 'stats-3',
-    title: 'Transaction',
-    value: '$230M+',
+    title: 'Income',
+    value: '$100M+',
   },
 ];
 

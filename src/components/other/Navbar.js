@@ -22,7 +22,7 @@ const Navbar = ({ page, isToggled, navbarLinks, logoWhite, textWhite, fullAccess
         <img
           src={toggle ? (textWhite ? close : close2) : textWhite ? menu : menu2}
           alt="menu"
-          className="w-[23px] h-[23px]"
+          className="w-auto h-[17px]"
           onClick={() => setToggle(!toggle)}
         />
 
@@ -68,7 +68,7 @@ const Navbar = ({ page, isToggled, navbarLinks, logoWhite, textWhite, fullAccess
 
   return (
     <nav className={`w-full flex py-4 justify-between items-center navbar relative z-50`}>
-      <img src={logoWhite ? logo : logo2} alt="hoobank" className="w-[175px] h-[21px]" />
+      <img src={logoWhite ? logo : logo2} alt="logo" className="w-[130px] sm:w-[150px] h-auto" />
       <ul className={`list-none sm:flex hidden justify-end items-center flex-1`}>
         {navbarLinks
           ?.find((nav) => nav.main.title === page && fullAccess)

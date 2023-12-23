@@ -325,8 +325,8 @@ const EditProfilePage = () => {
     isUpdatingImageForm ? (
     <CustomLoadingOverlay message={`We're updating your ${getTextForLoadingOverlay()}...`} />
   ) : (
-    <div className={styles.page}>
-      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
+    <div className={`${styles.page} px-6 sm:px-16`}>
+      <div className={`${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar {...navConfig} />
         </div>

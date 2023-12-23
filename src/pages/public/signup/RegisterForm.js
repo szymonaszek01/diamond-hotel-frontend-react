@@ -5,7 +5,7 @@ import { toAuthResMapper, toRegisterReqMapper } from '../../../redux/features/au
 import { isFullAccess, requiredInputsErrorMessage, validatePassword } from '../../../util';
 import { toast } from 'react-toastify';
 import { CustomLoadingOverlay, Steps } from '../../../components';
-import styles, { layout } from '../../../style';
+import styles from '../../../style';
 import { loginImg } from '../../../assets';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -130,7 +130,7 @@ const RegisterForm = () => {
   return isRegisterAccountLoading || isGetUserLoading ? (
     <CustomLoadingOverlay message={"Hang on! We're creating your account..."} />
   ) : (
-    <section id="login-form" className={`${layout.section} ${styles.flexCenter}`}>
+    <section id="login-form" className={`${styles.flexCenter}`}>
       <div className="min-h-[100vh] sm:min-h-[100%] sm:w-[100%] max-w-[75%] flex sm:flex-row flex-col rounded-[10px]">
         <div className="flex justify-center sm:justify-start w-[100%]">
           <img src={loginImg} alt="billing" className="w-[100%] h-auto" />
@@ -140,8 +140,8 @@ const RegisterForm = () => {
             className={`flex flex-col text-sm text-center sm:text-start text-dimWhite font-poppins font-thin leading-10 sm:leading-8 gap-5`}>
             <span className={'text-4xl font-semibold text-white'}>Sign up</span>
             <span>
-              Welcome to Diamond hotel! Join our community and unlock a world of opportunities.
-              Signing up is quick and easy.
+              Welcome to Diamond hotel! Join our community and unlock a lot of features and
+              possibilities.
             </span>
           </p>
           <Steps steps={4} count={step} error={error.fields.length > 0} />

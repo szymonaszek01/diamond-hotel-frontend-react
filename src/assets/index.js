@@ -2,7 +2,7 @@ import card from './card.png';
 import localization from './localization.png';
 import logo from './logo.png';
 import quotes from './quotes.svg';
-import hero from './hero.png';
+import main from './main.png';
 import send from './send.svg';
 import shield from './shield.svg';
 import star from './star.svg';
@@ -64,7 +64,7 @@ export {
   card,
   logo,
   quotes,
-  hero,
+  main,
   send,
   shield,
   star,

@@ -1,13 +1,9 @@
 import styles from '../../../style';
 import { publicNavLinks } from '../../../constants';
 import { Footer, Navbar } from '../../../components';
-import Hero from './Hero';
+import Main from './Main';
 import Stats from './Stats';
-import Business from './Business';
-import Product from './Product';
 import Contact from './Contact';
-import Opinion from './Opinion';
-import CTA from './CTA';
 
 const HomePage = () => {
   const navConfig = {
@@ -20,27 +16,23 @@ const HomePage = () => {
   };
 
   return (
-    <div className={styles.page}>
-      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
+    <div className={`${styles.page} px-6 sm:px-16`}>
+      <div>
         <div className={`${styles.boxWidth}`}>
           <Navbar {...navConfig} />
         </div>
       </div>
 
-      <div className={`${styles.flexStart}`}>
+      <div className={`${styles.flexStart} mt-7`}>
         <div className={`${styles.boxWidth}`}>
-          <Hero />
+          <Main />
         </div>
       </div>
 
-      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
-        <div className={`${styles.boxWidth}`}>
+      <div className={`mt-8 sm:mt-24`}>
+        <div className={`flex w-full flex-col gap-8 sm:gap-24`}>
           <Stats />
-          <Business />
-          <Product />
           <Contact />
-          <Opinion />
-          <CTA />
         </div>
       </div>
       <Footer />
