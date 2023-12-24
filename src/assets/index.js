@@ -3,6 +3,7 @@ import logo from './logo.png';
 import main from './main.png';
 import menu from './menu.svg';
 import close from './close.svg';
+import card from './card.png';
 import email from './email.png';
 import facebook from './facebook.svg';
 import instagram from './instagram.svg';
@@ -96,4 +97,5 @@ export {
   sortArrowActive,
   sortArrowNotActive,
   doubleArrow,
+  card,
 };

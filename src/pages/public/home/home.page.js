@@ -4,6 +4,7 @@ import { Footer, Navbar } from '../../../components';
 import Main from './Main';
 import Stats from './Stats';
 import Contact from './Contact';
+import Product from './Product';
 
 const HomePage = () => {
   const navConfig = {
@@ -32,6 +33,7 @@ const HomePage = () => {
       <div className={`mt-8 sm:mt-24`}>
         <div className={`flex w-full flex-col gap-8 sm:gap-24`}>
           <Stats />
+          <Product />
           <Contact />
         </div>
       </div>

@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
-import { contact, leafletMap } from '../../../constants';
+import React from 'react';
+import { contact } from '../../../constants';
 import styles from '../../../style';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
 
 const ContactItem = ({ icon, title, content }) => (
   <div
@@ -18,43 +16,12 @@ const ContactItem = ({ icon, title, content }) => (
 );
 
 const Contact = () => {
-  L.Marker.prototype.options.icon = L.icon({
-    iconUrl: leafletMap.icon,
-    shadowUrl: leafletMap.iconShadow,
-  });
-
-  useEffect(() => {
-    const map = L.map('map-container').setView([leafletMap.lat, leafletMap.lng], leafletMap.zoom);
-
-    L.tileLayer(leafletMap.titleLayer, {
-      attribution: leafletMap.attribution,
-      maxZoom: leafletMap.maxZoom,
-    }).addTo(map);
-
-    const marker = L.marker([leafletMap.lat, leafletMap.lng])
-      .addTo(map)
-      .bindPopup(leafletMap.address);
-
-    return () => {
-      map.remove();
-      marker.remove();
-    };
-  }, []);
-
   return (
-    <section id="contact" className={`flex sm:flex-row flex-col`}>
-      <div className={`w-full sm:w-[50%]`}>
-        <h2
-          className={`font-poppins font-semibold text-4xl sm:text-5xl text-white sm:text-start text-center mb-6`}>
-          Contact
-        </h2>
+    <section id="contact" className={`w-full flex flex-col`}>
+      <div className={`w-full flex flex-col sm:flex-row justify-between mt-1`}>
         {contact.map((feature, index) => (
           <ContactItem key={feature.id} {...feature} index={index} />
         ))}
-      </div>
-
-      <div className={`w-full sm:w-[50%] flex ${styles.flexCenter}`}>
-        <div id="map-container" className="w-[100%] h-[100%] rounded-[10px]" />
       </div>
     </section>
   );

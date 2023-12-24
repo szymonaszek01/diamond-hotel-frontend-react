@@ -139,6 +139,10 @@ export const publicNavLinks = [
     },
     sections: [
       {
+        id: 'product',
+        title: 'Product',
+      },
+      {
         id: 'contact',
         title: 'Contact',
       },

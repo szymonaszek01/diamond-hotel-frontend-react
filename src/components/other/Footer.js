@@ -1,9 +1,8 @@
-import styles from '../../style';
 import { logo } from '../../assets';
 import { socialMedia } from '../../constants';
 
 const Footer = () => (
-  <section className={`flex flex-col py-8 ${styles.paddingX}`}>
+  <section className={`flex flex-col py-8`}>
     <div className={`sm:flex-row flex-col w-full items-center justify-start`}>
       <div className="flex flex-col items-center sm:items-start text-center sm:text-start">
         <img src={logo} alt="logo" className="w-[180px] h-auto" />
