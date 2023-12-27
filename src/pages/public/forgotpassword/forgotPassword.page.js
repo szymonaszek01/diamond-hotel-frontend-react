@@ -31,7 +31,7 @@ const ForgotPasswordPage = () => {
                 <img src={loginImg} alt="billing" className="w-[100%] h-auto" />
               </div>
               <div className="flex flex-col justify-center items-center sm:items-start w-[100%] sm:px-10 z-50">
-                {!true ? (
+                {!confirmationToken ? (
                   <ForgotPasswordStepOne />
                 ) : (
                   <ForgotPasswordStepTwo token={confirmationToken} />
