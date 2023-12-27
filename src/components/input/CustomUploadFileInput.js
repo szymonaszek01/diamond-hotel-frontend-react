@@ -23,7 +23,7 @@ const CustomUploadFileInput = ({
         } w-[8.5rem]`}>
         <img
           src={image.src}
-          className={`${!image.default ? 'rounded-[10px]' : ''} max-w-[105px]`}
+          className={`${!image.default ? 'rounded-[10px]' : ''} max-w-[90px]`}
           alt={image.alt}
         />
       </div>
@@ -43,7 +43,7 @@ const CustomUploadFileInput = ({
   return (
     <div
       className={`mt-4 ${image.visible ? 'flex flex-col gap-5 items-center justify-center' : ''} ${
-        customStyles ?? 'w-[100px]'
+        customStyles ?? 'w-[100px] sm:w-full'
       }`}>
       {image.visible ? renderImage() : ''}
       <div

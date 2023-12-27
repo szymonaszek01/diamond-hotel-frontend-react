@@ -116,9 +116,8 @@ const FlightForm = ({ reservationDetails, updateReservationDetails, roomSelected
                 </p>
                 <p
                   className={`hidden xs:block font-poppins font-normal text-white text-[15px] mt-1`}>
-                  While providing your flight number is optional, it can help us better assist you
-                  during your journey. If you prefer not to provide your flight number, simply click
-                  the "Pay now or later" button to complete your booking.
+                  If you prefer not to provide your flight number, simply click the "Pay now or
+                  later" button to complete your booking.
                   <br />
                   <br />
                   <strong>

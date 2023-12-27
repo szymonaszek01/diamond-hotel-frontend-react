@@ -30,24 +30,16 @@ const UserDetailsCard = ({ allRequiredData }) => {
   }, [getUserImageByEmail]);
 
   return (
-    <div className={`flex flex-col relative z-40`}>
-      <div className="bg-black-gradient rounded-[10px] box-shadow w-full">
-        <div className={`${allRequiredData || !warning ? 'hidden' : ''} p-5`}>
-          <div className="text-white p-5 flex flex-col box-shadow justify-center items-start gap-5 rounded-[10px]">
-            <div className="flex flex-col sm:flex-row justify-center sm:justify-end items-center w-full">
-              <img
-                src={close}
-                alt="close"
-                className="w-[17px] h-auto cursor-pointer"
-                onClick={() => setWarning(false)}
-              />
-            </div>
+    <div className={`flex flex-col relative z-40 mt-5`}>
+      <div className="w-full box-shadow px-8 py-5 rounded-[5px] border-white border-[1px]">
+        <div className={`${allRequiredData || !warning ? 'hidden' : ''} mb-5`}>
+          <div className="text-white flex flex-col justify-center items-start gap-5 rounded-[5px]">
             <div className="flex flex-col sm:flex-row justify-center sm:justify-start items-center gap-5 w-full">
-              <img src={information} alt="information" className="w-[40px] h-auto" />
-              <p className={`${styles.paragraph} text-sm text-white break-all`}>
-                Please, fill all required data to in your{' '}
+              <img src={information} alt="information" className="w-[35px] h-auto" />
+              <p className={`font-poppins text-sm text-white break-all`}>
+                Please, fill all required data in your{' '}
                 <span
-                  className={`${styles.paragraph} text-sm font-semibold text-white cursor-pointer break-all`}
+                  className={`text-sm font-semibold text-white cursor-pointer break-all`}
                   onClick={() => navigate('/edit-profile')}>
                   user profile
                 </span>{' '}
@@ -56,7 +48,7 @@ const UserDetailsCard = ({ allRequiredData }) => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col sm:flex-row justify-start gap-8 p-5 items-center sm:items-start">
+        <div className="flex flex-col sm:flex-row justify-start gap-8 py-5 items-center sm:items-start">
           <div className={`rounded-[10px] h-auto ${image ? '' : 'p-5 box-shadow'} w-[120px]`}>
             <img
               src={image ? 'data:image/png;base64,' + image : defaultUser}
@@ -70,14 +62,14 @@ const UserDetailsCard = ({ allRequiredData }) => {
               <span className={'text-2xl font-semibold text-white'}>
                 Welcome back {userDetails?.firstname}!
               </span>
-              <span>We're thrilled to see you again.</span>
+              <span>We're pleasant to see you again.</span>
             </p>
             <a href="/edit-profile" className={`${styles.button} mt-2 text-sm p-3 box-shadow`}>
               Edit profile
             </a>
           </div>
         </div>
-        <div className="sm:mt-3 pb-5 px-5 sm:p-5 flex flex-col justify-start items-center sm:items-start gap-5 rounded-b-[10px] ">
+        <div className="sm:mt-3 pb-5 flex flex-col justify-start items-center sm:items-start gap-5 rounded-b-[10px] ">
           <p className={`font-poppins text-[13.5px] text-white break-all`}>
             {userDetails.role === role.user ? 'Before your arrival' : 'As an administrator'}
           </p>

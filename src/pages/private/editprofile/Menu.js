@@ -6,9 +6,7 @@ const Menu = ({ items, onClick }) => {
       <button
         id={item.name}
         key={item.name}
-        className={`${
-          styles.paragraph
-        } flex justify-center text-white text-xs p-3 rounded-[10px] cursor-pointer w-full sm:w-[150px] ${
+        className={`font-poppins flex justify-center text-white text-xs p-3 rounded-[10px] cursor-pointer w-full sm:w-[150px] ${
           item.selected ? 'box-shadow' : ''
         }`}
         onClick={onClick}>

@@ -63,13 +63,9 @@ const AddRoomForm = () => {
         <span className={'text-2xl font-semibold text-white leading-[50px] sm:leading-8'}>
           Room
         </span>
-        <span>
-          Save and Make it Live: By clicking "Add room" you are adding the new room to your
-          property's inventory or updating existing room. Make it live to showcase it to potential
-          guests.
-        </span>
+        <span>Here, you can add new room by providing number, floor and room type.</span>
       </p>
-      <div className={`w-full flex flex-wrap justify-between gap-5 mb-5 mt-16 sm:gap-0 text-start`}>
+      <div className={`w-full flex flex-wrap justify-between gap-5 mb-5 mt-8 sm:gap-0 text-start`}>
         {Object.values(form)
           .filter((obj) => obj.name !== 'roomTypeName')
           .map((obj) => (

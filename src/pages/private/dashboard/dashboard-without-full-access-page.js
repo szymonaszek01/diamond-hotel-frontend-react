@@ -21,13 +21,13 @@ const DashboardWithoutFullAccessPage = () => {
 
   return (
     <div className={styles.page}>
-      <div className={`${styles.paddingX} ${styles.flexCenter} bg-[#FFFFFF]`}>
+      <div className={`${styles.flexCenter} bg-[#FFFFFF] px-6 sm:px-16`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar {...navConfig} />
           <div className="absolute rotate-180 z-[0] left-0 w-full">
             <svg
               className="waves"
-              viewBox="0 20 100 32"
+              viewBox="0 10 30 40"
               preserveAspectRatio="none"
               shapeRendering="auto">
               <defs>
@@ -43,7 +43,7 @@ const DashboardWithoutFullAccessPage = () => {
           </div>
         </div>
       </div>
-      <div className={`bg-black-gradient ${styles.paddingX} ${styles.flexCenter} z-99`}>
+      <div className={`bg-black-gradient ${styles.flexCenter} z-99`}>
         <div className={`${styles.boxWidth} mb-20`}>
           <div className={`${styles.flexCenter} flex-col z-[99] sm:relative`}>
             <div className={`w-[80%] sm:w-[60%] mt-5 flex flex-col gap-20`}>
@@ -55,9 +55,8 @@ const DashboardWithoutFullAccessPage = () => {
                   Fill all required data
                 </span>
                 <span>
-                  Attention! To book and manage reservations, please ensure that all required
-                  information is filled in accurately. This helps us provide you with a seamless and
-                  efficient reservation experience.
+                  If you want to book and manage reservations, please update your profile with
+                  necessary data. It helps us to verify your identity.
                 </span>
               </p>
               <WeatherCard />
@@ -65,7 +64,9 @@ const DashboardWithoutFullAccessPage = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <div className={`w-full px-6 sm:px-16`}>
+        <Footer />
+      </div>
     </div>
   );
 };

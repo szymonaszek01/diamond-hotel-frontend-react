@@ -34,18 +34,15 @@ const RoomCard = () => {
   };
 
   return (
-    <div
-      key={`room-card`}
-      className={`bg-black-gradient w-full flex flex-wrap justify-between gap-8 box-shadow p-8 rounded-[10px]`}>
+    <div key={`room-card`} className={`w-full flex flex-wrap justify-between gap-8`}>
       <p
         className={`text-center sm:text-start flex flex-col gap-2 text-sm text-dimWhite font-poppins font-thin leading-10 sm:leading-8`}>
         <span className={'text-3xl font-semibold text-white leading-[50px] sm:leading-8'}>
           Browse Rooms
         </span>
         <span>
-          Explore and manage the rooms available in your property. Click on a room to view details.
-          You can download a detailed PDF report for each reserved room by clicking on the room
-          number.
+          Browse and manage all apartments in your hotel. Click on a room to view details. You can
+          download a PDF report, check guest details or see its status.
         </span>
       </p>
       <div

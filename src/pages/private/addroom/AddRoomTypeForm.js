@@ -79,11 +79,10 @@ const AddRoomTypeForm = () => {
           Room Type
         </span>
         <span>
-          Diversify your property's appeal by adding a new room type. Fill in the details below to
-          showcase the unique features of this room category.
+          If you add new room type, you have great opportunity to diversify your property's appeal.
         </span>
       </p>
-      <div className={`w-full mb-16`}>
+      <div className={`w-full mb-12`}>
         <Steps steps={3} count={count} error={false} validationOff={true} />
       </div>
       {count === 1 ? (

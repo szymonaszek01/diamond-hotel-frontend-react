@@ -331,33 +331,22 @@ const EditProfilePage = () => {
           <Navbar {...navConfig} />
         </div>
       </div>
-      <div className={`flex flex-col w-full items-center justify-center min-h-[75vh] mt-16`}>
+      <div className={`flex flex-col w-full items-center justify-start min-h-[75vh] mt-16`}>
         <div
-          className={`flex flex-col items-center text-center sm:text-start sm:items-start justify-center w-[70%]`}>
+          className={`flex flex-col items-center text-center sm:text-start sm:items-start justify-center w-[80%]`}>
           <div
             className={
               'flex flex-col items-center text-center sm:text-start sm:items-start justify-center gap-14'
             }>
             <p
-              className={`flex w-full flex-col gap-2 text-sm text-dimWhite font-poppins font-thin ml-2 leading-10 sm:leading-8`}>
+              className={`flex w-full flex-col gap-2 text-sm text-dimWhite font-poppins font-thin ml-2 leading-10 sm:leading-8 break-all`}>
               <span className={'text-2xl font-semibold text-white leading-[50px] sm:leading-8'}>
                 Settings
               </span>
               <span>
-                Welcome to your user settings page, where you have the power to customize your
-                experience and manage your account. Here, you can tailor your preferences to make
-                your time with us truly unique.
-              </span>
-            </p>
-            <p
-              className={`break-words flex w-full flex-col gap-2 text-sm text-dimWhite font-poppins font-thin ml-2 leading-10 sm:leading-8`}>
-              <span className={'text-2xl font-semibold text-white leading-[50px] sm:leading-8'}>
-                Questions or Concerns?
-              </span>
-              <span>
-                If you have any questions, concerns, or need assistance with your settings, please
-                contact our support team at diamond.hotel.contact@gmail.com or +960 1234567. Your
-                experience is in your hands. Tailor it to perfection!
+                On user settings page, you have ability to manage your account details. If you have
+                any questions, please contact our support team at diamond.hotel.contact@gmail.com or
+                +960 1234567.
               </span>
             </p>
             <div className="w-full flex flex-col sm:flex-row items-start justify-between">

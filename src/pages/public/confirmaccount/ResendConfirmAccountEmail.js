@@ -31,7 +31,7 @@ const ResendConfirmAccountEmail = ({ token }) => {
       <h4 className="font-poppins font-semibold text-gradient text-[18px] leading-[23.4px] mb-1">
         Account confirmation failed
       </h4>
-      <p className={`${styles.paragraph} text-[15px] sm:text-[12px] lg:text-[15px] text-white`}>
+      <p className={`font-poppins text-[15px] sm:text-[12px] lg:text-[15px] text-white`}>
         Click button below to send confirmation link again. Link will be sent to the address you
         provided during registration.
       </p>

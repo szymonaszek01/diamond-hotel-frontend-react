@@ -33,10 +33,7 @@ const SelectedWeatherItem = ({ weather, index }) => {
         <span className={'text-3xl font-semibold text-white leading-[50px] sm:leading-8'}>
           Upcoming Weather Forecast
         </span>
-        <span>
-          Stay informed about the weather conditions in your area and plan ahead with our upcoming
-          weather forecast.
-        </span>
+        <span>Keep track of upcoming weather conditions during your stay.</span>
       </p>
       <motion.div
         key={`weather-${index}`}
@@ -172,7 +169,7 @@ const WeatherCard = () => {
   }, [dailyWeatherList.length, dispatch, getWeatherList, selectedWeather]);
 
   return (
-    <div className={`${styles.boxWidth} bg-black-gradient box-shadow p-8 rounded-[10px]`}>
+    <div className={`${styles.boxWidth}`}>
       <div className="relative rounded-[10px] w-full">
         <SelectedWeatherItem weather={selectedWeather.weather} index={selectedWeather.index} />
         <div className="flex flex-col lg:flex-row justify-between items-center mt-7 pb-5 w-full">

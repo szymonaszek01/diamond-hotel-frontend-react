@@ -114,9 +114,7 @@ const ReservationPage = () => {
         },
       ],
       tableSliderCardWidth: '170px',
-      tableText:
-        "Below, you'll find a list of your confirmed reservations, including key information such\n" +
-        '            as reservation numbers, dates, and accommodation details.',
+      tableText: `Below, you'll find a list of your reservations.`,
       mapper: (res) => toReservationTableMapper(res, userDetails.role),
       apiPageFormSelector: async ({ userProfileId }) =>
         userDetails.role === role.admin
@@ -148,9 +146,7 @@ const ReservationPage = () => {
         },
       ],
       tableSliderCardWidth: '170px',
-      tableText:
-        "Below, you'll find a list of your confirmed room reservations, including key information\n" +
-        '            such as reservation id, room number and other details.\n',
+      tableText: `Below, you'll find a list of your reserved rooms.`,
       mapper: (res) => toReservedRoomTableMapper(res, userDetails.role),
       apiPageFormSelector: async ({ userProfileId }) =>
         userDetails.role === role.admin
@@ -177,9 +173,7 @@ const ReservationPage = () => {
         },
       ],
       tableSliderCardWidth: '170px',
-      tableText:
-        "Below, you'll find a list of your recent payments and transactions, including key\n" +
-        '            information such as payment dates, amounts, and payment statuses.',
+      tableText: `Below, you'll find a list of your payments.`,
       mapper: (res) => toPaymentTableMapper(res, userDetails.role),
       apiPageFormSelector: async ({ userProfileId }) =>
         userDetails.role === role.admin
@@ -262,7 +256,7 @@ const ReservationPage = () => {
       <div className="flex flex-col w-full items-center justify-center mt-8">
         <div
           className={
-            'flex flex-col items-center text-center sm:text-start sm:items-start justify-center w-[70%] gap-8'
+            'flex flex-col items-center text-center sm:text-start sm:items-start justify-center w-[80%] gap-8'
           }>
           <PageFormSelector
             optionList={pageForm}
@@ -276,9 +270,8 @@ const ReservationPage = () => {
               Your Reservations
             </span>
             <span>
-              Welcome to your reservation list. Here, you can view and manage all your upcoming
-              reservations with Diamond hotel. Whether you're checking in, making changes, or need
-              more details about your bookings, it's all right here.
+              You can view and manage all your upcoming reservations with Diamond hotel. If you want
+              to make changes or check details about your bookings, you should definitely stay here.
             </span>
           </p>
           <p
@@ -287,28 +280,25 @@ const ReservationPage = () => {
               Manage Your Reservations
             </span>
             <span className={'mt-2'}>
-              For each reservation listed, you'll have options to manage your booking. Here are some
-              common actions:
+              You can update your reservation list by clicking three dots in each row:
             </span>
             <ul className={'text-white mt-5'}>
               <li className={'li-circle'}>
-                <strong className={'text-sm font-semibold text-gradient'}>View Details:</strong>{' '}
-                Click to see all the details of your reservation, including room types, special
-                requests, and pricing information.
+                <strong className={'text-sm font-semibold text-gradient'}>
+                  View reserved room details:
+                </strong>{' '}
+                See all the details of your reserved room, including equipment, pricing and
+                capacity.
               </li>
               <li className={'li-circle'}>
                 <strong className={'text-sm font-semibold text-gradient'}>
-                  Modify Reservation:
+                  Pay or cancel your reservation:
                 </strong>{' '}
-                If you need to change your check-in or check-out dates, update guest information, or
-                make other modifications, you can do so through the "Modify Reservation" link.
+                If it is necessary, cancel selected reservation or pay for it.
               </li>
               <li className={'li-circle'}>
-                <strong className={'text-sm font-semibold text-gradient'}>
-                  Cancel Reservation:
-                </strong>{' '}
-                If your plans have changed and you need to cancel a reservation, you can do so by
-                clicking on the "Cancel Reservation" link.
+                <strong className={'text-sm font-semibold text-gradient'}>Get PDF report:</strong>{' '}
+                Download reservation summary to have all important details in one document.
               </li>
             </ul>
           </p>

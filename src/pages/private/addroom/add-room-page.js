@@ -25,10 +25,10 @@ const AddRoomPage = () => {
           <Navbar {...navConfig} />
         </div>
       </div>
-      <div className="flex flex-col w-full items-center justify-center mt-8">
+      <div className="flex flex-col w-full items-center justify-center mt-8 mb-16">
         <div
           className={
-            'flex flex-col items-center text-center sm:text-start sm:items-start justify-center w-[70%] gap-16'
+            'flex flex-col items-center text-center sm:text-start sm:items-start justify-center w-[80%] gap-16'
           }>
           <AddRoomForm />
           <AddRoomTypeForm />

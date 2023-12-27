@@ -80,12 +80,12 @@ const FindRoomPage = () => {
           className={`flex ${
             isRoomTypeDetailsListEmpty()
               ? 'flex-col justify-center items-center'
-              : 'flex-col sm:flex-row gap-16 sm:gap-28 w-[70%]'
+              : 'flex-col sm:flex-row gap-16 sm:gap-28 w-[80%]'
           } min-h-[75vh] relative z-99`}>
           <div
             className={`${
               isRoomTypeDetailsListEmpty()
-                ? 'w-[70%] flex flex-col sm:flex-row items-center'
+                ? 'w-[80%] flex flex-col sm:flex-row items-center'
                 : 'w-full flex flex-col items-start'
             } mt-16 gap-16 ${isRoomTypeDetailsListEmpty() ? 'sm:gap-28' : 'sm:gap-16'}`}>
             <FindRoomForm
@@ -103,9 +103,9 @@ const FindRoomPage = () => {
                     Welcome to Our Booking Page
                   </span>
                   <span>
-                    We're thrilled that you've chosen to book your stay with us! At Diamond Hotel,
-                    we're committed to providing you with a comfortable and memorable experience.
-                    Please use the booking form below to reserve your room.
+                    We're pleasant that you've chosen our hotel to spend your free time! At Diamond
+                    Hotel, we're responsible for providing you memorable experience and emotions.
+                    Use booking form to find available rooms.
                   </span>
                 </p>
               </div>

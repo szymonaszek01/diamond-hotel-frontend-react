@@ -67,14 +67,14 @@ const DashboardPage = () => {
   }, [dispatch, getRoomTypeEquipment, getRoomTypeList]);
 
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} bg-white`}>
       <div className={`${styles.flexCenter} bg-[#FFFFFF] w-full`}>
         <div className={`${styles.boxWidth} px-6 sm:px-16`}>
           <Navbar {...navConfig} />
           <div className="absolute rotate-180 z-[0] left-0 w-full">
             <svg
               className="waves"
-              viewBox="0 20 100 32"
+              viewBox="0 10 30 40"
               preserveAspectRatio="none"
               shapeRendering="auto">
               <defs>
@@ -95,8 +95,8 @@ const DashboardPage = () => {
           <div className={`${styles.flexCenter} flex-col z-[99] sm:relative`}>
             <div className={`w-[80%] sm:w-[60%] mt-8 flex flex-col gap-28`}>
               <UserDetailsCard allRequiredData={true} />
-              {userRole === role.admin ? <AddRoomCard /> : <FindRoomCard />}
               {userRole === role.admin ? <RoomCard /> : ''}
+              {userRole === role.admin ? <AddRoomCard /> : <FindRoomCard />}
               {userRole === role.admin ? <CheckStatisticsCard /> : ''}
               <WeatherCard />
             </div>

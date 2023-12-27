@@ -12,9 +12,9 @@ const Modal = ({ button, header, body, warning, action }) => {
             &times;
           </button>
           <div className="mb-3 px-5">
-            <p className={`${styles.paragraph} text-white text-sm`}>{body}</p>
+            <p className={`font-poppins text-white text-sm`}>{body}</p>
             <p
-              className={`${styles.paragraph} text-gradient font-semibold text-xs ${
+              className={`font-poppins text-gradient font-semibold text-xs ${
                 !warning ? 'hidden' : ''
               }`}>
               {warning}

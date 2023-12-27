@@ -112,8 +112,7 @@ const LoginForm = () => {
             </span>
           </p>
           <div className="flex flex-row justify-center sm:justify-start items-center gap-5 mt-5">
-            <p
-              className={`${styles.paragraph} text-[15px] sm:text-[12px] lg:text-[15px] text-white`}>
+            <p className={`font-poppins text-[15px] sm:text-[12px] lg:text-[15px] text-white`}>
               Sign in with
             </p>
             <img
@@ -125,8 +124,7 @@ const LoginForm = () => {
           </div>
           <div className="flex flex-row justify-center items-center w-[100%] gap-5">
             <hr className="border-1 w-[100%]" />
-            <p
-              className={`${styles.paragraph} text-[15px] sm:text-[12px] lg:text-[15px] text-white`}>
+            <p className={`font-poppins text-[15px] sm:text-[12px] lg:text-[15px] text-white`}>
               Or
             </p>
             <hr className="border-1 w-[100%]" />
@@ -150,14 +148,13 @@ const LoginForm = () => {
           <div className="flex flex-col sm:flex-row justify-between items-center w-[100%] mt-2">
             <div className="flex items-center gap-2 w-[100%]">
               <input type="checkbox" onChange={handleRememberMeInput} className="h-4 p-0" />
-              <p
-                className={`${styles.paragraph} text-[15px] sm:text-[12px] lg:text-[15px] text-white`}>
+              <p className={`font-poppins text-[15px] sm:text-[12px] lg:text-[15px] text-white`}>
                 Remember me
               </p>
             </div>
             <a
               href="/forgot/password"
-              className={`${styles.paragraph} text-[15px] sm:text-[12px] lg:text-[15px] text-gradient w-[100%] flex justify-start sm:justify-end`}>
+              className={`font-poppins text-[15px] sm:text-[12px] lg:text-[15px] text-gradient w-[100%] flex justify-start sm:justify-end`}>
               Forgot password?
             </a>
           </div>
@@ -165,7 +162,7 @@ const LoginForm = () => {
             Sign in
           </button>
           <p
-            className={`${styles.paragraph} text-[15px] sm:text-[12px] lg:text-[15px] text-white w-[100%] mt-4`}>
+            className={`font-poppins text-[15px] sm:text-[12px] lg:text-[15px] text-white w-[100%] mt-4`}>
             Don't have an account?
             <a href="/sign-up" className="ml-1 text-gradient font-semibold">
               Sign up
