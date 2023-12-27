@@ -134,8 +134,7 @@ const StatisticsPage = () => {
               Your Statistics
             </span>
             <span>
-              Welcome to the Statistics Page, where you can gain valuable insights into your
-              property's performance. Explore key metrics and trends to make informed decisions.
+              Welcome to the Statistics Page, where you can gain valuable data about your hotel.
             </span>
           </p>
           <div
