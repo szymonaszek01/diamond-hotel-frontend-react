@@ -45,3 +45,14 @@
 ### 13) Statistics - admin page
 ![statistics_page_1.png](src%2Fassets%2Fpages%2Fstatistics_page_1.png)
 ![statistics_page_2.png](src%2Fassets%2Fpages%2Fstatistics_page_2.png)
+
+### 14) Emails
+![change_password_email.png](src%2Fassets%2Femail%2Fchange_password_email.png)
+![confirm_account_email.png](src%2Fassets%2Femail%2Fconfirm_account_email.png)
+![new_reservation_email.png](src%2Fassets%2Femail%2Fnew_reservation_email.png)
+![reservation_cancelled_email.png](src%2Fassets%2Femail%2Freservation_cancelled_email.png)
+![reservation_paid_email.png](src%2Fassets%2Femail%2Freservation_paid_email.png)
+
+### 15) PDF files
+![payment_pdf.png](src%2Fassets%2Fpdf%2Fpayment_pdf.png)
+![reservation_pdf.png](src%2Fassets%2Fpdf%2Freservation_pdf.png)
